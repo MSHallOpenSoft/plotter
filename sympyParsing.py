@@ -35,7 +35,7 @@ def symStr(str_expr):
 		i=i+1
 	return ''.join(strLis)
 
-def exprParseSolve(str_expr,x_start,x_end,x_step=0.02):
+def exprParseSolve2D(str_expr,x_start,x_end,x_step=0.02):
 
 	str_expr = symStr(str_expr)
 	expr = sympify(str_expr)	#Parses the string to sympy object
@@ -55,6 +55,24 @@ def exprParseSolve(str_expr,x_start,x_end,x_step=0.02):
 	# print yArr
 
 	return xArr,yArr
+def exprParseSolve3D(str_expr,x_start,x_end,y_start,y_end,x_step=0.02,y_step=0.02):
+	str_expr = symStr(str_expr)
+	expr = sympify(str_expr)	#Parses the string to sympy object
+
+	# print 'Sympy expression is: ',expr
+	xArr=numpy.arange(x_start, x_end,x_step)
+	yArr=numpy.arange(y_start, y_end,y_step)
+	f = lambdify(x, expr, "numpy")
+	findyRoot=f(xArr)
+	zArr=[]
+	for exp in findyRoot:
+		# exp=exp.subs(y,x)
+		f2=lambdify(y,exp,"numpy")
+		findyRoot2=f2(yArr)
+		for exp2 in findyRoot2:
+			zArr.append( solve(exp2,z) )
+	return xArr,yArr,zArr
+	
 
 def exprLatex(str_expr):
 	str_expr = symStr(str_expr)
@@ -67,7 +85,8 @@ if __name__ == "__main__":
 
 	str_expr = raw_input()
 
-	exprParseSolve(str_expr,1,4)
+	print exprParseSolve2D(str_expr,1,4)
+	print exprParseSolve3D(str_expr,1,1.06,1,1.06)
 
 
 
