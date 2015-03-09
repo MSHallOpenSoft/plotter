@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import sympyParsing
 import sys
+import sympy
 import time
 import os
 import random
@@ -36,10 +37,17 @@ class customLineEdit(QtGui.QLineEdit):
         txt=sympyParsing.exprLatex(str(self.text()))
         self.parent.sc.fig.suptitle('$'+txt+'$', x=0.0, y=0.5,  horizontalalignment='left', verticalalignment='center')
         self.parent.sc.update_figure()
-        x_arr,y_arr=sympyParsing.exprParseSolve(str(self.text()),1,5)
+        #x_arr,y_arr=sympyParsing.exprParseSolve(str(self.text()),1,5)
         #print(y_arr)
         #y_arr=[i[0] for i in y_arr]
-        self.parent.sc.ax.plot(x_arr,y_arr,'r')
+        changed=sympyParsing.symStr(str(self.text()))
+        print(changed)
+        foo=sympy.sympify(changed)
+        sympy_p1 = sympy.plotting.plot(foo,show=False)
+        sympy_p1.save('foo')
+        print(sympy_p1._backend)
+        self.parent.sc.ax.add_collection(sympy_p1._backend.ax.get_children()[2])
+        #self.parent.sc.ax.plot(x_arr,y_arr,'r')
         self.parent.sc.update_figure()
 
 
@@ -57,6 +65,7 @@ class MplPlot3dCanvas(FigureCanvas):
       #self.toolbar = NavigationToolbar(self, parent)
       #self.ax = AxesDD(self.fig) # Canvas figure must be created for mouse rotation
       self.ax = self.fig.add_subplot(111)
+      #self.ax2 = self.fig.add_subplot(111)
       self.ax.set_xlabel('row (m CCD)')
       self.ax.set_ylabel('col (m CCD)')
       #self.ax.set_zlabel('Phi (m)')
