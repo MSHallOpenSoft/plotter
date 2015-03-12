@@ -13,6 +13,104 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+  text-align: center; 
+}
+
+
+QToolButton{
+  position: relative;
+  border: none;
+  outline:none;
+  cursor:pointer;
+  cursor: hand;
+  background: #F1C40F;
+  color: white;
+  padding: 2px 2px;
+  border-radius: 2px;
+  font-size: 22px;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   box-shadow: 0 0 4px rgba(0,0,0, .75);
+}
+QToolButton:hover:!pressed{
+  position: relative;
+  border: none;
+  outline:none;
+  cursor:pointer;
+  cursor: hand;
+  background: #d8ae01;
+  color: white;
+  padding: 2px 2px;
+  border-radius: 2px;
+  font-size: 22px;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   box-shadow: 0 0 4px rgba(0,0,0, .75);
+}
+QToolButton:pressed{
+  position: relative;
+  border: none;
+  outline:none;
+  cursor:pointer;
+  cursor: hand;
+  background: #fbd334;
+  color: white;
+  padding: 2px 2px;
+  border-radius: 2px;
+  font-size: 22px;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   box-shadow: 0 0 4px rgba(0,0,0, .75);
+}
+QPushButton{
+  position: relative;
+  border: none;
+  outline:none;
+  cursor:pointer;
+  cursor: hand;
+  background: #89669b;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 2px;
+  font-size: 20px;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   box-shadow: 0 0 4px rgba(0,0,0, .75);
+}
+QPushButton:hover{
+  position: relative;
+  border: none;
+  outline:none;
+  cursor:pointer;
+  cursor: hand;
+  background: #745385;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 2px;
+  font-size:20px;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   box-shadow: 0 0 4px rgba(0,0,0, .75);
+}
+QPushButton:pressed{
+  position: relative;
+  border: none;
+  outline:none;
+  cursor:pointer;
+  cursor: hand;
+  background: #9d74b2;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 2px;
+  font-size: 20px;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+   box-shadow: 0 0 4px rgba(0,0,0, .75);
+}
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
@@ -261,6 +359,9 @@ a:hover { color: yellow;}
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
        <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
           <string>Tab 1</string>
