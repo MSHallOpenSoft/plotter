@@ -1,4 +1,6 @@
 from sympy import *
+import sympyPlot_implicit
+
 import numpy
 x = symbols('x')
 y = symbols('y')
@@ -80,14 +82,32 @@ def exprLatex(str_expr):
 	return latex(expr)
 
 
+# if __name__ == "__main__":
+# 	print 'Enter the expression: ' ,
+
+# 	str_expr = raw_input()
+
+# 	print exprParseSolve2D(str_expr,1,4)
+# 	print exprParseSolve3D(str_expr,1,1.06,1,1.06)
+
+def plot_implicit_3d(expr, x_var=None, y_var=None, z_var_start=-5,z_var_end=5, **kwargs):
+    # np = import_module('numpy')
+    z=symbols('z')
+    zArr=numpy.linspace(z_var_start, z_var_end,num=50)
+    # mesh_z=np.meshgrid(zArr)
+    print (expr)
+    # f = lambdify(z, expr)
+    f = lambdify(z, expr , "numpy")
+    zExpr = f(zArr)
+    p=sympyPlot_implicit.plot_implicit(zExpr[0],show=False)
+    for i in xrange(1,len(zExpr)):
+    	p.extend(sympyPlot_implicit.plot_implicit(zExpr[i],show=False))
+    p.show()
+
 if __name__ == "__main__":
-	print 'Enter the expression: ' ,
-
-	str_expr = raw_input()
-
-	print exprParseSolve2D(str_expr,1,4)
-	print exprParseSolve3D(str_expr,1,1.06,1,1.06)
-
+    print ('Enter the expression: ' )
+    expr_str=raw_input()
+    q=plot_implicit_3d(sympify(expr_str))
 
 
 
