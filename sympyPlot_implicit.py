@@ -27,7 +27,8 @@ Arithmetic. Master's thesis. University of Toronto, 1996
 from __future__ import print_function, division
 
 from sympyPlot import BaseSeries, Plot
-from experimental_lambdify import experimental_lambdify, vectorized_lambdify
+# from experimental_lambdify import experimental_lambdify, vectorized_lambdify
+from sympy.plotting.experimental_lambdify import vectorized_lambdify, lambdify,experimental_lambdify
 from sympy.plotting.intervalmath import interval
 from sympy.core.relational import (Equality, GreaterThan, LessThan,
                 Relational, StrictLessThan, StrictGreaterThan)
