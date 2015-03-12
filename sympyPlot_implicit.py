@@ -32,7 +32,7 @@ from sympy.plotting.experimental_lambdify import vectorized_lambdify, lambdify,e
 from sympy.plotting.intervalmath import interval
 from sympy.core.relational import (Equality, GreaterThan, LessThan,
                 Relational, StrictLessThan, StrictGreaterThan)
-from sympy import Eq, Tuple, sympify, Symbol, Dummy
+from sympy import Eq, Tuple, sympify, Symbol, Dummy , symbols
 from sympy.external import import_module
 from sympy.logic.boolalg import BooleanFunction
 from sympy.polys.polyutils import _sort_gens
@@ -165,6 +165,7 @@ class ImplicitSeries(BaseSeries):
                 func_eval = func(intervalx, intervaly)
                 if func_eval[1] and func_eval[0] is not False:
                     plot_list.append([intervalx, intervaly])
+        # print (plot_list[0])
         return plot_list, 'fill'
 
     def _get_meshes_grid(self):
@@ -365,6 +366,7 @@ def plot_implicit(expr, x_var=None, y_var=None, **kwargs):
                                     nb_of_points, line_color)
     show = kwargs.pop('show', True)
 
+    print (series_argument.get_points())
     #set the x and y limits
     kwargs['xlim'] = tuple(float(x) for x in var_start_end_x[1:])
     kwargs['ylim'] = tuple(float(y) for y in var_start_end_y[1:])
@@ -375,3 +377,22 @@ def plot_implicit(expr, x_var=None, y_var=None, **kwargs):
     if show:
         p.show()
     return p
+
+# Not working -----------
+
+# def plot_implicit_3d(expr, x_var=None, y_var=None, z_var_start=-5,z_var_end=5, **kwargs):
+#     np = import_module('numpy')
+#     z=symbols('z')
+#     zArr=np.linspace(z_var_start, z_var_end,num=50)
+#     # mesh_z=np.meshgrid(zArr)
+#     print (expr)
+#     # f = lambdify(z, expr)
+#     f = lambdify(z, expr )
+#     print ( f(zArr) )
+
+
+
+# if __name__ == "__main__":
+#     print ('Enter the expression: ' )
+#     expr_str=raw_input()
+#     plot_implicit_3d(sympify(expr_str))
