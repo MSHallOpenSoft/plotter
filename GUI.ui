@@ -13,104 +13,6 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QMainWindow{
-  text-align: center; 
-}
-
-
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #F1C40F;
-  color: white;
-  padding: 5px 5px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #d8ae01;
-  color: white;
-  padding: 5px 5px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 5px 5px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QPushButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #89669b;
-  color: white;
-  padding: 18px 60px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QPushButton:hover{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #745385;
-  color: white;
-  padding: 18px 60px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QPushButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #9d74b2;
-  color: white;
-  padding: 18px 60px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
@@ -127,7 +29,77 @@ QPushButton:pressed{
          <item>
           <widget class="QPushButton" name="pushButton_3">
            <property name="styleSheet">
-            <string notr="true">box-shadow: 10px 10px 5px #888888;</string>
+            <string notr="true">.button {
+  background: orange;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 0.25em;
+  padding: 0.75em 2em;
+  line-height: 1;
+  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  font-size: 1.5rem;
+}
+.button-white {
+  background: white;
+  color: orange;
+}
+.button-round {
+  border-radius: 100%;
+  padding: 0.75em;
+  width: 3em;
+  height: 3em;
+}
+.button-ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate(0);
+}
+.button-ripple_content {
+  position: relative;
+  z-index: 1;
+}
+.button-ripple_ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.button-ripple_ripple{
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  transform: scale(0);
+
+  top: 0;
+  left: 0;
+
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale3d(1,1,1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale3d(100,100,1);
+      opacity: 0;
+    }
+}
+
+/* Make things perty */
+html {  height: 100%;}
+body { font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}
+h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}
+h2 { font-weight: 300}
+input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}
+a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}
+a:hover { color: yellow;}
+.container { display:block; margin: 2em 0;}</string>
            </property>
            <property name="text">
             <string>Hide</string>
@@ -186,7 +158,77 @@ QPushButton:pressed{
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">.button {
+  background: orange;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 0.25em;
+  padding: 0.75em 2em;
+  line-height: 1;
+  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  font-size: 1.5rem;
+}
+.button-white {
+  background: white;
+  color: orange;
+}
+.button-round {
+  border-radius: 100%;
+  padding: 0.75em;
+  width: 3em;
+  height: 3em;
+}
+.button-ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate(0);
+}
+.button-ripple_content {
+  position: relative;
+  z-index: 1;
+}
+.button-ripple_ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.button-ripple_ripple{
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  transform: scale(0);
+
+  top: 0;
+  left: 0;
+
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale3d(1,1,1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale3d(100,100,1);
+      opacity: 0;
+    }
+}
+
+/* Make things perty */
+html {  height: 100%;}
+body { font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}
+h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}
+h2 { font-weight: 300}
+input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}
+a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}
+a:hover { color: yellow;}
+.container { display:block; margin: 2em 0;}</string>
          </property>
          <column>
           <property name="text">
@@ -274,62 +316,6 @@ QPushButton:pressed{
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dockWidget">
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor: pointer;
-  background: #89669b;
-  color: white;
-  padding: 18px 60px;
-  border-radius: 2px;
-  font-size: 22px;
-}
-
-.fab{
-  border-radius: 50%;
-  margin:0;
-  padding: 20px;
-}
-
-.material{
-  position:relative;
-  color:white;
-  margin: 20px auto;
-  height:400px;
-  width:500px;
-  background:#f45673;
-  
-}
-
-.ripple{
-  overflow:hidden;
-}
-
-.ripple-effect{
-  position: absolute;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  background: white;
-
-    
-  animation: ripple-animation 2s;
-}
-
-
-@keyframes ripple-animation {
-    from {
-      transform: scale(1);
-      opacity: 0.4;
-    }
-    to {
-      transform: scale(100);
-      opacity: 0;
-    }
-}</string>
-   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
@@ -348,7 +334,259 @@ QPushButton:pressed{
    <widget class="QWidget" name="dockWidgetContents_2">
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2"/>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTabWidget" name="tabWidget_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>310</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="tabPosition">
+          <enum>QTabWidget::South</enum>
+         </property>
+         <property name="tabShape">
+          <enum>QTabWidget::Rounded</enum>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="elideMode">
+          <enum>Qt::ElideNone</enum>
+         </property>
+         <property name="tabsClosable">
+          <bool>false</bool>
+         </property>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>Appear</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Graph</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <widget class="QComboBox" name="comboBox"/>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBox_3"/>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBox_2"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>Appearance</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <widget class="QLabel" name="label">
+                  <property name="text">
+                   <string>Resolution</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="horizontalSlider">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <property name="sizeConstraint">
+                 <enum>QLayout::SetNoConstraint</enum>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string>Color:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_3">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>color</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_4">
+                  <property name="text">
+                   <string>Along</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton">
+                  <property name="text">
+                   <string>X</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton_3">
+                  <property name="text">
+                   <string>Z</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton_2">
+                  <property name="text">
+                   <string>Y</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QLabel" name="label_5">
+                  <property name="text">
+                   <string>Draw</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBox_4"/>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>Thickness</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="horizontalSlider_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <item>
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string>Transparency</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="horizontalSlider_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_4">
+          <attribute name="title">
+           <string>Axis Settings</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <widget class="QTabWidget" name="tabWidget_3">
+             <property name="styleSheet">
+              <string notr="true">QTabBar::tab{
+height : 40px;
+width : 156px;
+}</string>
+             </property>
+             <property name="currentIndex">
+              <number>1</number>
+             </property>
+             <property name="movable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="tab_5">
+              <attribute name="title">
+               <string>Tab 1</string>
+              </attribute>
+             </widget>
+             <widget class="QWidget" name="tab_6">
+              <attribute name="title">
+               <string>Tab 2</string>
+              </attribute>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
