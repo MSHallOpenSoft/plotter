@@ -28,7 +28,7 @@ from inspect import getargspec
 from collections import Callable
 import warnings
 
-from sympy import sympify, Expr, Tuple, Dummy, Symbol
+from sympy import sympify, Expr, Tuple, Dummy, Symbol , solve , symbols
 from sympy.external import import_module
 #from sympy.core.compatibility import range
 from sympy.utilities.decorator import doctest_depends_on
@@ -760,7 +760,57 @@ class SurfaceOver2DRangeSeries(SurfaceBaseSeries):
                                      np.linspace(self.start_y, self.end_y,
                                                  num=self.nb_of_points_y))
         f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
+        print ( f(mesh_x, mesh_y) )
+        
         return (mesh_x, mesh_y, f(mesh_x, mesh_y))
+
+
+
+
+class SurfaceOver3DRangeSeries(SurfaceBaseSeries):
+    """Representation for a 3D surface consisting of an implicit sympy expression and 3D
+    range."""
+    def __init__(self, expr, var_start_end_x, var_start_end_z ,var_start_end_y, **kwargs):
+        super(SurfaceOver3DRangeSeries, self).__init__()
+        self.expr = sympify(expr)
+        self.var_x = sympify(var_start_end_x[0])
+        self.start_x = float(var_start_end_x[1])
+        self.end_x = float(var_start_end_x[2])
+        self.var_y = sympify(var_start_end_y[0])
+        self.start_y = float(var_start_end_y[1])
+        self.end_y = float(var_start_end_y[2])
+        self.nb_of_points_x = kwargs.get('nb_of_points_x', 50)
+        self.nb_of_points_y = kwargs.get('nb_of_points_y', 50)
+        self.surface_color = kwargs.get('surface_color', None)
+
+    def __str__(self):
+        return ('cartesian surface: %s for'
+                ' %s over %s and %s over %s') % (
+                    str(self.expr),
+                    str(self.var_x),
+                    str((self.start_x, self.end_x)),
+                    str(self.var_y),
+                    str((self.start_y, self.end_y)))
+
+    def get_meshes(self):
+        np = import_module('numpy')
+        mesh_x, mesh_y = np.meshgrid(np.linspace(self.start_x, self.end_x,
+                                                 num=self.nb_of_points_x),
+                                     np.linspace(self.start_y, self.end_y,
+                                                 num=self.nb_of_points_y))
+        f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
+        z_eqns = f(mesh_x, mesh_y)
+        # mesh_z=[]
+        mesh_z = [[0 for x in xrange(len(z_eqns))] for x in xrange(len(z_eqns))]
+        z=symbols('z')
+        for i in xrange(len(z_eqns)):
+            for j in xrange(len(z_eqns)):
+                mesh_z[i][j]=np.float64(solve(z_eqns[i][j],z)[0])
+        mesh_z=np.array(mesh_z)
+        print (mesh_z)
+        print ('Implicit 3d')
+
+        return (mesh_x, mesh_y,mesh_z)
 
 
 class ParametricSurfaceSeries(SurfaceBaseSeries):
@@ -1633,12 +1683,31 @@ def plot3d(*args, **kwargs):
     show = kwargs.pop('show', True)
     series = []
     plot_expr = check_arguments(args, 1, 2)
+    # plot_expr = check_arguments(args, 1, 3) --- 3 when x,y,z are present
+    print (plot_expr)
     series = [SurfaceOver2DRangeSeries(*arg, **kwargs) for arg in plot_expr]
+    
+
     plots = Plot(*series, **kwargs)
     if show:
         plots.show()
     return plots
 
+
+@doctest_depends_on(modules=('numpy', 'matplotlib',))
+def plot3d_implicit(*args, **kwargs):
+    args = list(map(sympify, args))
+    show = kwargs.pop('show', True)
+    series = []
+    plot_expr = check_arguments(args, 1, 3)
+    print (plot_expr)
+    series = [SurfaceOver3DRangeSeries(*arg, **kwargs) for arg in plot_expr]
+    
+
+    plots = Plot(*series, **kwargs)
+    if show:
+        plots.show()
+    return plots
 
 @doctest_depends_on(modules=('numpy', 'matplotlib',))
 def plot3d_parametric_surface(*args, **kwargs):
