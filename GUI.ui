@@ -28,6 +28,79 @@
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QPushButton" name="pushButton_3">
+           <property name="styleSheet">
+            <string notr="true">.button {
+  background: orange;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 0.25em;
+  padding: 0.75em 2em;
+  line-height: 1;
+  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  font-size: 1.5rem;
+}
+.button-white {
+  background: white;
+  color: orange;
+}
+.button-round {
+  border-radius: 100%;
+  padding: 0.75em;
+  width: 3em;
+  height: 3em;
+}
+.button-ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate(0);
+}
+.button-ripple_content {
+  position: relative;
+  z-index: 1;
+}
+.button-ripple_ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.button-ripple_ripple{
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  transform: scale(0);
+
+  top: 0;
+  left: 0;
+
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale3d(1,1,1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale3d(100,100,1);
+      opacity: 0;
+    }
+}
+
+/* Make things perty */
+html {  height: 100%;}
+body { font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}
+h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}
+h2 { font-weight: 300}
+input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}
+a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}
+a:hover { color: yellow;}
+.container { display:block; margin: 2em 0;}</string>
+           </property>
            <property name="text">
             <string>Hide</string>
            </property>
@@ -84,6 +157,79 @@
            <height>0</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">.button {
+  background: orange;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 0.25em;
+  padding: 0.75em 2em;
+  line-height: 1;
+  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  font-size: 1.5rem;
+}
+.button-white {
+  background: white;
+  color: orange;
+}
+.button-round {
+  border-radius: 100%;
+  padding: 0.75em;
+  width: 3em;
+  height: 3em;
+}
+.button-ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate(0);
+}
+.button-ripple_content {
+  position: relative;
+  z-index: 1;
+}
+.button-ripple_ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.button-ripple_ripple{
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  transform: scale(0);
+
+  top: 0;
+  left: 0;
+
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale3d(1,1,1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale3d(100,100,1);
+      opacity: 0;
+    }
+}
+
+/* Make things perty */
+html {  height: 100%;}
+body { font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}
+h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}
+h2 { font-weight: 300}
+input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}
+a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}
+a:hover { color: yellow;}
+.container { display:block; margin: 2em 0;}</string>
+         </property>
          <column>
           <property name="text">
            <string>x</string>
@@ -137,7 +283,7 @@
      <x>0</x>
      <y>0</y>
      <width>1160</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
