@@ -901,8 +901,12 @@ class MatplotlibBackend(BaseBackend):
             ##      projection='3d'
             mpl_toolkits = import_module('mpl_toolkits',
                                      __import__kwargs={'fromlist': ['mplot3d']})
-            self.fig = self.plt.figure()
-            self.ax = self.fig.add_subplot(111, projection='3d')
+            if(self.parent.ax==None):
+              self.fig = self.plt.figure()
+              self.ax = self.fig.add_subplot(111, projection='3d')
+            else:
+              self.ax=self.parent.ax
+              print(self.ax)
 
     def process_series(self):
         parent = self.parent
