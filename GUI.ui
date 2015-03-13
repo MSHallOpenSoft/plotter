@@ -16,31 +16,9 @@
   <property name="styleSheet">
    <string notr="true">QMainWindow{
   text-align: center; 
-  
-	background-color: rgb(255, 255, 255);
 }
 
- QSlider::groove:horizontal {
-     background: red;
-     height: 15px;
-     position: absolute; 
-     left: 4px; right: 4px;
- }
 
- QSlider::handle:horizontal {
-     height:20px;
-     width: 10px;
-     background: green;
-     margin: -4px; 
- }
-
- QSlider::add-page:horizontal {
-     background:rgb(255, 255, 127)
- }
-
- QSlider::sub-page:horizontal {
-     background: rgb(255, 170, 0);
- }
 QToolButton{
   position: relative;
   border: none;
@@ -88,7 +66,7 @@ QToolButton:pressed{
 }
 QPushButton{
   position: relative;
-  border:none;
+  border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
@@ -148,15 +126,78 @@ QPushButton:pressed{
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QPushButton" name="pushButton_3">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton{
-border_bottom_style:outset;
-border_bottom_width:3px;
-border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.489318, stop:0 rgba(0, 0, 0, 255), stop:0.664773 rgba(255, 255, 255, 255))
-}</string>
+            <string notr="true">.button {
+  background: orange;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 0.25em;
+  padding: 0.75em 2em;
+  line-height: 1;
+  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);
+  font-size: 1.5rem;
+}
+.button-white {
+  background: white;
+  color: orange;
+}
+.button-round {
+  border-radius: 100%;
+  padding: 0.75em;
+  width: 3em;
+  height: 3em;
+}
+.button-ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate(0);
+}
+.button-ripple_content {
+  position: relative;
+  z-index: 1;
+}
+.button-ripple_ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.button-ripple_ripple{
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  transform: scale(0);
+
+  top: 0;
+  left: 0;
+
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale3d(1,1,1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale3d(100,100,1);
+      opacity: 0;
+    }
+}
+
+/* Make things perty */
+html {  height: 100%;}
+body { font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}
+h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}
+h2 { font-weight: 300}
+input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}
+a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}
+a:hover { color: yellow;}
+.container { display:block; margin: 2em 0;}</string>
            </property>
            <property name="text">
             <string>Hide</string>
@@ -165,9 +206,6 @@ border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.4
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_7">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -175,9 +213,6 @@ border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.4
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_9">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -185,9 +220,6 @@ border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.4
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_8">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -195,9 +227,6 @@ border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.4
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_6">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -205,9 +234,6 @@ border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.4
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_5">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -321,9 +347,6 @@ a:hover { color: yellow;}
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_21">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>Redraw</string>
          </property>
@@ -336,9 +359,6 @@ a:hover { color: yellow;}
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
        <widget class="QTabWidget" name="tabWidget">
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
         <property name="currentIndex">
          <number>1</number>
         </property>
@@ -409,13 +429,6 @@ a:hover { color: yellow;}
    </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidget_2">
-   <property name="styleSheet">
-    <string notr="true">QDockWidget{
-	background-color: rgb(11, 170, 165);
-    color:rgb(56, 252, 255);
-}
-</string>
-   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
@@ -437,24 +450,14 @@ a:hover { color: yellow;}
            <height>0</height>
           </size>
          </property>
-
          <property name="maximumSize">
           <size>
            <width>16777215</width>
            <height>16777215</height>
           </size>
-
-         <property name="cursor">
-          <cursorShape>ArrowCursor</cursorShape>
          </property>
          <property name="autoFillBackground">
           <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QTabWidget{
-background_color: rgb(56, 252, 255);
-color: rgb(56, 252, 255);
-}</string>
          </property>
          <property name="tabPosition">
           <enum>QTabWidget::South</enum>
@@ -506,28 +509,13 @@ color: rgb(56, 252, 255);
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
-                 <widget class="QComboBox" name="comboBox">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                 </widget>
+                 <widget class="QComboBox" name="comboBox"/>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox_3">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                 </widget>
+                 <widget class="QComboBox" name="comboBox_3"/>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox_2">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                 </widget>
+                 <widget class="QComboBox" name="comboBox_2"/>
                 </item>
                </layout>
               </item>
@@ -551,12 +539,6 @@ color: rgb(56, 252, 255);
                 </item>
                 <item>
                  <widget class="QSlider" name="horizontalSlider">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -587,6 +569,12 @@ color: rgb(56, 252, 255);
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButton_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton{
 background  : rgb(255, 0, 0);
@@ -606,9 +594,6 @@ background  : rgb(255, 0, 0);
                 </item>
                 <item>
                  <widget class="QRadioButton" name="radioButton">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
                   <property name="text">
                    <string>X</string>
                   </property>
@@ -616,9 +601,6 @@ background  : rgb(255, 0, 0);
                 </item>
                 <item>
                  <widget class="QRadioButton" name="radioButton_3">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
                   <property name="text">
                    <string>Z</string>
                   </property>
@@ -626,9 +608,6 @@ background  : rgb(255, 0, 0);
                 </item>
                 <item>
                  <widget class="QRadioButton" name="radioButton_2">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
                   <property name="text">
                    <string>Y</string>
                   </property>
@@ -646,11 +625,7 @@ background  : rgb(255, 0, 0);
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox_4">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                 </widget>
+                 <widget class="QComboBox" name="comboBox_4"/>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_6">
@@ -661,9 +636,6 @@ background  : rgb(255, 0, 0);
                 </item>
                 <item>
                  <widget class="QSlider" name="horizontalSlider_2">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -682,9 +654,6 @@ background  : rgb(255, 0, 0);
                 </item>
                 <item>
                  <widget class="QSlider" name="horizontalSlider_3">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -705,8 +674,7 @@ background  : rgb(255, 0, 0);
            <item>
             <widget class="QTabWidget" name="tabWidget_3">
              <property name="cursor">
-
-              <cursorShape>PointingHandCursor</cursorShape>
+              <cursorShape>ArrowCursor</cursorShape>
              </property>
              <property name="styleSheet">
               <string notr="true">QTabBar::tab{
@@ -716,9 +684,6 @@ width : 162px;
              </property>
              <property name="currentIndex">
               <number>1</number>
-             </property>
-             <property name="usesScrollButtons">
-              <bool>false</bool>
              </property>
              <property name="movable">
               <bool>true</bool>
@@ -898,15 +863,27 @@ width : 162px;
               <widget class="QWidget" name="">
                <property name="geometry">
                 <rect>
-                 <x>11</x>
-                 <y>21</y>
-                 <width>422</width>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>301</width>
                  <height>37</height>
                 </rect>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_17">
                 <item>
                  <widget class="QLabel" name="label_17">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>0</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Background</string>
                   </property>
@@ -917,6 +894,18 @@ width : 162px;
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButton">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>35</width>
+                    <height>35</height>
+                   </size>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton{
 background : rgb(255, 0, 0);
@@ -928,22 +917,25 @@ background : rgb(255, 0, 0);
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="checkBox">
+                 <widget class="QLabel" name="label_3">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
-                   <string>Surround Axis</string>
-                  </property>
-                  <property name="checked">
-                   <bool>true</bool>
-                  </property>
-                  <property name="tristate">
-                   <bool>false</bool>
+                   <string>Font Size</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="checkBox_2">
-                  <property name="text">
-                   <string>Center Aixs</string>
+                 <widget class="QComboBox" name="comboBox_5">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
                  </widget>
                 </item>
@@ -971,9 +963,6 @@ background : rgb(255, 0, 0);
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QToolButton" name="toolButton_17">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -981,9 +970,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_10">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -991,9 +977,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_20">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1001,9 +984,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_18">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1011,9 +991,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_4">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1021,9 +998,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_3">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1031,9 +1005,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_2">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1041,9 +1012,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1064,9 +1032,6 @@ background : rgb(255, 0, 0);
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QToolButton" name="toolButton_19">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1074,9 +1039,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_23">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1084,9 +1046,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_24">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1094,9 +1053,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_22">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1104,9 +1060,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_21">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1114,9 +1067,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_16">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1124,9 +1074,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_15">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1134,9 +1081,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_14">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1144,9 +1088,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_13">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1154,9 +1095,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_12">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -1164,9 +1102,6 @@ background : rgb(255, 0, 0);
        </item>
        <item>
         <widget class="QToolButton" name="toolButton_11">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
          <property name="text">
           <string>...</string>
          </property>
