@@ -760,7 +760,13 @@ class SurfaceOver2DRangeSeries(SurfaceBaseSeries):
                                      np.linspace(self.start_y, self.end_y,
                                                  num=self.nb_of_points_y))
         f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
-        print ( f(mesh_x, mesh_y) )
+        # print ( f(mesh_x, mesh_y) )
+
+        print(mesh_x)
+        print(mesh_y)
+        print(f(mesh_x, mesh_y))
+        print(type(mesh_x))
+        print(type(mesh_x[0]))
         
         return (mesh_x, mesh_y, f(mesh_x, mesh_y))
 

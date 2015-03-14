@@ -1,6 +1,7 @@
 from sympy import *
 import sympyPlot_implicit
-
+import sympyPlot
+import matplotlib
 import numpy
 x = symbols('x')
 y = symbols('y')
@@ -99,15 +100,44 @@ def plot_implicit_3d(expr, x_var=None, y_var=None, z_var_start=-5,z_var_end=5, *
     # f = lambdify(z, expr)
     f = lambdify(z, expr , "numpy")
     zExpr = f(zArr)
-    p=sympyPlot_implicit.plot_implicit(zExpr[0],show=False)
-    for i in xrange(1,len(zExpr)):
-    	p.extend(sympyPlot_implicit.plot_implicit(zExpr[i],show=False))
-    p.show()
+    xArrF=[]
+    zArrF=[]
+    yArrF=[]
+    
+    for i in xrange(0,len(zExpr)):
+    	xArrL,yArrL=sympyPlot_implicit.plot_implicit_3d(zExpr[i],show=False)
+    	zArrL=[zArr[i]] * len(xArrL)
+    	xArrF.append(xArrL)
+    	yArrF.append(yArrL)
+    	zArrF.append(zArrL)
+    mesh_z=numpy.array(zArrF)
+    mesh_y=numpy.array(yArrF)
+    mesh_x=numpy.array(xArrF)
+    print len(mesh_x)
+    fig=matplotlib.figure.Figure()
+    ax=fig.add_subplot(111,projection='3d')
+    # sympy.plotting.plot3d
+    ax.plot_surface(mesh_x,mesh_y,mesh_z)
+    fig.show()
+    return mesh_x,mesh_y,mesh_z
+	# print len(xArrF)
+	# print len(zArrF)
+
+
+    # for i in xrange(1,len(zExpr)):
+    # 	p.extend(sympyPlot_implicit.plot_implicit(zExpr[i],show=False))
+    # 	break
+    # p.show()
+
 
 if __name__ == "__main__":
     print ('Enter the expression: ' )
     expr_str=raw_input()
     q=plot_implicit_3d(sympify(expr_str))
+    # series = [SurfaceOver2DRangeSeries(*arg, **kwargs) for arg in plot_expr]
+    
+
+    # plots.show()
 
 
 

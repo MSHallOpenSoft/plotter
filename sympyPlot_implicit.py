@@ -39,7 +39,7 @@ from sympy.polys.polyutils import _sort_gens
 from sympy.utilities.decorator import doctest_depends_on
 from sympy.utilities.iterables import flatten
 import warnings
-
+import sympyPlot
 
 class ImplicitSeries(BaseSeries):
     """ Representation for Implicit plot """
@@ -366,7 +366,10 @@ def plot_implicit(expr, x_var=None, y_var=None, **kwargs):
                                     nb_of_points, line_color)
     show = kwargs.pop('show', True)
 
-    print (series_argument.get_points())
+    
+    x, y = sympyPlot._matplotlib_list(series_argument.get_points()[0])
+    print (len(x))
+    print (len(y))
     #set the x and y limits
     kwargs['xlim'] = tuple(float(x) for x in var_start_end_x[1:])
     kwargs['ylim'] = tuple(float(y) for y in var_start_end_y[1:])
@@ -377,6 +380,85 @@ def plot_implicit(expr, x_var=None, y_var=None, **kwargs):
     if show:
         p.show()
     return p
+
+
+
+@doctest_depends_on(modules=('matplotlib',))
+def plot_implicit_3d(expr, x_var=None, y_var=None, **kwargs):
+    has_equality = False  # Represents whether the expression contains an Equality,
+                     #GreaterThan or LessThan
+
+    def arg_expand(bool_expr):
+        """
+        Recursively expands the arguments of an Boolean Function
+        """
+        for arg in bool_expr.args:
+            if isinstance(arg, BooleanFunction):
+                arg_expand(arg)
+            elif isinstance(arg, Relational):
+                arg_list.append(arg)
+
+    arg_list = []
+    if isinstance(expr, BooleanFunction):
+        arg_expand(expr)
+
+    #Check whether there is an equality in the expression provided.
+        if any(isinstance(e, (Equality, GreaterThan, LessThan))
+               for e in arg_list):
+            has_equality = True
+
+    elif not isinstance(expr, Relational):
+        expr = Eq(expr, 0)
+        has_equality = True
+    elif isinstance(expr, (Equality, GreaterThan, LessThan)):
+        has_equality = True
+
+    xyvar = [i for i in (x_var, y_var) if i is not None]
+    free_symbols = expr.free_symbols
+    range_symbols = Tuple(*flatten(xyvar)).free_symbols
+    undeclared = free_symbols - range_symbols
+    if len(free_symbols & range_symbols) > 2:
+        raise NotImplementedError("Implicit plotting is not implemented for "
+                                  "more than 2 variables")
+
+    #Create default ranges if the range is not provided.
+    default_range = Tuple(-5, 5)
+    def _range_tuple(s):
+        if isinstance(s, Symbol):
+            return Tuple(s) + default_range
+        if len(s) == 3:
+            return Tuple(*s)
+        raise ValueError('symbol or `(symbol, min, max)` expected but got %s' % s)
+
+    if len(xyvar) == 0:
+        xyvar = list(_sort_gens(free_symbols))
+    var_start_end_x = _range_tuple(xyvar[0])
+    x = var_start_end_x[0]
+    if len(xyvar) != 2:
+        if x in undeclared or not undeclared:
+            xyvar.append(Dummy('f(%s)' % x.name))
+        else:
+            xyvar.append(undeclared.pop())
+    var_start_end_y = _range_tuple(xyvar[1])
+
+    use_interval = kwargs.pop('adaptive', True)
+    nb_of_points = kwargs.pop('points', 300)
+    depth = kwargs.pop('depth', 0)
+    line_color = kwargs.pop('line_color', "blue")
+    #Check whether the depth is greater than 4 or less than 0.
+    if depth > 4:
+        depth = 4
+    elif depth < 0:
+        depth = 0
+
+    series_argument = ImplicitSeries(expr, var_start_end_x, var_start_end_y,
+                                    has_equality, use_interval, depth,
+                                    nb_of_points, line_color)
+    show = kwargs.pop('show', True)
+
+    
+    x, y = sympyPlot._matplotlib_list(series_argument.get_points()[0])
+    return x,y
 
 # Not working -----------
 
