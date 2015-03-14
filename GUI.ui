@@ -136,6 +136,51 @@ QPushButton:pressed{
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>20</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame, QLabel, QToolTip {
+    border: 0px solid green;
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>20</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>T
+a
+b
+l
+e
+</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item>
      <widget class="QFrame" name="frame">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -357,6 +402,10 @@ a:hover { color: yellow;}
      </layout>
     </item>
    </layout>
+   <zorder>frame</zorder>
+   <zorder>tabWidget</zorder>
+   <zorder>tabWidget</zorder>
+   <zorder>frame_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -364,7 +413,7 @@ a:hover { color: yellow;}
      <x>0</x>
      <y>0</y>
      <width>1160</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -506,6 +555,16 @@ color: rgb(56, 252, 255);
                   <property name="styleSheet">
                    <string notr="true"/>
                   </property>
+                  <item>
+                   <property name="text">
+                    <string>3D</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>2D</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                 <item>
@@ -513,6 +572,21 @@ color: rgb(56, 252, 255);
                   <property name="cursor">
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
+                  <item>
+                   <property name="text">
+                    <string>Cartesian</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Cylindrical</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Spherical</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                 <item>
@@ -520,6 +594,21 @@ color: rgb(56, 252, 255);
                   <property name="cursor">
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
+                  <item>
+                   <property name="text">
+                    <string>Regular</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Implicit</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Parametric</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                </layout>
@@ -705,7 +794,7 @@ width : 156px;
 }</string>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <property name="usesScrollButtons">
               <bool>false</bool>
