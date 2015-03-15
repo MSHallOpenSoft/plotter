@@ -1,49 +1,39 @@
-from mpl_toolkits.mplot3d import axes3d
-import matplotlib.pyplot as plt
 import numpy as np
+from mayavi import mlab
+from sympy import symbols,sympify
+from sympy.plotting.experimental_lambdify import (vectorized_lambdify)
+import sympyParsing
+x = symbols('x')
+y = symbols('y')
+z = symbols('z')
 
-def plot_implicit(fn, bbox=(-2.5,2.5)):
-    ''' create a plot of an implicit function
-    fn  ...implicit function (plot where fn==0)
-    bbox ..the x,y,and z limits of plotted interval'''
-    xmin, xmax, ymin, ymax, zmin, zmax = bbox*3
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    A = np.linspace(xmin, xmax, 100) # resolution of the contour
-    B = np.linspace(xmin, xmax, 100) # number of slices
-    A1,A2 = np.meshgrid(A,A) # grid on which the contour is plotted
-    print B
-    for z in B: # plot contours in the XY plane
-        X,Y = A1,A2
-        Z = fn(X,Y,B)
-        # print Z
-        cset = ax.plot_surface(X, Y, Z)
-        # [z] defines the only level to plot for this contour for this value of z
-        break
-    # for y in B: # plot contours in the XZ plane
-    #     X,Z = A1,A2
-    #     Y = fn(X,y,Z)
-    #     cset = ax.plot_surface(X, Y+y, Z)
+# a, b, c = np.ogrid[-3:3:100j, -3:3:100j, -3:3:100j]
+# str_expr=raw_input()
+# expr = sympify(sympyParsing.symStr(str_expr))
+# f = vectorized_lambdify((x, y,z), expr)
+# print f(a,b,c)
 
-    # for x in B: # plot contours in the YZ plane
-    #     Y,Z = A1,A2
-    #     X = fn(x,Y,Z)
-    #     cset = ax.plot_surface(X+x, Y, Z)
 
-    # must set plot limits because the contour will likely extend
-    # way beyond the displayed level.  Otherwise matplotlib extends the plot limits
-    # to encompass all values in the contour.
-    ax.set_zlim3d(zmin,zmax)
-    ax.set_xlim3d(xmin,xmax)
-    ax.set_ylim3d(ymin,ymax)
+# contour3d=mlab.contour3d(f(a,b,c), contours = [0])
+# mlab.outline(contour3d, color=(.7, .7, .7))
+# mlab.axes(color=(.7, .7, .7))
+# mlab.show()
 
-    plt.show()
 
-def goursat_tangle(x,y,z):
-    # a,b,c = 0.0,-5.0,11.8
-    # print type(x)
-    return x**2+y
-    # return x**4+y**4+z**4+a*(x**2+y**2+z**2)**2+b*(x**2+y**2+z**2)+c
+def mayavi_implicit_3d(str_expr,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
+    expr = sympify(sympyParsing.symStr(str_expr))
+    no_x_points=complex(0,no_x_points)
+    no_y_points=complex(0,no_y_points)
+    no_z_points=complex(0,no_z_points)
 
-print goursat_tangle
-plot_implicit(goursat_tangle)
+    X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
+    
+    f = vectorized_lambdify((x, y,z), expr)
+    contour3d=mlab.contour3d(f(X,Y,Z), contours = [0])
+    mlab.outline(contour3d, color=(.7, .7, .7))
+    mlab.axes(color=(.7, .7, .7))
+    mlab.show()
+if __name__ == "__main__":
+    print ('Enter the expression: ' )
+    expr_str=raw_input()
+    mayavi_implicit_3d(expr_str)
