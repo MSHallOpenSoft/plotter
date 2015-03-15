@@ -12,7 +12,10 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 from plottingEquation_3d_explicit import MplPlot3dCanvas
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
+import numpy as np
+import matplotlib.pyplot as plotter
 i=1
 import sys, random
 
@@ -34,9 +37,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
-        QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self, self.close)
-        QtGui.QShortcut(QtGui.QKeySequence("Ctrl+T"), self, self.add_page)
-        QtGui.QShortcut(QtGui.QKeySequence("Ctrl+W"), self, self.closeTab_1)
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1160, 600)
@@ -70,8 +71,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -85,8 +84,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -105,8 +102,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -120,8 +115,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border:none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #89669b;\n"
 "  color: white;\n"
 "  padding: 6px 20px;\n"
@@ -135,8 +128,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #745385;\n"
 "  color: white;\n"
 "  padding: 6px 20px;\n"
@@ -150,8 +141,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #9d74b2;\n"
 "  color: white;\n"
 "  padding: 6px 20px;\n"
@@ -320,24 +309,24 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
         self.tabWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
-        self.tab = QtGui.QWidget()
+        '''self.tab = QtGui.QWidget()
         self.tab.setObjectName(_fromUtf8("tab"))
-        self.tabWidget.addTab(self.tab, _fromUtf8(""))
-        self.tabButton = QtGui.QToolButton(self)
-        self.tabButton.setText('+')
-        font = self.tabButton.font()
-        font.setBold(True)
-        self.tabButton.setFont(font)
-        self.tabWidget.setCornerWidget(self.tabButton)
-        self.tabButton.clicked.connect(self.add_page)
-        self.connect(self.tabWidget, QtCore.SIGNAL('tabCloseRequested (int)'),self.closeTab)
-        self.tabWidget.setTabsClosable(True)
-        self.tabWidget.setAutoFillBackground(False)
-        self.tabWidget.setMovable(True)
-        self.tabWidget.setDocumentMode(True)
-        ##self.tab_2 = QtGui.QWidget()
-        ##self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        #self.tabWidget.addTab(self.tab_2, _fromUtf8(""))
+        self.tabWidget.addTab(self.tab, "2D Graph")
+        self.tab.setVisible(False)'''
+        #self.tab_2 = QtGui.QWidget()
+        #self.tab_2.setObjectName(_fromUtf8("tab_2"))
+        contents_2=QtGui.QWidget(self.tabWidget)
+        layout_2= QtGui.QVBoxLayout(contents_2)
+        widget_2 = QtGui.QWidget(self)
+        sc_2=MplPlot3dCanvas_2(widget_2)
+        layout_2.addWidget(sc_2)
+        self.tabWidget.addTab(contents_2, "2D Graph")
+        contents = QtGui.QWidget(self.tabWidget)
+        layout = QtGui.QVBoxLayout(contents)
+        widget_1 = QtGui.QWidget(self)
+        sc = MplPlot3dCanvas(widget_1)
+        layout.addWidget(sc)
+        self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -358,6 +347,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         MainWindow.setStatusBar(self.statusbar)
         self.dockWidget = QtGui.QDockWidget(MainWindow)
         self.dockWidget.setObjectName(_fromUtf8("dockWidget"))
+        self.dockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.dockWidgetContents = QtGui.QWidget()
         self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
         self.gridLayout = QtGui.QGridLayout(self.dockWidgetContents)
@@ -401,6 +391,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "}\n"
 ""))
         self.dockWidget_2.setObjectName(_fromUtf8("dockWidget_2"))
+        self.dockWidget_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.dockWidgetContents_2 = QtGui.QWidget()
         self.dockWidgetContents_2.setObjectName(_fromUtf8("dockWidgetContents_2"))
         self.verticalLayout_4 = QtGui.QVBoxLayout(self.dockWidgetContents_2)
@@ -414,7 +405,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         sizePolicy.setHeightForWidth(self.tabWidget_2.sizePolicy().hasHeightForWidth())
         self.tabWidget_2.setSizePolicy(sizePolicy)
         self.tabWidget_2.setMinimumSize(QtCore.QSize(310, 0))
-        self.tabWidget_2.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.tabWidget_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.tabWidget_2.setAutoFillBackground(False)
         self.tabWidget_2.setStyleSheet(_fromUtf8("QTabWidget{\n"
 "background_color: rgb(56, 252, 255);\n"
@@ -624,8 +615,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -639,9 +628,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
-"\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
@@ -659,8 +645,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -682,8 +666,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -697,8 +679,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -717,8 +697,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -740,8 +718,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -755,8 +731,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -775,8 +749,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -798,8 +770,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -813,8 +783,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -833,8 +801,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -861,8 +827,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -876,8 +840,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -896,8 +858,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -919,8 +879,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -934,8 +892,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -954,8 +910,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -982,8 +936,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -997,8 +949,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1017,8 +967,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1037,8 +985,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1052,8 +998,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1072,8 +1016,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1097,8 +1039,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1112,8 +1052,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1132,8 +1070,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1155,8 +1091,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1170,8 +1104,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1190,8 +1122,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  position: relative;\n"
 "  border: none;\n"
 "  outline:none;\n"
-"  cursor:pointer;\n"
-"  cursor: hand;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
 "  padding: 2px 2px;\n"
@@ -1245,7 +1175,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
     # For Hand Cursor
     def hand_cursor(self,widget):
         widget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-
     def hide_2(self):
         self.frame.hide()
         self.frame_2.show()
@@ -1254,50 +1183,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame.show()
         self.frame_2.hide()
         self.pushButton.hide()
-    def closeTab(self, index):
-        if self.tabWidget.count()== 1:
-            self.close()
-        self.tabWidget.removeTab(index)
-      
-        self.tabWidget.destroy(index)
-    def closeTab_1(self):
-      
-        index=self.tabWidget.currentIndex()
-        if self.tabWidget.count()== 1:
-            self.close()
-        #self.pages.remove(self.tabWidget.currentWidget())
-        self.tabWidget.destroy(index)
-        self.tabWidget.removeTab(index)
-    def create_new_page_button(self):
-        radioButton = QtGui.QRadioButton('2D Graph')
-        radioButton.setGeometry(QtCore.QRect(0, 0, 116, 22))
-        #radioButton.clicked.connect(self.add_pagex)
-        return radioButton
-  
-    def create_new_page_button_2(self):
-        radioButton_2 = QtGui.QRadioButton('3D Graph')
-        radioButton_2.setGeometry(QtCore.QRect(0, 0, 116, 22))
-        #radioButton_2.clicked.connect(self.add_pagex)
-        return radioButton_2
-  
-    def create_new_page_button_3(self):
-        btn = QtGui.QPushButton('Change the title of the page!')
-        btn.clicked.connect(self.change_title)
-        return btn
-    
-    def create_page(self, *contents):
-        page = QtGui.QWidget()
-        num = 0 
-        hbox = QtGui.QHBoxLayout() 
-        vbox = QtGui.QVBoxLayout()  
-        hbox.addStretch(1) 
-        for c in contents[0:2]: 
-            hbox.addWidget(c)
-        #hbox.addWidget(contents[3])
-        vbox.addLayout(hbox)
-        vbox.insertStretch(-1,1) 
-        page.setLayout(vbox)
-        return page 
     
     def add_page(self):
         #self.pages.append(self.create_page(self.create_new_page_button(),self.create_new_page_button_2()))
@@ -1306,7 +1191,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         # add other widgets to the contents layout here
         # i.e. layout.addWidget(widget), etc
         widget_1 = QtGui.QWidget(self)
-        l = QtGui.QVBoxLayout(widget_1)
+        #l = QtGui.QVBoxLayout(widget_1)
         #textbox=customLineEdit(self)
         sc = MplPlot3dCanvas(widget_1)
         #l.addWidget(sc)
@@ -1325,7 +1210,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "l\n"
 "e\n"
 "", None))
-        self.pushButton_3.setText(_translate("MainWindow", "Hide", None))
+        self.pushButton_3.setText(_translate("MainWindow","Hide", None))
         self.toolButton_7.setText(_translate("MainWindow", "...", None))
         self.toolButton_9.setText(_translate("MainWindow", "...", None))
         self.toolButton_8.setText(_translate("MainWindow", "...", None))
@@ -1338,8 +1223,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "z", None))
         self.pushButton_21.setText(_translate("MainWindow", "Redraw", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Untitled 1", None))
-        #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Tab 2", None))
+        #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "2D Graph", None))
+        #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "3D Graph", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuEdit.setTitle(_translate("MainWindow", "Edit", None))
         self.menuView.setTitle(_translate("MainWindow", "View", None))
@@ -1401,11 +1286,92 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.actionNew_Project.setText(_translate("MainWindow", "New Project", None))
         self.actionSave.setText(_translate("MainWindow", "Save", None))
         self.actionSave_As.setText(_translate("MainWindow", "Save As", None))
-class 
+
+class TabContainer(QtGui.QWidget):
+  def __init__(self):
+    super(TabContainer, self).__init__()
+    self.initUI()
+    QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self, self.close)
+    QtGui.QShortcut(QtGui.QKeySequence("Ctrl+T"), self, self.add_page)
+    QtGui.QShortcut(QtGui.QKeySequence("Ctrl+W"), self, self.closeTab_1)
+    
+
+  def initUI(self):
+    #self.setGeometry( 150, 150, 650, 350)
+    self.tabWidget = QtGui.QTabWidget(self)
+    self.tabWidget.setTabPosition(QtGui.QTabWidget.North)
+   # self.tabwidget.setTabShape(QtGui.QTabWidget.Triangular)
+    #QtCore.QObject.connect(self, QtCore.SIGNAL('tabCloseRequested(int)'), self.closeTab)
+    self.connect(self.tabWidget, QtCore.SIGNAL('tabCloseRequested (int)'),self.closeTab)
+    self.tabWidget.setTabsClosable(True)
+    #self.tabwidget.removeTab(1)
+    self.tabWidget.setAutoFillBackground(False)
+    self.tabWidget.setMovable(True)
+    #self.tabwidget.setTabShape(QtGui.QTabWidget.Rounded)
+    vbox = QtGui.QVBoxLayout()
+    self.tabWidget.setDocumentMode(True)
+    vbox.addWidget(self.tabWidget)
+    self.tabButton = QtGui.QToolButton(self)
+    self.tabButton.setText(' + ')
+    font = self.tabButton.font()
+    font.setBold(True)
+    self.tabButton.setFont(font)
+    self.tabWidget.setCornerWidget(self.tabButton)
+    self.tabButton.clicked.connect(self.add_page)
+    self.connect(self.tabWidget, QtCore.SIGNAL('tabCloseRequested (int)'),self.closeTab)
+    self.tabWidget.setTabsClosable(True)
+    self.tabWidget.setAutoFillBackground(False)
+    self.tabWidget.setMovable(True)
+    self.tabWidget.setDocumentMode(True)
+    self.setLayout(vbox)
+    self.pages = []
+    self.add_page()
+    self.show()
+    
+  def closeTab(self, index):
+      
+      #self.tabWidget.widget(index).close()
+      if self.tabwidget.count()== 1:
+          self.close()
+      #self.pages.remove(self.tabwidget.currentWidget())
+      self.tabwidget.removeTab(index)
+      
+      self.tabwidget.destroy(index)
+      print len(self.pages)
+        
+  def closeTab_1(self):
+      
+      index=self.tabwidget.currentIndex()
+      if self.tabwidget.count()== 1:
+          self.close()
+      
+      self.pages.remove(self.tabwidget.currentWidget())
+      self.tabwidget.destroy(index)
+      self.tabwidget.removeTab(index)
+      print len(self.pages)
+        
+
+  def create_page(self, *contents):
+    print("creating new page")
+    page = QtGui.QWidget()
+    vbox = QtGui.QVBoxLayout()
+    
+    for c in contents:
+        vbox.addWidget(c)
+
+    page.setLayout(vbox)
+    return page
+
+  def add_page(self):
+    #self.pages.append( self.create_page( MainWindow() ) )
+    print("adding page")
+    self.pages.append(Ui_MainWindow())
+    self.tabWidget.addTab( self.pages[-1] , 'Project %s' % len(self.pages) )
+    self.tabWidget.setCurrentIndex( len(self.pages)-1 )
+
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    ex = Ui_MainWindow()
+    ex = TabContainer()
     ex.showMaximized()
-    ex.show()
     sys.exit(app.exec_())
