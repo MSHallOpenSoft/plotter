@@ -27,13 +27,19 @@ def mayavi_implicit_3d(str_expr,x_start=-10,x_end=10,no_x_points=100,y_start=-10
     no_z_points=complex(0,no_z_points)
 
     X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
-    
+    print X
+    print Y
+    print Z
     f = vectorized_lambdify((x, y,z), expr)
+
+    print f(X,Y,Z)
     contour3d=mlab.contour3d(f(X,Y,Z), contours = [0])
     mlab.outline(contour3d, color=(.7, .7, .7))
-    mlab.axes(color=(.7, .7, .7))
-    mlab.show()
 if __name__ == "__main__":
     print ('Enter the expression: ' )
     expr_str=raw_input()
     mayavi_implicit_3d(expr_str)
+    expr_str=raw_input()
+    mayavi_implicit_3d(expr_str)
+    mlab.axes(color=(.7, .7, .7))
+    mlab.show()
