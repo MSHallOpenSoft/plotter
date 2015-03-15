@@ -1,7 +1,6 @@
 from sympy import symbols,sympify,latex
 import sympyPlot_implicit
-import sympyPlot
-import matplotlib
+
 import numpy
 x = symbols('x')
 y = symbols('y')
@@ -135,14 +134,11 @@ def plot_implicit_3d(expr, x_var=None, y_var=None, z_var_start=-5,z_var_end=5, *
     # p.show()
 
 
+
 if __name__ == "__main__":
     print ('Enter the expression: ' )
     expr_str=raw_input()
     q=plot_implicit_3d(sympify(expr_str))
-    # series = [SurfaceOver2DRangeSeries(*arg, **kwargs) for arg in plot_expr]
-    
-
-    # plots.show()
 
 
 

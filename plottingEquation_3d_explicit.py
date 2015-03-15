@@ -178,12 +178,14 @@ class ApplicationWindow(QtGui.QMainWindow):
 #)
 
 
-qApp = QtGui.QApplication(sys.argv)
+if(__name__=='__main__'):
 
-aw = ApplicationWindow()
-aw.setWindowTitle("%s" % progname)
-aw.show()
-#for ii in xrange(0,360,1):
-        #aw.sc.ax.view_init(elev=10., azim=ii)
-sys.exit(qApp.exec_())
-qApp.exec_()
+  qApp = QtGui.QApplication(sys.argv)
+
+  aw = ApplicationWindow()
+  aw.setWindowTitle("%s" % progname)
+  aw.show()
+  #for ii in xrange(0,360,1):
+          #aw.sc.ax.view_init(elev=10., azim=ii)
+  sys.exit(qApp.exec_())
+  qApp.exec_()
