@@ -34,6 +34,235 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
+
+
+class ExpressionDetails(QFrame):
+
+    
+    def __init__(self,Form):
+        super(ExpressionDetails,self).__init__()
+        self.setupUi(self)
+
+    def setupUi(self, Form):
+        Form.setObjectName(_fromUtf8("Form"))
+        Form.resize(360, 168)
+        Form.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.verticalLayout_2 = QtGui.QVBoxLayout(Form)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        self.verticalLayout = QtGui.QVBoxLayout()
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.lineEdit = QtGui.QLineEdit(Form)
+        self.lineEdit.setMaximumSize(QtCore.QSize(16777215, 27))
+        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+        self.verticalLayout.addWidget(self.lineEdit)
+        
+
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.label = QtGui.QLabel(Form)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
+        self.label.setMaximumSize(QtCore.QSize(72, 17))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.horizontalLayout_2.addWidget(self.label)
+        self.listWidget = QtGui.QListWidget(Form)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
+        self.listWidget.setSizePolicy(sizePolicy)
+        self.listWidget.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.listWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.listWidget.setEditTriggers(QtGui.QAbstractItemView.EditKeyPressed)
+        self.listWidget.setFlow(QtGui.QListView.LeftToRight)
+        self.listWidget.setObjectName(_fromUtf8("listWidget"))
+        item = QtGui.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtGui.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtGui.QListWidgetItem()
+        self.listWidget.addItem(item)
+        self.horizontalLayout_2.addWidget(self.listWidget)
+        self.pushButton = QtGui.QPushButton(Form)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy)
+        self.pushButton.setMaximumSize(QtCore.QSize(40, 40))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.horizontalLayout_2.addWidget(self.pushButton)
+        spacerItem = QtGui.QSpacerItem(228, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        
+
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setSizeConstraint(QtGui.QLayout.SetFixedSize)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.label_2 = QtGui.QLabel(Form)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.horizontalLayout.addWidget(self.label_2)
+        self.label_3 = QtGui.QPushButton(Form)
+        self.label_3.setFlat(True)
+        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.horizontalLayout.addWidget(self.label_3)
+        self.horizontalSlider = QtGui.QSlider(Form)
+        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider.setObjectName(_fromUtf8("horizontalSlider"))
+        self.horizontalLayout.addWidget(self.horizontalSlider)
+        self.label_4 = QtGui.QPushButton(Form)
+        self.label_4.setFlat(True)
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        self.horizontalLayout.addWidget(self.label_4)
+
+        self.slide = QtGui.QWidget()
+        self.slide.setLayout(self.horizontalLayout)
+        self.verticalLayout.addWidget(self.slide)
+
+        
+
+
+
+        self.horizontalLayout99 = QtGui.QHBoxLayout()
+        self.horizontalLayout99.setSizeConstraint(QtGui.QLayout.SetMinimumSize)
+        self.horizontalLayout99.setObjectName(_fromUtf8("horizontalLayout99"))
+        self.leftRange = QtGui.QDoubleSpinBox(Form)
+        self.leftRange.setSingleStep(0.1)
+        self.leftRange.setObjectName(_fromUtf8("leftRange"))
+        self.horizontalLayout99.addWidget(self.leftRange)
+        self.placeHolder = QtGui.QLabel(Form)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.placeHolder.sizePolicy().hasHeightForWidth())
+        self.placeHolder.setSizePolicy(sizePolicy)
+        self.placeHolder.setObjectName(_fromUtf8("placeHolder"))
+        self.horizontalLayout99.addWidget(self.placeHolder)
+        self.rightRange = QtGui.QDoubleSpinBox(Form)
+        self.rightRange.setObjectName(_fromUtf8("rightRange"))
+        self.horizontalLayout99.addWidget(self.rightRange)
+        self.stepLabel = QtGui.QLabel(Form)
+        self.stepLabel.setObjectName(_fromUtf8("stepLabel"))
+        self.horizontalLayout99.addWidget(self.stepLabel)
+        self.stepValue = QtGui.QDoubleSpinBox(Form)
+        self.stepValue.setObjectName(_fromUtf8("stepValue"))
+        self.horizontalLayout99.addWidget(self.stepValue)
+        self.confirmButton = QtGui.QPushButton(Form)
+        self.confirmButton.setObjectName(_fromUtf8("confirmButton"))
+        self.horizontalLayout99.addWidget(self.confirmButton)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout99.addItem(spacerItem)
+
+
+        self.sliderQ = QtGui.QWidget()
+        self.sliderQ.setLayout(self.horizontalLayout99)
+        self.verticalLayout.addWidget(self.sliderQ)
+        spacerItem1 = QtGui.QSpacerItem(20, 1, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem1)
+        self.verticalLayout_2.addLayout(self.verticalLayout)
+
+        self.sliderQ.hide()
+
+
+        self.label_3.clicked.connect(lambda:self.showSliderChanger(self.slide,self.sliderQ))
+        self.label_4.clicked.connect(lambda:self.showSliderChanger(self.slide,self.sliderQ))
+
+        self.confirmButton.clicked.connect(lambda:self.hideSliderChanger(self.slide,self.sliderQ))
+
+
+
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        Form.setWindowTitle(_translate("Form", "Form", None))
+        self.label.setText(_translate("Form", "Add Slider:", None))
+        __sortingEnabled = self.listWidget.isSortingEnabled()
+        self.listWidget.setSortingEnabled(False)
+        item = self.listWidget.item(0)
+        item.setText(_translate("Form", "s", None))
+        item = self.listWidget.item(1)
+        item.setText(_translate("Form", "f", None))
+        item = self.listWidget.item(2)
+        item.setText(_translate("Form", "de", None))
+        self.listWidget.setSortingEnabled(__sortingEnabled)
+        self.pushButton.setText(_translate("Form", "all", None))
+        self.label_2.setText(_translate("Form", "a:", None))
+        self.label_3.setText(_translate("Form", "-10", None))
+        self.label_4.setText(_translate("Form", "10", None)) 
+        self.placeHolder.setText(_translate("Form", "<html><head/><body><p>&lt;= a &lt;=</p></body></html>", None))
+        self.stepLabel.setText(_translate("Form", "Step:", None))
+        self.confirmButton.setText(_translate("Form", "Done", None))
+
+    def had(self):
+        if(self.isHidden()):
+            self.show()
+        else:
+            self.hide()      
+
+    def showSliderChanger(self,slid,slidQ):
+        if(not slid.isHidden()):
+            slid.hide()
+        if(slidQ.isHidden()):
+            slidQ.show()
+
+    def hideSliderChanger(self,slid,slidQ):
+        if( not slidQ.isHidden()):
+            slidQ.hide()
+        if(slid.isHidden()):
+            slid.show()
+
+
+
+        
+class clickedFrame(QFrame):
+    
+     def had(self):
+        if(self.isHidden()):
+            self.show()
+        else:
+            self.hide()
+
+class Exp_Form(QtGui.QWidget):
+
+    def __init__(self):
+        super(Exp_Form,self).__init__()
+        self.setupUi(self)
+
+    def setupUi(self, Form):
+        Form.setObjectName(_fromUtf8("Form"))
+        Form.setWindowModality(QtCore.Qt.WindowModal)
+        Form.resize(400, 130)
+        self.horizontalLayout = QtGui.QHBoxLayout(Form)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.verticalLayout = QtGui.QVBoxLayout()
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.pushButton = QtGui.QPushButton(Form)
+        self.pushButton.setFlat(True)
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.verticalLayout.addWidget(self.pushButton)
+        self.frame = ExpressionDetails(Form)
+        #self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
+        #self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        #self.frame.setObjectName(_fromUtf8("frame"))
+        self.verticalLayout.addWidget(self.frame)
+        self.horizontalLayout.addLayout(self.verticalLayout)
+
+        self.pushButton.clicked.connect(self.frame.had)
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        Form.setWindowTitle(_translate("Form", "Form", None))
+        self.pushButton.setText(_translate("Form", "Plot_1", None))
+
 class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QWidget.__init__(self)
@@ -248,44 +477,62 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+
         self.dockWidget = QtGui.QDockWidget(MainWindow)
         self.dockWidget.setObjectName(_fromUtf8("dockWidget"))
         self.dockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.dockWidgetContents = QtGui.QWidget()
-        self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
-        self.gridLayout = QtGui.QGridLayout(self.dockWidgetContents)
-        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.comboBox_5 = QtGui.QComboBox(self.dockWidgetContents)
-        self.comboBox_5.setObjectName(_fromUtf8("comboBox_5"))
-        self.comboBox_5.addItem(_fromUtf8(""))
-        self.comboBox_5.addItem(_fromUtf8(""))
-        self.comboBox_5.addItem(_fromUtf8(""))
-        self.gridLayout.addWidget(self.comboBox_5, 0, 0, 1, 1)
-        self.textEdit = QtGui.QTextEdit(self.dockWidgetContents)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.textEdit.sizePolicy().hasHeightForWidth())
-        self.textEdit.setSizePolicy(sizePolicy)
-        self.textEdit.setMinimumSize(QtCore.QSize(0, 20))
-        self.textEdit.setObjectName(_fromUtf8("textEdit"))
-        self.gridLayout.addWidget(self.textEdit, 0, 1, 1, 1)
-        self.comboBox_6 = QtGui.QComboBox(self.dockWidgetContents)
-        self.comboBox_6.setObjectName(_fromUtf8("comboBox_6"))
-        self.comboBox_6.addItem(_fromUtf8(""))
-        self.comboBox_6.addItem(_fromUtf8(""))
-        self.comboBox_6.addItem(_fromUtf8(""))
-        self.gridLayout.addWidget(self.comboBox_6, 1, 0, 1, 1)
-        self.textEdit_2 = QtGui.QTextEdit(self.dockWidgetContents)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.textEdit_2.sizePolicy().hasHeightForWidth())
-        self.textEdit_2.setSizePolicy(sizePolicy)
-        self.textEdit_2.setMinimumSize(QtCore.QSize(0, 20))
-        self.textEdit_2.setObjectName(_fromUtf8("textEdit_2"))
-        self.gridLayout.addWidget(self.textEdit_2, 1, 1, 1, 1)
-        self.dockWidget.setWidget(self.dockWidgetContents)
+        
+        #self.dockWidgetContents.SetName("plot1")
+
+        #self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
+        #self.dockWidget.setGeometry
+        
+
+        """
+
+        The docked frame accordion code.
+        """
+
+        self.verticalLayout_21 = QtGui.QVBoxLayout()
+        self.verticalLayout_21.setObjectName(_fromUtf8("verticalLayout_21"))
+        self.verticalLayout51 = QtGui.QVBoxLayout()
+        self.verticalLayout51.setObjectName(_fromUtf8("verticalLayout51"))
+        self.addNewPlotButton = QtGui.QPushButton("Add New Plot")
+        self.addNewPlotButton.setFlat(True)
+        self.addNewPlotButton.setObjectName(_fromUtf8("addNewPlotButton."))
+        self.verticalLayout51.addWidget(self.addNewPlotButton)
+        self.scrollArea = QtGui.QScrollArea()
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
+        self.scrollAreaWidgetContents = QtGui.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 376, 243))
+        self.scrollAreaWidgetContents.setObjectName(_fromUtf8("scrollAreaWidgetContents"))
+        self.verticalLayout_44 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_44.setObjectName(_fromUtf8("verticalLayout_44"))
+        self.verticalLayout_33 = QtGui.QVBoxLayout()
+        self.verticalLayout_33.setSpacing(0)
+        self.verticalLayout_33.setObjectName(_fromUtf8("verticalLayout_33"))
+        
+        self.verticalLayout_44.addLayout(self.verticalLayout_33)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout51.addWidget(self.scrollArea)
+        self.verticalLayout_21.addLayout(self.verticalLayout51)
+
+
+
+        self.spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_33.addItem(self.spacerItem)
+
+        self.addNewPlotButton.clicked.connect(lambda:addNewEquationEditor(self.verticalLayout_33,self.spacerItem))
+
+        
+
+        self.dockContent = QtGui.QWidget()
+
+        self.dockContent.setLayout(self.verticalLayout_21)
+        self.dockWidget.setWidget(self.dockContent)
+
+
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget)
         self.dockWidget_2 = QtGui.QDockWidget(MainWindow)
         self.dockWidget_2.setObjectName(_fromUtf8("dockWidget_2"))
@@ -689,12 +936,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.menuEdit.setTitle(_translate("MainWindow", "Edit", None))
         self.menuView.setTitle(_translate("MainWindow", "View", None))
         self.menuAbout.setTitle(_translate("MainWindow", "About", None))
-        self.comboBox_5.setItemText(0, _translate("MainWindow", "x", None))
-        self.comboBox_5.setItemText(1, _translate("MainWindow", "y", None))
-        self.comboBox_5.setItemText(2, _translate("MainWindow", "z", None))
-        self.comboBox_6.setItemText(0, _translate("MainWindow", "x", None))
-        self.comboBox_6.setItemText(1, _translate("MainWindow", "y", None))
-        self.comboBox_6.setItemText(2, _translate("MainWindow", "z", None))
+        
         self.groupBox_2.setTitle(_translate("MainWindow", "Graph", None))
         self.comboBox.setItemText(0, _translate("MainWindow", "3D", None))
         self.comboBox.setItemText(1, _translate("MainWindow", "2D", None))
@@ -828,6 +1070,16 @@ class TabContainer(QtGui.QWidget):
     self.pages.append(Ui_MainWindow())
     self.tabWidget.addTab( self.pages[-1] , 'Project %s' % len(self.pages) )
     self.tabWidget.setCurrentIndex( len(self.pages)-1 )
+
+
+def addNewEquationEditor(layout,spacer):
+    n = layout.count()
+    layout.removeItem(layout.itemAt(n-1))
+    dockWidgetContents = Exp_Form()
+    layout.addWidget(dockWidgetContents)
+    layout.addItem(spacer)
+
+
 
 import sys
 if __name__ == '__main__':
