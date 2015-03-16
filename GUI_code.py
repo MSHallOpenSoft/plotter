@@ -2434,6 +2434,26 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.actionNew_Project.setText(_translate("MainWindow", "New Project", None))
         self.actionSave.setText(_translate("MainWindow", "Save", None))
         self.actionSave_As.setText(_translate("MainWindow", "Save As", None))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_10.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_20.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_18.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_4.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_3.setIconSize(QtCore.QSize(30, 30))
+        self.Example.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_25.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+        self.toolButton_17.setIconSize(QtCore.QSize(30, 30))
+
 
 class TabContainer(QtGui.QWidget):
   def __init__(self):
