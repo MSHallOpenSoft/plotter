@@ -26,7 +26,7 @@ import numpy as np
 #import mayavi_3d
 from mayavi import mlab
 from PyQt4 import QtGui, QtCore
-from sympy import symbols,sympify,latex
+from sympy import symbols,sympify,latex,simplify,fraction,radsimp
 
 from traits.api import HasTraits, Instance, on_trait_change
 from traitsui.api import View, Item
@@ -57,12 +57,21 @@ class Visualization(HasTraits):
     scene = Instance(MlabSceneModel, ())
       # the layout of the dialog screated
       
-    def mayavi_implicit_3d(self,str_expr,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
+    def mayavi_implicit_3d(self,str_expr,x_start=-100,x_end=100,no_x_points=100,y_start=-100,y_end=100,no_y_points=100,z_start=-100,z_end=100,no_z_points=100):
       expr = sympify((str_expr))
-      no_x_points=2
-      no_y_points=2
-      no_z_points=2
-      print(sympyParsing.symStr(str_expr))
+      print(expr)
+      expr = simplify(expr)
+      print(expr)
+      expr = radsimp(expr)
+      print(expr)
+      num_dum=fraction(expr)
+      print(num_dum)
+      expr=num_dum[0]
+      print(expr)
+      #no_x_points=2
+      #no_y_points=2
+      #no_z_points=2
+      #print(sympyParsing.symStr(str_expr))
       no_x_points=complex(0,no_x_points)
       no_y_points=complex(0,no_y_points)
       no_z_points=complex(0,no_z_points)
@@ -72,7 +81,7 @@ class Visualization(HasTraits):
       #print X
       #print Y
       #print Z
-      f = lambdify((x,y,z), expr)
+      f = vectorized_lambdify((x,y,z), expr)
       #print(f(0,1.5,10000))
       foo=f(X,Y,Z)
       print(foo)
@@ -120,11 +129,12 @@ class Visualization(HasTraits):
         #F = x**2/3**2 + y**2/2**2 + z**2/4**2 - 1
         #self.scene.mlab.contour3d(F, contours = [0])
         self.scene.mlab.axes(color=(.7, .7, .7))
-        #xx = yy = zz = np.arange(-5,5,1)
-        #xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
-        #self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
-        #self.scene.mlab.plot3d(zx,zy+0.1,zz,line_width=0.01,tube_radius=0.01)
-        #self.scene.mlab.plot3d(xx,xy+0.1,xz,line_width=0.01,tube_radius=0.01)
+        self.scene.mlab.orientation_axes()
+        xx = yy = zz = np.arange(-10,10,1)
+        xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
+        self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
+        self.scene.mlab.plot3d(zx,zy+0.1,zz,line_width=0.01,tube_radius=0.01)
+        self.scene.mlab.plot3d(xx,xy+0.1,xz,line_width=0.01,tube_radius=0.01)
 
 
     view = View(Item('scene', editor=SceneEditor(scene_class=Scene),

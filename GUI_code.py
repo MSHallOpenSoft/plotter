@@ -7,11 +7,12 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+from mayaviPlot import MayaviQWidget
 from PyQt4 import QtCore, QtGui
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
-from plottingEquation_3d_explicit import MplPlot3dCanvas
+#from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
@@ -36,10 +37,13 @@ except AttributeError:
 
 class ExpressionDetails(QFrame):
 
-   
-    def __init__(self,Form):
+    def __init__(self,Form,parent=None):
         super(ExpressionDetails,self).__init__()
         self.setupUi(self)
+        self.parent=parent
+
+    def plot(self,text):
+        self.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(str(text))
 
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
@@ -50,11 +54,10 @@ class ExpressionDetails(QFrame):
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.lineEdit = QtGui.QLineEdit(Form)
+        self.lineEdit.returnPressed.connect(lambda:self.plot(self.lineEdit.text()))
         self.lineEdit.setMaximumSize(QtCore.QSize(16777215, 27))
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.verticalLayout.addWidget(self.lineEdit)
-       
-
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.label = QtGui.QLabel(Form)
@@ -228,9 +231,10 @@ class clickedFrame(QFrame):
 
 class Exp_Form(QtGui.QWidget):
 
-    def __init__(self):
+    def __init__(self,parent=None):
         super(Exp_Form,self).__init__()
         self.setupUi(self)
+        self.parent=parent
 
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
@@ -244,7 +248,7 @@ class Exp_Form(QtGui.QWidget):
         self.pushButton.setFlat(True)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.verticalLayout.addWidget(self.pushButton)
-        self.frame = ExpressionDetails(Form)
+        self.frame = ExpressionDetails(Form,self)
         #self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
         #self.frame.setFrameShadow(QtGui.QFrame.Raised)
         #self.frame.setObjectName(_fromUtf8("frame"))
@@ -263,11 +267,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
+        self.expression_list=[]
 
     def addNewEquationEditor(self,layout,spacer):
         n = layout.count()
         layout.removeItem(layout.itemAt(n-1))
-        dockWidgetContents = Exp_Form()
+        dockWidgetContents = Exp_Form(self)
+        self.expression_list.append(dockWidgetContents)
         layout.addWidget(dockWidgetContents)
         layout.addItem(spacer)
 
@@ -734,8 +740,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         contents = QtGui.QWidget(self.tabWidget)
         layout = QtGui.QVBoxLayout(contents)
         widget_1 = QtGui.QWidget(self)
-        sc = MplPlot3dCanvas(widget_1)
-        layout.addWidget(sc)
+        self.mayavi_widget = MayaviQWidget(widget_1)
+        layout.addWidget(self.mayavi_widget)
         self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
 "  background: orange;\n"
 "  outline: none;\n"
@@ -2334,7 +2340,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         #l = QtGui.QVBoxLayout(widget_1)
         #textbox=customLineEdit(self)
-        sc = MplPlot3dCanvas(widget_1)
+        sc = MayaviQWidget(widget_1)
         #l.addWidget(sc)
         #l.addWidget(textbox)
         layout.addWidget(sc)
