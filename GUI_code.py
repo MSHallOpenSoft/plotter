@@ -14,6 +14,7 @@ from PyQt4.QtGui import *
 from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
+from function_2 import Ui_DockWidget
 import numpy as np
 import matplotlib.pyplot as plotter
 i=1
@@ -72,13 +73,10 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  border: none;\n"
 "  outline:none;\n"
 "\n"
-"  color: white;\n"
+"  color: white;\n" 
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}\n"
 "QToolButton:hover:!pressed{\n"
 "  position: relative;\n"
@@ -89,10 +87,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
 "}\n"
 "QToolButton:focus\n"
 " {\n"
@@ -104,12 +98,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  outline:none;\n"
 "  background: #fbd334;\n"
 "  color: white;\n"
-"  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}\n"
 "QPushButton{\n"
 "  position: relative;\n"
@@ -117,12 +107,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  outline:none;\n"
 "  background: #89669b;\n"
 "  color: white;\n"
-"  padding: 6px 20px;\n"
 "  border-radius: 2px;\n"
+"  padding: 6px 20px;\n"
 "  font-size: 20px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}\n"
 "QPushButton:hover{\n"
 "  position: relative;\n"
@@ -130,12 +117,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  outline:none;\n"
 "  background: #745385;\n"
 "  color: white;\n"
-"  padding: 6px 20px;\n"
 "  border-radius: 2px;\n"
 "  font-size:20px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}\n"
 "QPushButton:pressed{\n"
 "  position: relative;\n"
@@ -143,12 +126,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  outline:none;\n"
 "  background: #9d74b2;\n"
 "  color: white;\n"
-"  padding: 6px 20px;\n"
 "  border-radius: 2px;\n"
-"  font-size: 20px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
+"  font-size: 20px;\n"  
 "}\n"
 ""))
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -182,11 +161,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
         self.pushButton_3 = QtGui.QPushButton(self.frame)
         self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_3.setStyleSheet(_fromUtf8("QPushButton{\n"
-"border_bottom_style:outset;\n"
-"border_bottom_width:3px;\n"
-"border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.489318, stop:0 rgba(0, 0, 0, 255), stop:0.664773 rgba(255, 255, 255, 255))\n"
-"}"))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.horizontalLayout_5.addWidget(self.pushButton_3)
         self.toolButton_7 = QtGui.QToolButton(self.frame)
@@ -217,77 +191,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
         self.tableWidget.setSizePolicy(sizePolicy)
         self.tableWidget.setMinimumSize(QtCore.QSize(300, 0))
-        self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
-"  background: orange;\n"
-"  outline: none;\n"
-"  color: white;\n"
-"  border: none;\n"
-"  border-radius: 0.25em;\n"
-"  padding: 0.75em 2em;\n"
-"  line-height: 1;\n"
-"  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);\n"
-"  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);\n"
-"  font-size: 1.5rem;\n"
-"}\n"
-".button-white {\n"
-"  background: white;\n"
-"  color: orange;\n"
-"}\n"
-".button-round {\n"
-"  border-radius: 100%;\n"
-"  padding: 0.75em;\n"
-"  width: 3em;\n"
-"  height: 3em;\n"
-"}\n"
-".button-ripple {\n"
-"  position: relative;\n"
-"  overflow: hidden;\n"
-"  transform: translate(0);\n"
-"}\n"
-".button-ripple_content {\n"
-"  position: relative;\n"
-"  z-index: 1;\n"
-"}\n"
-".button-ripple_ripples {\n"
-"  position: absolute;\n"
-"  top: 0;\n"
-"  left: 0;\n"
-"}\n"
-".button-ripple_ripple{\n"
-"  display: block;\n"
-"  position: absolute;\n"
-"  border-radius: 100%;\n"
-"  width: 1em;\n"
-"  height: 1em;\n"
-"  margin: -0.5em 0 0 -0.5em;\n"
-"  transform: scale(0);\n"
-"\n"
-"  top: 0;\n"
-"  left: 0;\n"
-"\n"
-"  animation: ripple-animation 2s;\n"
-"}\n"
-"\n"
-"@keyframes ripple-animation {\n"
-"    from {\n"
-"      transform: scale3d(1,1,1);\n"
-"      opacity: 0.8;\n"
-"    }\n"
-"    to {\n"
-"      transform: scale3d(100,100,1);\n"
-"      opacity: 0;\n"
-"    }\n"
-"}\n"
-"\n"
-"/* Make things perty */\n"
-"html {  height: 100%;}\n"
-"body { font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}\n"
-"h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}\n"
-"h2 { font-weight: 300}\n"
-"input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}\n"
-"a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}\n"
-"a:hover { color: yellow;}\n"
-".container { display:block; margin: 2em 0;}"))
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
@@ -385,11 +288,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.dockWidget.setWidget(self.dockWidgetContents)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget)
         self.dockWidget_2 = QtGui.QDockWidget(MainWindow)
-        self.dockWidget_2.setStyleSheet(_fromUtf8("QDockWidget{\n"
-"    background-color: rgb(11, 170, 165);\n"
-"    color:rgb(56, 252, 255);\n"
-"}\n"
-""))
         self.dockWidget_2.setObjectName(_fromUtf8("dockWidget_2"))
         self.dockWidget_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.dockWidgetContents_2 = QtGui.QWidget()
@@ -407,10 +305,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tabWidget_2.setMinimumSize(QtCore.QSize(310, 0))
         self.tabWidget_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.tabWidget_2.setAutoFillBackground(False)
-        self.tabWidget_2.setStyleSheet(_fromUtf8("QTabWidget{\n"
-"background_color: rgb(56, 252, 255);\n"
-"color: rgb(56, 252, 255);\n"
-"}"))
         self.tabWidget_2.setTabPosition(QtGui.QTabWidget.South)
         self.tabWidget_2.setTabShape(QtGui.QTabWidget.Rounded)
         self.tabWidget_2.setIconSize(QtCore.QSize(16, 25))
@@ -541,10 +435,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_13.setObjectName(_fromUtf8("horizontalLayout_13"))
         self.tabWidget_3 = QtGui.QTabWidget(self.tab_4)
         self.tabWidget_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.tabWidget_3.setStyleSheet(_fromUtf8("QTabBar::tab{\n"
-"height : 40px;\n"
-"width : 156px;\n"
-"}"))
         self.tabWidget_3.setUsesScrollButtons(False)
         self.tabWidget_3.setMovable(True)
         self.tabWidget_3.setObjectName(_fromUtf8("tabWidget_3"))
@@ -611,49 +501,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
         self.toolButton_19 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_19.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_19.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Briefcase-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_19.setIcon(icon)
@@ -662,50 +509,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.toolButton_19)
         self.toolButton_23 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_23.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_23.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Printer-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_23.setIcon(icon1)
@@ -714,50 +517,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.toolButton_23)
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_24.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_24.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Camera-02-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_24.setIcon(icon2)
@@ -766,50 +525,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.toolButton_24)
         self.toolButton_22 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_22.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_22.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(/home/varun/git repos/Opensoft/plotter/Icons/icons/Facebook-48-hover.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/home/varun/git repos/Opensoft/plotter/Icons/icons/Facebook-48-hover.png);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Facebook-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_22.setIcon(icon3)
@@ -823,50 +538,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.line_3)
         self.toolButton_21 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_21.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_21.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Media-Play-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_21.setIcon(icon4)
@@ -875,50 +546,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.toolButton_21)
         self.toolButton_16 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_16.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_16.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Stop-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_16.setIcon(icon5)
@@ -932,99 +559,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.line_2)
         self.toolButton_15 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_15.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_15.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         self.toolButton_15.setIconSize(QtCore.QSize(48, 48))
         self.toolButton_15.setObjectName(_fromUtf8("toolButton_15"))
         self.horizontalLayout_4.addWidget(self.toolButton_15)
         self.toolButton_14 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_14.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_14.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         self.toolButton_14.setIconSize(QtCore.QSize(48, 48))
         self.toolButton_14.setObjectName(_fromUtf8("toolButton_14"))
         self.horizontalLayout_4.addWidget(self.toolButton_14)
@@ -1035,50 +574,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.line)
         self.toolButton_13 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_13.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_13.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Magnifying-Glass-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_13.setIcon(icon6)
@@ -1087,50 +582,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_4.addWidget(self.toolButton_13)
         self.toolButton_12 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_12.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toolButton_12.setStyleSheet(_fromUtf8("QToolButton{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}\n"
-"QToolButton:hover:!pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"    border-image: url(c:/Data/navArrowsSelected.png);\n"
-"}\n"
-"QToolButton:focus\n"
-" {\n"
-" border-image: url(/icons/);\n"
-"} \n"
-"QToolButton:pressed{\n"
-"  position: relative;\n"
-"  border: none;\n"
-"  outline:none;\n"
-"  background: #fbd334;\n"
-"  color: white;\n"
-"  padding: 2px 2px;\n"
-"  border-radius: 2px;\n"
-"  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"}"))
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Zoom-In-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_12.setIcon(icon7)
@@ -1163,18 +614,20 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(0)   
         self.tabWidget_2.setCurrentIndex(0)
         self.tabWidget_3.setCurrentIndex(0)
-        self.pushButton_3.clicked.connect(lambda:self.hide_2())
+        self.pushButton_3.clicked.connect(self.hide_2)
         self.pushButton.setVisible(False)
         self.frame_2.setVisible(False)
-        self.pushButton.clicked.connect(lambda:self.show_2())
+        self.pushButton.clicked.connect(self.show_2)
+        self.toolButton_19.clicked.connect(self.show_1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     # For Hand Cursor
     def hand_cursor(self,widget):
         widget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+    
     def hide_2(self):
         self.frame.hide()
         self.frame_2.show()
@@ -1184,6 +637,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame_2.hide()
         self.pushButton.hide()
     
+    def show_1(self):
+        if at.isVisible()==False:
+            at.move(1920-911,1080-296)
+            at.show()
+        else:
+            at.hide()
+
     def add_page(self):
         #self.pages.append(self.create_page(self.create_new_page_button(),self.create_new_page_button_2()))
         contents = QtGui.QWidget(self.tabWidget)
@@ -1331,23 +791,23 @@ class TabContainer(QtGui.QWidget):
   def closeTab(self, index):
       
       #self.tabWidget.widget(index).close()
-      if self.tabwidget.count()== 1:
+      if self.tabWidget.count()== 1:
           self.close()
       #self.pages.remove(self.tabwidget.currentWidget())
-      self.tabwidget.removeTab(index)
+      self.tabWidget.removeTab(index)
       
-      self.tabwidget.destroy(index)
+      self.tabWidget.destroy(index)
       print len(self.pages)
         
   def closeTab_1(self):
       
-      index=self.tabwidget.currentIndex()
-      if self.tabwidget.count()== 1:
+      index=self.tabWidget.currentIndex()
+      if self.tabWidget.count()== 1:
           self.close()
       
-      self.pages.remove(self.tabwidget.currentWidget())
-      self.tabwidget.destroy(index)
-      self.tabwidget.removeTab(index)
+      self.pages.remove(self.tabWidget.currentWidget())
+      self.tabWidget.destroy(index)
+      self.tabWidget.removeTab(index)
       print len(self.pages)
         
 
@@ -1374,4 +834,5 @@ if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     ex = TabContainer()
     ex.showMaximized()
+    at=Ui_DockWidget()
     sys.exit(app.exec_())
