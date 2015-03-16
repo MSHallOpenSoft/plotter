@@ -9,6 +9,10 @@ z = symbols('z')
 # Adaptive Mesh
 
 def symStr(str_expr):
+        print('--------------')
+        print(str_expr)
+        print('************')
+        print(str_expr)
 	indOfXor=str_expr.find('^')
 
 	# Changes x^2 to x**2
@@ -28,7 +32,7 @@ def symStr(str_expr):
 	strLis=list(str_expr)
 	i=1
 	while i<len(strLis):
-		if (strLis[i]=='x' or strLis[i]=='z' or strLis[i]=='y' or strLis[i].isdigit()) and (strLis[i-1]=='x' or strLis[i-1].isdigit() or  strLis[i-1]=='z' or strLis[i-1]=='y'):
+		if (strLis[i]=='x' or strLis[i]=='z' or strLis[i]=='y' ) and (strLis[i-1]=='x' or strLis[i-1].isdigit() or  strLis[i-1]=='z' or strLis[i-1]=='y'):
 			strLis.insert(i,'*')
 		if (strLis[i]=='x' or strLis[i].isdigit() or strLis[i]=='z' or strLis[i]=='y') and (strLis[i-1]==')'):
 			strLis.insert(i,'*')
