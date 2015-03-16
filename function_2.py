@@ -11,7 +11,7 @@ from PyQt4 import QtCore, QtGui
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
-
+from functions import Ui_DockWidget_2
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -30,6 +30,8 @@ class Ui_DockWidget(QtGui.QDockWidget):
     def __init__(self):
         super(Ui_DockWidget, self).__init__()
         self.setupUi(self)
+        self.hide()
+        
     def setupUi(self, DockWidget):
         DockWidget.setObjectName(_fromUtf8("DockWidget"))
         DockWidget.resize(911, 296)
@@ -484,18 +486,30 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_3.setFont(font)
         self.pushButton_33.setFont(font)
         self.pushButton_34.setFont(font)
-        
+        self.pushButton_4.setFont(font)
+        self.pushButton_22.setFont(font)
+        self.pushButton_31.setFont(font)
+        self.pushButton_35.setFont(font)
+        self.pushButton_36.setFont(font)
+        at=Ui_DockWidget_2()
+        self.pushButton_8.clicked.connect(lambda:self.show_1(at))
         DockWidget.setWidget(self.dockWidgetContents)
 
         self.retranslateUi(DockWidget)
         QtCore.QMetaObject.connectSlotsByName(DockWidget)
 
+    def show_1(self,at):
+        if at.isVisible()==False:
+            at.move(1920-293,1080-411-296)
+            at.show()
+        else:
+            at.hide()
     def retranslateUi(self, DockWidget):
-        DockWidget.setWindowTitle(_translate("DockWidget", "DockWidget", None))
+        DockWidget.setWindowTitle(_translate("DockWidget", "Keyboard", None))
         self.pushButton_13.setText(_translate("DockWidget", u'\u2265', None))
         self.pushButton_6.setText(_translate("DockWidget", "x", None))
         self.pushButton_17.setText(_translate("DockWidget", u'x\u00B2', None))
-        self.pushButton_4.setText(_translate("DockWidget", "Pi", None))
+        self.pushButton_4.setText(_translate("DockWidget", u'\u03C0', None))
         self.pushButton_7.setText(_translate("DockWidget", "y", None))
         self.pushButton_12.setText(_translate("DockWidget", u'a\u1D47', None))
         self.pushButton_10.setText(_translate("DockWidget", ")", None))
@@ -514,9 +528,9 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_20.setText(_translate("DockWidget", "9", None))
         self.pushButton_5.setText(_translate("DockWidget", "+", None))
         self.pushButton_21.setText(_translate("DockWidget", "8", None))
-        self.pushButton_22.setText(_translate("DockWidget", "divide", None))
+        self.pushButton_22.setText(_translate("DockWidget", u'\u00F7', None))
         self.pushButton_23.setText(_translate("DockWidget", "5", None))
-        self.pushButton_31.setText(_translate("DockWidget", "multiply", None))
+        self.pushButton_31.setText(_translate("DockWidget", u'\u00D7', None))
         self.pushButton_25.setText(_translate("DockWidget", "=", None))
         self.pushButton_26.setText(_translate("DockWidget", "1", None))
         self.pushButton_27.setText(_translate("DockWidget", "3", None))
@@ -526,12 +540,13 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_8.setText(_translate("DockWidget", "functions", None))
         self.pushButton_34.setText(_translate("DockWidget", u'\u2190', None))
         self.pushButton_33.setText(_translate("DockWidget", u'\u2192', None))
-        self.pushButton_35.setText(_translate("DockWidget", "Back Space", None))
-        self.pushButton_36.setText(_translate("DockWidget", "Enter", None))
+        self.pushButton_35.setText(_translate("DockWidget", u'\u232B', None))
+        self.pushButton_36.setText(_translate("DockWidget", u'\u23CE', None))
 
 if __name__ == "__main__":
     import sys
     a = QtGui.QApplication(sys.argv)
     w=Ui_DockWidget()
     w.show()
+    at=Ui_DockWidget_2()
     sys.exit(a.exec_())

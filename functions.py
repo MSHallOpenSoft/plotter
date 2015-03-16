@@ -23,10 +23,12 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_DockWidget(QtGui.QDockWidget):
+class Ui_DockWidget_2(QtGui.QDockWidget):
     def __init__(self):
-        super(Ui_DockWidget, self).__init__()
+        super(Ui_DockWidget_2, self).__init__()
         self.setupUi(self)
+        self.hide()
+
     def setupUi(self, DockWidget):
         DockWidget.setObjectName(_fromUtf8("DockWidget"))
         DockWidget.resize(293, 411)
@@ -282,6 +284,16 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.verticalLayout_4.addLayout(self.gridLayout_3)
         self.tabWidget.addTab(self.tab_3, _fromUtf8(""))
         self.verticalLayout.addWidget(self.tabWidget)
+        font = QtGui.QFont()
+        font.setWeight(50)
+        font.setPointSize(15)
+        font.setBold(False)
+        self.pushButton_41.setFont(font)
+        self.pushButton_42.setFont(font)
+        self.pushButton_44.setFont(font)
+        self.pushButton_51.setFont(font)
+        self.pushButton_53.setFont(font)
+
         DockWidget.setWidget(self.dockWidgetContents)
 
         self.retranslateUi(DockWidget)
@@ -290,7 +302,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
 
     def retranslateUi(self, DockWidget):
         DockWidget.setToolTip(_translate("DockWidget", "Functions", None))
-        DockWidget.setWindowTitle(_translate("DockWidget", "DockWidget", None))
+        DockWidget.setWindowTitle(_translate("DockWidget", "Functions", None))
         self.pushButton.setText(_translate("DockWidget", "cos", None))
         self.pushButton_4.setText(_translate("DockWidget", "arccos", None))
         self.pushButton_2.setText(_translate("DockWidget", "sin", None))
@@ -332,7 +344,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_41.setText(_translate("DockWidget", u'\u2211', None))
         self.pushButton_42.setText(_translate("DockWidget", u'\u33D2', None))
         self.pushButton_43.setText(_translate("DockWidget", "round", None))
-        self.pushButton_44.setText(_translate("DockWidget", "cuberoot", None))
+        self.pushButton_44.setText(_translate("DockWidget", u'\u221B', None))
         self.pushButton_45.setText(_translate("DockWidget", "gcd", None))
         self.pushButton_46.setText(_translate("DockWidget", "mod", None))
         self.pushButton_47.setText(_translate("DockWidget", "min", None))
@@ -347,6 +359,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
 if __name__ == "__main__":
     import sys
     a = QtGui.QApplication(sys.argv)
-    w=Ui_DockWidget()
+    w=Ui_DockWidget_2()
+    #w.setFloating(True)
     w.show()
     sys.exit(a.exec_())
