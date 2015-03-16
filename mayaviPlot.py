@@ -26,7 +26,7 @@ import numpy as np
 #import mayavi_3d
 from mayavi import mlab
 from PyQt4 import QtGui, QtCore
-from sympy import symbols,sympify,latex,simplify,fraction
+from sympy import symbols,sympify,latex,simplify,fraction,radsimp
 
 from traits.api import HasTraits, Instance, on_trait_change
 from traitsui.api import View, Item
@@ -61,6 +61,12 @@ class Visualization(HasTraits):
       expr = sympify((str_expr))
       print(expr)
       expr = simplify(expr)
+      print(expr)
+      expr = radsimp(expr)
+      print(expr)
+      num_dum=fraction(expr)
+      print(num_dum)
+      expr=num_dum[0]
       print(expr)
       #no_x_points=2
       #no_y_points=2

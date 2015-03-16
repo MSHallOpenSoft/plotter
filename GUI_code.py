@@ -7,11 +7,12 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+from mayaviPlot import MayaviQWidget
 from PyQt4 import QtCore, QtGui
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
-from plottingEquation_3d_explicit import MplPlot3dCanvas
+#from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
@@ -456,7 +457,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         contents = QtGui.QWidget(self.tabWidget)
         layout = QtGui.QVBoxLayout(contents)
         widget_1 = QtGui.QWidget(self)
-        sc = MplPlot3dCanvas(widget_1)
+        sc = MayaviQWidget(widget_1)
         layout.addWidget(sc)
         self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
@@ -900,7 +901,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         #l = QtGui.QVBoxLayout(widget_1)
         #textbox=customLineEdit(self)
-        sc = MplPlot3dCanvas(widget_1)
+        sc = MayaviQWidget(widget_1)
         #l.addWidget(sc)
         #l.addWidget(textbox)
         layout.addWidget(sc)
