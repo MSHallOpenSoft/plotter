@@ -54,7 +54,7 @@ class customLineEdit(QtGui.QLineEdit):
         self.parent.sc.update_figure()
 
 
-class MplPlot3dCanvas(FigureCanvas):
+class MplPlot3dCanvas_2(FigureCanvas):
   def __init__(self,parent=None):
       self.surfs = [] # [{"xx":,"yy:","val:"}]
       self.fig= plt.figure()
@@ -65,7 +65,7 @@ class MplPlot3dCanvas(FigureCanvas):
           QtGui.QSizePolicy.Expanding,
           QtGui.QSizePolicy.Expanding)
       FigureCanvas.updateGeometry(self)
-      self.toolbar = NavigationToolbar(self, parent)
+      #self.toolbar = NavigationToolbar(self, parent)
       #self.ax = AxesDD(self.fig) # Canvas figure must be created for mouse rotation
       self.ax = self.fig.add_subplot(111)
       #self.ax2 = self.fig.add_subplot(111)
@@ -183,7 +183,7 @@ class ApplicationWindow(QtGui.QMainWindow):
 
         l = QtGui.QVBoxLayout(self.main_widget)
         textbox=customLineEdit(self)
-        sc = MplPlot3dCanvas(self.main_widget)
+        sc = MplPlot3dCanvas_2(self.main_widget)
         l.addWidget(sc)
         l.addWidget(textbox)
         self.sc=sc
@@ -215,13 +215,12 @@ class ApplicationWindow(QtGui.QMainWindow):
 #modified versions may be distributed without limitation."""
 #)
 
-
-qApp = QtGui.QApplication(sys.argv)
-
-aw = ApplicationWindow()
-aw.setWindowTitle("%s" % progname)
-aw.show()
-#for ii in xrange(0,360,1):
-        #aw.sc.ax.view_init(elev=10., azim=ii)
-sys.exit(qApp.exec_())
-qApp.exec_()
+if __name__=='__main__':
+  qApp = QtGui.QApplication(sys.argv)
+  aw = ApplicationWindow()
+  aw.setWindowTitle("%s" % progname)
+  aw.show()
+	#for ii in xrange(0,360,1):
+		#aw.sc.ax.view_init(elev=10., azim=ii)
+  sys.exit(qApp.exec_())
+  qApp.exec_()

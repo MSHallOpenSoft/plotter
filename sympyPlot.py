@@ -33,15 +33,15 @@ from sympy.external import import_module
 #from sympy.core.compatibility import range
 from sympy.utilities.decorator import doctest_depends_on
 from sympy.utilities.iterables import is_sequence
-from sympy.plotting.experimental_lambdify import (vectorized_lambdify, lambdify)
-
+from sympy.plotting.experimental_lambdify import (vectorized_lambdify)
+from sympy import lambdify
 # N.B.
 # When changing the minimum module version for matplotlib, please change
 # the same in the `SymPyDocTestFinder`` in `sympy/utilities/runtests.py`
 
 # Backend specific imports - textplot
 from sympy.plotting.textplot import textplot
-
+import sympyPlot_implicit
 # Global variable
 # Set to False when running tests / doctests so that the plots don't show.
 _show = True
@@ -811,6 +811,113 @@ class SurfaceOver3DRangeSeries(SurfaceBaseSeries):
         print ('Implicit 3d')
 
         return (mesh_x, mesh_y,mesh_z)
+
+
+
+
+
+class SurfaceOver3D1RangeSeries(SurfaceBaseSeries):
+    """Representation for a 3D surface consisting of an implicit sympy expression and 3D
+    range."""
+    def __init__(self, expr, var_start_end_x, var_start_end_z ,var_start_end_y, **kwargs):
+        super(SurfaceOver3D1RangeSeries, self).__init__()
+        self.expr = sympify(expr)
+        self.var_x = sympify(var_start_end_x[0])
+        self.start_x = float(var_start_end_x[1])
+        self.end_x = float(var_start_end_x[2])
+        self.var_z = sympify(var_start_end_z[0])
+        self.start_z = float(var_start_end_z[1])
+        self.end_z = float(var_start_end_z[2])
+        self.var_y = sympify(var_start_end_y[0])
+        self.start_y = float(var_start_end_y[1])
+        self.end_y = float(var_start_end_y[2])
+        self.nb_of_points_x = kwargs.get('nb_of_points_x', 50)
+        self.nb_of_points_y = kwargs.get('nb_of_points_y', 50)
+        self.surface_color = kwargs.get('surface_color', None)
+
+    def __str__(self):
+        return ('cartesian surface: %s for'
+                ' %s over %s and %s over %s') % (
+                    str(self.expr),
+                    str(self.var_x),
+                    str((self.start_x, self.end_x)),
+                    str(self.var_y),
+                    str((self.start_y, self.end_y)))
+
+    def get_meshes(self):
+        np = import_module('numpy')
+        # mesh_x, mesh_y = np.meshgrid(np.linspace(self.start_x, self.end_x,
+        #                                          num=self.nb_of_points_x),
+        #                              np.linspace(self.start_y, self.end_y,
+        #                                          num=self.nb_of_points_y))
+        # f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
+        # z_eqns = f(mesh_x, mesh_y)
+        # # mesh_z=[]
+        # mesh_z = [[0 for x in xrange(len(z_eqns))] for x in xrange(len(z_eqns))]
+        # z=symbols('z')
+        # for i in xrange(len(z_eqns)):
+        #     for j in xrange(len(z_eqns)):
+        #         mesh_z[i][j]=np.float64(solve(z_eqns[i][j],z)[0])
+        # mesh_z=np.array(mesh_z)
+        # print (mesh_z)
+        # print ('Implicit 3d')
+
+        # return (mesh_x, mesh_y,mesh_z)
+
+
+        # z=symbols('z')
+        zArr=np.linspace(self.start_x, self.end_x,num=50)
+        print (self.expr)
+        print ((self.var_z))
+        f = lambdify((self.var_z), self.expr )
+        zExpr = f(zArr)
+        # print (zExpr)
+        xArrF=[]
+        zArrF=[]
+        yArrF=[]
+
+        # for i in xrange(0,len(zExpr)):
+        #     xArrL,yArrL=sympyPlot_implicit.plot_implicit_3d(zExpr[i],show=False)
+        #     if len(xArrL)<1000:
+        #         continue
+        #     xArrL=xArrL[:1000]
+        #     yArrL=yArrL[:1000]
+        #     zArrL=[zArr[i]] * len(xArrL)
+        #     xArrL=np.array(xArrL,dtype=float)
+        #     yArrL=np.array(yArrL,dtype=float)
+        #     zArrL=np.array(zArrL,dtype=float)
+        #     print(len(xArrL))
+        #     print(len(yArrL))
+        #     print(len(zArrL))
+        #     xArrF.append(xArrL)
+        #     yArrF.append(yArrL)
+        #     zArrF.append(zArrL)
+        # mesh_z=np.array(zArrF, dtype=object)
+        # mesh_y=np.array(yArrF, dtype=object)
+        # mesh_x=np.array(xArrF, dtype=object)
+
+        for i in xrange(0,len(zExpr)):
+            xArrL,yArrL=sympyPlot_implicit.plot_implicit_3d(zExpr[i],show=False)
+            
+            xArrF+=xArrL
+            yArrF+=yArrL
+            zArrL=[zArr[i]] * len(xArrL)
+            zArrF+=zArrL
+        arrSrt=int(len(xArrF)**(1/2))
+        xArrF=xArrF[:arrSrt*arrSrt]
+        yArrF=yArrF[:arrSrt*arrSrt]
+        zArrF=zArrF[:arrSrt*arrSrt]
+        print(arrSrt)
+        xArrF=np.array(xArrF,dtype=float)
+        yArrF=np.array(yArrF,dtype=float)
+        zArrF=np.array(zArrF,dtype=float)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+        mesh_x=np.reshape(xArrF, (-1, arrSrt))
+        mesh_y=np.reshape(yArrF, (-1, arrSrt))
+        mesh_z=np.reshape(zArrF, (-1, arrSrt))
+
+        print (type(mesh_x[0]))
+        print (type(mesh_x[0][0]))
+        return (mesh_x,mesh_y,mesh_z)
 
 
 class ParametricSurfaceSeries(SurfaceBaseSeries):
@@ -1703,6 +1810,20 @@ def plot3d_implicit(*args, **kwargs):
     print (plot_expr)
     series = [SurfaceOver3DRangeSeries(*arg, **kwargs) for arg in plot_expr]
     
+
+    plots = Plot(*series, **kwargs)
+    if show:
+        plots.show()
+    return plots
+
+def plot3d_implicit1(*args, **kwargs):
+    args = list(map(sympify, args))
+    show = kwargs.pop('show', True)
+    series = []
+    plot_expr = check_arguments(args, 1, 3)
+    print (plot_expr)
+    series = [SurfaceOver3D1RangeSeries(*arg, **kwargs) for arg in plot_expr]
+    print ("seadsadasdsdaries")
 
     plots = Plot(*series, **kwargs)
     if show:
