@@ -39,6 +39,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
 
+    def addNewEquationEditor(self,layout,spacer):
+        n = layout.count()
+        layout.removeItem(layout.itemAt(n-1))
+        dockWidgetContents = Exp_Form()
+        layout.addWidget(dockWidgetContents)
+        layout.addItem(spacer)
+
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1160, 600)
@@ -596,41 +604,57 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.dockWidget = QtGui.QDockWidget(MainWindow)
         self.dockWidget.setObjectName(_fromUtf8("dockWidget"))
         self.dockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.dockWidgetContents = QtGui.QWidget()
-        self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
-        self.gridLayout = QtGui.QGridLayout(self.dockWidgetContents)
-        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.comboBox_5 = QtGui.QComboBox(self.dockWidgetContents)
-        self.comboBox_5.setObjectName(_fromUtf8("comboBox_5"))
-        self.comboBox_5.addItem(_fromUtf8(""))
-        self.comboBox_5.addItem(_fromUtf8(""))
-        self.comboBox_5.addItem(_fromUtf8(""))
-        self.gridLayout.addWidget(self.comboBox_5, 0, 0, 1, 1)
-        self.textEdit = QtGui.QTextEdit(self.dockWidgetContents)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.textEdit.sizePolicy().hasHeightForWidth())
-        self.textEdit.setSizePolicy(sizePolicy)
-        self.textEdit.setMinimumSize(QtCore.QSize(0, 20))
-        self.textEdit.setObjectName(_fromUtf8("textEdit"))
-        self.gridLayout.addWidget(self.textEdit, 0, 1, 1, 1)
-        self.comboBox_6 = QtGui.QComboBox(self.dockWidgetContents)
-        self.comboBox_6.setObjectName(_fromUtf8("comboBox_6"))
-        self.comboBox_6.addItem(_fromUtf8(""))
-        self.comboBox_6.addItem(_fromUtf8(""))
-        self.comboBox_6.addItem(_fromUtf8(""))
-        self.gridLayout.addWidget(self.comboBox_6, 1, 0, 1, 1)
-        self.textEdit_2 = QtGui.QTextEdit(self.dockWidgetContents)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.textEdit_2.sizePolicy().hasHeightForWidth())
-        self.textEdit_2.setSizePolicy(sizePolicy)
-        self.textEdit_2.setMinimumSize(QtCore.QSize(0, 20))
-        self.textEdit_2.setObjectName(_fromUtf8("textEdit_2"))
-        self.gridLayout.addWidget(self.textEdit_2, 1, 1, 1, 1)
-        self.dockWidget.setWidget(self.dockWidgetContents)
+       
+        #self.dockWidgetContents.SetName("plot1")
+
+        #self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
+        #self.dockWidget.setGeometry
+        
+
+        """
+
+        The docked frame accordion code.
+        """
+
+        self.verticalLayout_21 = QtGui.QVBoxLayout()
+        self.verticalLayout_21.setObjectName(_fromUtf8("verticalLayout_21"))
+        self.verticalLayout51 = QtGui.QVBoxLayout()
+        self.verticalLayout51.setObjectName(_fromUtf8("verticalLayout51"))
+        self.addNewPlotButton = QtGui.QPushButton("Add New Plot")
+        self.addNewPlotButton.setFlat(True)
+        self.addNewPlotButton.setObjectName(_fromUtf8("addNewPlotButton."))
+        self.verticalLayout51.addWidget(self.addNewPlotButton)
+        self.scrollArea = QtGui.QScrollArea()
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
+        self.scrollAreaWidgetContents = QtGui.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 376, 243))
+        self.scrollAreaWidgetContents.setObjectName(_fromUtf8("scrollAreaWidgetContents"))
+        self.verticalLayout_44 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_44.setObjectName(_fromUtf8("verticalLayout_44"))
+        self.verticalLayout_33 = QtGui.QVBoxLayout()
+        self.verticalLayout_33.setSpacing(0)
+        self.verticalLayout_33.setObjectName(_fromUtf8("verticalLayout_33"))
+        
+        self.verticalLayout_44.addLayout(self.verticalLayout_33)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout51.addWidget(self.scrollArea)
+        self.verticalLayout_21.addLayout(self.verticalLayout51)
+
+
+
+        self.spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_33.addItem(self.spacerItem)
+
+        self.addNewPlotButton.clicked.connect(lambda:self.addNewEquationEditor(self.verticalLayout_33,self.spacerItem))
+
+        
+
+        self.dockContent = QtGui.QWidget()
+
+        self.dockContent.setLayout(self.verticalLayout_21)
+        self.dockWidget.setWidget(self.dockContent)
+
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget)
         self.dockWidget_2 = QtGui.QDockWidget(MainWindow)
         self.dockWidget_2.setObjectName(_fromUtf8("dockWidget_2"))
@@ -2274,6 +2298,14 @@ class TabContainer(QtGui.QWidget):
     self.tabWidget.addTab( self.pages[-1] , 'Project %s' % len(self.pages) )
     self.tabWidget.setCurrentIndex( len(self.pages)-1 )
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> d307fd2772b0c2f851cdc637115008129fb8f5ed
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
