@@ -20,6 +20,7 @@ os.environ['ETS_TOOLKIT'] = 'qt4'
 import sys
 import sympyParsing
 from sympy.plotting.experimental_lambdify import (vectorized_lambdify)
+from sympy.utilities.lambdify import lambdify
 
 import numpy as np
 #import mayavi_3d
@@ -46,7 +47,7 @@ class customLineEdit(QtGui.QLineEdit):
         self.returnPressed.connect(self.sg_returnPressed)
 
     def sg_returnPressed(self):
-        self.parent.mayavi_widget.visualization.update_plot(str(self.text()))
+        self.parent.mayavi_widget.visualization.mayavi_implicit_3d(str(self.text()))
 
 
 ################################################################################
@@ -57,47 +58,73 @@ class Visualization(HasTraits):
       # the layout of the dialog screated
       
     def mayavi_implicit_3d(self,str_expr,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
-      expr = sympify(sympyParsing.symStr(str_expr))
+      expr = sympify((str_expr))
+      no_x_points=2
+      no_y_points=2
+      no_z_points=2
+      print(sympyParsing.symStr(str_expr))
       no_x_points=complex(0,no_x_points)
       no_y_points=complex(0,no_y_points)
       no_z_points=complex(0,no_z_points)
+      points_size=[no_x_points,no_y_points,no_z_points]
 
       X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
-      print X
-      print Y
-      print Z
-      f = vectorized_lambdify((x, y,z), expr)
-      print(self.scene)
-      contour3d=self.scene.mlab.contour3d(f(X,Y,Z), contours = [0])
+      #print X
+      #print Y
+      #print Z
+      f = lambdify((x,y,z), expr)
+      #print(f(0,1.5,10000))
+      foo=f(X,Y,Z)
+      print(foo)
+      print(foo.shape)
+      axis=[]
+      s=foo.shape
+      for i in range(0,len(points_size)):
+          if(s[i]!=points_size[i].imag):
+              axis.append(i)
+      #if s[0]!=no_x_points.imag:
+          #axis.append(0)
+      #if s[1]!=no_y_points.imag:
+          #axis.append(1)
+      #if s[2]!=no_z_points.imag:
+      #    axis.append(2)
+      print(axis)
+      doo=foo
+      for i in range(0,len(axis)):
+          doo=np.repeat(doo,points_size[i].imag,axis[i])
+      print(doo)
+      print(doo.shape)
+      contour3d=self.scene.mlab.contour3d(doo,extent=[x_start,x_end,y_start,y_end,z_start,z_end], contours = [0])
       self.scene.mlab.outline(contour3d, color=(.7, .7, .7))
+      self.update_plot()
 
 
 
 
     @on_trait_change('scene.activated')
-    def update_plot(self,txt=None):
+    def update_plot(self):
         # This function is called when the view is opened. We don't
         # populate the scene when the view is not yet open, as some
         # VTK features require a GLContext.
 
         # We can do normal mlab calls on the embedded scene.
         # self.scene.mlab.test_points3d()
-        print(txt)
-        if(txt!=None):
-          self.mayavi_implicit_3d(txt)
-          print(txt)
-        else:
-          self.mayavi_implicit_3d('x+y+z=1')
-          #self.scene.mlab.test_points3d()
-          #x, y, z = np.ogrid[-3:3:100j, -3:3:100j, -3:3:100j]
-          #F = x**2/3**2 + y**2/2**2 + z**2/4**2 - 1
+        #print(txt)
+        #if(txt!=None):
+          #self.mayavi_implicit_3d(txt)
+          #print(txt)
+        #else:
+          ##self.mayavi_implicit_3d('x+y+z=1')
+        #  self.scene.mlab.test_points3d()
+        #x, y, z = np.ogrid[-3:3:100j, -3:3:100j, -3:3:100j]
+        #F = x**2/3**2 + y**2/2**2 + z**2/4**2 - 1
         #self.scene.mlab.contour3d(F, contours = [0])
-        #self.scene.mlab.axes(color=(.7, .7, .7))
-        xx = yy = zz = np.arange(-5,5,1)
-        xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
-        self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
-        self.scene.mlab.plot3d(zx,zy+0.1,zz,line_width=0.01,tube_radius=0.01)
-        self.scene.mlab.plot3d(xx,xy+0.1,xz,line_width=0.01,tube_radius=0.01)
+        self.scene.mlab.axes(color=(.7, .7, .7))
+        #xx = yy = zz = np.arange(-5,5,1)
+        #xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
+        #self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
+        #self.scene.mlab.plot3d(zx,zy+0.1,zz,line_width=0.01,tube_radius=0.01)
+        #self.scene.mlab.plot3d(xx,xy+0.1,xz,line_width=0.01,tube_radius=0.01)
 
 
     view = View(Item('scene', editor=SceneEditor(scene_class=Scene),
