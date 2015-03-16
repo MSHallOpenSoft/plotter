@@ -268,6 +268,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
 
+    def addNewEquationEditor(self,layout,spacer):
+        n = layout.count()
+        layout.removeItem(layout.itemAt(n-1))
+        dockWidgetContents = Exp_Form()
+        layout.addWidget(dockWidgetContents)
+        layout.addItem(spacer)
+
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1160, 600)
@@ -523,7 +531,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_33.addItem(self.spacerItem)
 
-        self.addNewPlotButton.clicked.connect(lambda:addNewEquationEditor(self.verticalLayout_33,self.spacerItem))
+        self.addNewPlotButton.clicked.connect(lambda:self.addNewEquationEditor(self.verticalLayout_33,self.spacerItem))
 
         
 
@@ -1072,12 +1080,7 @@ class TabContainer(QtGui.QWidget):
     self.tabWidget.setCurrentIndex( len(self.pages)-1 )
 
 
-def addNewEquationEditor(layout,spacer):
-    n = layout.count()
-    layout.removeItem(layout.itemAt(n-1))
-    dockWidgetContents = Exp_Form()
-    layout.addWidget(dockWidgetContents)
-    layout.addItem(spacer)
+
 
 
 
