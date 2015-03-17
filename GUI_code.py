@@ -431,9 +431,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "    border-image: url(c:/Data/navArrowsSelected.png);\n"
 "}\n"
 "QToolButton:focus\n"
@@ -451,9 +448,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}"))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Add-New-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -475,9 +469,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}\n"
 "QToolButton:hover:!pressed{\n"
 "  position: relative;\n"
@@ -490,9 +481,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "    border-image: url(c:/Data/navArrowsSelected.png);\n"
 "}\n"
 "QToolButton:focus\n"
@@ -510,9 +498,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}"))
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Minus-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -533,9 +518,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}\n"
 "QToolButton:hover:!pressed{\n"
 "  position: relative;\n"
@@ -548,9 +530,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "    border-image: url(c:/Data/navArrowsSelected.png);\n"
 "}\n"
 "QToolButton:focus\n"
@@ -568,9 +547,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}"))
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Folder-Open-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -591,9 +567,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}\n"
 "QToolButton:hover:!pressed{\n"
 "  position: relative;\n"
@@ -606,9 +579,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "    border-image: url(c:/Data/navArrowsSelected.png);\n"
 "}\n"
 "QToolButton:focus\n"
@@ -626,9 +596,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "}"))
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Open-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -664,9 +631,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "  padding: 2px 2px;\n"
 "  border-radius: 2px;\n"
 "  font-size: 22px;\n"
-"  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
-"   box-shadow: 0 0 4px rgba(0,0,0, .75);\n"
 "    border-image: url(c:/Data/navArrowsSelected.png);\n"
 "}\n"
 "QToolButton:focus\n"
