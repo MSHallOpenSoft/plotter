@@ -57,8 +57,11 @@ class Visualization(HasTraits):
     scene = Instance(MlabSceneModel, ())
       # the layout of the dialog screated
       
-    def mayavi_implicit_3d(self,str_expr,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
+    def mayavi_implicit_3d(self,str_expr,color=(0,1,0),line_width=2,opacity=1,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
       expr = sympify(sympyParsing.symStr(str_expr))
+      print(x_start,x_end,no_x_points)
+      print(y_start,y_end,no_y_points)
+      print(z_start,z_end,no_z_points)
       print(expr)
       expr = simplify(expr)
       print(expr)
@@ -103,7 +106,7 @@ class Visualization(HasTraits):
           #for i in range(0,len(axis)):
       #        doo=np.repeat(doo,points_size[i].imag,axis[i])
       print(doo.shape)
-      contour3d=self.scene.mlab.contour3d(doo, contours = [0])
+      contour3d=self.scene.mlab.contour3d(doo,color=color,line_width=line_width,opacity=opacity, contours = [0])
       self.scene.mlab.outline(contour3d, color=(.7, .7, .7))
       self.update_plot()
 
