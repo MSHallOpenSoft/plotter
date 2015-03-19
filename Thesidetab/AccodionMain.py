@@ -55,6 +55,7 @@ class AccordionMain(QtGui.QWidget):
 
         self.drawButton = QtGui.QPushButton("Draw")
         self.drawButton.setMaximumSize(60,30)
+        self.drawButton.clicked.connect(self.plot)
         self.horizontalLayout2 = QtGui.QHBoxLayout()
         self.horizontalLayout2.addWidget(self.iconButton)
         self.horizontalLayout2.addWidget(self.pushButton)
@@ -74,20 +75,19 @@ class AccordionMain(QtGui.QWidget):
         #self.frame.setFrameShadow(QtGui.QFrame.Raised)
         #self.frame.setObjectName(_fromUtf8("frame"))
         self.verticalLayout.addWidget(self.frame)
-
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.setLayout(self.verticalLayout)
-
         self.iconButton.clicked.connect(self.closeHandler)
-
-
         self.frame.hide()
-
         self.pushButton.clicked.connect(self.accord)
-        
-
         self.retranslateUi()
+
+    def plot(self):
+      #print("fooooooooooooooooooooooooooooooooo")
+      #print(str(self.frame.widget_4.text()))
+      print( self.parent.parent.mayavi_widget.visualization)
+      self.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(str(self.frame.widget_4.text()))
         
 
     def retranslateUi(self):
@@ -105,6 +105,8 @@ class AccordionMain(QtGui.QWidget):
     def closeHandler(self):
         if(self):
             self.deleteLater()
+
+    
 
 import sys
 if __name__ == '__main__':

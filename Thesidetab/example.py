@@ -28,6 +28,7 @@ import settingTab
 import range5
 import accordion
 import sliderTop
+import som
 
 
 class MainFrameR(QtGui.QWidget):
@@ -63,6 +64,14 @@ class MainFrameR(QtGui.QWidget):
 
         self.widget_4 = QtGui.QLineEdit()
         self.equationTab = accordion.Accordion(self,"Expression",self.widget_4)
+
+        self.widget_41 = som.ExplicitEquation()
+        self.equationTabExplicit = accordion.Accordion(self,"Expression",self.widget_41)
+
+
+
+
+
 
 
         self.sliderTab.hide()

@@ -38,12 +38,12 @@ Please point out any further feautures that can be included in our plotter, or e
 ## Please keep adding more as you come to think of any !!!
 '''
 
-#import mayaviPlot
+import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -469,7 +469,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tab.setVisible(False)'''
         #self.tab_2 = QtGui.QWidget()
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        '''contents_2=QtGui.QWidget(self.tabWidget)
+        contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         widget_2 = QtGui.QWidget(self)
         sc_2=MplPlot3dCanvas_2(widget_2)
@@ -478,8 +478,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         contents = QtGui.QWidget(self.tabWidget)
         layout = QtGui.QVBoxLayout(contents)
         widget_1 = QtGui.QWidget(self)
-        self.mayavi_widget = MayaviQWidget(widget_1)
-        layout.addWidget(self.mayavi_widget)'''
+        self.mayavi_widget = mayaviPlot.MayaviQWidget(widget_1)
+        layout.addWidget(self.mayavi_widget)
         self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
 "  background: orange;\n"
 "  outline: none;\n"
@@ -551,7 +551,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}\n"
 "a:hover { color: yellow;}\n"
 ".container { display:block; margin: 2em 0;}"))
-        #self.tabWidget.addTab(contents, "3D Graph")
+        self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -585,7 +585,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
       
 
-        self.dockWidgetContents = mainFrame.DockContents()
+        self.dockWidgetContents = mainFrame.DockContents(self)
 
         self.dockWidget.setWidget(self.dockWidgetContents)
 
