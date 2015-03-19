@@ -18,7 +18,7 @@ from function_2 import Ui_DockWidget
 import numpy as np
 #import matplotlib.pyplot as plotter
 i=1
-import sys, random
+import sys, random  
 from Thesidetab import mainFrame
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
