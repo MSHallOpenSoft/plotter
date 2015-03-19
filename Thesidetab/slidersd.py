@@ -9,6 +9,8 @@
 
 from PyQt4 import QtCore, QtGui
 
+import slider 
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -24,8 +26,8 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class SliderShower(QtGui.QWidget):
-    def __init__(self,labe):
-        super(SliderShower,self).__init__()
+    def __init__(self,labe,parent = None):
+        super(SliderShower,self).__init__(parent)
         self.setupUi(labe)
 
     def setupUi(self,label):
@@ -41,7 +43,10 @@ class SliderShower(QtGui.QWidget):
         self.horizontalLayout.addWidget(self.label_2)
         self.label_3 = QtGui.QPushButton()
         self.label_3.setFlat(True)
-        self.label_3.setMaximumSize(35,35)
+        self.label_3.setMaximumHeight(35)
+        self.label_3.setMaximumWidth(45)
+        #self.label_3.setSizePolicy(QtGui.QSizePolicy.Ignored,QtGui.QSizePolicy.Fixed)
+        #self.label_3.resize(35,35)
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.horizontalLayout.addWidget(self.label_3)
         self.horizontalSlider = QtGui.QSlider()
@@ -50,15 +55,30 @@ class SliderShower(QtGui.QWidget):
         self.horizontalLayout.addWidget(self.horizontalSlider)
         self.label_4 = QtGui.QPushButton()
         self.label_4.setFlat(True)
-        self.label_4.setMaximumSize(35,35)
+        self.label_4.setMaximumHeight(35)
+        self.label_4.setMaximumWidth(45)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.horizontalLayout.addWidget(self.label_4)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.widget = QtGui.QWidget()
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setContentsMargins(0,0,0,0)
+        self.widget.setLayout(self.horizontalLayout)
+        self.verticalLayout.addWidget(self.widget)
+
+        self.rangeChanger = slider.SliderRangeEditor(label,self)
+        self.verticalLayout.addWidget(self.rangeChanger)
+        self.rangeChanger.hide()
 
         self.setLayout(self.verticalLayout)
         self.minrange = -10
         self.maxrange = 10
         self.step = 1
+
+
+        self.label_3.clicked.connect(self.onClickHandler)
+        self.label_4.clicked.connect(self.onClickHandler)
 
         self.retranslateUi(label)
         #QtCore.QMetaObject.connectSlotsByName()
@@ -69,17 +89,36 @@ class SliderShower(QtGui.QWidget):
         self.label_3.setText(_translate("Form", str(self.minrange), None))
         self.label_4.setText(_translate("Form", str(self.maxrange), None))
 
-    def setMinRange(value):
+    def setMinRange(self,value):
         self.minrange = value
         self.label_3.setText(str(value))
 
-    def setMaxRange(value):
+    def setMaxRange(self,value):
         self.maxrange = value
         self.label_4.setText(str(value))
 
 
-    def setStep(value):
+    def setStep(self,value):
         self.step = value
+
+    def onClickHandler(self):
+        if(self.rangeChanger.isHidden()):
+            self.rangeChanger.show()
+            self.widget.hide()
+            self.adjustSize()
+
+    def doneClickHandler(self):
+        if(self.widget.isHidden()):
+            self.widget.show()
+            valuel = self.rangeChanger.leftRange.value()
+            valuer = self.rangeChanger.rightRange.value()
+            stepp = self.rangeChanger.stepValue.value()
+            self.setMinRange(valuel)
+            self.setMaxRange(valuer)
+            self.setStep(stepp)
+            self.rangeChanger.hide()
+            self.adjustSize()
+
 
 
 

@@ -44,9 +44,19 @@ class AccordionMain(QtGui.QWidget):
         self.pushButton.setFlat(True)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
 
+
+        self.iconButton = QtGui.QPushButton()
+
+        self.icon = QtGui.QIcon()
+        self.icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/closeButton.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.iconButton.setIcon(self.icon)
+        self.iconButton.setFlat(True)
+        self.iconButton.setMaximumSize(30,30)
+
         self.drawButton = QtGui.QPushButton("Draw")
         self.drawButton.setMaximumSize(60,30)
         self.horizontalLayout2 = QtGui.QHBoxLayout()
+        self.horizontalLayout2.addWidget(self.iconButton)
         self.horizontalLayout2.addWidget(self.pushButton)
         self.horizontalLayout2.addWidget(self.drawButton)
 
@@ -69,6 +79,7 @@ class AccordionMain(QtGui.QWidget):
         self.verticalLayout.addItem(spacerItem)
         self.setLayout(self.verticalLayout)
 
+        self.iconButton.clicked.connect(self.closeHandler)
 
 
         self.frame.hide()
@@ -90,6 +101,10 @@ class AccordionMain(QtGui.QWidget):
         else:
             
             self.frame.hide()
+
+    def closeHandler(self):
+        if(self):
+            self.deleteLater()
 
 import sys
 if __name__ == '__main__':

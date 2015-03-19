@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 
+import colorButton
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -95,7 +96,8 @@ class SettingTab(QtGui.QWidget):
         self.label_2 = QtGui.QLabel(self.groupBox)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.horizontalLayout_9.addWidget(self.label_2)
-        self.label_3 = QtGui.QLabel(self.groupBox)
+        self.label_3 = colorButton.QColorButton(self.groupBox)
+        
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -104,6 +106,35 @@ class SettingTab(QtGui.QWidget):
         self.label_3.setMinimumSize(QtCore.QSize(20, 20))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.horizontalLayout_9.addWidget(self.label_3)
+
+        self.label_Y = colorButton.QColorButton(self.groupBox)
+        
+        #sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
+        self.label_Y.setSizePolicy(sizePolicy)
+        self.label_Y.setMinimumSize(QtCore.QSize(20, 20))
+        self.label_Y.setObjectName(_fromUtf8("label_3"))
+        self.label_Y.setColor("#00ff00")
+        self.horizontalLayout_9.addWidget(self.label_Y)
+
+        self.label_Z = colorButton.QColorButton(self.groupBox)
+        
+        #sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        ##sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
+        self.label_Z.setSizePolicy(sizePolicy)
+        self.label_Z.setMinimumSize(QtCore.QSize(20, 20))
+        self.label_Z.setObjectName(_fromUtf8("label_3"))
+        self.label_Z.setColor("#0000ff")
+        self.horizontalLayout_9.addWidget(self.label_Z)
+
+        self.label_Y.hide()
+        self.label_Z.hide()
+
+
         self.label_4 = QtGui.QLabel(self.groupBox)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.horizontalLayout_9.addWidget(self.label_4)
@@ -158,6 +189,17 @@ class SettingTab(QtGui.QWidget):
         self.spacerItem1 = QtGui.QSpacerItem(1, 1, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(self.spacerItem1)
         self.setLayout(self.verticalLayout)
+        self.radioButton.setChecked(True)
+
+        self.colorAxis = ["#ff0000","#00ff00","#0000ff"]
+
+        self.radioButton.clicked.connect(lambda: self.changedAxis(0))
+        self.radioButton_2.clicked.connect(lambda: self.changedAxis(2))
+        self.radioButton_3.clicked.connect(lambda: self.changedAxis(1))
+        
+
+
+
         self.retranslateUi()
        # QtCore.QMetaObject.connectSlotsByName()
 
@@ -177,11 +219,11 @@ class SettingTab(QtGui.QWidget):
         self.groupBox.setTitle(_translate("Form", "Appearance", None))
         self.label.setText(_translate("Form", "Resolution", None))
         self.label_2.setText(_translate("Form", "Color:", None))
-        self.label_3.setText(_translate("Form", "color", None))
+        #self.label_3.setText(_translate("Form", "color", None))
         self.label_4.setText(_translate("Form", "Along", None))
         self.radioButton.setText(_translate("Form", "X", None))
-        self.radioButton_3.setText(_translate("Form", "Z", None))
-        self.radioButton_2.setText(_translate("Form", "Y", None))
+        self.radioButton_3.setText(_translate("Form", "Y", None))
+        self.radioButton_2.setText(_translate("Form", "Z", None))
         self.label_5.setText(_translate("Form", "Draw", None))
         self.comboBox_4.setItemText(0, _translate("Form", "Points", None))
         self.comboBox_4.setItemText(1, _translate("Form", "Surface", None))
@@ -190,6 +232,24 @@ class SettingTab(QtGui.QWidget):
         self.comboBox_4.setItemText(4, _translate("Form", "S+L", None))
         self.label_6.setText(_translate("Form", "Thickness", None))
         self.label_7.setText(_translate("Form", "Transparency", None))
+
+    def changedAxis(self,id):
+        self.label_3.hide()
+        self.label_Z.hide()
+        self.label_Y.hide()
+
+        if(id == 0):
+            self.label_3.show()
+        elif(id == 1):
+            self.label_Y.show()
+        else:
+            self.label_Z.show()
+
+
+        
+
+
+
 
 import sys
 if __name__ == '__main__':

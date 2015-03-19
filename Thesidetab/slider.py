@@ -24,10 +24,10 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class SliderRangeEditor(QtGui.QWidget):
-    def __init__(self,parent = None):
-        super(SliderRangeEditor,self).__init__()
+    def __init__(self,label,parent = None):
+        super(SliderRangeEditor,self).__init__(parent)
         self.parent = parent
-        self.label = "a"
+        self.label = label
         self.setupUi()
         
 
@@ -42,7 +42,11 @@ class SliderRangeEditor(QtGui.QWidget):
         self.horizontalLayout99.setSizeConstraint(QtGui.QLayout.SetMinimumSize)
         self.horizontalLayout99.setObjectName(_fromUtf8("horizontalLayout99"))
         self.leftRange = QtGui.QDoubleSpinBox()
-        self.leftRange.setSingleStep(0.1)
+        self.leftRange.setMinimum(-99)
+        self.leftRange.setSingleStep(0.01)
+        self.leftRange.setValue(-10)
+        self.leftRange.setWrapping(True)
+        self.leftRange.setDecimals(3)
         self.leftRange.setObjectName(_fromUtf8("leftRange"))
         self.horizontalLayout99.addWidget(self.leftRange)
         self.placeHolder = QtGui.QLabel()
@@ -55,12 +59,20 @@ class SliderRangeEditor(QtGui.QWidget):
         self.horizontalLayout99.addWidget(self.placeHolder)
         self.rightRange = QtGui.QDoubleSpinBox()
         self.rightRange.setObjectName(_fromUtf8("rightRange"))
+        self.rightRange.setMinimum(-99)
+        self.rightRange.setSingleStep(0.01)
+        self.rightRange.setValue(10)
+        self.rightRange.setWrapping(True)
+        self.rightRange.setDecimals(3)
         self.horizontalLayout99.addWidget(self.rightRange)
         self.stepLabel = QtGui.QLabel()
         self.stepLabel.setObjectName(_fromUtf8("stepLabel"))
         self.horizontalLayout99.addWidget(self.stepLabel)
         self.stepValue = QtGui.QDoubleSpinBox()
         self.stepValue.setObjectName(_fromUtf8("stepValue"))
+        self.stepValue.setValue(1)
+        self.stepValue.setWrapping(True)
+        self.stepValue.setDecimals(3)
         self.horizontalLayout99.addWidget(self.stepValue)
         self.confirmButton = QtGui.QPushButton()
         self.confirmButton.setMinimumSize(QtCore.QSize(50, 0))
@@ -72,6 +84,8 @@ class SliderRangeEditor(QtGui.QWidget):
         self.horizontalLayout_2.addLayout(self.verticalLayout)
 
         self.setLayout(self.horizontalLayout_2)
+
+        self.confirmButton.clicked.connect(self.parent.doneClickHandler)
 
         self.retranslateUi()
         #QtCore.QMetaObject.connectSlotsByName()
@@ -90,10 +104,11 @@ class SliderRangeEditor(QtGui.QWidget):
         self.placeHolder.setText(u'\u2264' +" "+self.label+" "+u'\u2264')
 
 
+
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    ex = SliderRangeEditor()
+    ex = SliderRangeEditor("d")
     ex.setLabel("gte")
     ex.show()
     #ex.showMaximized()
