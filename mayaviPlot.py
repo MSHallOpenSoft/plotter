@@ -25,7 +25,7 @@ from sympy.utilities.lambdify import lambdify
 import numpy as np
 #import mayavi_3d
 from mayavi import mlab
-from PyQt4 import QtGui, QtCore
+from pyface.qt import QtGui, QtCore
 from sympy import symbols,sympify,latex,simplify,fraction,radsimp
 
 from traits.api import HasTraits, Instance, on_trait_change
@@ -58,7 +58,7 @@ class Visualization(HasTraits):
       # the layout of the dialog screated
       
     def mayavi_implicit_3d(self,str_expr,x_start=-100,x_end=100,no_x_points=100,y_start=-100,y_end=100,no_y_points=100,z_start=-100,z_end=100,no_z_points=100):
-      expr = sympify((str_expr))
+      expr = sympify(sympyParsing.symStr(str_expr))
       print(expr)
       expr = simplify(expr)
       print(expr)
@@ -128,9 +128,10 @@ class Visualization(HasTraits):
         #x, y, z = np.ogrid[-3:3:100j, -3:3:100j, -3:3:100j]
         #F = x**2/3**2 + y**2/2**2 + z**2/4**2 - 1
         #self.scene.mlab.contour3d(F, contours = [0])
-        self.scene.mlab.points3d([0],[0],[0])
-        self.scene.mlab.axes(color=(.7, .7, .7))
+        self.scene.mlab.points3d([0],[0],[0],line_width=0.05,mode='point')
+        # self.scene.mlab.axes(color=(.7, .7, .7))
         self.scene.mlab.orientation_axes()
+        self.scene.mlab.outline()
         xx = yy = zz = np.arange(-10,10,1)
         xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
         self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
@@ -217,7 +218,7 @@ if __name__ == "__main__":
     # Don't create a new QApplication, it would unhook the Events
     # set by Traits on the existing QApplication. Simply use the
     # '.instance()' method to retrieve the existing one.
-    qApp = QtGui.QApplication(sys.argv)
+    qApp = QtGui.QApplication.instance()
     aw = ApplicationWindow()
     #aw.setWindowTitle("%s" % progname)
     aw.show()
