@@ -59,6 +59,9 @@ class Visualization(HasTraits):
       
     def mayavi_implicit_3d(self,str_expr,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
       expr = sympify(sympyParsing.symStr(str_expr))
+      print(x_start,x_end,no_x_points)
+      print(y_start,y_end,no_y_points)
+      print(z_start,z_end,no_z_points)
       print(expr)
       expr = simplify(expr)
       print(expr)

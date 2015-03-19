@@ -12,7 +12,7 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 import numpy as np
 import matplotlib.pyplot as plotter
@@ -361,7 +361,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #self.dockWidget.setGeometry
         
 
-        self.dockWidgetContents = mainFrame.DockContents()
+        self.dockWidgetContents = mainFrame.DockContents(self)
+
 
         self.dockWidget.setWidget(self.dockWidgetContents)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget)

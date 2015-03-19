@@ -86,8 +86,17 @@ class AccordionMain(QtGui.QWidget):
     def plot(self):
       #print("fooooooooooooooooooooooooooooooooo")
       #print(str(self.frame.widget_4.text()))
+      print(self.frame.rangeTab.frame.XRight)
+      print(self.frame.rangeTab.frame.XLeft)
+      x_start=self.frame.rangeTab.frame.XLeft.value()
+      x_end=self.frame.rangeTab.frame.XRight.value()
+      y_start=self.frame.rangeTab.frame.YLeft.value()
+      y_end=self.frame.rangeTab.frame.YRight.value()
+      z_start=self.frame.rangeTab.frame.ZRight.value()
+      z_end=self.frame.rangeTab.frame.ZLeft.value()
       print( self.parent.parent.mayavi_widget.visualization)
-      self.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(str(self.frame.widget_4.text()))
+      self.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(str(self.frame.widget_4.text()),x_start=x_start,x_end=x_end,no_x_points=10
+          ,y_start=y_start,y_end=y_end,no_y_points=10,z_start=z_start,z_end=z_end,no_z_points=10)
         
 
     def retranslateUi(self):
