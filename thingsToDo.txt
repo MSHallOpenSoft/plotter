@@ -1,0 +1,12 @@
+Calculator input integration
+Threading
+Project Saving
+Image Saving
+Print support
+2D plot polishing
+3D axes set
+Colour gradient for plots
+Time/animation
+Plotting tabular values
+Table integration with plots given on left
+
