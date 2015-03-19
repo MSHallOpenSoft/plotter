@@ -25,7 +25,7 @@ from sympy.utilities.lambdify import lambdify
 import numpy as np
 #import mayavi_3d
 from mayavi import mlab
-from PyQt4 import QtGui, QtCore
+from pyface.qt import QtGui, QtCore
 from sympy import symbols,sympify,latex,simplify,fraction,radsimp
 
 from traits.api import HasTraits, Instance, on_trait_change
