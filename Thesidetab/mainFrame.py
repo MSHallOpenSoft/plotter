@@ -37,6 +37,16 @@ class DockContents(QtGui.QWidget):
     def setupUI(self):
         self.resize(400,700)
         self.setMinimumWidth(360)
+        self.setStyleSheet("\n"
+" QDockWidget{\n"
+" background-color:#737373;\n"
+" border:none;\n"
+" padding:0px; \n"
+"}\n"
+" QFrame{\n"
+" border:none;\n"
+" padding:0px; \n"
+"}\n")
         self.vertical = QtGui.QVBoxLayout()
 
         self.addNewPlotButton = QtGui.QPushButton("Add a new plot")

@@ -1,56 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GUI.ui'
+# Form implementation generated from reading ui file 'GUI_final.ui'
 #
-# Created: Sun Mar 15 00:12:39 2015
+# Created: Thu Mar 19 22:03:17 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
+from PyQt4 import QtCore, QtGui
 
-
-'''
-Please Note : All the developers are requested to kindly specify or atleast mention the unique features being added by them 
-              so as to keep track of them and such that these don't go unattended, when writing the documentation about unique features of our plotter
-
-unique (not-so-common) features of MS Hall Opensoft Plotter Software :
-
-### till 18th March 2015 :
-
-allowing for keyboard shortcuts for adding TabPages - by Ravi
-accounting for file inputs not in proper csv format and specifying the delimiters for the same- by Varun
-
-
-
-
-Please point out any further feautures that can be included in our plotter, or even mention any basic required functionality not included yet:
-
-### Basic Functionality:
-    
-    Naming the new Project as soon as a new TabPage project is created ( instead of naming it as Project 1....etc.)
-    (The project will be saved by the same name in the saved plots folder)
-
-### Additional Features :
-
-    Adding a Tutorial flipPage at the very first use (describing all the keyboard shortcuts etc.)
-
-
-## Please keep adding more as you come to think of any !!!
-'''
-
-#import mayaviPlot
-from PyQt4 import QtCore
-from PyQt4 import QtGui
-from PyQt4.QtGui import *
-#from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot3dCanvas_2
-from PyQt4.QtCore import Qt, SIGNAL
-from function_2 import Ui_DockWidget
-import numpy as np
-#import matplotlib.pyplot as plotter
-i=1
-import sys, random  
-from Thesidetab import mainFrame
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -65,23 +23,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
-
-class Ui_MainWindow(QtGui.QMainWindow):
-    def __init__(self):
-        QtGui.QWidget.__init__(self)
-        self.setupUi(self)
-        self.expression_list=[]
-
-    def addNewEquationEditor(self,layout,spacer):
-        n = layout.count()
-        layout.removeItem(layout.itemAt(n-1))
-        dockWidgetContents = Exp_Form(self)
-        self.expression_list.append(dockWidgetContents)
-        layout.addWidget(dockWidgetContents)
-        layout.addItem(spacer)
-
-
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1396, 727)
@@ -89,21 +31,15 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "border:none;\n"
 "}\n"
 "QStatusBar{ \n"
-"background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.33, stop:0 rgba(255, 255, 255, 255), stop:0.125 rgba(155, 174, 198, 255), stop:0.318182 rgba(104, 117, 133, 255), stop:0.534091 rgba(65, 73, 83, 255), stop:0.875 rgba(42, 47, 54, 255));\n"
-"}\n"
-
+"background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.33, stop:0 rgba(255, 255, 255, 255), stop:0.125 rgba(155, 174, 198, 255), stop:0.318182 rgba(104, 117, 133, 255), stop:0.534091 rgba(65, 73, 83, 255), stop:0.875 rgba(42, 47, 54, 255)); }\n"
 " QMainWindow{\n"
-" background-image: url(Icons/rsz_back1.jpg);\n"
+" background-image: url(:/img/Icons/rsz_back1.jpg); border:none;\n"
 " background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));\n"
-" border:none;\n"
-" text-align: center;\n" 
-"}\n"
-
+" text-align: center; }\n"
 " QGroupBox{ \n"
 "background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); }\n"
 " QTabWidget{\n"
-" background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));\n"
-" }\n"
+" background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); }\n"
 " QDockWidget{\n"
 " background-color:#737373;\n"
 " border:none;\n"
@@ -225,7 +161,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "} \n"
 "QTableWidget{ \n"
 "background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255));\n"
-" border:px solid rgb(171, 173, 179);\n"
+" border:1px solid rgb(171, 173, 179);\n"
 " }\n"
 " QTextEdit{ \n"
 "background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); \n"
@@ -347,7 +283,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton.setText(_fromUtf8(""))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/double-right.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/arrow/Icons/double-right.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.verticalLayout_5.addWidget(self.pushButton)
@@ -444,8 +380,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, item)
-        self.header=self.tableWidget.horizontalHeader();
-        self.header.setResizeMode(QHeaderView.Stretch);
         self.verticalLayout_3.addWidget(self.tableWidget)
         self.pushButton_21 = QtGui.QPushButton(self.frame)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
@@ -460,99 +394,10 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_3.addWidget(self.frame)
         self.verticalLayout_6 = QtGui.QVBoxLayout()
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
-        self.tabWidget = QtGui.QTabWidget(self.centralwidget)
-        self.tabWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
-        '''self.tab = QtGui.QWidget()
-        self.tab.setObjectName(_fromUtf8("tab"))
-        self.tabWidget.addTab(self.tab, "2D Graph")
-        self.tab.setVisible(False)'''
-        #self.tab_2 = QtGui.QWidget()
-        #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        '''contents_2=QtGui.QWidget(self.tabWidget)
-        layout_2= QtGui.QVBoxLayout(contents_2)
-        widget_2 = QtGui.QWidget(self)
-        sc_2=MplPlot3dCanvas_2(widget_2)
-        layout_2.addWidget(sc_2)
-        self.tabWidget.addTab(contents_2, "2D Graph")
-        contents = QtGui.QWidget(self.tabWidget)
-        layout = QtGui.QVBoxLayout(contents)
-        widget_1 = QtGui.QWidget(self)
-        self.mayavi_widget = MayaviQWidget(widget_1)
-        layout.addWidget(self.mayavi_widget)'''
-        self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
-"  background: orange;\n"
-"  outline: none;\n"
-"  color: white;\n"
-"  border: none;\n"
-"  border-radius: 0.25em;\n"
-"  padding: 0.75em 2em;\n"
-"  line-height: 1;\n"
-"  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);\n"
-"  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);\n"
-"  font-size: 1.5rem;\n"
-"}\n"
-".button-white {\n"
-"  background: white;\n"
-"  color: orange;\n"
-"}\n"
-".button-round {\n"
-"  border-radius: 100%;\n"
-"  padding: 0.75em;\n"
-"  width: 3em;\n"
-"  height: 3em;\n"
-"}\n"
-".button-ripple {\n"
-"  position: relative;\n"
-"  overflow: hidden;\n"
-"  transform: translate(0);\n"
-"}\n"
-".button-ripple_content {\n"
-"  position: relative;\n"
-"  z-index: 1;\n"
-"}\n"
-".button-ripple_ripples {\n"
-"  position: absolute;\n"
-"  top: 0;\n"
-"  left: 0;\n"
-"}\n"
-".button-ripple_ripple{\n"
-"  display: block;\n"
-"  position: absolute;\n"
-"  border-radius: 100%;\n"
-"  width: 1em;\n"
-"  height: 1em;\n"
-"  margin: -0.5em 0 0 -0.5em;\n"
-"  transform: scale(0);\n"
-"\n"
-"  top: 0;\n"
-"  left: 0;\n"
-"\n"
-"  animation: ripple-animation 2s;\n"
-"}\n"
-"\n"
-"@keyframes ripple-animation {\n"
-"    from {\n"
-"      transform: scale3d(1,1,1);\n"
-"      opacity: 0.8;\n"
-"    }\n"
-"    to {\n"
-"      transform: scale3d(100,100,1);\n"
-"      opacity: 0;\n"
-"    }\n"
-"}\n"
-"\n"
-"/* Make things perty */\n"
-"html {  height: 100%;}\n"
-"body { font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}\n"
-"h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}\n"
-"h2 { font-weight: 300}\n"
-"input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}\n"
-"a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}\n"
-"a:hover { color: yellow;}\n"
-".container { display:block; margin: 2em 0;}"))
-        #self.tabWidget.addTab(contents, "3D Graph")
-        self.verticalLayout_6.addWidget(self.tabWidget)
+        self.widget = QtGui.QWidget(self.centralwidget)
+        self.widget.setStyleSheet(_fromUtf8(""))
+        self.widget.setObjectName(_fromUtf8("widget"))
+        self.verticalLayout_6.addWidget(self.widget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -570,32 +415,216 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
-        
-        
-
         self.dockWidget = QtGui.QDockWidget(MainWindow)
+        self.dockWidget.setMinimumSize(QtCore.QSize(320, 91))
         self.dockWidget.setObjectName(_fromUtf8("dockWidget"))
-        self.dockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-       
-        #self.dockWidgetContents.SetName("plot1")
-
-        #self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
-        #self.dockWidget.setGeometry
-        
-
-      
-
-        self.dockWidgetContents = mainFrame.DockContents()
-
+        self.dockWidgetContents = QtGui.QWidget()
+        self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
+        self.gridLayout = QtGui.QGridLayout(self.dockWidgetContents)
+        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
+        self.comboBox_5 = QtGui.QComboBox(self.dockWidgetContents)
+        self.comboBox_5.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboBox_5.setObjectName(_fromUtf8("comboBox_5"))
+        self.comboBox_5.addItem(_fromUtf8(""))
+        self.comboBox_5.addItem(_fromUtf8(""))
+        self.comboBox_5.addItem(_fromUtf8(""))
+        self.gridLayout.addWidget(self.comboBox_5, 0, 0, 1, 1)
+        self.textEdit = QtGui.QTextEdit(self.dockWidgetContents)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.textEdit.sizePolicy().hasHeightForWidth())
+        self.textEdit.setSizePolicy(sizePolicy)
+        self.textEdit.setMinimumSize(QtCore.QSize(0, 20))
+        self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        self.gridLayout.addWidget(self.textEdit, 0, 1, 1, 1)
+        self.comboBox_6 = QtGui.QComboBox(self.dockWidgetContents)
+        self.comboBox_6.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboBox_6.setObjectName(_fromUtf8("comboBox_6"))
+        self.comboBox_6.addItem(_fromUtf8(""))
+        self.comboBox_6.addItem(_fromUtf8(""))
+        self.comboBox_6.addItem(_fromUtf8(""))
+        self.gridLayout.addWidget(self.comboBox_6, 1, 0, 1, 1)
+        self.textEdit_2 = QtGui.QTextEdit(self.dockWidgetContents)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.textEdit_2.sizePolicy().hasHeightForWidth())
+        self.textEdit_2.setSizePolicy(sizePolicy)
+        self.textEdit_2.setMinimumSize(QtCore.QSize(0, 20))
+        self.textEdit_2.setObjectName(_fromUtf8("textEdit_2"))
+        self.gridLayout.addWidget(self.textEdit_2, 1, 1, 1, 1)
         self.dockWidget.setWidget(self.dockWidgetContents)
-
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget)
-
-
-
-
-
-
+        self.dockWidget_2 = QtGui.QDockWidget(MainWindow)
+        self.dockWidget_2.setMinimumSize(QtCore.QSize(427, 324))
+        self.dockWidget_2.setStyleSheet(_fromUtf8(""))
+        self.dockWidget_2.setObjectName(_fromUtf8("dockWidget_2"))
+        self.dockWidgetContents_2 = QtGui.QWidget()
+        self.dockWidgetContents_2.setObjectName(_fromUtf8("dockWidgetContents_2"))
+        self.verticalLayout_4 = QtGui.QVBoxLayout(self.dockWidgetContents_2)
+        self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
+        self.groupBox_2 = QtGui.QGroupBox(self.dockWidgetContents_2)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.groupBox_2.sizePolicy().hasHeightForWidth())
+        self.groupBox_2.setSizePolicy(sizePolicy)
+        self.groupBox_2.setMinimumSize(QtCore.QSize(0, 50))
+        self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
+        self.horizontalLayout_12 = QtGui.QHBoxLayout(self.groupBox_2)
+        self.horizontalLayout_12.setObjectName(_fromUtf8("horizontalLayout_12"))
+        self.horizontalLayout_7 = QtGui.QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(_fromUtf8("horizontalLayout_7"))
+        self.comboBox = QtGui.QComboBox(self.groupBox_2)
+        self.comboBox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboBox.setStyleSheet(_fromUtf8(""))
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.horizontalLayout_7.addWidget(self.comboBox)
+        self.comboBox_3 = QtGui.QComboBox(self.groupBox_2)
+        self.comboBox_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboBox_3.setObjectName(_fromUtf8("comboBox_3"))
+        self.comboBox_3.addItem(_fromUtf8(""))
+        self.comboBox_3.addItem(_fromUtf8(""))
+        self.comboBox_3.addItem(_fromUtf8(""))
+        self.horizontalLayout_7.addWidget(self.comboBox_3)
+        self.comboBox_2 = QtGui.QComboBox(self.groupBox_2)
+        self.comboBox_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboBox_2.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.comboBox_2.setAutoFillBackground(False)
+        self.comboBox_2.setFrame(True)
+        self.comboBox_2.setObjectName(_fromUtf8("comboBox_2"))
+        self.comboBox_2.addItem(_fromUtf8(""))
+        self.comboBox_2.addItem(_fromUtf8(""))
+        self.comboBox_2.addItem(_fromUtf8(""))
+        self.horizontalLayout_7.addWidget(self.comboBox_2)
+        self.horizontalLayout_12.addLayout(self.horizontalLayout_7)
+        self.verticalLayout_4.addWidget(self.groupBox_2)
+        self.verticalLayout_2 = QtGui.QVBoxLayout()
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        self.tabWidget_2 = QtGui.QTabWidget(self.dockWidgetContents_2)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tabWidget_2.sizePolicy().hasHeightForWidth())
+        self.tabWidget_2.setSizePolicy(sizePolicy)
+        self.tabWidget_2.setMinimumSize(QtCore.QSize(310, 0))
+        self.tabWidget_2.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.tabWidget_2.setAutoFillBackground(False)
+        self.tabWidget_2.setStyleSheet(_fromUtf8(""))
+        self.tabWidget_2.setTabPosition(QtGui.QTabWidget.South)
+        self.tabWidget_2.setTabShape(QtGui.QTabWidget.Rounded)
+        self.tabWidget_2.setIconSize(QtCore.QSize(16, 25))
+        self.tabWidget_2.setElideMode(QtCore.Qt.ElideNone)
+        self.tabWidget_2.setTabsClosable(False)
+        self.tabWidget_2.setMovable(True)
+        self.tabWidget_2.setObjectName(_fromUtf8("tabWidget_2"))
+        self.tab_3 = QtGui.QWidget()
+        self.tab_3.setObjectName(_fromUtf8("tab_3"))
+        self.verticalLayout_8 = QtGui.QVBoxLayout(self.tab_3)
+        self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
+        self.groupBox = QtGui.QGroupBox(self.tab_3)
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
+        self.verticalLayout_7 = QtGui.QVBoxLayout(self.groupBox)
+        self.verticalLayout_7.setObjectName(_fromUtf8("verticalLayout_7"))
+        self.horizontalLayout_8 = QtGui.QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(_fromUtf8("horizontalLayout_8"))
+        self.label = QtGui.QLabel(self.groupBox)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.horizontalLayout_8.amenuddWidget(self.label)
+        self.horizontalSlider = QtGui.QSlider(self.groupBox)
+        self.horizontalSlider.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.horizontalSlider.setStyleSheet(_fromUtf8(""))
+        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider.setObjectName(_fromUtf8("horizontalSlider"))
+        self.horizontalLayout_8.addWidget(self.horizontalSlider)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_8)
+        self.horizontalLayout_9 = QtGui.QHBoxLayout()
+        self.horizontalLayout_9.setSizeConstraint(QtGui.QLayout.SetNoConstraint)
+        self.horizontalLayout_9.setObjectName(_fromUtf8("horizontalLayout_9"))
+        self.label_2 = QtGui.QLabel(self.groupBox)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.horizontalLayout_9.addWidget(self.label_2)
+        self.label_3 = QtGui.QLabel(self.groupBox)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
+        self.label_3.setSizePolicy(sizePolicy)
+        self.label_3.setMinimumSize(QtCore.QSize(20, 20))
+        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.horizontalLayout_9.addWidget(self.label_3)
+        self.label_4 = QtGui.QLabel(self.groupBox)
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        self.horizontalLayout_9.addWidget(self.label_4)
+        self.radioButton = QtGui.QRadioButton(self.groupBox)
+        self.radioButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.radioButton.setObjectName(_fromUtf8("radioButton"))
+        self.horizontalLayout_9.addWidget(self.radioButton)
+        self.radioButton_3 = QtGui.QRadioButton(self.groupBox)
+        self.radioButton_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.radioButton_3.setObjectName(_fromUtf8("radioButton_3"))
+        self.horizontalLayout_9.addWidget(self.radioButton_3)
+        self.radioButton_2 = QtGui.QRadioButton(self.groupBox)
+        self.radioButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
+        self.horizontalLayout_9.addWidget(self.radioButton_2)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_9)
+        self.horizontalLayout_10 = QtGui.QHBoxLayout()
+        self.horizontalLayout_10.setObjectName(_fromUtf8("horizontalLayout_10"))
+        self.label_5 = QtGui.QLabel(self.groupBox)
+        self.label_5.setObjectName(_fromUtf8("label_5"))
+        self.horizontalLayout_10.addWidget(self.label_5)
+        self.comboBox_4 = QtGui.QComboBox(self.groupBox)
+        self.comboBox_4.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboBox_4.setObjectName(_fromUtf8("comboBox_4"))
+        self.horizontalLayout_10.addWidget(self.comboBox_4)
+        self.label_6 = QtGui.QLabel(self.groupBox)
+        self.label_6.setObjectName(_fromUtf8("label_6"))
+        self.horizontalLayout_10.addWidget(self.label_6)
+        self.horizontalSlider_2 = QtGui.QSlider(self.groupBox)
+        self.horizontalSlider_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.horizontalSlider_2.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_2.setObjectName(_fromUtf8("horizontalSlider_2"))
+        self.horizontalLayout_10.addWidget(self.horizontalSlider_2)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_10)
+        self.horizontalLayout_11 = QtGui.QHBoxLayout()
+        self.horizontalLayout_11.setObjectName(_fromUtf8("horizontalLayout_11"))
+        self.label_7 = QtGui.QLabel(self.groupBox)
+        self.label_7.setObjectName(_fromUtf8("label_7"))
+        self.horizontalLayout_11.addWidget(self.label_7)
+        self.horizontalSlider_3 = QtGui.QSlider(self.groupBox)
+        self.horizontalSlider_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.horizontalSlider_3.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_3.setObjectName(_fromUtf8("horizontalSlider_3"))
+        self.horizontalLayout_11.addWidget(self.horizontalSlider_3)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_11)
+        self.verticalLayout_8.addWidget(self.groupBox)
+        self.tabWidget_2.addTab(self.tab_3, _fromUtf8(""))
+        self.tab_4 = QtGui.QWidget()
+        self.tab_4.setObjectName(_fromUtf8("tab_4"))
+        self.horizontalLayout_13 = QtGui.QHBoxLayout(self.tab_4)
+        self.horizontalLayout_13.setObjectName(_fromUtf8("horizontalLayout_13"))
+        self.tabWidget_3 = QtGui.QTabWidget(self.tab_4)
+        self.tabWidget_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.tabWidget_3.setStyleSheet(_fromUtf8(""))
+        self.tabWidget_3.setUsesScrollButtons(False)
+        self.tabWidget_3.setMovable(True)
+        self.tabWidget_3.setObjectName(_fromUtf8("tabWidget_3"))
+        self.tab_5 = QtGui.QWidget()
+        self.tab_5.setObjectName(_fromUtf8("tab_5"))
+        self.tabWidget_3.addTab(self.tab_5, _fromUtf8(""))
+        self.tab_6 = QtGui.QWidget()
+        self.tab_6.setObjectName(_fromUtf8("tab_6"))
+        self.tabWidget_3.addTab(self.tab_6, _fromUtf8(""))
+        self.horizontalLayout_13.addWidget(self.tabWidget_3)
+        self.tabWidget_2.addTab(self.tab_4, _fromUtf8(""))
+        self.verticalLayout_2.addWidget(self.tabWidget_2)
+        self.verticalLayout_4.addLayout(self.verticalLayout_2)
+        self.dockWidget_2.setWidget(self.dockWidgetContents_2)
+        MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget_2)
         self.dockWidget_3 = QtGui.QDockWidget(MainWindow)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -908,164 +937,25 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_2.addWidget(self.toolButton_11)
         self.dockWidget_4.setWidget(self.dockWidgetContents_4)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(4), self.dockWidget_4)
+        self.dockWidget_5 = QtGui.QDockWidget(MainWindow)
+        self.dockWidget_5.setObjectName(_fromUtf8("dockWidget_5"))
+        self.dockWidgetContents_5 = QtGui.QWidget()
+        self.dockWidgetContents_5.setObjectName(_fromUtf8("dockWidgetContents_5"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.dockWidgetContents_5)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.pushButton_2 = QtGui.QPushButton(self.dockWidgetContents_5)
+        self.pushButton_2.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.verticalLayout.addWidget(self.pushButton_2)
+        self.dockWidget_5.setWidget(self.dockWidgetContents_5)
+        MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget_5)
         self.retranslateUi(MainWindow)
+        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_3.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)   
-        
-        self.pushButton_3.clicked.connect(self.hide_2)
-        self.pushButton.setVisible(False)
-        self.frame_2.setVisible(False)
-        self.pushButton.clicked.connect(self.show_2)
-        self.toolButton_19.clicked.connect(self.show_1)
-        self.toolButton_8.clicked.connect(self.showFileChooser)
-        self.toolButton_7.clicked.connect(self.addRowDataPoint)
-        self.toolButton_9.clicked.connect(self.removeRowDataPoint)
-        self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def saveDataValuesToFile(self):
-        pname = ex.getTabName()
-        import csv
-        #savFile = open(pname+'.csv','w')
-        with open(pname+".csv",'w') as output:
-            writeHead = csv.writer(output,delimiter=',',lineterminator='\n')
-            for i in range (0,self.tableWidget.rowCount()):
-                row = list()
-
-                for j in range (0,3):
-                    try :
-                        item = self.tableWidget.item(i,j).text()
-                    except Exception,e:
-                        continue
-                    #toInt = int(item)
-                    print item
-                    row.append(item)
-
-                #print row
-                writeHead.writerow(row)
-
-        #savFile.close()
-
-    def addRowDataPoint(self):
-        rowC = self.tableWidget.rowCount()
-        self.tableWidget.insertRow(rowC)
-
-    def removeRowDataPoint(self):
-        if(self.tableWidget.currentRow()==-1):
-            self.errorRemoveDataPoint()
-        else:
-            self.tableWidget.removeRow(self.tableWidget.currentRow())
-            self.tableWidget.setCurrentCell(-1,-1)
-
-    def errorRemoveDataPoint(self):
-        Dialog = QtGui.QDialog()
-        u = Ui_Dialog_2("Please select the data point to remove")
-        u.setupUi(Dialog)
-        Dialog.exec_()
-
-    # For Hand Cursor
-    def hand_cursor(self,widget):
-        widget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-
-    def showFileChooser(self):
-        fname = QtGui.QFileDialog.getOpenFileName(self,'Select File')
-        self.delimit=','
-        import csv
-        f=open(fname,'rt')
-        try:
-            reader = csv.reader(f)
-            num_rows = 0
-            for row in reader:
-                num_rows=num_rows+1
-
-            with open(fname,'r') as fil :
-               text = fil.read()
-
-            count_comma=0
-            for char in text:
-               if char==',':
-                  count_comma=count_comma+1
-
-            if count_comma != (num_rows * 2) : # i.e. it is NOT a csv file
-                self.showSelectDelimiter()
-
-            self.tableWidget.setRowCount(num_rows)
-            ## create items in all added 
-            rowno_=0
-            f=open(fname,'rt')
-            reader=csv.reader(f,delimiter=self.delimit)
-            try:   
-                for row in reader:
-                    for col in range (0,3):
-                        float(row[col])
-                        item = QtGui.QTableWidgetItem(row[col])
-                        self.tableWidget.setItem(rowno_,col,item)
-                    rowno_=rowno_+1        
-
-                self.tableWidget.setRowCount(rowno_)
-                
-            except Exception, e:
-                self.showU=self.showInvalidValueError()
-                self.tableWidget.setRowCount(0)                    
-
-        finally:
-            f.close()                                  
-                
-
-    def showInvalidValueError(self):
-        Dialog = QtGui.QDialog()
-        u = Ui_Dialog_2('Cannnot import values ! Data Invalid !')
-        u.setupUi(Dialog)
-        Dialog.exec_()
-
-    def showSelectDelimiter(self):
-      Dialog = QtGui.QDialog()
-      u = Ui_Dialog()
-      u.setupUi(Dialog)
-      dialg = StartDialog()
-      if dialg.exec_():
-        self.delimit = dialg.getDelim()
-      #self.showFileChooser()
-
-    def hide_2(self):
-        self.frame.hide()
-        self.frame_2.show()
-        self.pushButton.show()
-    def show_2(self):
-        self.frame.show()
-        self.frame_2.hide()
-        self.pushButton.hide()
-    
-    def show_1(self):
-        if at.isVisible()==False:
-            at.move(1920-911,1080-296)
-            at.show()
-        else:
-            at.hide()
-
-    def add_page(self):
-        #self.pages.append(self.create_page(self.create_new_page_button(),self.create_new_page_button_2()))
-        contents = QtGui.QWidget(self.tabWidget)
-        layout = QtGui.QVBoxLayout(contents)
-        # add other widgets to the contents layout here
-        # i.e. layout.addWidget(widget), etc
-        widget_1 = QtGui.QWidget(self)
-        #l = QtGui.QVBoxLayout(widget_1)
-        #textbox=customLineEdit(self)
-        sc = MayaviQWidget(widget_1)
-        #l.addWidget(sc)
-        #l.addWidget(textbox)
-        layout.addWidget(sc)
-        #layout.addWidget(self.create_new_page_button(),1,Qt.AlignTop)
-        #layout.addWidget(self.create_new_page_button_2(),15,Qt.AlignTop)
-        global i
-        i+=1
-        self.tabWidget.addTab( contents , 'Untitled'+str(i))        
-    
     def retranslateUi(self, MainWindow):
-        
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.pushButton_3.setText(_translate("MainWindow", "Hide", None))
         self.toolButton_7.setToolTip(_translate("MainWindow", "Add", None))
@@ -1127,283 +1017,4 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_12.setText(_translate("MainWindow", "...", None))
         self.toolButton_11.setToolTip(_translate("MainWindow", "Zoom out", None))
         self.toolButton_11.setText(_translate("MainWindow", "...", None))
-        #self.pushButton_2.setText(_translate("MainWindow", "PushButton", None))
-
-
-class TabContainer(QtGui.QWidget):
-  def __init__(self):
-    super(TabContainer, self).__init__()
-    self.initUI()
-    QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self, self.close)
-    QtGui.QShortcut(QtGui.QKeySequence("Ctrl+T"), self, self.add_page)
-    QtGui.QShortcut(QtGui.QKeySequence("Ctrl+W"), self, self.closeTab_1)
-    
-
-  def initUI(self):
-    #self.setGeometry( 150, 150, 650, 350)
-    self.tabWidget = QtGui.QTabWidget(self)
-    self.tabWidget.setTabPosition(QtGui.QTabWidget.North)
-   # self.tabwidget.setTabShape(QtGui.QTabWidget.Triangular)
-    #QtCore.QObject.connect(self, QtCore.SIGNAL('tabCloseRequested(int)'), self.closeTab)
-    self.connect(self.tabWidget, QtCore.SIGNAL('tabCloseRequested (int)'),self.closeTab)
-    self.tabWidget.setTabsClosable(True)
-    #self.tabwidget.removeTab(1)
-    self.tabWidget.setAutoFillBackground(False)
-    self.tabWidget.setMovable(True)
-    #self.tabwidget.setTabShape(QtGui.QTabWidget.Rounded)
-    vbox = QtGui.QVBoxLayout()
-    self.tabWidget.setDocumentMode(True)
-    vbox.addWidget(self.tabWidget)
-    self.tabButton = QtGui.QToolButton(self)
-    self.tabButton.setText(' + ')
-    font = self.tabButton.font()
-    font.setBold(True)
-    self.tabButton.setFont(font)
-    self.tabWidget.setCornerWidget(self.tabButton)
-    self.tabButton.clicked.connect(self.add_page)
-    self.setLayout(vbox)
-    self.pages = []
-    self.add_page()
-    self.show()
-    
-  def closeTab(self, index):
-      
-      #self.tabWidget.widget(index).close()
-      if self.tabWidget.count()== 1:
-          self.close()
-      #self.pages.remove(self.tabwidget.currentWidget())
-      self.tabWidget.removeTab(index)
-      
-      self.tabWidget.destroy(index)
-      print len(self.pages)
-        
-  def closeTab_1(self):
-      
-      print"hello"
-      index=self.tabWidget.currentIndex()
-      if self.tabWidget.count()== 1:
-          self.close()
-      
-      self.pages.remove(self.tabWidget.currentWidget())
-      self.tabWidget.destroy(index)
-      self.tabWidget.removeTab(index)
-      print len(self.pages)
-        
-
-  def create_page(self, *contents):
-    print("creating new page")
-    page = QtGui.QWidget()
-    vbox = QtGui.QVBoxLayout()
-    
-    for c in contents:
-        vbox.addWidget(c)
-
-    page.setLayout(vbox)
-    return page
-
-  def add_page(self):
-    #self.pages.append( self.create_page( MainWindow() ) )
-    print("adding page")
-    self.pages.append(Ui_MainWindow())
-    self.tabWidget.addTab( self.pages[-1] , 'Project %s' % len(self.pages) )
-    self.tabWidget.setCurrentIndex( len(self.pages)-1 )
-
-  def getProjectName(self):
-        return 'Project %s' % len(self.pages)
-
-class Ui_MainWindow_2(QtGui.QMainWindow):
-    delimit = ','
-    #t=TabContainer()
-    def __init__(self):
-        QtGui.QWidget.__init__(self)
-        self.setupUi(self)
-
-
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtGui.QWidget(MainWindow)
-        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
-        self.menubar.setObjectName(_fromUtf8("menubar"))
-        self.menuFile = QtGui.QMenu(self.menubar)
-        self.menuFile.setObjectName(_fromUtf8("menuFile"))
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtGui.QStatusBar(MainWindow)
-        self.statusbar.setObjectName(_fromUtf8("statusbar"))
-        MainWindow.setStatusBar(self.statusbar)
-        self.menubar.addAction(self.menuFile.menuAction())
-        self.vbox=QtGui.QVBoxLayout(self.centralwidget)
-        self.t=TabContainer()
-        self.vbox.addWidget(self.t)
-        self.vbox.setMargin(0)
-        self.vbox.setSpacing(0)
-        #self.vbox.setContentsMargins(0,0,0,0)
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        self.menuFile.setTitle(_translate("MainWindow", "File", None))
-
-    def getTabName(self):
-        return self.t.getProjectName();
-
-
-
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(456, 339)
-        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(70, 280, 341, 32))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
-        self.label = QtGui.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(40, 110, 211, 21))
-        self.label.setObjectName(_fromUtf8("label"))
-        self.comboBox = QtGui.QComboBox(Dialog)
-        self.comboBox.setGeometry(QtCore.QRect(260, 110, 141, 32))
-        self.comboBox.setObjectName(_fromUtf8("comboBox"))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.widget = QtGui.QWidget(Dialog)
-        self.widget.setEnabled(False)
-        self.widget.setGeometry(QtCore.QRect(50, 200, 311, 71))
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
-        self.widget.setPalette(palette)
-        self.widget.setObjectName(_fromUtf8("widget"))
-        self.label_2 = QtGui.QLabel(self.widget)
-        self.label_2.setEnabled(False)
-        self.label_2.setGeometry(QtCore.QRect(10, 10, 281, 21))
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.label_3 = QtGui.QLabel(self.widget)
-        self.label_3.setGeometry(QtCore.QRect(10, 30, 291, 21))
-        self.label_3.setObjectName(_fromUtf8("label_3"))
-        self.widget_2 = QtGui.QWidget(Dialog)
-        self.widget_2.setGeometry(QtCore.QRect(60, 20, 361, 71))
-        self.widget_2.setObjectName(_fromUtf8("widget_2"))
-        self.label_6 = QtGui.QLabel(self.widget_2)
-        self.label_6.setEnabled(False)
-        self.label_6.setGeometry(QtCore.QRect(10, 10, 281, 22))
-        self.label_6.setObjectName(_fromUtf8("label_6"))
-        self.label_7 = QtGui.QLabel(self.widget_2)
-        self.label_7.setEnabled(False)
-        self.label_7.setGeometry(QtCore.QRect(10, 30, 331, 22))
-        self.label_7.setObjectName(_fromUtf8("label_7"))
-        self.label_4 = QtGui.QLabel(Dialog)
-        self.label_4.setEnabled(False)
-        self.label_4.setGeometry(QtCore.QRect(240, 160, 83, 22))
-        self.label_4.setObjectName(_fromUtf8("label_4"))
-        self.textEdit = QtGui.QTextEdit(Dialog)
-        self.textEdit.setEnabled(False)
-        self.textEdit.setGeometry(QtCore.QRect(320, 160, 41, 31))
-        self.textEdit.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textEdit.setObjectName(_fromUtf8("textEdit"))
-
-        self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-        #self.buttonBox.button(QtGui.QDialogButtonBox.Ok).clicked.connect(lambda:self.storeDelim)
-        self.comboBox.activated.connect(self.storeDelim)
-        self.textEdit.textChanged.connect(self.storeDelim)
-
-    def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Choose Delimiter", None))
-        self.label.setText(_translate("Dialog", "Please specify delimiter :", None))
-        self.comboBox.setItemText(0, _translate("Dialog", "\',\' (comma)", None))
-        self.comboBox.setItemText(1, _translate("Dialog", "\' \' (space)", None))
-        self.comboBox.setItemText(2, _translate("Dialog", "\';\' (semicolon)", None))
-        self.comboBox.setItemText(3, _translate("Dialog", "\'-\' (dash)", None))
-        self.comboBox.setItemText(4, _translate("Dialog", "\':\' (colon)", None))
-        self.comboBox.setItemText(5, _translate("Dialog", "Specify other", None))
-        self.label_2.setText(_translate("Dialog", "The Plotter retrieves values ", None))
-        self.label_3.setText(_translate("Dialog", "separated by the chosen delimiter", None))
-        self.label_6.setText(_translate("Dialog", "The Plotter has detected that the", None))
-        self.label_7.setText(_translate("Dialog", "selected file is NOT in proper csv format", None))
-        self.label_4.setText(_translate("Dialog", "Specify :", None))    
-
-    def storeDelim(self):
-        if self.comboBox.currentIndex()==0:
-            self.ch = ','
-            self.label_4.setEnabled(False)
-            self.textEdit.setEnabled(False)
-        elif self.comboBox.currentIndex()==1:
-            self.ch = ' '
-            self.label_4.setEnabled(False)
-            self.textEdit.setEnabled(False)
-        elif self.comboBox.currentIndex()==2:
-            self.ch = ';'
-            self.label_4.setEnabled(False)
-            self.textEdit.setEnabled(False)
-        elif self.comboBox.currentIndex()==3:
-            self.ch = '-'
-            self.label_4.setEnabled(False)
-            self.textEdit.setEnabled(False)
-        elif self.comboBox.currentIndex()==4:
-            self.ch = ':'
-            self.label_4.setEnabled(False)
-            self.textEdit.setEnabled(False)
-        elif self.comboBox.currentIndex()==5:
-            self.label_4.setEnabled(True)
-            self.textEdit.setEnabled(True)
-            self.ch=str(self.textEdit.toPlainText())
-
-    def getDelim(self):
-        return self.ch
-
-class StartDialog(QtGui.QDialog, Ui_Dialog): 
-    def __init__(self,parent=None): 
-        QtGui.QDialog.__init__(self,parent) 
-        self.setupUi(self)
-class Ui_Dialog_2(object):    ## class for error Dialog Box
-    mssg = 'error message'
-
-    def __init__(self,string):
-        self.mssg = string
-
-    def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(400, 126)
-        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(140, 70, 91, 32))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
-        self.label = QtGui.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(40, 30, 400, 22))
-        self.label.setObjectName(_fromUtf8("label"))
-
-        self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-
-    def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
-        self.label.setText(_translate("Dialog", self.mssg, None))
-
-import sys
-if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    ex = Ui_MainWindow_2()
-    ex.showMaximized()
-    at=Ui_DockWidget()
-    sys.exit(app.exec_())
+        self.pushButton_2.setText(_translate("MainWindow", "PushButton", None))
