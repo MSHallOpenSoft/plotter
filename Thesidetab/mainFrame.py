@@ -43,9 +43,9 @@ class DockContents(QtGui.QWidget):
 " border:none;\n"
 " padding:0px; \n"
 "}\n"
-" QFrame{\n"
-" border:none;\n"
-" padding:0px; \n"
+" QWidget{\n"
+
+
 "}\n")
         self.vertical = QtGui.QVBoxLayout()
 

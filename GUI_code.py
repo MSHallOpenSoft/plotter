@@ -37,11 +37,18 @@ Please point out any further feautures that can be included in our plotter, or e
 
 ## Please keep adding more as you come to think of any !!!
 '''
+#import pyface.ui.qt4
+#import traits.ui.qt4
+#import enable.qt4_backend 
+import os
+os.environ['ETS_TOOLKIT'] = 'qt4'   
+
 
 import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
+
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
@@ -71,6 +78,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
+        QtGui.QShortcut(QtGui.QKeySequence("Esc"), self, self.showAll)
         self.expression_list=[]
 
     def addNewEquationEditor(self,layout,spacer):
@@ -471,14 +479,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
-        widget_2 = QtGui.QWidget(self)
-        sc_2=MplPlot3dCanvas_2(widget_2)
+        sc_2=MplPlot3dCanvas_2(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
         contents = QtGui.QWidget(self.tabWidget)
         layout = QtGui.QVBoxLayout(contents)
-        widget_1 = QtGui.QWidget(self)
-        self.mayavi_widget = mayaviPlot.MayaviQWidget(widget_1)
+        self.mayavi_widget = mayaviPlot.MayaviQWidget(self)
         layout.addWidget(self.mayavi_widget)
         self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
 "  background: orange;\n"
@@ -609,6 +615,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.dockWidgetContents_3.setObjectName(_fromUtf8("dockWidgetContents_3"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.dockWidgetContents_3)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setSpacing(0)
         self.toolButton_17 = QtGui.QToolButton(self.dockWidgetContents_3)
         self.toolButton_17.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_17.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -742,6 +750,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.dockWidgetContents_4.setObjectName(_fromUtf8("dockWidgetContents_4"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.dockWidgetContents_4)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.horizontalLayout_2.setMargin(0)
+        self.horizontalLayout_2.setSpacing(0)
         self.line_7 = QtGui.QFrame(self.dockWidgetContents_4)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -923,7 +933,20 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_7.clicked.connect(self.addRowDataPoint)
         self.toolButton_9.clicked.connect(self.removeRowDataPoint)
         self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
+        self.toolButton_15.clicked.connect(self.hideAll)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def hideAll(self):
+        self.dockWidget.hide()
+        self.dockWidget_4.hide()
+        self.dockWidget_3.hide()
+        self.frame.hide()
+
+    def showAll(self):
+        self.dockWidget.show()
+        self.dockWidget_4.show()
+        self.dockWidget_3.show()
+        self.frame.show()
 
     def saveDataValuesToFile(self):
         pname = ex.getTabName()
@@ -1280,7 +1303,7 @@ class Ui_Dialog(object):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)   
         brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
