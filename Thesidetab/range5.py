@@ -136,6 +136,13 @@ class RangeTab(QtGui.QWidget):
         self.label_4.setText(_translate("Form", "to", None))
         self.label_5.setText(_translate("Form", "Z:", None))
         self.label_6.setText(_translate("Form", "to", None))
+        self.XRight.setValue(10)
+        self.XLeft.setValue(-10)
+        self.YRight.setValue(10)
+        self.YLeft.setValue(-10)
+        self.ZRight.setValue(10)
+        self.ZLeft.setValue(-10)
+
 
 
 import sys

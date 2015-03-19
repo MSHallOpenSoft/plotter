@@ -27,9 +27,9 @@ except AttributeError:
 
 class SettingTab(QtGui.QWidget):
 
-    def __init__(self):
-        super(SettingTab,self).__init__()
-        
+    def __init__(self,parent = None):
+        super(SettingTab,self).__init__(parent)
+        self.parent = parent
         self.setupUi()
 
     def setupUi(self):
@@ -196,8 +196,9 @@ class SettingTab(QtGui.QWidget):
         self.radioButton.clicked.connect(lambda: self.changedAxis(0))
         self.radioButton_2.clicked.connect(lambda: self.changedAxis(2))
         self.radioButton_3.clicked.connect(lambda: self.changedAxis(1))
-        
-
+        i = 0
+        paren = self.parent
+        self.comboBox_2.currentIndexChanged.connect(lambda :paren.typeSelector(self.comboBox_2))
 
 
         self.retranslateUi()

@@ -29,6 +29,7 @@ import range5
 import accordion
 import sliderTop
 import som
+import som2
 
 
 class MainFrameR(QtGui.QWidget):
@@ -56,7 +57,7 @@ class MainFrameR(QtGui.QWidget):
         #self.widget.setGeometry(QtCore.QRect(40, 30, 301, 91))
         #self.widget.setObjectName(_fromUtf8("widget"))
         
-        self.widget_2 = settingTab.SettingTab()
+        self.widget_2 = settingTab.SettingTab(self)
         self.settingTab = accordion.Accordion(self,"Settings",self.widget_2)
 
         self.widget_3 = sliderTop.ParamList([])
@@ -68,6 +69,11 @@ class MainFrameR(QtGui.QWidget):
         self.widget_41 = som.ExplicitEquation()
         self.equationTabExplicit = accordion.Accordion(self,"Expression",self.widget_41)
 
+        self.widget_42 = som2.ParameterEquation()
+        self.equationTabParameter = accordion.Accordion(self,"Expression",self.widget_42)
+
+
+
 
 
 
@@ -76,12 +82,19 @@ class MainFrameR(QtGui.QWidget):
 
         self.sliderTab.hide()
 
-        self.equationTab.frame.show()
+        
       
         self.vertical.addRow(self.equationTab)
+        self.vertical.addRow(self.equationTabParameter)
+        self.vertical.addRow(self.equationTabExplicit)
         self.vertical.addRow(self.rangeTab)
         self.vertical.addRow(self.settingTab)
         self.vertical.addRow(self.sliderTab)
+
+        self.equationTab.hide()
+        self.equationTabParameter.hide()
+
+        self.equationTabExplicit.frame.show()
 
         self.vertical.setSpacing(0)
         self.vertical.setContentsMargins(0,0,0,0)
@@ -95,6 +108,28 @@ class MainFrameR(QtGui.QWidget):
         self.setLayout(self.vertical)
         #self.retranslateUi()
         #QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def typeSelector(self,combob):
+        if(combob.currentIndex() == 0):
+            self.equationTab.hide()
+            self.equationTabParameter.hide()
+            self.equationTabExplicit.show()
+            self.equationTabExplicit.frame.show()
+        elif(combob.currentIndex() == 1):
+            self.equationTab.show()
+            self.equationTab.frame.show()
+            self.equationTabParameter.hide()
+            self.equationTabExplicit.hide()
+        elif(combob.currentIndex() == 2):
+            self.equationTab.hide()
+            self.equationTabParameter.show()
+            self.equationTabParameter.frame.show()
+            self.equationTabExplicit.hide()
+        self.adjustSize()
+
+
+
+
 
     
 
