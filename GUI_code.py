@@ -7,17 +7,46 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from mayaviPlot import MayaviQWidget
+'''
+Please Note : All the developers are requested to kindly specify or atleast mention the unique features being added by them 
+              so as to keep track of them and such that these don't go unattended, when writing the documentation about unique features of our plotter
+
+unique (not-so-common) features of MS Hall Opensoft Plotter Software :
+
+### till 18th March 2015 :
+
+allowing for keyboard shortcuts for adding TabPages - by Ravi
+accounting for file inputs not in proper csv format and specifying the delimiters for the same- by Varun
+
+
+
+
+Please point out any further feautures that can be included in our plotter, or even mention any basic required functionality not included yet:
+
+### Basic Functionality:
+    
+    Naming the new Project as soon as a new TabPage project is created ( instead of naming it as Project 1....etc.)
+    (The project will be saved by the same name in the saved plots folder)
+
+### Additional Features :
+
+    Adding a Tutorial flipPage at the very first use (describing all the keyboard shortcuts etc.)
+
+
+## Please keep adding more as you come to think of any !!!
+'''
+#from mayaviPlot import MayaviQWidget
 from PyQt4 import QtCore, QtGui
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot3dCanvas_2
+#######Remove Comment befor pushing###############3
+#from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
-import matplotlib.pyplot as plotter
+#import matplotlib.pyplot as plotter
 i=1
 import sys, random
 
@@ -168,14 +197,12 @@ class ExpressionDetails(QFrame):
 
         self.sliderQ.hide()
 
-
         self.label_3.clicked.connect(lambda:self.showSliderChanger(self.slide,self.sliderQ))
         self.label_4.clicked.connect(lambda:self.showSliderChanger(self.slide,self.sliderQ))
 
         self.confirmButton.clicked.connect(lambda:self.hideSliderChanger(self.slide,self.sliderQ))
 
-
-
+        
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -217,7 +244,6 @@ class ExpressionDetails(QFrame):
             slidQ.hide()
         if(slid.isHidden()):
             slid.show()
-
 
 
        
@@ -263,7 +289,9 @@ class Exp_Form(QtGui.QWidget):
     def retranslateUi(self, Form):
         Form.setWindowTitle(_translate("Form", "Form", None))
         self.pushButton.setText(_translate("Form", "Plot_1", None))
+
 class Ui_MainWindow(QtGui.QMainWindow):
+    delimit = ','
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
@@ -731,7 +759,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tab.setVisible(False)'''
         #self.tab_2 = QtGui.QWidget()
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        contents_2=QtGui.QWidget(self.tabWidget)
+        
+        #######Remove Comment befor pushing###############3
+        '''contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         widget_2 = QtGui.QWidget(self)
         sc_2=MplPlot3dCanvas_2(widget_2)
@@ -741,7 +771,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         layout = QtGui.QVBoxLayout(contents)
         widget_1 = QtGui.QWidget(self)
         self.mayavi_widget = MayaviQWidget(widget_1)
-        layout.addWidget(self.mayavi_widget)
+        layout.addWidget(self.mayavi_widget)'''
         self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
 "  background: orange;\n"
 "  outline: none;\n"
@@ -813,7 +843,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}\n"
 "a:hover { color: yellow;}\n"
 ".container { display:block; margin: 2em 0;}"))
-        self.tabWidget.addTab(contents, "3D Graph")
+        
+        ###### Remove Comment Before Pushing it######
+        '''self.tabWidget.addTab(contents, "3D Graph")'''
         self.verticalLayout_6.addWidget(self.tabWidget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -833,6 +865,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
         self.dockWidget = QtGui.QDockWidget(MainWindow)
+       # self.dockWidget.setTitle
         self.dockWidget.setObjectName(_fromUtf8("dockWidget"))
         self.dockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
        
@@ -2309,16 +2342,121 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame_2.setVisible(False)
         self.pushButton.clicked.connect(self.show_2)
         self.toolButton_19.clicked.connect(self.show_1)
+        self.toolButton_8.clicked.connect(self.showFileChooser)
+        self.toolButton_7.clicked.connect(self.addRowDataPoint)
+        self.toolButton_9.clicked.connect(self.removeRowDataPoint)
+        self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def saveDataValuesToFile(self):
+        pname = ex.getProjectName()
+        import csv
+        #savFile = open(pname+'.csv','w')
+        with open(pname+".csv",'w') as output:
+            writeHead = csv.writer(output,delimiter=',',lineterminator='\n')
+            for i in range (0,self.tableWidget.rowCount()):
+                row = list()
+
+                for j in range (0,3):
+                    try :
+                        item = self.tableWidget.item(i,j).text()
+                    except Exception,e:
+                        continue
+                    #toInt = int(item)
+                    print item
+                    row.append(item)
+
+                #print row
+                writeHead.writerow(row)
+
+        #savFile.close()
+
+    def addRowDataPoint(self):
+        rowC = self.tableWidget.rowCount()
+        self.tableWidget.insertRow(rowC)
+
+    def removeRowDataPoint(self):
+        if(self.tableWidget.currentRow()==-1):
+            self.errorRemoveDataPoint()
+        else:
+            self.tableWidget.removeRow(self.tableWidget.currentRow())
+            self.tableWidget.setCurrentCell(-1,-1)
+
+    def errorRemoveDataPoint(self):
+        Dialog = QtGui.QDialog()
+        u = Ui_Dialog_2("Please select the data point to remove")
+        u.setupUi(Dialog)
+        Dialog.exec_()
 
     # For Hand Cursor
     def hand_cursor(self,widget):
         widget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-    
+
+    def showFileChooser(self):
+        fname = QtGui.QFileDialog.getOpenFileName(self,'Select File')
+        self.delimit=','
+        import csv
+        f=open(fname,'rt')
+        try:
+            reader = csv.reader(f)
+            num_rows = 0
+            for row in reader:
+                num_rows=num_rows+1
+
+            with open(fname,'r') as fil :
+               text = fil.read()
+
+            count_comma=0
+            for char in text:
+               if char==',':
+                  count_comma=count_comma+1
+
+            if count_comma != (num_rows * 2) : # i.e. it is NOT a csv file
+                self.showSelectDelimiter()
+
+            self.tableWidget.setRowCount(num_rows)
+            ## create items in all added 
+            rowno_=0
+            f=open(fname,'rt')
+            reader=csv.reader(f,delimiter=self.delimit)
+            try:   
+                for row in reader:
+                    for col in range (0,3):
+                        float(row[col])
+                        item = QtGui.QTableWidgetItem(row[col])
+                        self.tableWidget.setItem(rowno_,col,item)
+                    rowno_=rowno_+1        
+
+                self.tableWidget.setRowCount(rowno_)
+                
+            except Exception, e:
+                self.showU=self.showInvalidValueError()
+                self.tableWidget.setRowCount(0)                    
+
+        finally:
+            f.close()                                  
+                
+
+    def showInvalidValueError(self):
+        Dialog = QtGui.QDialog()
+        u = Ui_Dialog_2('Cannnot import values ! Data Invalid !')
+        u.setupUi(Dialog)
+        Dialog.exec_()
+
+    def showSelectDelimiter(self):
+      Dialog = QtGui.QDialog()
+      u = Ui_Dialog()
+      u.setupUi(Dialog)
+      dialg = StartDialog()
+      if dialg.exec_():
+        self.delimit = dialg.getDelim()
+      #self.showFileChooser()
+        
     def hide_2(self):
         self.frame.hide()
         self.frame_2.show()
         self.pushButton.show()
+
     def show_2(self):
         self.frame.show()
         self.frame_2.hide()
@@ -2348,7 +2486,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #layout.addWidget(self.create_new_page_button_2(),15,Qt.AlignTop)
         global i
         i+=1
-        self.tabWidget.addTab( contents , 'Untitled'+str(i))        
+        self.tabWidget.addTab( contents , 'Untitled'+str(i))      
+
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.pushButton.setText(_translate("MainWindow", "T\n"
@@ -2482,6 +2621,7 @@ class TabContainer(QtGui.QWidget):
     self.add_page()
     self.show()
     
+
   def closeTab(self, index):
       
       #self.tabWidget.widget(index).close()
@@ -2522,6 +2662,136 @@ class TabContainer(QtGui.QWidget):
     self.pages.append(Ui_MainWindow())
     self.tabWidget.addTab( self.pages[-1] , 'Project %s' % len(self.pages) )
     self.tabWidget.setCurrentIndex( len(self.pages)-1 )
+
+  def getProjectName(self):
+    return 'Project %s' % len(self.pages)
+
+
+class Ui_Dialog(object):
+    ch=','
+
+    def setupUi(self, Dialog):
+        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.resize(456, 284)
+        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
+        self.buttonBox.setGeometry(QtCore.QRect(80, 240, 341, 32))
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.label = QtGui.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(40, 110, 211, 21))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.comboBox = QtGui.QComboBox(Dialog)
+        self.comboBox.setGeometry(QtCore.QRect(260, 110, 141, 32))
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.widget = QtGui.QWidget(Dialog)
+        self.widget.setEnabled(False)
+        self.widget.setGeometry(QtCore.QRect(70, 160, 311, 71))
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
+        brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
+        brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
+        self.widget.setPalette(palette)
+        self.widget.setObjectName(_fromUtf8("widget"))
+        self.label_2 = QtGui.QLabel(self.widget)
+        self.label_2.setEnabled(False)
+        self.label_2.setGeometry(QtCore.QRect(10, 10, 281, 21))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.label_3 = QtGui.QLabel(self.widget)
+        self.label_3.setGeometry(QtCore.QRect(10, 30, 291, 21))
+        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.widget_2 = QtGui.QWidget(Dialog)
+        self.widget_2.setGeometry(QtCore.QRect(60, 20, 361, 71))
+        self.widget_2.setObjectName(_fromUtf8("widget_2"))
+        self.label_6 = QtGui.QLabel(self.widget_2)
+        self.label_6.setEnabled(False)
+        self.label_6.setGeometry(QtCore.QRect(10, 10, 281, 22))
+        self.label_6.setObjectName(_fromUtf8("label_6"))
+        self.label_7 = QtGui.QLabel(self.widget_2)
+        self.label_7.setEnabled(False)
+        self.label_7.setGeometry(QtCore.QRect(10, 30, 331, 22))
+        self.label_7.setObjectName(_fromUtf8("label_7"))
+
+        self.retranslateUi(Dialog)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+        #self.buttonBox.button(QtGui.QDialogButtonBox.Ok).clicked.connect(lambda:self.storeDelim)
+        self.comboBox.activated.connect(self.storeDelim)
+
+    def storeDelim(self):
+        if self.comboBox.currentIndex()==0:
+            self.ch = ','
+        elif self.comboBox.currentIndex()==1:
+            self.ch = ' '
+        elif self.comboBox.currentIndex()==2:
+            self.ch = ';'
+        elif self.comboBox.currentIndex()==3:
+            self.ch = '-'
+        elif self.comboBox.currentIndex()==4:
+            self.ch = ':'
+
+    def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(_translate("Dialog", "Choose Delimiter", None))
+        self.label.setText(_translate("Dialog", "Please specify delimiter :", None))
+        self.comboBox.setItemText(0, _translate("Dialog", "\',\' (comma)", None))
+        self.comboBox.setItemText(1, _translate("Dialog", "\' \' (space)", None))
+        self.comboBox.setItemText(2, _translate("Dialog", "\';\' (semicolon)", None))
+        self.comboBox.setItemText(3, _translate("Dialog", "\'-\' (dash)", None))
+        self.comboBox.setItemText(4, _translate("Dialog", "\':\' (colon)", None))
+        self.label_2.setText(_translate("Dialog", "The Plotter retrieves values ", None))
+        self.label_3.setText(_translate("Dialog", "separated by the chosen delimiter", None))
+        self.label_6.setText(_translate("Dialog", "The Plotter has detected that the", None))
+        self.label_7.setText(_translate("Dialog", "selected file is NOT in proper csv format", None))
+
+    def getDelim(self):
+        return self.ch
+
+class StartDialog(QtGui.QDialog, Ui_Dialog):
+    def __init__(self,parent=None):
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+
+class Ui_Dialog_2(object):    ## class for error Dialog Box
+    mssg = 'error message'
+
+    def __init__(self,string):
+        self.mssg = string
+
+    def setupUi(self, Dialog):
+        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.resize(400, 126)
+        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
+        self.buttonBox.setGeometry(QtCore.QRect(140, 70, 91, 32))
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.label = QtGui.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(40, 30, 400, 22))
+        self.label.setObjectName(_fromUtf8("label"))
+
+        self.retranslateUi(Dialog)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
+        self.label.setText(_translate("Dialog", self.mssg, None))
+
+
 
 import sys
 if __name__ == '__main__':
