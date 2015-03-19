@@ -52,11 +52,11 @@ class Accordion(QtGui.QWidget):
         self.iconButton = QtGui.QPushButton()
 
         self.icon = QtGui.QIcon()
-        self.icon.addPixmap(QtGui.QPixmap(_fromUtf8("/home/prabhat/Documents/plotter/Icons/Add-New-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Add-New-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         
 
         self.icon2 = QtGui.QIcon()
-        self.icon2.addPixmap(QtGui.QPixmap(_fromUtf8("/home/prabhat/Documents/plotter/Icons/Minus-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.icon2.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Minus-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
         self.iconButton.setIcon(self.icon)
         self.iconButton.setFlat(True)
