@@ -106,6 +106,8 @@ class AccordionMain(QtGui.QWidget):
         if(self):
             self.deleteLater()
 
+    
+
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
