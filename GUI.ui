@@ -15,126 +15,275 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
-  text-align: center; 
-	background-color: rgb(255, 255, 255);
+	border:none;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(105, 230, 199, 255), stop:1 rgba(255, 255, 255, 255));
+   text-align: center; 
 }
+QDockWidget{
+	background-color: #7986cb;
+    border:none;
+    padding:0px;
+}
+
  QSlider::groove:horizontal {
-     background: red;
+    background:red;
      height: 15px;
      position: absolute; 
-     left: 4px; right: 4px;
+     left: 4px;  right: 4px;
  }
 
  QSlider::handle:horizontal {
      height:20px;
      width: 10px;
-     background: green;
+     background: #0d47a1;
      margin: -4px; 
  }
 
  QSlider::add-page:horizontal {
-     background:rgb(255, 255, 127)
+     background:#bbdefb;
  }
 
  QSlider::sub-page:horizontal {
-     background: rgb(255, 170, 0);
+     background:#2196f3 ;
  }
 QToolButton{
   position: relative;
   border: none;
   outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
+  color: black;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }
-QToolButton:hover:!pressed{
+QToolButton:hover{
   position: relative;
   border: none;
   outline:none;
-  cursor:pointer;
-  cursor: hand;
-
+  background-color: #bbdefb;
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
+  
 }
-QToolButton:focus
- {
- border-image: url();
-} 
+
 QToolButton:pressed{
   position: relative;
   border: none;
   outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
+    background:white;
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }
 QPushButton{
   position: relative;
   border:none;
   outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #89669b;
+  background: #1565c0;
   color: white;
   padding: 6px 20px;
   border-radius: 2px;
   font-size: 20px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
+ 
 }
 QPushButton:hover{
   position: relative;
   border: none;
   outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #745385;
+  background: #64b5f6;
   color: white;
   padding: 6px 20px;
   border-radius: 2px;
   font-size:20px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }
 QPushButton:pressed{
   position: relative;
   border: none;
   outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #9d74b2;
+  background: #1976d2;
   color: white;
   padding: 6px 20px;
   border-radius: 2px;
   font-size: 20px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }
-</string>
+QComboBox {
+    border: none;
+    padding: 1px 18px 1px 3px;
+    min-width: 6em;
+}
+
+QComboBox, QComboBox:drop-down {
+    background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(21, 101, 192, 255), stop:1 rgba(255, 255, 255, 255));
+}
+
+
+QComboBox:on, QComboBox:drop-down:on {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop:1 rgba(255, 255, 255, 255),stop:0 rgba(21, 101, 192, 255));
+}
+
+QComboBox:on {
+    padding-top: 3px;
+    padding-left: 4px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid;
+}
+
+QComboBox::down-arrow {
+	image:url(:/arrow/Icons/arrow.png);
+}
+
+QComboBox::down-arrow:on { 
+    top: 1px;
+    left: 1px;
+}
+QMenu {
+    background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(255, 241, 118, 255), stop:1 rgba(255, 255, 255, 255)) ;
+    border: none;
+}
+
+QMenu::item {
+    
+    background-color: transparent;
+}
+
+QMenu::item:selected { 
+    background-color:rgb(110, 122, 185);
+}
+QMenuBar {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(173, 213, 247, 255), stop:1 rgba(255, 255, 255, 255))
+}
+
+QMenuBar::item {
+    spacing: 3px;
+    padding: 1px 4px;
+    background: transparent;
+    border-radius: 2px;
+}
+
+QMenuBar::item:selected { 
+    background: rgb(21, 101, 192);
+}
+
+QMenuBar::item:pressed {
+    background: #64b5f6;
+}
+QTableWidget{
+	background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(255, 241, 118, 255), stop:1 rgba(255, 255, 255, 255));
+border:1px solid rgb(171, 173, 179);
+}
+QTextEdit{
+background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(255, 241, 118, 255), stop:1 rgba(255, 255, 255, 255));
+}    
+QScrollBar:horizontal {
+    border: none;
+    background:  rgb(187, 222, 251);
+    height: 15px;
+    margin: 0px 20px 0 20px;
+}
+QScrollBar::handle:horizontal {
+    background:rgb(110, 122, 185);
+    min-width: 20px;
+}
+QScrollBar::handle:horizontal:hover:!pressed {
+    background:#c5cae9;
+    min-width: 20px;
+}
+QScrollBar::add-line:horizontal {
+    border: none;
+    background:rgb(187, 222, 251);
+    width: 20px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal {
+    border:none;
+    background:rgb(187, 222, 251);
+    width: 20px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+QScrollBar::add-line:horizontal:hover:!pressed {
+    border: none;
+    background:rgb(110, 122, 185);
+    width: 20px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal:hover:!pressed {
+    border:none;
+    background:rgb(110, 122, 185);
+    width: 20px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+QScrollBar::left-arrow:horizontal{
+	image: url(:/arrow/Icons/left-arrow.png);
+}
+QScrollBar::right-arrow:horizontal{
+	image: url(:/arrow/Icons/right-arrow.png);
+}
+QScrollBar:vertical {
+    border: none;
+    background:  rgb(187, 222, 251);
+    width: 15px;
+    margin: 0px 20px 0 20px;
+}
+QScrollBar::handle:vertical {
+    background:rgb(110, 122, 185);
+    min-height: 20px;
+}
+QScrollBar::handle:vertical:hover:!pressed {
+    background:#c5cae9;
+    min-height: 15px;
+}
+QScrollBar::add-line:vertical {
+    border: none;
+    background:rgb(187, 222, 251);
+    height: 20px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+    border:none;
+    background:rgb(187, 222, 251);
+    height: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical:hover:!pressed {
+    border: none;
+    background:rgb(110, 122, 185);
+    height: 20px;
+    subcontrol-position:bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover:!pressed {
+    border:none;
+    background:rgb(110, 122, 185);
+    height: 20px;
+    subcontrol-position:top;
+    subcontrol-origin: margin;
+}
+QScrollBar::up-arrow:vertical{
+	image: url(:/arrow/Icons/up-arrow.png);
+}
+QScrollBar::down-arrow:vertical{
+	image: url(:/arrow/Icons/down-arrow.png);
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -168,8 +317,8 @@ QPushButton:pressed{
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>20</width>
-         <height>121</height>
+         <width>16</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -178,13 +327,15 @@ QPushButton:pressed{
          <height>16777215</height>
         </size>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
-        <string>T
-a
-b
-l
-e
-</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/arrow/Icons/double-right.png</normaloff>:/arrow/Icons/double-right.png</iconset>
        </property>
       </widget>
      </widget>
@@ -206,17 +357,31 @@ e
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <property name="spacing">
+          <number>6</number>
+         </property>
          <item>
           <widget class="QPushButton" name="pushButton_3">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton{
-border_bottom_style:outset;
-border_bottom_width:3px;
-border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.489318, stop:0 rgba(0, 0, 0, 255), stop:0.664773 rgba(255, 255, 255, 255))
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>Hide</string>
@@ -225,6 +390,18 @@ border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.4
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_7">
+           <property name="minimumSize">
+            <size>
+             <width>10</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>35</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
@@ -238,49 +415,35 @@ border_bottom_color:qlineargradient(spread:pad, x1:0, y1:0.494, x2:0.284, y2:0.4
   outline:none;
   cursor:pointer;
   cursor: hand;
-
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
+  font-size: 22px; 
 }
-QToolButton:hover:!pressed{
+QToolButton:hover{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-background:rgb(66, 204, 225);
+  background:#82b1ff;
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
 }
-QToolButton:focus
- {
- border-image: url();
-} 
+
 QToolButton:pressed{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-  background: #fbd334;
   color: white;
-  padding: 2px 2px;
+  background:white;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }</string>
            </property>
            <property name="text">
@@ -293,13 +456,25 @@ QToolButton:pressed{
            <property name="iconSize">
             <size>
              <width>40</width>
-             <height>40</height>
+             <height>30</height>
             </size>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_9">
+           <property name="minimumSize">
+            <size>
+             <width>10</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>35</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
@@ -313,49 +488,35 @@ QToolButton:pressed{
   outline:none;
   cursor:pointer;
   cursor: hand;
-
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
+  font-size: 22px; 
 }
-QToolButton:hover:!pressed{
+QToolButton:hover{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-background:rgb(66, 204, 225);
+  background:#82b1ff;
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
 }
-QToolButton:focus
- {
- border-image: url();
-} 
+
 QToolButton:pressed{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-  background: #fbd334;
   color: white;
-  padding: 2px 2px;
+  background:white;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }</string>
            </property>
            <property name="text">
@@ -368,15 +529,30 @@ QToolButton:pressed{
            <property name="iconSize">
             <size>
              <width>40</width>
-             <height>40</height>
+             <height>30</height>
             </size>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_8">
+           <property name="minimumSize">
+            <size>
+             <width>10</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>35</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="toolTip">
+            <string>Import Coordinates</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QToolButton{
@@ -385,49 +561,35 @@ QToolButton:pressed{
   outline:none;
   cursor:pointer;
   cursor: hand;
-
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
+  font-size: 22px; 
 }
-QToolButton:hover:!pressed{
+QToolButton:hover{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-background:rgb(66, 204, 225);
+  background:#82b1ff;
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
 }
-QToolButton:focus
- {
- border-image: url();
-} 
+
 QToolButton:pressed{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-  background: #fbd334;
   color: white;
-  padding: 2px 2px;
+  background:white;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }</string>
            </property>
            <property name="text">
@@ -440,87 +602,30 @@ QToolButton:pressed{
            <property name="iconSize">
             <size>
              <width>40</width>
-             <height>40</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="toolButton_6">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-background:rgb(66, 204, 225);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
-           </property>
-           <property name="text">
-            <string>...</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>Icons/Open-48.png</normaloff>Icons/Open-48.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>40</width>
-             <height>40</height>
+             <height>30</height>
             </size>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QToolButton" name="toolButton_5">
+           <property name="minimumSize">
+            <size>
+             <width>10</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>35</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="toolTip">
+            <string>Export Coordinates</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QToolButton{
@@ -529,49 +634,35 @@ QToolButton:pressed{
   outline:none;
   cursor:pointer;
   cursor: hand;
-
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
+  font-size: 22px; 
 }
-QToolButton:hover:!pressed{
+QToolButton:hover{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-background:rgb(66, 204, 225);
+  background:#82b1ff;
   color: white;
-  padding: 2px 2px;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
 }
-QToolButton:focus
- {
- border-image: url();
-} 
+
 QToolButton:pressed{
   position: relative;
   border: none;
   outline:none;
   cursor:pointer;
   cursor: hand;
-  background: #fbd334;
   color: white;
-  padding: 2px 2px;
+  background:white;
+  padding: 0px;
   border-radius: 2px;
   font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
 }</string>
            </property>
            <property name="text">
@@ -584,10 +675,23 @@ QToolButton:pressed{
            <property name="iconSize">
             <size>
              <width>40</width>
-             <height>40</height>
+             <height>30</height>
             </size>
            </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
@@ -606,77 +710,7 @@ QToolButton:pressed{
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">.button {
-  background: orange;
-  outline: none;
-  color: white;
-  border: none;
-  border-radius: 0.25em;
-  padding: 0.75em 2em;
-  line-height: 1;
-  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);
-  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);
-  font-size: 1.5rem;
-}
-.button-white {
-  background: white;
-  color: orange;
-}
-.button-round {
-  border-radius: 100%;
-  padding: 0.75em;
-  width: 3em;
-  height: 3em;
-}
-.button-ripple {
-  position: relative;
-  overflow: hidden;
-  transform: translate(0);
-}
-.button-ripple_content {
-  position: relative;
-  z-index: 1;
-}
-.button-ripple_ripples {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.button-ripple_ripple{
-  display: block;
-  position: absolute;
-  border-radius: 100%;
-  width: 1em;
-  height: 1em;
-  margin: -0.5em 0 0 -0.5em;
-  transform: scale(0);
-
-  top: 0;
-  left: 0;
-
-  animation: ripple-animation 2s;
-}
-
-@keyframes ripple-animation {
-    from {
-      transform: scale3d(1,1,1);
-      opacity: 0.8;
-    }
-    to {
-      transform: scale3d(100,100,1);
-      opacity: 0;
-    }
-}
-
-/* Make things perty */
-html {  height: 100%;}
-body { font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}
-h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}
-h2 { font-weight: 300}
-input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}
-a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}
-a:hover { color: yellow;}
-.container { display:block; margin: 2em 0;}</string>
+          <string notr="true"/>
          </property>
          <column>
           <property name="text">
@@ -711,7 +745,11 @@ a:hover { color: yellow;}
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
-       <widget class="QWidget" name="widget" native="true"/>
+       <widget class="QWidget" name="widget" native="true">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -726,7 +764,7 @@ a:hover { color: yellow;}
      <x>0</x>
      <y>0</y>
      <width>1396</width>
-     <height>28</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -766,6 +804,9 @@ a:hover { color: yellow;}
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QComboBox" name="comboBox_5">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <item>
         <property name="text">
          <string>x</string>
@@ -801,6 +842,9 @@ a:hover { color: yellow;}
      </item>
      <item row="1" column="0">
       <widget class="QComboBox" name="comboBox_6">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <item>
         <property name="text">
          <string>x</string>
@@ -839,11 +883,7 @@ a:hover { color: yellow;}
   </widget>
   <widget class="QDockWidget" name="dockWidget_2">
    <property name="styleSheet">
-    <string notr="true">QDockWidget{
-	background-color: rgb(11, 170, 165);
-    color:rgb(56, 252, 255);
-}
-</string>
+    <string notr="true"/>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -917,6 +957,15 @@ a:hover { color: yellow;}
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
             <item>
              <property name="text">
               <string>Regular</string>
@@ -962,10 +1011,7 @@ a:hover { color: yellow;}
           <bool>false</bool>
          </property>
          <property name="styleSheet">
-          <string notr="true">QTabWidget{
-background_color: rgb(56, 252, 255);
-color: rgb(56, 252, 255);
-}</string>
+          <string notr="true"/>
          </property>
          <property name="tabPosition">
           <enum>QTabWidget::South</enum>
@@ -1168,10 +1214,7 @@ color: rgb(56, 252, 255);
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">QTabBar::tab{
-height : 40px;
-width : 156px;
-}</string>
+              <string notr="true"/>
              </property>
              <property name="currentIndex">
               <number>0</number>
@@ -1204,6 +1247,24 @@ width : 156px;
    </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidget_3">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>453</width>
+     <height>70</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>524287</width>
+     <height>524287</height>
+    </size>
+   </property>
    <attribute name="dockWidgetArea">
     <number>4</number>
    </attribute>
@@ -1211,6 +1272,12 @@ width : 156px;
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QToolButton" name="toolButton_17">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -1218,57 +1285,7 @@ width : 156px;
         <string>Create New</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1279,14 +1296,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_10">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -1294,57 +1317,7 @@ QToolButton:pressed{
         <string>Open Existing</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1355,14 +1328,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_20">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -1370,57 +1349,7 @@ QToolButton:pressed{
         <string>Save to Drive</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1431,14 +1360,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_18">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -1446,57 +1381,7 @@ QToolButton:pressed{
         <string>Load New</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1507,14 +1392,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="line_4">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -1522,6 +1413,12 @@ QToolButton:pressed{
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_4">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -1529,57 +1426,7 @@ QToolButton:pressed{
         <string>Add new Equation</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1590,14 +1437,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_3">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -1605,57 +1458,7 @@ QToolButton:pressed{
         <string>Remove this Equation</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1666,14 +1469,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="line_5">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -1684,8 +1493,11 @@ QToolButton:pressed{
        <property name="maximumSize">
         <size>
          <width>20</width>
-         <height>16777215</height>
+         <height>25</height>
         </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="toolTip">
         <string>Show on Graph</string>
@@ -1700,6 +1512,18 @@ QToolButton:pressed{
      </item>
      <item>
       <widget class="QToolButton" name="Example">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -1710,56 +1534,8 @@ QToolButton:pressed{
         <string>Example</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: rgb(0, 0, 0);
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
+        <string notr="true">QToolButton{
+font-size: 15px;
 }</string>
        </property>
        <property name="text">
@@ -1767,14 +1543,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>24</width>
+         <height>24</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="line_6">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -1782,61 +1564,20 @@ QToolButton:pressed{
      </item>
      <item>
       <widget class="QToolButton" name="toolButton">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="toolTip">
+        <string>Always on Top</string>
+       </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1847,69 +1588,28 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_25">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="toolTip">
+        <string>Show/Hide Table</string>
+       </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -1920,14 +1620,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="line_8">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -1937,13 +1643,43 @@ QToolButton:pressed{
    </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidget_4">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>576</width>
+     <height>70</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>524287</width>
+     <height>70</height>
+    </size>
+   </property>
    <attribute name="dockWidgetArea">
     <number>4</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_4">
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="Line" name="line_7">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="lineWidth">
         <number>1</number>
        </property>
@@ -1957,79 +1693,44 @@ QToolButton:pressed{
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_19">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="toolTip">
+        <string>Keyboard</string>
+       </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>Icons/Briefcase-48.png</normaloff>Icons/Briefcase-48.png</iconset>
+         <normaloff>Icons/Keyboard-48.png</normaloff>Icons/Keyboard-48.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_23">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -2037,57 +1738,7 @@ QToolButton:pressed{
         <string>Print graph</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2098,14 +1749,49 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_2">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="toolTip">
+        <string>Save Graph</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>Icons/Save-48.png</normaloff>Icons/Save-48.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_24">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -2113,57 +1799,7 @@ QToolButton:pressed{
         <string>Take a screenshot</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2174,14 +1810,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_22">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -2189,57 +1831,7 @@ QToolButton:pressed{
         <string>Go to our FaceBook page</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2250,14 +1842,26 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="line_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -2265,6 +1869,12 @@ QToolButton:pressed{
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_21">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -2272,57 +1882,7 @@ QToolButton:pressed{
         <string>Play</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2333,14 +1893,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_16">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -2348,57 +1914,7 @@ QToolButton:pressed{
         <string>Stop</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2409,14 +1925,26 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="line_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -2424,61 +1952,20 @@ QToolButton:pressed{
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_15">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="toolTip">
+        <string>Disable Anti-Aliasing</string>
+       </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2489,69 +1976,28 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_14">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="toolTip">
+        <string>Enable Anti-Aliasing</string>
+       </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2562,14 +2008,26 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="line">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -2577,64 +2035,20 @@ QToolButton:pressed{
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_13">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="toolTip">
-        <string>Zoom</string>
+        <string>Zoom All</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2645,14 +2059,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_12">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -2660,57 +2080,7 @@ QToolButton:pressed{
         <string>Zoom in</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2721,14 +2091,20 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_11">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -2739,57 +2115,7 @@ QToolButton:pressed{
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}
-QToolButton:hover:!pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: #fbd334;
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-	border-image: url(c:/Data/navArrowsSelected.png);
-}
-QToolButton:focus
- {
- border-image: url();
-} 
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background: rgb(57, 255, 146);
-  color: white;
-  padding: 2px 2px;
-  border-radius: 2px;
-  font-size: 22px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-   box-shadow: 0 0 4px rgba(0,0,0, .75);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>...</string>
@@ -2800,8 +2126,8 @@ QToolButton:pressed{
        </property>
        <property name="iconSize">
         <size>
-         <width>48</width>
-         <height>48</height>
+         <width>35</width>
+         <height>35</height>
         </size>
        </property>
       </widget>
@@ -2817,6 +2143,15 @@ QToolButton:pressed{
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QPushButton" name="pushButton_2">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>PushButton</string>
        </property>
@@ -2841,6 +2176,8 @@ QToolButton:pressed{
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
  <connections/>
 </ui>
