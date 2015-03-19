@@ -57,7 +57,7 @@ class Visualization(HasTraits):
     scene = Instance(MlabSceneModel, ())
       # the layout of the dialog screated
       
-    def mayavi_implicit_3d(self,str_expr,x_start=-100,x_end=100,no_x_points=100,y_start=-100,y_end=100,no_y_points=100,z_start=-100,z_end=100,no_z_points=100):
+    def mayavi_implicit_3d(self,str_expr,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
       expr = sympify(sympyParsing.symStr(str_expr))
       print(expr)
       expr = simplify(expr)
@@ -84,26 +84,26 @@ class Visualization(HasTraits):
       f = vectorized_lambdify((x,y,z), expr)
       #print(f(0,1.5,10000))
       foo=f(X,Y,Z)
-      print(foo)
+      #print(foo)
       print(foo.shape)
       axis=[]
       s=foo.shape
-      for i in range(0,len(points_size)):
-          if(s[i]!=points_size[i].imag):
-              axis.append(i)
-      #if s[0]!=no_x_points.imag:
-          #axis.append(0)
-      #if s[1]!=no_y_points.imag:
-          #axis.append(1)
-      #if s[2]!=no_z_points.imag:
-      #    axis.append(2)
-      print(axis)
       doo=foo
-      for i in range(0,len(axis)):
-          doo=np.repeat(doo,points_size[i].imag,axis[i])
-      print(doo)
+      #if len(foo.shape)==3:
+          #for i in range(0,len(points_size)):
+              #if(s[i]!=points_size[i].imag):
+                  #axis.append(i)
+          #if s[0]!=no_x_points.imag:
+              #axis.append(0)
+          #if s[1]!=no_y_points.imag:
+              #axis.append(1)
+          #if s[2]!=no_z_points.imag:
+              #axis.append(2)
+          #print(axis)
+          #for i in range(0,len(axis)):
+      #        doo=np.repeat(doo,points_size[i].imag,axis[i])
       print(doo.shape)
-      contour3d=self.scene.mlab.contour3d(doo,extent=[x_start,x_end,y_start,y_end,z_start,z_end], contours = [0])
+      contour3d=self.scene.mlab.contour3d(doo, contours = [0])
       self.scene.mlab.outline(contour3d, color=(.7, .7, .7))
       self.update_plot()
 
@@ -131,12 +131,12 @@ class Visualization(HasTraits):
         self.scene.mlab.points3d([0],[0],[0],line_width=0.05,mode='point')
         # self.scene.mlab.axes(color=(.7, .7, .7))
         self.scene.mlab.orientation_axes()
-        self.scene.mlab.outline()
-        xx = yy = zz = np.arange(-10,10,1)
-        xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
-        self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
-        self.scene.mlab.plot3d(zx,zy+0.1,zz,line_width=0.01,tube_radius=0.01)
-        self.scene.mlab.plot3d(xx,xy+0.1,xz,line_width=0.01,tube_radius=0.01)
+        #self.scene.mlab.outline()
+        #xx = yy = zz = np.arange(-10,10,1)
+        #xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
+        #self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
+        #self.scene.mlab.plot3d(zx,zy+0.1,zz,line_width=0.01,tube_radius=0.01)
+        #self.scene.mlab.plot3d(xx,xy+0.1,xz,line_width=0.01,tube_radius=0.01)
 
 
     view = View(Item('scene', editor=SceneEditor(scene_class=Scene),
