@@ -128,6 +128,21 @@ class MainFrameR(QtGui.QWidget):
         self.adjustSize()
 
 
+    def getExpression(self):
+        listr = []
+        if(not self.equationTab.isHidden()):
+            listr.append(self.equationTab.frame.text())
+        elif(not self.equationTabExplicit.isHidden()):
+            listr.append(self.equationTabExplicit.frame.getExpre())
+        elif(not self.equationTabParameter.isHidden()):
+            listr = self.equationTabParameter.frame.getExpression()
+
+        return listr
+
+
+
+
+
 
 
 

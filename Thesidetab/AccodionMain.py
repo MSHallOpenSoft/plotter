@@ -101,7 +101,7 @@ class AccordionMain(QtGui.QWidget):
       currentDim=self.frame.settingTab.frame.comboBox.currentText()
       transparency=self.frame.settingTab.frame.horizontalSlider_3.value()
       thickness=self.frame.settingTab.frame.horizontalSlider_2.value()
-      resolution=self.frame.settingTab.frame.horizontalSlider_1.value()
+      resolution=self.frame.settingTab.frame.horizontalSlider.value()
       print(resolution)
       print(thickness)
       print(transparency)
@@ -111,6 +111,11 @@ class AccordionMain(QtGui.QWidget):
       print(opacity)
       print(currentDim)
 
+      expr=self.frame.getExpression()
+      print(expr)
+      eqn=""
+      if len(expr)==1:
+        eqn=expr[0]
       
       x_start=self.frame.rangeTab.frame.XLeft.value()
       x_end=self.frame.rangeTab.frame.XRight.value()
@@ -119,7 +124,7 @@ class AccordionMain(QtGui.QWidget):
       z_start=self.frame.rangeTab.frame.ZRight.value()
       z_end=self.frame.rangeTab.frame.ZLeft.value()
       if(currentDim=="3D"):
-        self.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(str(self.frame.widget_4.text()),color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end,no_x_points=10
+        self.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end,no_x_points=10
           ,y_start=y_start,y_end=y_end,no_y_points=10,z_start=z_start,z_end=z_end,no_z_points=10)
       else:
         print("plot 2d")

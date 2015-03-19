@@ -35,7 +35,7 @@ class ExplicitEquation(QtGui.QWidget):
         self.horizontalLayout.setContentsMargins(0,0,0,0)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.comboBox = QtGui.QComboBox()
-        self.comboBox.setMaximumSize(QtCore.QSize(50, 16777215))
+        self.comboBox.setMaximumSize(50, 30)
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
@@ -77,6 +77,10 @@ class ExplicitEquation(QtGui.QWidget):
         self.comboBox.setItemText(12, _translate("Form", "x "+u"\u2265", None))
         self.comboBox.setItemText(13, _translate("Form", "y "+u"\u2265", None))
         self.comboBox.setItemText(14, _translate("Form", "z "+u"\u2265", None))
+
+    def getExpre(self):
+        st = self.comboBox.currentText() + self.lineEdit.text()
+        return st
 
 
 import sys

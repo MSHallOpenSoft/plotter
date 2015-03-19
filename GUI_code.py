@@ -478,7 +478,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         contents = QtGui.QWidget(self.tabWidget)
         layout = QtGui.QVBoxLayout(contents)
         widget_1 = QtGui.QWidget(self)
-        self.mayavi_widget = mayaviPlot.MayaviQWidget(widget_1)
+        self.mayavi_widget = mayaviPlot.MayaviQWidget()
         layout.addWidget(self.mayavi_widget)
         self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
 "  background: orange;\n"
@@ -1402,7 +1402,7 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
 
 import sys
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
+    app = QtGui.QApplication.instance()
     ex = Ui_MainWindow_2()
     ex.showMaximized()
     at=Ui_DockWidget()
