@@ -15,12 +15,20 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
+   
+	background-image: url(:/img/Icons/background.png);
 	border:none;
-	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(105, 230, 199, 255), stop:1 rgba(255, 255, 255, 255));
+	background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));
    text-align: center; 
 }
+QGroupBox{
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));
+}
+QTabWidget{
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));
+}
 QDockWidget{
-	background-color: #7986cb;
+	background-color:#737373;
     border:none;
     padding:0px;
 }
@@ -35,16 +43,22 @@ QDockWidget{
  QSlider::handle:horizontal {
      height:20px;
      width: 10px;
-     background: #0d47a1;
+     background: qlineargradient(spread:pad, x1:0, y1:0.477, x2:0, y2:0, stop:0.125 rgba(42, 47, 54, 255), stop:0.465909 rgba(65, 73, 83, 255), stop:0.681818 rgba(104, 117, 133, 255), stop:0.875 rgba(155, 174, 198, 255), stop:1 rgba(255, 255, 255, 255));
+     margin: -4px; 
+ }
+ QSlider::handle:hover:horizontal {
+     height:20px;
+     width: 10px;
+     background:qlineargradient(spread:pad, x1:0, y1:0.477, x2:0, y2:0, stop:0.125 rgba(91, 95, 100, 255), stop:0.465909 rgba(122, 132, 146, 255), stop:0.681818 rgba(141, 153, 167, 255), stop:0.875 rgba(181, 195, 212, 255), stop:1 rgba(255, 255, 255, 255));
      margin: -4px; 
  }
 
  QSlider::add-page:horizontal {
-     background:#bbdefb;
+     background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.284, stop:0 rgba(255, 255, 255, 255), stop:0.0738636 rgba(231, 246, 123, 255), stop:0.284091 rgba(217, 236, 83, 255), stop:0.715909 rgba(182, 198, 69, 255));
  }
 
  QSlider::sub-page:horizontal {
-     background:#2196f3 ;
+     background: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255)) ;
  }
 QToolButton{
   position: relative;
@@ -55,59 +69,39 @@ QToolButton{
   border-radius: 2px;
   font-size: 22px;
 }
-QToolButton:hover{
+QToolButton:hover:!pressed{
   position: relative;
   border: none;
   outline:none;
-  background-color: #bbdefb;
+  background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.284, stop:0 rgba(255, 255, 255, 255), stop:0.0738636 rgba(231, 246, 123, 255), stop:0.284091 rgba(217, 236, 83, 255), stop:0.715909 rgba(182, 198, 69, 255));
   color: white;
   padding: 0px;
   border-radius: 2px;
   font-size: 22px;
   
 }
-
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-    background:white;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}
 QPushButton{
   position: relative;
   border:none;
   outline:none;
-  background: #1565c0;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));
   color: white;
   padding: 6px 20px;
   border-radius: 2px;
   font-size: 20px;
  
 }
-QPushButton:hover{
+QPushButton:hover:!pressed{
   position: relative;
   border: none;
   outline:none;
-  background: #64b5f6;
+ background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.284, stop:0 rgba(255, 255, 255, 255), stop:0.0738636 rgba(231, 246, 123, 255), stop:0.284091 rgba(217, 236, 83, 255), stop:0.715909 rgba(182, 198, 69, 255));
   color: white;
   padding: 6px 20px;
   border-radius: 2px;
   font-size:20px;
 }
-QPushButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  background: #1976d2;
-  color: white;
-  padding: 6px 20px;
-  border-radius: 2px;
-  font-size: 20px;
-}
+
 QComboBox {
     border: none;
     padding: 1px 18px 1px 3px;
@@ -115,13 +109,12 @@ QComboBox {
 }
 
 QComboBox, QComboBox:drop-down {
-    background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(21, 101, 192, 255), stop:1 rgba(255, 255, 255, 255));
+    background:qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));
 }
 
 
 QComboBox:on, QComboBox:drop-down:on {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop:1 rgba(255, 255, 255, 255),stop:0 rgba(21, 101, 192, 255));
+    background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.284, stop:0 rgba(255, 255, 255, 255), stop:0.0738636 rgba(231, 246, 123, 255), stop:0.284091 rgba(217, 236, 83, 255), stop:0.715909 rgba(182, 198, 69, 255));
 }
 
 QComboBox:on {
@@ -139,7 +132,7 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
-	image:url(:/arrow/Icons/arrow.png);
+	image:url(:/arrow/Icons/arrow-new.png);
 }
 
 QComboBox::down-arrow:on { 
@@ -147,7 +140,8 @@ QComboBox::down-arrow:on {
     left: 1px;
 }
 QMenu {
-    background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(255, 241, 118, 255), stop:1 rgba(255, 255, 255, 255)) ;
+   
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));
     border: none;
 }
 
@@ -157,10 +151,10 @@ QMenu::item {
 }
 
 QMenu::item:selected { 
-    background-color:rgb(110, 122, 185);
+    background-color:#D9EC53;
 }
 QMenuBar {
-    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(173, 213, 247, 255), stop:1 rgba(255, 255, 255, 255))
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255))
 }
 
 QMenuBar::item {
@@ -171,36 +165,36 @@ QMenuBar::item {
 }
 
 QMenuBar::item:selected { 
-    background: rgb(21, 101, 192);
+    background:#737373;
 }
 
 QMenuBar::item:pressed {
-    background: #64b5f6;
+    background: #414953;
 }
 QTableWidget{
-	background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(255, 241, 118, 255), stop:1 rgba(255, 255, 255, 255));
+	background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255));
 border:1px solid rgb(171, 173, 179);
 }
 QTextEdit{
-background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(255, 241, 118, 255), stop:1 rgba(255, 255, 255, 255));
+background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255));
 }    
 QScrollBar:horizontal {
     border: none;
-    background:  rgb(187, 222, 251);
+    background: #DBDBDB;
     height: 15px;
     margin: 0px 20px 0 20px;
 }
 QScrollBar::handle:horizontal {
-    background:rgb(110, 122, 185);
+    background: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));
     min-width: 20px;
 }
-QScrollBar::handle:horizontal:hover:!pressed {
-    background:#c5cae9;
+QScrollBar::handle:horizontal:hover {
+    background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.284, stop:0 rgba(255, 255, 255, 255), stop:0.0738636 rgba(231, 246, 123, 255), stop:0.284091 rgba(217, 236, 83, 255), stop:0.715909 rgba(182, 198, 69, 255));
     min-width: 20px;
 }
 QScrollBar::add-line:horizontal {
     border: none;
-    background:rgb(187, 222, 251);
+    background:#DBDBDB;
     width: 20px;
     subcontrol-position: right;
     subcontrol-origin: margin;
@@ -208,14 +202,14 @@ QScrollBar::add-line:horizontal {
 
 QScrollBar::sub-line:horizontal {
     border:none;
-    background:rgb(187, 222, 251);
+    background:#DBDBDB;
     width: 20px;
     subcontrol-position: left;
     subcontrol-origin: margin;
 }
 QScrollBar::add-line:horizontal:hover:!pressed {
     border: none;
-    background:rgb(110, 122, 185);
+    background: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));
     width: 20px;
     subcontrol-position: right;
     subcontrol-origin: margin;
@@ -223,7 +217,7 @@ QScrollBar::add-line:horizontal:hover:!pressed {
 
 QScrollBar::sub-line:horizontal:hover:!pressed {
     border:none;
-    background:rgb(110, 122, 185);
+    background: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));
     width: 20px;
     subcontrol-position: left;
     subcontrol-origin: margin;
@@ -236,21 +230,21 @@ QScrollBar::right-arrow:horizontal{
 }
 QScrollBar:vertical {
     border: none;
-    background:  rgb(187, 222, 251);
+    background: #DBDBDB;
     width: 15px;
     margin: 0px 20px 0 20px;
 }
 QScrollBar::handle:vertical {
-    background:rgb(110, 122, 185);
+    background: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));;
     min-height: 20px;
 }
-QScrollBar::handle:vertical:hover:!pressed {
-    background:#c5cae9;
+QScrollBar::handle:vertical:hover {
+    background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.284, stop:0 rgba(255, 255, 255, 255), stop:0.0738636 rgba(231, 246, 123, 255), stop:0.284091 rgba(217, 236, 83, 255), stop:0.715909 rgba(182, 198, 69, 255));
     min-height: 15px;
 }
 QScrollBar::add-line:vertical {
     border: none;
-    background:rgb(187, 222, 251);
+    background:#DBDBDB;
     height: 20px;
     subcontrol-position: bottom;
     subcontrol-origin: margin;
@@ -258,14 +252,14 @@ QScrollBar::add-line:vertical {
 
 QScrollBar::sub-line:vertical {
     border:none;
-    background:rgb(187, 222, 251);
+    background:#DBDBDB;
     height: 20px;
     subcontrol-position: top;
     subcontrol-origin: margin;
 }
 QScrollBar::add-line:vertical:hover:!pressed {
     border: none;
-    background:rgb(110, 122, 185);
+    background: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));
     height: 20px;
     subcontrol-position:bottom;
     subcontrol-origin: margin;
@@ -273,7 +267,7 @@ QScrollBar::add-line:vertical:hover:!pressed {
 
 QScrollBar::sub-line:vertical:hover:!pressed {
     border:none;
-    background:rgb(110, 122, 185);
+    background: qlineargradient(spread:pad, x1:0, y1:0.692, x2:0, y2:0, stop:0.278409 rgba(150, 171, 0, 255), stop:0.715909 rgba(177, 202, 0, 255), stop:0.880682 rgba(207, 230, 42, 255), stop:0.897727 rgba(207, 230, 42, 255), stop:1 rgba(255, 255, 255, 255));
     height: 20px;
     subcontrol-position:top;
     subcontrol-origin: margin;
@@ -302,9 +296,7 @@ QScrollBar::down-arrow:vertical{
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">QFrame, QLabel, QToolTip {
-    border: 0px solid green;
-}</string>
+       <string notr="true"/>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -409,42 +401,7 @@ QScrollBar::down-arrow:vertical{
             <string>Add</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px; 
-}
-QToolButton:hover{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background:#82b1ff;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}
-
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  background:white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>...</string>
@@ -482,42 +439,7 @@ QToolButton:pressed{
             <string>Remove</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px; 
-}
-QToolButton:hover{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background:#82b1ff;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}
-
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  background:white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>...</string>
@@ -555,42 +477,7 @@ QToolButton:pressed{
             <string>Import Coordinates</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px; 
-}
-QToolButton:hover{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background:#82b1ff;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}
-
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  background:white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>...</string>
@@ -628,42 +515,7 @@ QToolButton:pressed{
             <string>Export Coordinates</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px; 
-}
-QToolButton:hover{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  background:#82b1ff;
-  color: white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}
-
-QToolButton:pressed{
-  position: relative;
-  border: none;
-  outline:none;
-  cursor:pointer;
-  cursor: hand;
-  color: white;
-  background:white;
-  padding: 0px;
-  border-radius: 2px;
-  font-size: 22px;
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>...</string>
@@ -733,6 +585,9 @@ QToolButton:pressed{
         <widget class="QPushButton" name="pushButton_21">
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Redraw</string>
@@ -1020,7 +875,7 @@ QToolButton:pressed{
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="iconSize">
           <size>
@@ -1217,7 +1072,7 @@ QToolButton:pressed{
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <property name="usesScrollButtons">
               <bool>false</bool>
@@ -1255,7 +1110,7 @@ QToolButton:pressed{
    </property>
    <property name="minimumSize">
     <size>
-     <width>453</width>
+     <width>489</width>
      <height>70</height>
     </size>
    </property>
@@ -1651,7 +1506,7 @@ font-size: 15px;
    </property>
    <property name="minimumSize">
     <size>
-     <width>576</width>
+     <width>624</width>
      <height>70</height>
     </size>
    </property>
