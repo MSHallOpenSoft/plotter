@@ -128,6 +128,7 @@ class Visualization(HasTraits):
         #x, y, z = np.ogrid[-3:3:100j, -3:3:100j, -3:3:100j]
         #F = x**2/3**2 + y**2/2**2 + z**2/4**2 - 1
         #self.scene.mlab.contour3d(F, contours = [0])
+        self.scene.mlab.points3d([0],[0],[0])
         self.scene.mlab.axes(color=(.7, .7, .7))
         self.scene.mlab.orientation_axes()
         xx = yy = zz = np.arange(-10,10,1)
