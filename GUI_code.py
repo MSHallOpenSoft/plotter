@@ -75,11 +75,14 @@ except AttributeError:
 
 
 class Ui_MainWindow(QtGui.QMainWindow):
+    totalTabs=0
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
         QtGui.QShortcut(QtGui.QKeySequence("Esc"), self, self.showAll)
         self.expression_list=[]
+        self.tabIdentifier=Ui_MainWindow.totalTabs
+        Ui_MainWindow.totalTabs+=1
 
     def addNewEquationEditor(self,layout,spacer):
         n = layout.count()

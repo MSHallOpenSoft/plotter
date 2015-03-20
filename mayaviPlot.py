@@ -55,60 +55,92 @@ class customLineEdit(QtGui.QLineEdit):
 class Visualization(HasTraits):
     #def __init__(self, parent=None):
     scene = Instance(MlabSceneModel, ())
+    dic={} #storing contour
+    dic2={} #storing parameters
+    dic3={} #storing calculated values
+    dic4={} #storing outline
       # the layout of the dialog screated
       
-    def mayavi_implicit_3d(self,str_expr,color=(0,1,0),line_width=2,opacity=1,x_start=-10,x_end=10,no_x_points=100,y_start=-10,y_end=10,no_y_points=100,z_start=-10,z_end=10,no_z_points=100):
-      expr = sympify(sympyParsing.symStr(str_expr))
-      print(x_start,x_end,no_x_points)
-      print(y_start,y_end,no_y_points)
-      print(z_start,z_end,no_z_points)
-      print(expr)
-      expr = simplify(expr)
-      print(expr)
-      expr = radsimp(expr)
-      print(expr)
-      num_dum=fraction(expr)
-      print(num_dum)
-      expr=num_dum[0]
-      print(expr)
-      #no_x_points=2
-      #no_y_points=2
-      #no_z_points=2
-      #print(sympyParsing.symStr(str_expr))
-      no_x_points=complex(0,no_x_points)
-      no_y_points=complex(0,no_y_points)
-      no_z_points=complex(0,no_z_points)
-      points_size=[no_x_points,no_y_points,no_z_points]
+    def mayavi_implicit_3d(self,curTab,curPlot,**kwargs):
+      donot_calculate=False
+      len_arguments=len(kwargs)
+      len_shared=0
+      x_start=kwargs['x_start']
+      eqn=kwargs['eqn']
+      line_width=kwargs['line_width']
+      opacity=kwargs['opacity']
+      x_end=kwargs['x_end']
+      y_start=kwargs['y_start']
+      y_end=kwargs['y_end']
+      z_start=kwargs['z_start']
+      z_end=kwargs['z_end']
+      no_x_points=kwargs['no_x_points']
+      no_y_points=kwargs['no_y_points']
+      no_z_points=kwargs['no_z_points']
+      color=kwargs['color']
+      #print(self.dic2)
+      keystr="tab"+str(curTab)+"plt"+str(curPlot)
+      shared_items=[]
+      print("hooooo")
+      if(keystr in self.dic2):
+          if self.dic2[keystr]['eqn'] == kwargs['eqn']:
+            print(kwargs)
+            print(self.dic2)
+            shared_items = set(kwargs.items()) & set(self.dic2[keystr].items())
+            print(shared_items)
+            len_shared = len(shared_items)
+            if len_shared == len_arguments:
+                print("no change")
+                return
+            donot_calculate = len_shared == len_arguments-1 and self.dic2[keystr]['color'] != kwargs['color']
 
-      X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
-      #print X
-      #print Y
-      #print Z
-      f = vectorized_lambdify((x,y,z), expr)
-      #print(f(0,1.5,10000))
-      foo=f(X,Y,Z)
-      #print(foo)
-      print(foo.shape)
-      axis=[]
-      s=foo.shape
-      doo=foo
-      #if len(foo.shape)==3:
-          #for i in range(0,len(points_size)):
-              #if(s[i]!=points_size[i].imag):
-                  #axis.append(i)
-          #if s[0]!=no_x_points.imag:
-              #axis.append(0)
-          #if s[1]!=no_y_points.imag:
-              #axis.append(1)
-          #if s[2]!=no_z_points.imag:
-              #axis.append(2)
-          #print(axis)
-          #for i in range(0,len(axis)):
-      #        doo=np.repeat(doo,points_size[i].imag,axis[i])
-      print(doo.shape)
-      contour3d=self.scene.mlab.contour3d(doo,color=color,line_width=line_width,opacity=opacity, contours = [0])
-      self.scene.mlab.outline(contour3d, color=(.7, .7, .7))
+      self.dic2[keystr]=kwargs
+      print("shaaaaaaaaaare",len_shared)
+      if(donot_calculate):
+          doo=self.dic3[keystr]
+          print("not calculating")
+      else:
+          expr = sympify(sympyParsing.symStr(eqn))
+          expr = simplify(expr)
+          expr = radsimp(expr)
+          num_dum=fraction(expr)
+          expr=num_dum[0]
+          no_x_points=complex(0,no_x_points)
+          no_y_points=complex(0,no_y_points)
+          no_z_points=complex(0,no_z_points)
+          points_size=[no_x_points,no_y_points,no_z_points]
+          X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
+          f = vectorized_lambdify((x,y,z), expr)
+          foo=f(X,Y,Z)
+          print(foo.shape)
+          axis=[]
+          s=foo.shape
+          doo=foo
+          #if len(foo.shape)==3:
+              #for i in range(0,len(points_size)):
+                  #if(s[i]!=points_size[i].imag):
+                      #axis.append(i)
+              #if s[0]!=no_x_points.imag:
+                  #axis.append(0)
+              #if s[1]!=no_y_points.imag:
+                  #axis.append(1)
+              #if s[2]!=no_z_points.imag:
+                  #axis.append(2)
+              #print(axis)
+              #for i in range(0,len(axis)):
+          #        doo=np.repeat(doo,points_size[i].imag,axis[i])
+          print(doo.shape)
+          self.dic3[keystr]=doo
+
+      if(keystr in self.dic):
+          self.dic[keystr].remove()
+
+      if(keystr in self.dic4):
+          self.dic4[keystr].remove()
+      self.dic[keystr]=self.scene.mlab.contour3d(doo,color=color,line_width=line_width,opacity=opacity, contours = [0])
+      self.dic4[keystr]=self.scene.mlab.outline(self.dic[keystr], color=(.7, .7, .7))
       self.update_plot()
+      #self.started=0
 
 
 
