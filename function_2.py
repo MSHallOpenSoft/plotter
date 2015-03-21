@@ -27,10 +27,11 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_DockWidget(QtGui.QDockWidget):
-    def __init__(self):
+    def __init__(self,target_area):
         super(Ui_DockWidget, self).__init__()
         self.setupUi(self)
         self.hide()
+        self.target=target_area
         
     def setupUi(self, DockWidget):
         DockWidget.setObjectName(_fromUtf8("DockWidget"))
@@ -168,6 +169,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
         font.setPointSize(12)
         font.setItalic(True)
         self.pushButton_16.setFont(font)
+        self.pushButton_12.setFont(font)
         self.pushButton_16.setObjectName(_fromUtf8("pushButton_16"))
         self.gridLayout_3.addWidget(self.pushButton_16, 5, 0, 1, 1)
         self.pushButton_2 = QtGui.QPushButton(self.frame)
@@ -475,25 +477,57 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_35.setMinimumSize(QtCore.QSize(0, 50))
         self.pushButton_35.setObjectName(_fromUtf8("pushButton_35"))
         self.verticalLayout_3.addWidget(self.pushButton_35)
-        self.pushButton_36 = QtGui.QPushButton(self.frame_3)
-        self.pushButton_36.setMinimumSize(QtCore.QSize(0, 50))
-        self.pushButton_36.setObjectName(_fromUtf8("pushButton_36"))
-        self.verticalLayout_3.addWidget(self.pushButton_36)
         font = QtGui.QFont()
-        font.setWeight(50)
+        #font.setWeight(50)
         font.setPointSize(20)
         font.setBold(False)
+        font.setItalic(True)
         self.pushButton_3.setFont(font)
         self.pushButton_33.setFont(font)
         self.pushButton_34.setFont(font)
-        self.pushButton_4.setFont(font)
         self.pushButton_22.setFont(font)
         self.pushButton_31.setFont(font)
         self.pushButton_35.setFont(font)
-        self.pushButton_36.setFont(font)
-        at=Ui_DockWidget_2()
+        font.setPointSize(16)
+        font.setBold(False)
+        self.pushButton_4.setFont(font)
+        at=Ui_DockWidget_2(None)
         self.pushButton_8.clicked.connect(lambda:self.show_1(at))
         DockWidget.setWidget(self.dockWidgetContents)
+        self.pushButton_13.clicked.connect(self.function_11)
+        self.pushButton_6.clicked.connect(lambda:self.function_14("x"))
+        self.pushButton_17.clicked.connect(self.function_2)
+        self.pushButton_4.clicked.connect(self.function_13)
+        self.pushButton_7.clicked.connect(lambda:self.function_14("y"))
+        self.pushButton_12.clicked.connect(self.function_3)
+        self.pushButton_10.clicked.connect(lambda:self.function_14(")"))
+        self.pushButton_14.clicked.connect(lambda:self.function_14("<"))
+        self.pushButton_3.clicked.connect(self.function_12)
+        self.pushButton_16.clicked.connect(self.function_8)
+        self.pushButton_2.clicked.connect(self.function_10)
+        self.pushButton_11.clicked.connect(lambda:self.function_14(">"))
+        self.pushButton.clicked.connect(lambda:self.function_14("("))
+        self.pushButton_15.clicked.connect(lambda:self.function_14(" "))
+        self.pushButton_28.clicked.connect(lambda:self.function_14(","))
+        self.pushButton_24.clicked.connect(lambda:self.function_14("6"))
+        self.pushButton_9.clicked.connect(lambda:self.function_14("2"))
+        self.pushButton_18.clicked.connect(lambda:self.function_14("-"))
+        self.pushButton_19.clicked.connect(lambda:self.function_14("7"))
+        self.pushButton_20.clicked.connect(lambda:self.function_14("9"))
+        self.pushButton_5.clicked.connect(lambda:self.function_14("+"))
+        self.pushButton_21.clicked.connect(lambda:self.function_14("8"))
+        self.pushButton_22.clicked.connect(self.function_15)
+        self.pushButton_23.clicked.connect(lambda:self.function_14("5"))
+        self.pushButton_31.clicked.connect(self.function_16)
+        self.pushButton_25.clicked.connect(lambda:self.function_14("="))
+        self.pushButton_26.clicked.connect(lambda:self.function_14("1"))
+        self.pushButton_27.clicked.connect(lambda:self.function_14("3"))
+        self.pushButton_29.clicked.connect(lambda:self.function_14("4"))
+        self.pushButton_30.clicked.connect(lambda:self.function_14("0"))
+        self.pushButton_32.clicked.connect(lambda:self.function_14("."))
+        self.pushButton_34.clicked.connect(self.function_17)
+        self.pushButton_33.clicked.connect(self.function_18)
+        self.pushButton_35.clicked.connect(self.function_19)
 
         self.retranslateUi(DockWidget)
         QtCore.QMetaObject.connectSlotsByName(DockWidget)
@@ -501,25 +535,72 @@ class Ui_DockWidget(QtGui.QDockWidget):
     def show_1(self,at):
         if at.isVisible()==False:
             at.move(1920-293,1080-411-296)
+            at.setTarget(self.target)
             at.show()
         else:
             at.hide()
+
+    def function(self):
+        self.target.insert("x")
+    def function_1(self):
+        self.target.insert("y")
+    def function_2(self):
+        self.target.insert(u'\u00B2')
+    # very very hard !!!
+    def function_3(self):
+        self.target.insert(u'\u1D47')
+    def function_4(self):
+        self.target.insert("(")
+    def function_5(self):
+        self.target.insert(")")
+    def function_6(self):
+        self.target.insert("<")
+    def function_7(self):
+        self.target.insert(">")
+    def function_8(self):
+        self.target.insert("||")
+        self.target.setCursorPosition(self.target.cursorPosition()-1)
+    def function_9(self):
+        self.target.insert(",")
+    def function_10(self):
+        self.target.insert(u'\u2264')#<=
+    def function_11(self):
+        self.target.insert(u'\u2265')#>=
+    def function_12(self):
+        self.target.insert(u'\u221A')#sqrt
+    def function_13(self):
+        self.target.insert(u'\u03C0')#pi
+    def function_14(self,str_num):
+        self.target.insert(str_num)    
+    def function_15(self):
+        self.target.insert(u'\u00F7')#divide
+    def function_16(self):
+        self.target.insert(u'\u00D7')#multiply
+    def function_17(self):
+        self.target.setCursorPosition(self.target.cursorPosition()-1)
+    def function_18(self):
+        self.target.setCursorPosition(self.target.cursorPosition()+1)
+    def function_19(self):
+        self.target.backspace()
+    def setTarget(self,target_area):
+        self.target=target_area
+
     def retranslateUi(self, DockWidget):
         DockWidget.setWindowTitle(_translate("DockWidget", "Keyboard", None))
-        self.pushButton_13.setText(_translate("DockWidget", u'\u2265', None))
+        self.pushButton_13.setText(_translate("DockWidget", u'\u2265', None))#Greater than equal to
         self.pushButton_6.setText(_translate("DockWidget", "x", None))
-        self.pushButton_17.setText(_translate("DockWidget", u'x\u00B2', None))
-        self.pushButton_4.setText(_translate("DockWidget", u'\u03C0', None))
+        self.pushButton_17.setText(_translate("DockWidget", u'x\u00B2', None))#Square
+        self.pushButton_4.setText(_translate("DockWidget", u'\u03C0', None))# pi
         self.pushButton_7.setText(_translate("DockWidget", "y", None))
-        self.pushButton_12.setText(_translate("DockWidget", u'a\u1D47', None))
+        self.pushButton_12.setText(_translate("DockWidget", u'a\u1D47', None))# a^b
         self.pushButton_10.setText(_translate("DockWidget", ")", None))
         self.pushButton_14.setText(_translate("DockWidget", "<", None))
-        self.pushButton_3.setText(_translate("DockWidget", u'\u221A', None))
+        self.pushButton_3.setText(_translate("DockWidget", u'\u221A', None))# root
         self.pushButton_16.setText(_translate("DockWidget", "|a|", None))
-        self.pushButton_2.setText(_translate("DockWidget", u'\u2264', None))
+        self.pushButton_2.setText(_translate("DockWidget", u'\u2264', None))# Less Than Equal to
         self.pushButton_11.setText(_translate("DockWidget", ">", None))
         self.pushButton.setText(_translate("DockWidget", "(", None))
-        self.pushButton_15.setText(_translate("DockWidget", "                ABC                ", None))
+        self.pushButton_15.setText(_translate("DockWidget", "               SPACE               ", None))
         self.pushButton_28.setText(_translate("DockWidget", ",", None))
         self.pushButton_24.setText(_translate("DockWidget", "6", None))
         self.pushButton_9.setText(_translate("DockWidget", "2", None))
@@ -528,9 +609,9 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_20.setText(_translate("DockWidget", "9", None))
         self.pushButton_5.setText(_translate("DockWidget", "+", None))
         self.pushButton_21.setText(_translate("DockWidget", "8", None))
-        self.pushButton_22.setText(_translate("DockWidget", u'\u00F7', None))
+        self.pushButton_22.setText(_translate("DockWidget", u'\u00F7', None))#Divide
         self.pushButton_23.setText(_translate("DockWidget", "5", None))
-        self.pushButton_31.setText(_translate("DockWidget", u'\u00D7', None))
+        self.pushButton_31.setText(_translate("DockWidget", u'\u00D7', None))#multiply
         self.pushButton_25.setText(_translate("DockWidget", "=", None))
         self.pushButton_26.setText(_translate("DockWidget", "1", None))
         self.pushButton_27.setText(_translate("DockWidget", "3", None))
@@ -538,15 +619,14 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_30.setText(_translate("DockWidget", "0", None))
         self.pushButton_32.setText(_translate("DockWidget", ".", None))
         self.pushButton_8.setText(_translate("DockWidget", "functions", None))
-        self.pushButton_34.setText(_translate("DockWidget", u'\u2190', None))
-        self.pushButton_33.setText(_translate("DockWidget", u'\u2192', None))
-        self.pushButton_35.setText(_translate("DockWidget", u'\u232B', None))
-        self.pushButton_36.setText(_translate("DockWidget", u'\u23CE', None))
+        self.pushButton_34.setText(_translate("DockWidget", u'\u2190', None))#LeftArrow
+        self.pushButton_33.setText(_translate("DockWidget", u'\u2192', None))#Right Arrow
+        self.pushButton_35.setText(_translate("DockWidget", u'\u232B', None))#BackSpace
 
 if __name__ == "__main__":
     import sys
     a = QtGui.QApplication(sys.argv)
-    w=Ui_DockWidget()
+    w=Ui_DockWidget(None)
     w.show()
-    at=Ui_DockWidget_2()
+    at=Ui_DockWidget_2(None)
     sys.exit(a.exec_())
