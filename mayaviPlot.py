@@ -23,7 +23,6 @@ from sympy.plotting.experimental_lambdify import (vectorized_lambdify)
 from sympy.utilities.lambdify import lambdify
 
 import numpy as np
-#import mayavi_3d
 from mayavi import mlab
 from pyface.qt import QtGui, QtCore
 from sympy import symbols,sympify,latex,simplify,fraction,radsimp
@@ -40,6 +39,13 @@ z = symbols('z')
 
 
 class customLineEdit(QtGui.QLineEdit):
+    """A simple, custom input taking class to test when this module is run.
+    The input is taken from an object of this to give it to mayavi and test.
+    This is not used in the actual GUI. Used to just test this module separately
+    by running this file. The graph is plotted when the enter key is pressed in
+    this input box. It calls the ``mayavi_implicit_3d`` method from the ``Visualization``
+    class to draw the plot.
+    """
     def __init__(self,parent=None):
         self.parent=parent
         QtGui.QLineEdit.__init__(self)
@@ -53,51 +59,68 @@ class customLineEdit(QtGui.QLineEdit):
 ################################################################################
 #The actual visualization6
 class Visualization(HasTraits):
+    """Mayavi visualization class."""
     #def __init__(self, parent=None):
     scene = Instance(MlabSceneModel, ())
-    dic={} #storing contour
-    dic2={} #storing parameters
-    dic3={} #storing calculated values
-    dic4={} #storing outline
-      # the layout of the dialog screated
+    dic_contour={} #storing contour
+    dic_parameter={} #storing parameters
+    dic_calculated={} #storing calculated values
+    dic_outline={} #storing outline
+    # the layout of the dialog screated
       
-    def mayavi_implicit_3d(self,curTab,curPlot,**kwargs):
+    def mayavi_implicit_3d(self,curTab=0,curPlot=1,**kwargs):
+      """
+      The main 3d plotting method. Uses sympy's ``simplify`` and ``rationalise`` methods
+      to obtain the numerator and then plot it. This is done to avoid ``division by zero`` error. The behaviour
+      with respect to asymptotes is as expected.
+      Maintaining separate dictionaries ``dic_contour``,``dic_parameter``,``dic_calculated``,``dic_outline`` to store the
+      ``contours``(plotted 3d object) , ``parameters``, ``outline`` respectively. Using key strings of the form ``tab1plt1`` with the
+      use of the respective tab and plot identifiers for the dictionaries. When for the same plot a new input is
+      given, we check the difference between the new and the currently plotted parameters, and if we needed the ``contour``
+      is cacluclated again using ``numpy's ogrid`` method. This way for complex graphs, if parameters are changed which do not
+      affect the actual plot (not characteristics like ``colour``, ``transparency`` etc. ), there is no recalculation taking place.
+
+      If the dimension of the output given by ``numpy's ogrid`` method is not of the form (t,t,t) we manually change the numpy
+      array using ``numpy's repeat`` method. This is used to plot 2d equations like ``x+y=0``,``x+z=0``,``z=0`` etc in 3d form.
+      """
       donot_calculate=False
       len_arguments=len(kwargs)
       len_shared=0
-      x_start=kwargs['x_start']
-      eqn=kwargs['eqn']
-      line_width=kwargs['line_width']
-      opacity=kwargs['opacity']
-      x_end=kwargs['x_end']
-      y_start=kwargs['y_start']
-      y_end=kwargs['y_end']
-      z_start=kwargs['z_start']
-      z_end=kwargs['z_end']
-      no_x_points=kwargs['no_x_points']
-      no_y_points=kwargs['no_y_points']
-      no_z_points=kwargs['no_z_points']
-      color=kwargs['color']
-      #print(self.dic2)
+
+      x_start=kwargs.get('x_start',(-5))
+      eqn=kwargs.get('eqn',"x+y+z=0")
+      line_width=kwargs.get('line_width',0.2)
+      opacity=kwargs.get('opacity',1)
+      x_end=kwargs.get('x_end', 5)
+      y_start=kwargs.get('y_start',-5)
+      y_end=kwargs.get('y_end',5)
+      z_start=kwargs.get('z_start',-5)
+      z_end=kwargs.get('z_end',5)
+
+      no_x_points=kwargs.get('no_x_points',10)
+      no_y_points=kwargs.get('no_y_points',10)
+      no_z_points=kwargs.get('no_z_points',10)
+      color=kwargs.get('color',(0.5,0.8,0.5))
+      #print(self.dic_parameter)
       keystr="tab"+str(curTab)+"plt"+str(curPlot)
       shared_items=[]
       print("hooooo")
-      if(keystr in self.dic2):
-          if self.dic2[keystr]['eqn'] == kwargs['eqn']:
+      if(keystr in self.dic_parameter):
+          if self.dic_parameter[keystr]['eqn'] == kwargs['eqn']:
             print(kwargs)
-            print(self.dic2)
-            shared_items = set(kwargs.items()) & set(self.dic2[keystr].items())
+            print(self.dic_parameter)
+            shared_items = set(kwargs.items()) & set(self.dic_parameter[keystr].items())
             print(shared_items)
             len_shared = len(shared_items)
             if len_shared == len_arguments:
                 print("no change")
                 return
-            donot_calculate = len_shared == len_arguments-1 and self.dic2[keystr]['color'] != kwargs['color']
+            donot_calculate = len_shared == len_arguments-1 and self.dic_parameter[keystr]['color'] != kwargs['color']
 
-      self.dic2[keystr]=kwargs
+      self.dic_parameter[keystr]=kwargs
       print("shaaaaaaaaaare",len_shared)
       if(donot_calculate):
-          doo=self.dic3[keystr]
+          doo=self.dic_calculated[keystr]
           print("not calculating")
       else:
           expr = sympify(sympyParsing.symStr(eqn))
@@ -130,49 +153,33 @@ class Visualization(HasTraits):
               #for i in range(0,len(axis)):
           #        doo=np.repeat(doo,points_size[i].imag,axis[i])
           print(doo.shape)
-          self.dic3[keystr]=doo
+          self.dic_calculated[keystr]=doo
 
-      if(keystr in self.dic):
-          self.dic[keystr].remove()
+      if(keystr in self.dic_contour):
+          self.dic_contour[keystr].remove()
 
-      if(keystr in self.dic4):
-          self.dic4[keystr].remove()
-      self.dic[keystr]=self.scene.mlab.contour3d(doo,color=color,line_width=line_width,opacity=opacity, contours = [0])
-      self.dic4[keystr]=self.scene.mlab.outline(self.dic[keystr], color=(.7, .7, .7))
+      if(keystr in self.dic_outline):
+          self.dic_outline[keystr].remove()
+      self.dic_contour[keystr]=self.scene.mlab.contour3d(doo,color=color,line_width=line_width,opacity=opacity, contours = [0])
+      self.dic_outline[keystr]=self.scene.mlab.outline(self.dic_contour[keystr], color=(.7, .7, .7))
       self.update_plot()
       #self.started=0
 
-
-
-
     @on_trait_change('scene.activated')
     def update_plot(self):
-        # This function is called when the view is opened. We don't
-        # populate the scene when the view is not yet open, as some
-        # VTK features require a GLContext.
-
-        # We can do normal mlab calls on the embedded scene.
-        # self.scene.mlab.test_points3d()
-        #print(txt)
-        #if(txt!=None):
-          #self.mayavi_implicit_3d(txt)
-          #print(txt)
-        #else:
-          ##self.mayavi_implicit_3d('x+y+z=1')
-        #  self.scene.mlab.test_points3d()
-        #x, y, z = np.ogrid[-3:3:100j, -3:3:100j, -3:3:100j]
-        #F = x**2/3**2 + y**2/2**2 + z**2/4**2 - 1
-        #self.scene.mlab.contour3d(F, contours = [0])
+        """
+         This function is called when the view is opened. We don't
+         populate the scene when the view is not yet open, as some
+         VTK features require a GLContext.
+         We can do normal mlab calls on the embedded scene.
+        """
         self.scene.mlab.points3d([0],[0],[0],line_width=0.05,mode='point')
-        # self.scene.mlab.axes(color=(.7, .7, .7))
         self.scene.mlab.orientation_axes()
-        #self.scene.mlab.outline()
         #xx = yy = zz = np.arange(-10,10,1)
         #xy = xz = yx = yz = zx = zy = np.zeros_like(xx)    
         #self.scene.mlab.plot3d(yx,yy+0.1,yz,line_width=0.01,tube_radius=0.01)
         #self.scene.mlab.plot3d(zx,zy+0.1,zz,line_width=0.01,tube_radius=0.01)
         #self.scene.mlab.plot3d(xx,xy+0.1,xz,line_width=0.01,tube_radius=0.01)
-
 
     view = View(Item('scene', editor=SceneEditor(scene_class=Scene),
                      height=250, width=300, show_label=False),
