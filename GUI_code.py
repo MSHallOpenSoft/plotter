@@ -39,13 +39,13 @@ Please point out any further feautures that can be included in our plotter, or e
 '''
 
 
-import mayaviPlot
+#import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot3dCanvas_2
+#from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -287,7 +287,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tab.setVisible(False)'''
         #self.tab_2 = QtGui.QWidget()
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        contents_2=QtGui.QWidget(self.tabWidget)
+        '''contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         sc_2=MplPlot3dCanvas_2(self)
         widget_2=QtGui.QWidget(self)
@@ -298,7 +298,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         self.mayavi_widget = mayaviPlot.MayaviQWidget()
         layout.addWidget(self.mayavi_widget)
-        self.tabWidget.addTab(contents, "3D Graph")
+        self.tabWidget.addTab(contents, "3D Graph")'''
         self.verticalLayout_6.addWidget(self.tabWidget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -995,11 +995,71 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuView = QtGui.QMenu(self.menubar)
+        self.menuView.setObjectName(_fromUtf8("menuView"))
+        self.menuView_2 = QtGui.QMenu(self.menubar)
+        self.menuView_2.setObjectName(_fromUtf8("menuView_2"))
+        self.menuSettigs = QtGui.QMenu(self.menubar)
+        self.menuSettigs.setObjectName(_fromUtf8("menuSettigs"))
+        self.menuWindow = QtGui.QMenu(self.menubar)
+        self.menuWindow.setObjectName(_fromUtf8("menuWindow"))
+        self.menuHelp = QtGui.QMenu(self.menubar)
+        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+        self.actionNew_Project = QtGui.QAction(MainWindow)
+        self.actionNew_Project.setObjectName(_fromUtf8("actionNew_Project"))
+        self.actionSave = QtGui.QAction(MainWindow)
+        self.actionSave.setObjectName(_fromUtf8("actionSave"))
+        self.actionSave_As = QtGui.QAction(MainWindow)
+        self.actionSave_As.setObjectName(_fromUtf8("actionSave_As"))
+        self.actionExit = QtGui.QAction(MainWindow)
+        self.actionExit.setObjectName(_fromUtf8("actionExit"))
+        self.actionOpen_Project = QtGui.QAction(MainWindow)
+        self.actionOpen_Project.setObjectName(_fromUtf8("actionOpen_Project"))
+        self.actionSave_All = QtGui.QAction(MainWindow)
+        self.actionSave_All.setObjectName(_fromUtf8("actionSave_All"))
+        self.actionPrint = QtGui.QAction(MainWindow)
+        self.actionPrint.setObjectName(_fromUtf8("actionPrint"))
+        self.actionClose = QtGui.QAction(MainWindow)
+        self.actionClose.setObjectName(_fromUtf8("actionClose"))
+        self.actionTable = QtGui.QAction(MainWindow)
+        self.actionTable.setIconVisibleInMenu(False)
+        self.actionTable.setObjectName(_fromUtf8("actionTable"))
+        self.actionFullScrren = QtGui.QAction(MainWindow)
+        self.actionFullScrren.setObjectName(_fromUtf8("actionFullScrren"))
+        self.actionExit_Full_Screen_esc = QtGui.QAction(MainWindow)
+        self.actionExit_Full_Screen_esc.setObjectName(_fromUtf8("actionExit_Full_Screen_esc"))
+        self.actionFile_Menu = QtGui.QAction(MainWindow)
+        self.actionFile_Menu.setObjectName(_fromUtf8("actionFile_Menu"))
+        self.actionGraph_Menu = QtGui.QAction(MainWindow)
+        self.actionGraph_Menu.setObjectName(_fromUtf8("actionGraph_Menu"))
+        self.actionEquation_Widget = QtGui.QAction(MainWindow)
+        self.actionEquation_Widget.setObjectName(_fromUtf8("actionEquation_Widget"))
+        self.menuFile.addAction(self.actionNew_Project)
+        self.menuFile.addAction(self.actionOpen_Project)
+        self.menuFile.addAction(self.actionSave)
+        self.menuFile.addAction(self.actionSave_As)
+        self.menuFile.addAction(self.actionSave_All)
+        self.menuFile.addAction(self.actionPrint)
+        self.menuFile.addAction(self.actionClose)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionExit)
+        self.menuView_2.addAction(self.actionTable)
+        self.menuView_2.addAction(self.actionFullScrren)
+        self.menuView_2.addAction(self.actionExit_Full_Screen_esc)
+        self.menuView_2.addAction(self.actionFile_Menu)
+        self.menuView_2.addAction(self.actionGraph_Menu)
+        self.menuView_2.addAction(self.actionEquation_Widget)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuView.menuAction())
+        self.menubar.addAction(self.menuView_2.menuAction())
+        self.menubar.addAction(self.menuSettigs.menuAction())
+        self.menubar.addAction(self.menuWindow.menuAction())
+        self.menubar.addAction(self.menuHelp.menuAction())
+        
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
         self.t=TabContainer()
         self.vbox.addWidget(self.t)
@@ -1012,6 +1072,25 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
+        self.menuView.setTitle(_translate("MainWindow", "Edit", None))
+        self.menuView_2.setTitle(_translate("MainWindow", "View", None))
+        self.menuSettigs.setTitle(_translate("MainWindow", "Settings", None))
+        self.menuWindow.setTitle(_translate("MainWindow", "Window", None))
+        self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
+        self.actionNew_Project.setText(_translate("MainWindow", "New Project", None))
+        self.actionSave.setText(_translate("MainWindow", "Save", None))
+        self.actionSave_As.setText(_translate("MainWindow", "Save As", None))
+        self.actionExit.setText(_translate("MainWindow", "Exit", None))
+        self.actionOpen_Project.setText(_translate("MainWindow", "Open Project", None))
+        self.actionSave_All.setText(_translate("MainWindow", "Save All", None))
+        self.actionPrint.setText(_translate("MainWindow", "Print", None))
+        self.actionClose.setText(_translate("MainWindow", "Close", None))
+        self.actionTable.setText(_translate("MainWindow", "Table", None))
+        self.actionFullScrren.setText(_translate("MainWindow", "FullScrren", None))
+        self.actionExit_Full_Screen_esc.setText(_translate("MainWindow", "Exit Full Screen (esc)", None))
+        self.actionFile_Menu.setText(_translate("MainWindow", "File Menu", None))
+        self.actionGraph_Menu.setText(_translate("MainWindow", "Graph Menu", None))
+        self.actionEquation_Widget.setText(_translate("MainWindow", "Equation Widget", None))
 
     def getTabName(self):
         return self.t.getProjectName();
