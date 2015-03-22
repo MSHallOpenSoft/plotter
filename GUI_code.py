@@ -39,13 +39,13 @@ Please point out any further feautures that can be included in our plotter, or e
 '''
 
 
-#import mayaviPlot
+import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -287,7 +287,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tab.setVisible(False)'''
         #self.tab_2 = QtGui.QWidget()
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        '''contents_2=QtGui.QWidget(self.tabWidget)
+        contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         sc_2=MplPlot3dCanvas_2(self)
         widget_2=QtGui.QWidget(self)
@@ -298,7 +298,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         self.mayavi_widget = mayaviPlot.MayaviQWidget()
         layout.addWidget(self.mayavi_widget)
-        self.tabWidget.addTab(contents, "3D Graph")'''
+        self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -1045,7 +1045,7 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menuFile.addAction(self.actionSave_All)
         self.menuFile.addAction(self.actionPrint)
         self.menuFile.addAction(self.actionClose)
-        self.menuFile.addSeparator()
+        self.menuFile.addSeparator()    
         self.menuFile.addAction(self.actionExit)
         self.menuView_2.addAction(self.actionTable)
         self.menuView_2.addAction(self.actionFullScrren)
@@ -1060,6 +1060,10 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menubar.addAction(self.menuWindow.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
         
+        ##Allotion slots actions created above
+        self.actionFullScrren.triggered.connect(self.FullScrren)
+        self.actionSave.triggered.connect(self.save)
+        self.actionSave_As.triggered.connect(self.save_as)
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
         self.t=TabContainer()
         self.vbox.addWidget(self.t)
@@ -1069,6 +1073,12 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def FullScrren(self):
+        print "FullScreen"
+    def save(self):
+        print "save"
+    def save_as(self):
+        print "save_as"
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
