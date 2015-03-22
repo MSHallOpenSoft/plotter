@@ -39,17 +39,17 @@ Please point out any further feautures that can be included in our plotter, or e
 '''
 
 
-#import mayaviPlot
+import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
-#import matplotlib.pyplot as plotter
+import matplotlib.pyplot as plotter
 i=1
 import sys, random  
 from Thesidetab import mainFrame
@@ -287,7 +287,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tab.setVisible(False)'''
         #self.tab_2 = QtGui.QWidget()
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        '''contents_2=QtGui.QWidget(self.tabWidget)
+        contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         sc_2=MplPlot3dCanvas_2(self)
         widget_2=QtGui.QWidget(self)
@@ -298,7 +298,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         self.mayavi_widget = mayaviPlot.MayaviQWidget()
         layout.addWidget(self.mayavi_widget)
-        self.tabWidget.addTab(contents, "3D Graph")'''
+        self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralwidget)
