@@ -29,7 +29,7 @@ except AttributeError:
 class LabelButton(QtGui.QPushButton):
 
     def __init__(self,labelName,parent = None):
-        super(LabelButton,self).__init__()
+        super(LabelButton,self).__init__(parent)
         self.parent = parent
         self.setMaximumSize(30,30)
         self.setText(labelName)
@@ -41,8 +41,8 @@ class LabelButton(QtGui.QPushButton):
 
 class ParamList(QtGui.QWidget):
 
-    def __init__(self,labelsP):
-        super(ParamList,self).__init__()
+    def __init__(self,labelsP,parent=None):
+        super(ParamList,self).__init__(parent)
         self.labels = copy.deepcopy(labelsP)
         self.buttonList = []
         self.setupUi()
