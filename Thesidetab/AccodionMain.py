@@ -43,6 +43,16 @@ class AccordionMain(QtGui.QWidget):
         self.pushButton = QtGui.QPushButton()
         self.pushButton.setFlat(True)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton.setStyleSheet(_fromUtf8("QPushButton{\n"
+"  font-size: 14px;\n"
+"  position: relative;\n"
+"  border: none;\n"
+"  outline:none;\n"
+"  background:white;\n"
+"  color: black;\n"
+"  padding: 3px 10px;\n"
+"  border-radius: 2px;\n"
+"}"))
 
 
         self.iconButton = QtGui.QPushButton()
@@ -51,11 +61,13 @@ class AccordionMain(QtGui.QWidget):
         self.icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/closeButton.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconButton.setIcon(self.icon)
         self.iconButton.setFlat(True)
-        self.iconButton.setMaximumSize(30,30)
+        self.iconButton.setMaximumSize(40,40)
 
         self.drawButton = QtGui.QPushButton("Draw")
         self.drawButton.setMaximumSize(60,30)
         self.drawButton.clicked.connect(self.plot)
+        self.drawButton.setStyleSheet("QPushButton{font-size:13px; padding:2px;}")
+        self.iconButton.setStyleSheet("QPushButton{ padding:1px;}")
         self.horizontalLayout2 = QtGui.QHBoxLayout()
         self.horizontalLayout2.addWidget(self.iconButton)
         self.horizontalLayout2.addWidget(self.pushButton)

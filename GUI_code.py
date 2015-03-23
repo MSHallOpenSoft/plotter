@@ -173,7 +173,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "QComboBox { \n"
 "border: none; \n"
 "padding: 1px 18px 1px 3px; \n"
-"min-width: 6em;\n"
+
 " }\n"
 " QComboBox, QComboBox:drop-down \n"
 "{\n"
@@ -277,7 +277,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " border: none;\n"
 " background: #DBDBDB;\n"
 " width: 15px; \n"
-"margin: 0px 20px 0 20px; \n"
+"margin: 20px 0px 20 0px; \n"
 "} \n"
 "QScrollBar::handle:vertical { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.357955 rgba(89, 189, 9, 255), stop:0.801136 rgba(120, 255, 13, 255), stop:0.9375 rgba(175, 255, 111, 255), stop:1 rgba(255, 255, 255, 255));\n"
 " min-height: 20px; }\n"
@@ -680,6 +680,10 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.checkBox.setText(_fromUtf8(""))
         self.checkBox.setObjectName(_fromUtf8("checkBox"))
         self.horizontalLayout.addWidget(self.checkBox)
+
+
+        
+
         self.Example = QtGui.QToolButton(self.dockWidgetContents_3)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)

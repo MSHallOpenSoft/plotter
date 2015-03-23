@@ -95,6 +95,7 @@ class MainFrameR(QtGui.QWidget):
         self.equationTabParameter.hide()
 
         self.equationTabExplicit.frame.show()
+        self.equationTabExplicit.iconButton.setIcon(self.equationTabExplicit.icon2)
 
         self.vertical.setSpacing(0)
         self.vertical.setContentsMargins(0,0,0,0)
@@ -127,6 +128,19 @@ class MainFrameR(QtGui.QWidget):
             self.equationTabExplicit.hide()
         self.adjustSize()
 
+    def dimensionSelector(self,combob):
+        if(combob.currentIndex() == 0):   # 0 is 3D
+            self.equationTabParameter.frame.label_3.show()
+            self.equationTabParameter.frame.lineEdit_3.show()
+            self.equationTabExplicit.frame.setfor3D()
+            self.rangeTab.frame.setupfor3D()
+        elif(combob.currentIndex() == 1):
+            self.equationTabExplicit.frame.setfor2D()
+            self.equationTabParameter.frame.label_3.hide()
+            self.equationTabParameter.frame.lineEdit_3.hide()
+            self.equationTabParameter.frame.adjustSize()
+            self.rangeTab.frame.setupfor2D()
+        self.adjustSize()
 
     def getExpression(self):
         listr = []
