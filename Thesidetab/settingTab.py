@@ -199,6 +199,7 @@ class SettingTab(QtGui.QWidget):
         i = 0
         paren = self.parent
         self.comboBox_2.currentIndexChanged.connect(lambda :paren.typeSelector(self.comboBox_2))
+        self.comboBox.currentIndexChanged.connect(lambda :paren.dimensionSelector(self.comboBox))
 
 
         self.retranslateUi()
