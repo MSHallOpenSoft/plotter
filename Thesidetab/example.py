@@ -33,7 +33,7 @@ import som2
 
 
 class MainFrameR(QtGui.QWidget):
-    def __init__(self,parent = None):
+    def __init__(self,parent):
         super(MainFrameR,self).__init__(parent)
         self.parent = parent
         self.setupUi()
@@ -52,7 +52,7 @@ class MainFrameR(QtGui.QWidget):
 
         self.vertical.setSizeConstraint(QtGui.QLayout.SetMinimumSize)
         
-        self.widget = range5.RangeTab()
+        self.widget = range5.RangeTab(self)
         self.rangeTab = accordion.Accordion(self,"Range",self.widget)
         #self.widget.setGeometry(QtCore.QRect(40, 30, 301, 91))
         #self.widget.setObjectName(_fromUtf8("widget"))
@@ -60,16 +60,16 @@ class MainFrameR(QtGui.QWidget):
         self.widget_2 = settingTab.SettingTab(self)
         self.settingTab = accordion.Accordion(self,"Settings",self.widget_2)
 
-        self.widget_3 = sliderTop.ParamList([])
+        self.widget_3 = sliderTop.ParamList([],self)
         self.sliderTab = accordion.Accordion(self,"Parameters",self.widget_3)
 
-        self.widget_4 = QtGui.QLineEdit()
+        self.widget_4 = QtGui.QLineEdit(self)
         self.equationTab = accordion.Accordion(self,"Expression",self.widget_4)
 
-        self.widget_41 = som.ExplicitEquation()
+        self.widget_41 = som.ExplicitEquation(self)
         self.equationTabExplicit = accordion.Accordion(self,"Expression",self.widget_41)
 
-        self.widget_42 = som2.ParameterEquation()
+        self.widget_42 = som2.ParameterEquation(self)
         self.equationTabParameter = accordion.Accordion(self,"Expression",self.widget_42)
 
 
@@ -109,6 +109,7 @@ class MainFrameR(QtGui.QWidget):
         self.setLayout(self.vertical)
         #self.retranslateUi()
         #QtCore.QMetaObject.connectSlotsByName(Form)
+
 
     def typeSelector(self,combob):
         if(combob.currentIndex() == 0):
@@ -153,6 +154,8 @@ class MainFrameR(QtGui.QWidget):
 
         return listr
 
+    def getMainFrame(self):
+      return parent
 
 
 
@@ -165,7 +168,7 @@ class MainFrameR(QtGui.QWidget):
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    ex = MainFrameR()
+    ex = MainFrameR(None)
     ex.show()
     #ex.showMaximized()
     sys.exit(app.exec_())
