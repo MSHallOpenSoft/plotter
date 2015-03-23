@@ -191,8 +191,10 @@ class Visualization(HasTraits):
 
 
 ################################################################################
-# The QWidget containing the visualization, this is pure PyQt4 code.
 class MayaviQWidget(QtGui.QWidget):
+    """
+        The QWidget containing the visualization, this is pure PyQt4 code.
+    """ 
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
         layout = QtGui.QVBoxLayout(self)
@@ -215,6 +217,10 @@ class MayaviQWidget(QtGui.QWidget):
 
 
 class ApplicationWindow(QtGui.QMainWindow):
+    """
+      This class is used just to test this module by running this file. This is the Application
+      window which is created when this file is run.
+    """
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)

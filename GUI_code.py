@@ -296,6 +296,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         sc_2=MplPlot2dCanvas(self)
+        self.sc_2=sc_2
         widget_2=QtGui.QWidget(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
@@ -1280,7 +1281,7 @@ def focusAdjuster(old,new):
 
 import sys
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
+    app = QtGui.QApplication.instance()
     app.focusChanged.connect(focusAdjuster)
     ex = Ui_MainWindow_2()
     ex.myKeyboard.setTarget(app.focusChanged.connect(focusAdjuster))
