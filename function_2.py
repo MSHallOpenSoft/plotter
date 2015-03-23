@@ -44,27 +44,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
 " background-color:#737373;\n"
 " border:none;\n"
 " padding:0px; \n"
-"}\n"
-" QPushButton{ \n"
-"position: relative;\n"
-" border:none;\n"
-" outline:none; \n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.357955 rgba(89, 189, 9, 255), stop:0.801136 rgba(120, 255, 13, 255), stop:0.9375 rgba(175, 255, 111, 255), stop:1 rgba(255, 255, 255, 255));\n"
-" color: white;\n"
-" padding: 6px 20px; \n"
-"border-radius: 2px;\n"
-" font-size: 20px;\n"
-" }\n"
-" QPushButton:hover:!pressed{ \n"
-"position: relative;\n"
-" border: none; \n"
-"outline:none;\n"
-" background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.0802727, stop:0 rgba(255, 255, 255, 255), stop:0.0397727 rgba(222, 255, 196, 255), stop:0.176136 rgba(168, 255, 99, 255), stop:0.642045 rgba(127, 200, 70, 255));\n"
-" color: white; \n"
-"padding: 6px 20px; \n"
-"border-radius: 2px;\n"
-" font-size:20px; \n"
-"} \n")
+"}\n")
         self.dockWidgetContents = QtGui.QWidget()
         self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
         self.frame = QtGui.QFrame(self.dockWidgetContents)
@@ -562,7 +542,8 @@ class Ui_DockWidget(QtGui.QDockWidget):
 
     def show_1(self,at):
         if self.myKeyboard_2.isVisible()==False:
-            self.myKeyboard_2.move(1920-293,1080-411-296)
+            print self.rect_1.width()
+            self.myKeyboard_2.move(1.73532*self.rect_1.width()-293,1.73532*self.rect_1.height()-411-280)
             self.myKeyboard_2.setTarget(self.target)
             self.myKeyboard_2.show()
         else:
@@ -612,7 +593,9 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.target.backspace()
     def setTarget(self,target_area):
         self.target=target_area
-
+        self.myKeyboard_2.setTarget(self.target)
+    def setSize(self,rect1):
+        self.rect_1=rect1
     def retranslateUi(self, DockWidget):
         #DockWidget.setWindowTitle(_translate("DockWidget", "Keyboard", None))
         self.pushButton_13.setText(_translate("DockWidget", u'\u2265', None))#Greater than equal to
@@ -653,7 +636,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
 
 if __name__ == "__main__":
     import sys
-    a = QtGui.QApplication(sys.argv)
+    a = QtGui.QApplication.instance()
     w=Ui_DockWidget(None,None)
     w.show()
     sys.exit(a.exec_())
