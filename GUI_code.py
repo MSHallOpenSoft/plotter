@@ -45,7 +45,7 @@ from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot2dCanvas
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -289,7 +289,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
-        sc_2=MplPlot3dCanvas_2(self)
+        sc_2=MplPlot2dCanvas(self)
         widget_2=QtGui.QWidget(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
