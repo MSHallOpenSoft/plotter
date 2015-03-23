@@ -38,10 +38,12 @@ Please point out any further feautures that can be included in our plotter, or e
 ## Please keep adding more as you come to think of any !!!
 '''
 
+
 import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
+
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
@@ -68,10 +70,14 @@ except AttributeError:
 
 
 class Ui_MainWindow(QtGui.QMainWindow):
+    totalTabs=0
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
+        QtGui.QShortcut(QtGui.QKeySequence("Esc"), self, self.showAll)
         self.expression_list=[]
+        self.tabIdentifier=Ui_MainWindow.totalTabs
+        Ui_MainWindow.totalTabs+=1
 
     def addNewEquationEditor(self,layout,spacer):
         n = layout.count()
@@ -89,19 +95,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "border:none;\n"
 "}\n"
 "QStatusBar{ \n"
-"background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.33, stop:0 rgba(255, 255, 255, 255), stop:0.125 rgba(155, 174, 198, 255), stop:0.318182 rgba(104, 117, 133, 255), stop:0.534091 rgba(65, 73, 83, 255), stop:0.875 rgba(42, 47, 54, 255));\n"
-"}\n"
-
+"background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.33, stop:0 rgba(255, 255, 255, 255), stop:0.125 rgba(155, 174, 198, 255), stop:0.318182 rgba(104, 117, 133, 255), stop:0.534091 rgba(65, 73, 83, 255), stop:0.875 rgba(42, 47, 54, 255)); }\n"
 " QMainWindow{\n"
-" background-image: url(Icons/rsz_back1.jpg);\n"
-" background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));\n"
-" border:none;\n"
-" text-align: center;\n" 
-"}\n"
-
+" background-image: url(Icons/rsz_back1.jpg); border:none; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); text-align: center; }\n"
 " QGroupBox{ \n"
 "background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); }\n"
 " QTabWidget{\n"
+
 " background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255));\n"
 " }\n"
 " QDockWidget{\n"
@@ -318,6 +318,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "QScrollBar::down-arrow:vertical{\n"
 " image: url(:/arrow/Icons/down-arrow.png);\n"
 " }"))
+
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.horizontalLayout_3 = QtGui.QHBoxLayout(self.centralwidget)
@@ -471,8 +472,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
-        widget_2 = QtGui.QWidget(self)
-        sc_2=MplPlot3dCanvas_2(widget_2)
+        sc_2=MplPlot3dCanvas_2(self)
+        widget_2=QtGui.QWidget(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
         contents = QtGui.QWidget(self.tabWidget)
@@ -480,77 +481,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         self.mayavi_widget = mayaviPlot.MayaviQWidget()
         layout.addWidget(self.mayavi_widget)
-        self.tableWidget.setStyleSheet(_fromUtf8(".button {\n"
-"  background: orange;\n"
-"  outline: none;\n"
-"  color: white;\n"
-"  border: none;\n"
-"  border-radius: 0.25em;\n"
-"  padding: 0.75em 2em;\n"
-"  line-height: 1;\n"
-"  box-shadow: 0 0 0.25em rgba(0,0,0,0.5);\n"
-"  text-shadow: 0 0 0.25em rgba(0,0,0,0.5);\n"
-"  font-size: 1.5rem;\n"
-"}\n"
-".button-white {\n"
-"  background: white;\n"
-"  color: orange;\n"
-"}\n"
-".button-round {\n"
-"  border-radius: 100%;\n"
-"  padding: 0.75em;\n"
-"  width: 3em;\n"
-"  height: 3em;\n"
-"}\n"
-".button-ripple {\n"
-"  position: relative;\n"
-"  overflow: hidden;\n"
-"  transform: translate(0);\n"
-"}\n"
-".button-ripple_content {\n"
-"  position: relative;\n"
-"  z-index: 1;\n"
-"}\n"
-".button-ripple_ripples {\n"
-"  position: absolute;\n"
-"  top: 0;\n"
-"  left: 0;\n"
-"}\n"
-".button-ripple_ripple{\n"
-"  display: block;\n"
-"  position: absolute;\n"
-"  border-radius: 100%;\n"
-"  width: 1em;\n"
-"  height: 1em;\n"
-"  margin: -0.5em 0 0 -0.5em;\n"
-"  transform: scale(0);\n"
-"\n"
-"  top: 0;\n"
-"  left: 0;\n"
-"\n"
-"  animation: ripple-animation 2s;\n"
-"}\n"
-"\n"
-"@keyframes ripple-animation {\n"
-"    from {\n"
-"      transform: scale3d(1,1,1);\n"
-"      opacity: 0.8;\n"
-"    }\n"
-"    to {\n"
-"      transform: scale3d(100,100,1);\n"
-"      opacity: 0;\n"
-"    }\n"
-"}\n"
-"\n"
-"/* Make things perty */\n"
-"html {  height: 100%;}\n"
-"body { font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; background: url(http://www.jmchristensendesign.com/wp-content/themes/jmcdsn/images/intro_default-background.jpg); color: #fff; height: 100%; padding-top: 2em; text-align: center;}\n"
-"h1, h2{ margin: 0; text-transform: uppercase;text-shadow: 0 0 0.5em black;}\n"
-"h2 { font-weight: 300}\n"
-"input { border: 1px solid #666; background: #333; color: #fff; padding: 0.5em; box-shadow: none; outline: none !important; margin: 1em  auto; text-align: center;}\n"
-"a { color: orange; text-decoration: none; transition: color 250ms ease-in-out;}\n"
-"a:hover { color: yellow;}\n"
-".container { display:block; margin: 2em 0;}"))
         self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
@@ -609,6 +539,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.dockWidgetContents_3.setObjectName(_fromUtf8("dockWidgetContents_3"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.dockWidgetContents_3)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setSpacing(0)
         self.toolButton_17 = QtGui.QToolButton(self.dockWidgetContents_3)
         self.toolButton_17.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_17.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -746,6 +678,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.dockWidgetContents_4.setObjectName(_fromUtf8("dockWidgetContents_4"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.dockWidgetContents_4)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.horizontalLayout_2.setMargin(0)
+        self.horizontalLayout_2.setSpacing(0)
         self.line_7 = QtGui.QFrame(self.dockWidgetContents_4)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -927,7 +861,20 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_7.clicked.connect(self.addRowDataPoint)
         self.toolButton_9.clicked.connect(self.removeRowDataPoint)
         self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
+        self.toolButton_15.clicked.connect(self.hideAll)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def hideAll(self):
+        self.dockWidget.hide()
+        self.dockWidget_4.hide()
+        self.dockWidget_3.hide()
+        self.frame.hide()
+
+    def showAll(self):
+        self.dockWidget.show()
+        self.dockWidget_4.show()
+        self.dockWidget_3.show()
+        self.frame.show()
 
     def saveDataValuesToFile(self):
         pname = ex.getTabName()
@@ -1042,10 +989,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame_2.hide()
         self.pushButton.hide()
     
-    def show_1(self):
+    def show_1(self):   
         if at.isVisible()==False:
             at.move(1920-911,1080-296)
             at.show()
+            at.setTarget(self.dockWidgetContents.eqList[0].frame.widget_4)
         else:
             at.hide()
 
@@ -1234,11 +1182,75 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuView = QtGui.QMenu(self.menubar)
+        self.menuView.setObjectName(_fromUtf8("menuView"))
+        self.menuView_2 = QtGui.QMenu(self.menubar)
+        self.menuView_2.setObjectName(_fromUtf8("menuView_2"))
+        self.menuSettigs = QtGui.QMenu(self.menubar)
+        self.menuSettigs.setObjectName(_fromUtf8("menuSettigs"))
+        self.menuWindow = QtGui.QMenu(self.menubar)
+        self.menuWindow.setObjectName(_fromUtf8("menuWindow"))
+        self.menuHelp = QtGui.QMenu(self.menubar)
+        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+        self.actionNew_Project = QtGui.QAction(MainWindow)
+        self.actionNew_Project.setObjectName(_fromUtf8("actionNew_Project"))
+        self.actionSave = QtGui.QAction(MainWindow)
+        self.actionSave.setObjectName(_fromUtf8("actionSave"))
+        self.actionSave_As = QtGui.QAction(MainWindow)
+        self.actionSave_As.setObjectName(_fromUtf8("actionSave_As"))
+        self.actionExit = QtGui.QAction(MainWindow)
+        self.actionExit.setObjectName(_fromUtf8("actionExit"))
+        self.actionOpen_Project = QtGui.QAction(MainWindow)
+        self.actionOpen_Project.setObjectName(_fromUtf8("actionOpen_Project"))
+        self.actionSave_All = QtGui.QAction(MainWindow)
+        self.actionSave_All.setObjectName(_fromUtf8("actionSave_All"))
+        self.actionPrint = QtGui.QAction(MainWindow)
+        self.actionPrint.setObjectName(_fromUtf8("actionPrint"))
+        self.actionClose = QtGui.QAction(MainWindow)
+        self.actionClose.setObjectName(_fromUtf8("actionClose"))
+        self.actionTable = QtGui.QAction(MainWindow)
+        self.actionTable.setIconVisibleInMenu(False)
+        self.actionTable.setObjectName(_fromUtf8("actionTable"))
+        self.actionFullScrren = QtGui.QAction(MainWindow)
+        self.actionFullScrren.setObjectName(_fromUtf8("actionFullScrren"))
+        self.actionExit_Full_Screen_esc = QtGui.QAction(MainWindow)
+        self.actionExit_Full_Screen_esc.setObjectName(_fromUtf8("actionExit_Full_Screen_esc"))
+        self.actionFile_Menu = QtGui.QAction(MainWindow)
+        self.actionFile_Menu.setObjectName(_fromUtf8("actionFile_Menu"))
+        self.actionGraph_Menu = QtGui.QAction(MainWindow)
+        self.actionGraph_Menu.setObjectName(_fromUtf8("actionGraph_Menu"))
+        self.actionEquation_Widget = QtGui.QAction(MainWindow)
+        self.actionEquation_Widget.setObjectName(_fromUtf8("actionEquation_Widget"))
+        self.menuFile.addAction(self.actionNew_Project)
+        self.menuFile.addAction(self.actionOpen_Project)
+        self.menuFile.addAction(self.actionSave)
+        self.menuFile.addAction(self.actionSave_As)
+        self.menuFile.addAction(self.actionSave_All)
+        self.menuFile.addAction(self.actionPrint)
+        self.menuFile.addAction(self.actionClose)
+        self.menuFile.addSeparator()    
+        self.menuFile.addAction(self.actionExit)
+        self.menuView_2.addAction(self.actionTable)
+        self.menuView_2.addAction(self.actionFullScrren)
+        self.menuView_2.addAction(self.actionExit_Full_Screen_esc)
+        self.menuView_2.addAction(self.actionFile_Menu)
+        self.menuView_2.addAction(self.actionGraph_Menu)
+        self.menuView_2.addAction(self.actionEquation_Widget)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuView.menuAction())
+        self.menubar.addAction(self.menuView_2.menuAction())
+        self.menubar.addAction(self.menuSettigs.menuAction())
+        self.menubar.addAction(self.menuWindow.menuAction())
+        self.menubar.addAction(self.menuHelp.menuAction())
+        
+        ##Allotion slots actions created above
+        self.actionFullScrren.triggered.connect(self.FullScrren)
+        self.actionSave.triggered.connect(self.save)
+        self.actionSave_As.triggered.connect(self.save_as)
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
         self.t=TabContainer()
         self.vbox.addWidget(self.t)
@@ -1248,9 +1260,34 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def FullScrren(self):
+        print "FullScreen"
+    def save(self):
+        print "save"
+    def save_as(self):
+        print "save_as"
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
+        self.menuView.setTitle(_translate("MainWindow", "Edit", None))
+        self.menuView_2.setTitle(_translate("MainWindow", "View", None))
+        self.menuSettigs.setTitle(_translate("MainWindow", "Settings", None))
+        self.menuWindow.setTitle(_translate("MainWindow", "Window", None))
+        self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
+        self.actionNew_Project.setText(_translate("MainWindow", "New Project", None))
+        self.actionSave.setText(_translate("MainWindow", "Save", None))
+        self.actionSave_As.setText(_translate("MainWindow", "Save As", None))
+        self.actionExit.setText(_translate("MainWindow", "Exit", None))
+        self.actionOpen_Project.setText(_translate("MainWindow", "Open Project", None))
+        self.actionSave_All.setText(_translate("MainWindow", "Save All", None))
+        self.actionPrint.setText(_translate("MainWindow", "Print", None))
+        self.actionClose.setText(_translate("MainWindow", "Close", None))
+        self.actionTable.setText(_translate("MainWindow", "Table", None))
+        self.actionFullScrren.setText(_translate("MainWindow", "FullScrren", None))
+        self.actionExit_Full_Screen_esc.setText(_translate("MainWindow", "Exit Full Screen (esc)", None))
+        self.actionFile_Menu.setText(_translate("MainWindow", "File Menu", None))
+        self.actionGraph_Menu.setText(_translate("MainWindow", "Graph Menu", None))
+        self.actionEquation_Widget.setText(_translate("MainWindow", "Equation Widget", None))
 
     def getTabName(self):
         return self.t.getProjectName();
@@ -1284,7 +1321,7 @@ class Ui_Dialog(object):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)   
         brush = QtGui.QBrush(QtGui.QColor(163, 163, 163))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
@@ -1409,5 +1446,5 @@ if __name__ == '__main__':
     app = QtGui.QApplication.instance()
     ex = Ui_MainWindow_2()
     ex.showMaximized()
-    at=Ui_DockWidget()
+    at=Ui_DockWidget(None)
     sys.exit(app.exec_())

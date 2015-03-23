@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from customThreading import MyThread
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -25,13 +26,23 @@ except AttributeError:
 
 
 class AccordionMain(QtGui.QWidget):
-
     def __init__(self,parent,label,frame):
         super(AccordionMain,self).__init__()
         self.frame = frame
         self.label = label
         self.parent = parent
         self.setupUi()
+        self.plotThread = MyThread(self)
+        self.connect(self.plotThread,QtCore.SIGNAL('finished'),self.finishedPlotting)
+        self.plottingNow=False
+
+    def finishedPlotting(self):
+      print("finished plotting")
+
+    def plot3d_spawn_thread(self,**kwargs):
+      self.plotThread.plot3d(**kwargs)
+      print("foooooooooo")
+      return
 
     def setupUi(self):
         ##Form.setWindowModality(QtCore.Qt.WindowModal)
@@ -96,8 +107,13 @@ class AccordionMain(QtGui.QWidget):
         self.retranslateUi()
 
     def plot(self):
-      #print("fooooooooooooooooooooooooooooooooo")
       #print(str(self.frame.widget_4.text()))
+      curTab=self.parent.parent.tabIdentifier
+      curPlot=int(self.label[5:])
+      print(curTab,curPlot)
+      print(self.parent.parent.tabIdentifier)
+      #print(self.plottingIdentifier)
+      print("fooooooooooooooooooooooooooooooooo")
       print(self.frame.rangeTab.frame.XRight)
       print(self.frame.rangeTab.frame.XLeft)
       print(self.frame.settingTab.frame.comboBox.currentText())
@@ -136,7 +152,8 @@ class AccordionMain(QtGui.QWidget):
       z_start=self.frame.rangeTab.frame.ZRight.value()
       z_end=self.frame.rangeTab.frame.ZLeft.value()
       if(currentDim=="3D"):
-        self.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end,no_x_points=10
+        self.plot3d_spawn_thread(curTab=curTab
+          ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end,no_x_points=10
           ,y_start=y_start,y_end=y_end,no_y_points=10,z_start=z_start,z_end=z_end,no_z_points=10)
       else:
         print("plot 2d")
