@@ -143,6 +143,19 @@ class RangeTab(QtGui.QWidget):
         self.ZRight.setValue(10)
         self.ZLeft.setValue(-10)
 
+    def setupfor2D(self):
+        self.ZLeft.hide()
+        self.ZRight.hide()
+        self.label_6.hide()
+        self.label_5.hide()
+        self.adjustSize()
+
+    def setupfor3D(self):
+        self.ZLeft.show()
+        self.ZRight.show()
+        self.label_6.show()
+        self.label_5.show()
+        self.adjustSize()
 
 
 import sys

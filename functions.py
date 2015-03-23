@@ -24,16 +24,43 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_DockWidget_2(QtGui.QDockWidget):
-    def __init__(self,target_area):
-        super(Ui_DockWidget_2, self).__init__()
+    def __init__(self,parent,target_area):
+        super(Ui_DockWidget_2, self).__init__(parent)
         self.setupUi(self)
         self.target=target_area
         self.hide()
+        self.setFloating(True)
 
     def setupUi(self, DockWidget):
         DockWidget.setObjectName(_fromUtf8("DockWidget"))
         DockWidget.resize(293, 411)
         DockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        DockWidget.setStyleSheet("\n"
+            " QPushButton{ \n"
+"position: relative;\n"
+" border:none;\n"
+" outline:none; \n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.357955 rgba(89, 189, 9, 255), stop:0.801136 rgba(120, 255, 13, 255), stop:0.9375 rgba(175, 255, 111, 255), stop:1 rgba(255, 255, 255, 255));\n"
+" color: white;\n"
+" padding: 6px 20px; \n"
+"border-radius: 2px;\n"
+" font-size: 15px;\n"
+" }\n"
+" QPushButton:hover:!pressed{ \n"
+"position: relative;\n"
+" border: none; \n"
+"outline:none;\n"
+" background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.0802727, stop:0 rgba(255, 255, 255, 255), stop:0.0397727 rgba(222, 255, 196, 255), stop:0.176136 rgba(168, 255, 99, 255), stop:0.642045 rgba(127, 200, 70, 255));\n"
+" color: white; \n"
+"padding: 6px 20px; \n"
+"border-radius: 2px;\n"
+" font-size:15px; \n"
+"} \n"
+" QTabWidget{\n"
+" background-color:#737373;\n"
+" border:none;\n"
+" padding:0px; \n"
+" }\n")
         self.dockWidgetContents = QtGui.QWidget()
         self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
         self.verticalLayout = QtGui.QVBoxLayout(self.dockWidgetContents)
@@ -365,7 +392,7 @@ class Ui_DockWidget_2(QtGui.QDockWidget):
         self.target.setCursorPosition(self.target.cursorPosition()-1)
     def retranslateUi(self, DockWidget):
         DockWidget.setToolTip(_translate("DockWidget", "Functions", None))
-        DockWidget.setWindowTitle(_translate("DockWidget", "Functions", None))
+        #DockWidget.setWindowTitle(_translate("DockWidget", "Functions", None))
         self.pushButton.setText(_translate("DockWidget", "cos", None))
         self.pushButton_4.setText(_translate("DockWidget", "arccos", None))
         self.pushButton_2.setText(_translate("DockWidget", "sin", None))

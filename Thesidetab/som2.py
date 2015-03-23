@@ -69,6 +69,14 @@ class ParameterEquation(QtGui.QWidget):
         self.label_2.setText(_translate("Form", "y(u,v) =", None))
         self.label_3.setText(_translate("Form", "z(u,v) =", None))
 
+    def getExpression(self):
+        r = []
+        r.append("x = "+str(self.lineEdit.text()))
+        r.append("y = "+str(self.lineEdit_2.text()))
+        r.append("z = "+str(self.lineEdit_3.text()))
+        return r
+
+
 
 
 import sys

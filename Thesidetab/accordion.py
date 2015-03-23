@@ -42,6 +42,16 @@ class Accordion(QtGui.QWidget):
         self.pushButton = QtGui.QPushButton()
         self.pushButton.setFlat(True)
         self.pushButton.setMinimumSize(QtCore.QSize(300, 0))
+        self.pushButton.setStyleSheet(_fromUtf8("QPushButton{\n"
+"  font-size: 12px;\n"
+"  position: relative;\n"
+"  border: none;\n"
+"  outline:none;\n"
+"  background:white;\n"
+"  color: black;\n"
+"  padding: 3px 10px;\n"
+"  border-radius: 2px;\n"
+"}"))
 
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
 
