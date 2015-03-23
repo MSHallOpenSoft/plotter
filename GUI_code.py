@@ -1266,11 +1266,20 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
 
 
 
+def keyBoardChanger(old,new,ex):
+    ex.myKeyboard.setTarget(new)
+
+
+
+
+
+
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication.instance()
     ex = Ui_MainWindow_2()
     ex.showMaximized()
+    app.focusChanger.connect(lambda:keyboardFocusChanger(ex))
     #app.focusChanged.connect(keyboardFocusChanger)
 
     at=Ui_DockWidget(None)
