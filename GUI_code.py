@@ -37,7 +37,9 @@ Please point out any further feautures that can be included in our plotter, or e
 
 ## Please keep adding more as you come to think of any !!!
 '''
-
+'''Bugs by prabahat ------------------------ 1) + button comes in place of cross when you change the expression type
+                                             2) Enter button does not create the graph
+                                             3) Prabhar find your bugs and get it right ASAP'''
 
 import mayaviPlot
 from PyQt4 import QtCore
@@ -686,6 +688,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_9.clicked.connect(self.removeRowDataPoint)
         self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
         self.toolButton_15.clicked.connect(self.hideAll)
+        self.action_1=self.dockWidget_3.toggleViewAction()
+        ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def hideAll(self):
@@ -1032,18 +1036,22 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.actionPrint.setObjectName(_fromUtf8("actionPrint"))
         self.actionClose = QtGui.QAction(MainWindow)
         self.actionClose.setObjectName(_fromUtf8("actionClose"))
-        self.actionTable = QtGui.QAction(MainWindow)
+        self.actionTable = QtGui.QAction(MainWindow,checkable=True)
+        self.actionTable.setChecked(True)
         self.actionTable.setIconVisibleInMenu(False)
         self.actionTable.setObjectName(_fromUtf8("actionTable"))
         self.actionFullScrren = QtGui.QAction(MainWindow)
         self.actionFullScrren.setObjectName(_fromUtf8("actionFullScrren"))
         self.actionExit_Full_Screen_esc = QtGui.QAction(MainWindow)
         self.actionExit_Full_Screen_esc.setObjectName(_fromUtf8("actionExit_Full_Screen_esc"))
-        self.actionFile_Menu = QtGui.QAction(MainWindow)
+        self.actionFile_Menu = QtGui.QAction(MainWindow,checkable=True)
+        self.actionFile_Menu.setChecked(True)
         self.actionFile_Menu.setObjectName(_fromUtf8("actionFile_Menu"))
-        self.actionGraph_Menu = QtGui.QAction(MainWindow)
+        self.actionGraph_Menu = QtGui.QAction(MainWindow,checkable=True)
+        self.actionGraph_Menu.setChecked(True)
         self.actionGraph_Menu.setObjectName(_fromUtf8("actionGraph_Menu"))
-        self.actionEquation_Widget = QtGui.QAction(MainWindow)
+        self.actionEquation_Widget = QtGui.QAction(MainWindow,checkable=True)
+        self.actionEquation_Widget.setChecked(True)
         self.actionEquation_Widget.setObjectName(_fromUtf8("actionEquation_Widget"))
         self.menuFile.addAction(self.actionNew_Project)
         self.menuFile.addAction(self.actionOpen_Project)
@@ -1073,6 +1081,10 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.actionExit_Full_Screen_esc.triggered.connect(self.exitFullScreen)
         self.actionSave.triggered.connect(self.save)
         self.actionSave_As.triggered.connect(self.save_as)
+        self.actionEquation_Widget.triggered.connect(self.equationWidget)
+        self.actionFile_Menu.triggered.connect(self.fileMenu)
+        self.actionTable.triggered.connect(self.showTable)
+        self.actionTable.triggered.connect(self.graphMenu)
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
         self.myKeyboard = Ui_DockWidget(self,None)
         self.t=TabContainer(self)
@@ -1085,15 +1097,41 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
 
     def show_1(self):   
         if self.myKeyboard.isVisible()==False:
-            self.myKeyboard.move(1920-911,1080-296)
+            self.myKeyboard.setSize(self.rect)
+            self.myKeyboard.move(1.73532*self.rect.width()-911,1.73532*self.rect.height()-296)
             self.myKeyboard.show()
-            self.myKeyboard.setTarget(self.dockWidgetContents.eqList[0].frame.widget_4)
+            #self.myKeyboard.setTarget(self.dockWidgetContents.eqList[0].frame.widget_4)
         else:
             self.myKeyboard.hide()
+    def setSize(self):
+        self.rect=self.geometry()
     def FullScrren(self):
         self.t.pages[self.t.tabWidget.currentIndex()].hideAll()
     def exitFullScreen(self):
         self.t.pages[self.t.tabWidget.currentIndex()].showAll()
+    def equationWidget(self):
+        if self.t.pages[self.t.tabWidget.currentIndex()].dockWidget.isVisible() == False:
+            self.t.pages[self.t.tabWidget.currentIndex()].dockWidget.show()
+        else:
+            self.t.pages[self.t.tabWidget.currentIndex()].dockWidget.hide()
+    def fileMenu(self):
+        if self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_4.isVisible() == False:
+            self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_4.show()
+        else:
+            self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_4.hide()
+    def showTable(self):
+        if self.t.pages[self.t.tabWidget.currentIndex()].frame.isVisible() == False:
+            self.t.pages[self.t.tabWidget.currentIndex()].frame.show()
+        else:
+            self.t.pages[self.t.tabWidget.currentIndex()].frame.hide()
+    def graphMenu(self):
+        if self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.isVisible() == False:
+            self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.show()
+        else:
+            self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.hide()
+    #self.dockWidget_4.show()
+    #self.dockWidget_3.show()
+    #self.frame.show()
     def save(self):
         print "save"
     def save_as(self):
@@ -1274,18 +1312,19 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
         self.label.setText(_translate("Dialog", self.mssg, None))
 
 
-def focusAdjuster(old,new):
-    return new
+def changedFocusSlot(old, now):
+    if type(now) is not QPushButton and QTableWidget:
+        keyboard.setTarget(now)
 
 
 import sys
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    app.focusChanged.connect(focusAdjuster)
+    app = QtGui.QApplication.instance()
     ex = Ui_MainWindow_2()
-    ex.myKeyboard.setTarget(app.focusChanged.connect(focusAdjuster))
+    keyboard=ex.myKeyboard
+    QtCore.QObject.connect(app, SIGNAL("focusChanged(QWidget *, QWidget *)"), changedFocusSlot)
     #ex.myKeyboard.
     ex.showMaximized()
-
+    ex.setSize()
     #app.focusChanged.connect(keyboardFocusChanger)
     sys.exit(app.exec_())
