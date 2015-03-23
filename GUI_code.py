@@ -44,8 +44,8 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
-from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot3dCanvas_2
+#from plottingEquation_3d_explicit import MplPlot3dCanvas
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
