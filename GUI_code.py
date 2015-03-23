@@ -44,8 +44,8 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
-#from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot3dCanvas_2
+from plottingEquation_3d_explicit import MplPlot3dCanvas
+#from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -71,8 +71,9 @@ except AttributeError:
 
 class Ui_MainWindow(QtGui.QMainWindow):
     totalTabs=0
-    def __init__(self):
-        QtGui.QWidget.__init__(self)
+    def __init__(self,parent):
+        QtGui.QWidget.__init__(self,parent)
+        self.parent=parent
         self.setupUi(self)
         QtGui.QShortcut(QtGui.QKeySequence("Esc"), self, self.showAll)
         self.expression_list=[]
@@ -140,6 +141,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " QScrollBar::sub-line:vertical:hover:!pressed { border:none; background: qlineargradient(spread:pad, x1:0.659545, y1:0, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); height: 20px; subcontrol-position:top; subcontrol-origin: margin; } \n"
 "QScrollBar::up-arrow:vertical{ image: url(Icons/up-arrow.png); } QScrollBar::down-arrow:vertical{ image: url(Icons/down-arrow.png); }"))
 
+        
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.horizontalLayout_3 = QtGui.QHBoxLayout(self.centralwidget)
@@ -678,7 +680,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.pushButton.setVisible(False)
         self.frame_2.setVisible(False)
         self.pushButton.clicked.connect(self.show_2)
-        self.toolButton_19.clicked.connect(self.show_1)
+        self.toolButton_19.clicked.connect(self.parent.showKeyboard)
         self.toolButton_8.clicked.connect(self.showFileChooser)
         self.toolButton_7.clicked.connect(self.addRowDataPoint)
         self.toolButton_9.clicked.connect(self.removeRowDataPoint)
@@ -806,18 +808,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame.hide()
         self.frame_2.show()
         self.pushButton.show()
+    
     def show_2(self):
         self.frame.show()
         self.frame_2.hide()
         self.pushButton.hide()
-    
-    def show_1(self):   
-        if at.isVisible()==False:
-            at.move(1920-911,1080-296)
-            at.show()
-            at.setTarget(self.dockWidgetContents.eqList[0].frame.widget_4)
-        else:
-            at.hide()
 
     def add_page(self):
         #self.pages.append(self.create_page(self.create_new_page_button(),self.create_new_page_button_2()))
@@ -905,12 +900,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
 
 class TabContainer(QtGui.QWidget):
-  def __init__(self):
-    super(TabContainer, self).__init__()
+  def __init__(self,parent):
+    super(TabContainer, self).__init__(parent)
     self.initUI()
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self, self.close)
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+T"), self, self.add_page)
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+W"), self, self.closeTab_1)
+    self.parent=parent
     
 
   def initUI(self):
@@ -978,12 +974,14 @@ class TabContainer(QtGui.QWidget):
   def add_page(self):
     #self.pages.append( self.create_page( MainWindow() ) )
     print("adding page")
-    self.pages.append(Ui_MainWindow())
+    self.pages.append(Ui_MainWindow(self))
     self.tabWidget.addTab( self.pages[-1] , 'Project %s' % len(self.pages) )
     self.tabWidget.setCurrentIndex( len(self.pages)-1 )
 
   def getProjectName(self):
         return 'Project %s' % len(self.pages)
+  def showKeyboard(self):
+        self.parent.show_1()    
 
 class Ui_MainWindow_2(QtGui.QMainWindow):
     delimit = ','
@@ -1070,11 +1068,14 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menubar.addAction(self.menuHelp.menuAction())
         
         ##Allotion slots actions created above
+        
         self.actionFullScrren.triggered.connect(self.FullScrren)
+        self.actionExit_Full_Screen_esc.triggered.connect(self.exitFullScreen)
         self.actionSave.triggered.connect(self.save)
         self.actionSave_As.triggered.connect(self.save_as)
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
-        self.t=TabContainer()
+        self.myKeyboard = Ui_DockWidget(self,None)
+        self.t=TabContainer(self)
         self.vbox.addWidget(self.t)
         self.vbox.setMargin(0)
         self.vbox.setSpacing(0)
@@ -1082,8 +1083,17 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def show_1(self):   
+        if self.myKeyboard.isVisible()==False:
+            self.myKeyboard.move(1920-911,1080-296)
+            self.myKeyboard.show()
+            self.myKeyboard.setTarget(self.dockWidgetContents.eqList[0].frame.widget_4)
+        else:
+            self.myKeyboard.hide()
     def FullScrren(self):
-        print "FullScreen"
+        self.t.pages[self.t.tabWidget.currentIndex()].hideAll()
+    def exitFullScreen(self):
+        self.t.pages[self.t.tabWidget.currentIndex()].showAll()
     def save(self):
         print "save"
     def save_as(self):
@@ -1264,6 +1274,8 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
         self.label.setText(_translate("Dialog", self.mssg, None))
 
 
+def focusAdjuster(old,new):
+    return new
 
 
 def keyBoardChanger(old,new,ex):
@@ -1276,11 +1288,15 @@ def keyBoardChanger(old,new,ex):
 
 import sys
 if __name__ == '__main__':
-    app = QtGui.QApplication.instance()
+    app = QtGui.QApplication(sys.argv)
+    app.focusChanged.connect(focusAdjuster)
     ex = Ui_MainWindow_2()
+    ex.myKeyboard.setTarget(app.focusChanged.connect(focusAdjuster))
+    #ex.myKeyboard.
     ex.showMaximized()
     app.focusChanger.connect(lambda:keyboardFocusChanger(ex))
     #app.focusChanged.connect(keyboardFocusChanger)
 
-    at=Ui_DockWidget(None)
+
+    #app.focusChanged.connect(keyboardFocusChanger)
     sys.exit(app.exec_())

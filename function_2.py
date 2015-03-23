@@ -27,15 +27,44 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_DockWidget(QtGui.QDockWidget):
-    def __init__(self,target_area):
-        super(Ui_DockWidget, self).__init__()
+    def __init__(self,parent,target_area):
+        super(Ui_DockWidget, self).__init__(parent)
         self.setupUi(self)
         self.hide()
         self.target=target_area
+        self.setFloating(True)
+        self.myKeyboard_2=Ui_DockWidget_2(self,self.target)
+        #self.setAllowedAreas(None)
         
     def setupUi(self, DockWidget):
         DockWidget.setObjectName(_fromUtf8("DockWidget"))
         DockWidget.resize(911, 296)
+        DockWidget.setStyleSheet("\n"
+            " QDockWidget{\n"
+" background-color:#737373;\n"
+" border:none;\n"
+" padding:0px; \n"
+"}\n"
+" QPushButton{ \n"
+"position: relative;\n"
+" border:none;\n"
+" outline:none; \n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.357955 rgba(89, 189, 9, 255), stop:0.801136 rgba(120, 255, 13, 255), stop:0.9375 rgba(175, 255, 111, 255), stop:1 rgba(255, 255, 255, 255));\n"
+" color: white;\n"
+" padding: 6px 20px; \n"
+"border-radius: 2px;\n"
+" font-size: 20px;\n"
+" }\n"
+" QPushButton:hover:!pressed{ \n"
+"position: relative;\n"
+" border: none; \n"
+"outline:none;\n"
+" background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.0802727, stop:0 rgba(255, 255, 255, 255), stop:0.0397727 rgba(222, 255, 196, 255), stop:0.176136 rgba(168, 255, 99, 255), stop:0.642045 rgba(127, 200, 70, 255));\n"
+" color: white; \n"
+"padding: 6px 20px; \n"
+"border-radius: 2px;\n"
+" font-size:20px; \n"
+"} \n")
         self.dockWidgetContents = QtGui.QWidget()
         self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
         self.frame = QtGui.QFrame(self.dockWidgetContents)
@@ -491,8 +520,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
         font.setPointSize(16)
         font.setBold(False)
         self.pushButton_4.setFont(font)
-        at=Ui_DockWidget_2(None)
-        self.pushButton_8.clicked.connect(lambda:self.show_1(at))
+        self.pushButton_8.clicked.connect(lambda:self.show_1(self.myKeyboard_2))
         DockWidget.setWidget(self.dockWidgetContents)
         self.pushButton_13.clicked.connect(self.function_11)
         self.pushButton_6.clicked.connect(lambda:self.function_14("x"))
@@ -533,12 +561,12 @@ class Ui_DockWidget(QtGui.QDockWidget):
         QtCore.QMetaObject.connectSlotsByName(DockWidget)
 
     def show_1(self,at):
-        if at.isVisible()==False:
-            at.move(1920-293,1080-411-296)
-            at.setTarget(self.target)
-            at.show()
+        if self.myKeyboard_2.isVisible()==False:
+            self.myKeyboard_2.move(1920-293,1080-411-296)
+            self.myKeyboard_2.setTarget(self.target)
+            self.myKeyboard_2.show()
         else:
-            at.hide()
+            self.myKeyboard_2.hide()
 
     def function(self):
         self.target.insert("x")
@@ -586,7 +614,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.target=target_area
 
     def retranslateUi(self, DockWidget):
-        DockWidget.setWindowTitle(_translate("DockWidget", "Keyboard", None))
+        #DockWidget.setWindowTitle(_translate("DockWidget", "Keyboard", None))
         self.pushButton_13.setText(_translate("DockWidget", u'\u2265', None))#Greater than equal to
         self.pushButton_6.setText(_translate("DockWidget", "x", None))
         self.pushButton_17.setText(_translate("DockWidget", u'x\u00B2', None))#Square
@@ -626,7 +654,6 @@ class Ui_DockWidget(QtGui.QDockWidget):
 if __name__ == "__main__":
     import sys
     a = QtGui.QApplication(sys.argv)
-    w=Ui_DockWidget(None)
+    w=Ui_DockWidget(None,None)
     w.show()
-    at=Ui_DockWidget_2(None)
     sys.exit(a.exec_())
