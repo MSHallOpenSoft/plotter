@@ -546,6 +546,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_2.setIcon(icon4)
         self.toolButton_2.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_2.setObjectName(_fromUtf8("toolButton_2"))
+        self.toolButton_2.clicked.connect(self.saveImage)
         self.horizontalLayout_2.addWidget(self.toolButton_2)
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_24.setMaximumSize(QtCore.QSize(16777215, 25))
@@ -692,6 +693,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.action_1=self.dockWidget_3.toggleViewAction()
         ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def saveImage(self,event):
+      #self.sc_2.plotobj.save('foo.pdf')
+      #self.mayavi_widget.visualization.scene.mlab.savefig('doo.pdf')
+      print("saving graph")
 
     def hideAll(self):
         self.dockWidget.hide()

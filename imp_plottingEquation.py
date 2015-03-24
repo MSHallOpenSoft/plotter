@@ -129,7 +129,9 @@ class MplPlot2dCanvas(FigureCanvas):
             print("no change")
             return
       self.ax.cla()
-      sympy_p1 = sympyPlot_implicit.plot_implicit(expr,show=False,ax=self.ax,x_var=(x,x_start,x_end),y_var=(y,y_start,y_end),line_color=color,linewidth=line_width)
+      print("adsflasdfasdf")
+      print(expr)
+      sympy_p1 = sympyPlot_implicit.plot_implicit(expr,show=False,ax=self.ax,fig=self.fig,x_var=(x,x_start,x_end),y_var=(y,y_start,y_end),line_color=color,linewidth=line_width)
       if(len(self.dic_plot)==0):
         self.plotobj=sympy_p1
       else:

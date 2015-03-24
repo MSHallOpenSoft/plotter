@@ -19,8 +19,8 @@ os.environ['QT_API'] = 'pyqt'
 #   sip.setapi('QString', 2)
 import sys
 import sympyParsing
-from sympy.plotting.experimental_lambdify import (vectorized_lambdify)
-from sympy.utilities.lambdify import lambdify
+from sympy.utilities.lambdify import lambdify 
+import scipy
 
 import numpy as np
 from mayavi import mlab
@@ -67,6 +67,7 @@ class Visualization(HasTraits):
     dic_calculated={} #storing calculated values
     dic_outline={} #storing outline
     # the layout of the dialog screated
+
       
     def mayavi_implicit_3d(self,curTab=0,curPlot=1,**kwargs):
       """
@@ -97,11 +98,12 @@ class Visualization(HasTraits):
       z_start=kwargs.get('z_start',-5)
       z_end=kwargs.get('z_end',5)
 
-      no_x_points=kwargs.get('no_x_points',10)
-      no_y_points=kwargs.get('no_y_points',10)
-      no_z_points=kwargs.get('no_z_points',10)
+      no_x_points=kwargs.get('no_x_points',50)
+      no_y_points=kwargs.get('no_y_points',50)
+      no_z_points=kwargs.get('no_z_points',50)
       color=kwargs.get('color',(0.5,0.8,0.5))
       #print(self.dic_parameter)
+      print(kwargs)
       keystr="tab"+str(curTab)+"plt"+str(curPlot)
       shared_items=[]
       print("hooooo")
@@ -133,25 +135,23 @@ class Visualization(HasTraits):
           no_z_points=complex(0,no_z_points)
           points_size=[no_x_points,no_y_points,no_z_points]
           X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
-          f = vectorized_lambdify((x,y,z), expr)
+          print("adsflasdfasdf")
+          print(expr)
+          f = lambdify((x,y,z), expr,"numpy")
           foo=f(X,Y,Z)
+          print(points_size)
           print(foo.shape)
           axis=[]
           s=foo.shape
           doo=foo
-          #if len(foo.shape)==3:
-              #for i in range(0,len(points_size)):
-                  #if(s[i]!=points_size[i].imag):
-                      #axis.append(i)
-              #if s[0]!=no_x_points.imag:
-                  #axis.append(0)
-              #if s[1]!=no_y_points.imag:
-                  #axis.append(1)
-              #if s[2]!=no_z_points.imag:
-                  #axis.append(2)
-              #print(axis)
-              #for i in range(0,len(axis)):
-          #        doo=np.repeat(doo,points_size[i].imag,axis[i])
+          if len(foo.shape)==3:
+              if(len(set(foo.shape))==2):
+                  for i in range(0,len(points_size)):
+                      if(s[i]!=points_size[i].imag):
+                          axis.append(i)
+                  print(axis)
+                  for i in range(0,len(axis)):
+                      doo=np.repeat(doo,points_size[i].imag,axis[i])
           print(doo.shape)
           self.dic_calculated[keystr]=doo
 
@@ -161,7 +161,16 @@ class Visualization(HasTraits):
       if(keystr in self.dic_outline):
           self.dic_outline[keystr].remove()
       self.dic_contour[keystr]=self.scene.mlab.contour3d(doo,color=color,line_width=line_width,opacity=opacity, contours = [0])
+      axes=self.scene.mlab.axes(color=(0.5,0.5,0.5),nb_labels=10,xlabel='x',ylabel='y',zlabel='z')
+      axes.label_text_property.font_family = 'courier'
+      axes.label_text_property.font_size = 4
       self.dic_outline[keystr]=self.scene.mlab.outline(self.dic_contour[keystr], color=(.7, .7, .7))
+      #X = 100 * scipy.rand(100, 3)
+      #self.scene.disable_render = True # Super duper trick
+      #self.scene.mlab.points3d(X[:,0], X[:,1], X[:,2], scale_factor=0.4)
+      #for i, p in enumerate(X):
+        #self.scene.mlab.text3d(p[0], p[1], p[2], str(i), scale=(2, 2, 2))
+      #self.scene.disable_render = False # Super duper trick
       self.update_plot()
       #self.started=0
 
