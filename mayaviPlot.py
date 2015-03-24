@@ -139,6 +139,7 @@ class Visualization(HasTraits):
           print(expr)
           f = lambdify((x,y,z), expr,"numpy")
           foo=f(X,Y,Z)
+          print(foo)
           print(points_size)
           print(foo.shape)
           axis=[]
