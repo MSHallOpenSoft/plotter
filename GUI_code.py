@@ -1,53 +1,9 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'GUI.ui'
-#
-# Created: Sun Mar 15 00:12:39 2015
-#      by: PyQt4 UI code generator 4.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
-
-
-'''
-Please Note : All the developers are requested to kindly specify or atleast mention the unique features being added by them 
-              so as to keep track of them and such that these don't go unattended, when writing the documentation about unique features of our plotter
-
-unique (not-so-common) features of MS Hall Opensoft Plotter Software :
-
-### till 18th March 2015 :
-
-allowing for keyboard shortcuts for adding TabPages - by Ravi
-accounting for file inputs not in proper csv format and specifying the delimiters for the same- by Varun
-
-
-
-
-Please point out any further feautures that can be included in our plotter, or even mention any basic required functionality not included yet:
-
-### Basic Functionality:
-    
-    Naming the new Project as soon as a new TabPage project is created ( instead of naming it as Project 1....etc.)
-    (The project will be saved by the same name in the saved plots folder)
-
-### Additional Features :
-
-    Adding a Tutorial flipPage at the very first use (describing all the keyboard shortcuts etc.)
-
-
-## Please keep adding more as you come to think of any !!!
-'''
-'''Bugs by prabahat ------------------------ 1) + button comes in place of cross when you change the expression type
-                                             2) Enter button does not create the graph
-                                             3) Prabhar find your bugs and get it right ASAP'''
 
 import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 from functions import Ui_DockWidget_2
-
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot2dCanvas
 from PyQt4.QtCore import Qt, SIGNAL
@@ -569,7 +525,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_19.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_19.setObjectName(_fromUtf8("toolButton_19"))
         self.horizontalLayout_2.addWidget(self.toolButton_19)
-        self.toolButton_23 = QtGui.QToolButton(self.dockWidgetContents_4)
+        '''self.toolButton_23 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_23.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_23.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_23.setStyleSheet(_fromUtf8(""))
@@ -578,7 +534,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_23.setIcon(icon10)
         self.toolButton_23.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_23.setObjectName(_fromUtf8("toolButton_23"))
-        self.horizontalLayout_2.addWidget(self.toolButton_23)
+        self.horizontalLayout_2.addWidget(self.toolButton_23)'''
         '''self.toolButton_2 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_2.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -618,7 +574,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.line_3.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_3.setObjectName(_fromUtf8("line_3"))
         self.horizontalLayout_2.addWidget(self.line_3)
-        self.toolButton_21 = QtGui.QToolButton(self.dockWidgetContents_4)
+        '''self.toolButton_21 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_21.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_21.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_21.setStyleSheet(_fromUtf8(""))
@@ -627,8 +583,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_21.setIcon(icon13)
         self.toolButton_21.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_21.setObjectName(_fromUtf8("toolButton_21"))
-        self.horizontalLayout_2.addWidget(self.toolButton_21)
-        self.toolButton_16 = QtGui.QToolButton(self.dockWidgetContents_4)
+        self.horizontalLayout_2.addWidget(self.toolButton_21)'''
+        '''self.toolButton_16 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_16.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_16.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_16.setStyleSheet(_fromUtf8(""))
@@ -636,8 +592,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         icon14.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Stop-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_16.setIcon(icon14)
         self.toolButton_16.setIconSize(QtCore.QSize(35, 35))
-        self.toolButton_16.setObjectName(_fromUtf8("toolButton_16"))
-        self.horizontalLayout_2.addWidget(self.toolButton_16)
+        self.toolButton_16.setObjectName(_fromUtf8("toolButton_16"))'''
+        #self.horizontalLayout_2.addWidget(self.toolButton_16)
         self.line_2 = QtGui.QFrame(self.dockWidgetContents_4)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -690,7 +646,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_13.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_13.setObjectName(_fromUtf8("toolButton_13"))
         self.horizontalLayout_2.addWidget(self.toolButton_13)'''
-        self.toolButton_12 = QtGui.QToolButton(self.dockWidgetContents_4)
+        '''self.toolButton_12 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_12.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_12.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_12.setStyleSheet(_fromUtf8(""))
@@ -699,8 +655,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_12.setIcon(icon18)
         self.toolButton_12.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_12.setObjectName(_fromUtf8("toolButton_12"))
-        self.horizontalLayout_2.addWidget(self.toolButton_12)
-        self.toolButton_11 = QtGui.QToolButton(self.dockWidgetContents_4)
+        self.horizontalLayout_2.addWidget(self.toolButton_12)'''
+        '''self.toolButton_11 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_11.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_11.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_11.setAutoFillBackground(False)
@@ -710,7 +666,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_11.setIcon(icon19)
         self.toolButton_11.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_11.setObjectName(_fromUtf8("toolButton_11"))
-        self.horizontalLayout_2.addWidget(self.toolButton_11)
+        self.horizontalLayout_2.addWidget(self.toolButton_11)'''
+        self.spacerItem = QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(self.spacerItem)
         self.dockWidget_4.setWidget(self.dockWidgetContents_4)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(4), self.dockWidget_4)
         self.retranslateUi(MainWindow)
@@ -733,7 +691,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_17.clicked.connect(self.parent.add_page)
         #self.toolButton.clicked.connect(self.still)
         self.action_1=self.dockWidget_3.toggleViewAction()
-        ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def showTable(self):
         if self.frame.isVisible()==True:
@@ -914,7 +871,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
     
     def retranslateUi(self, MainWindow):
         
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Plot It", None))
         # self.pushButton_3.setText(_translate("MainWindow", "Hide", None))
         # self.toolButton_7.setToolTip(_translate("MainWindow", "Add", None))
         # self.toolButton_7.setText(_translate("MainWindow", "...", None))
@@ -953,28 +910,28 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_25.setText(_translate("MainWindow", "...", None))
         self.toolButton_19.setToolTip(_translate("MainWindow", "Keyboard", None))
         self.toolButton_19.setText(_translate("MainWindow", "...", None))
-        self.toolButton_23.setToolTip(_translate("MainWindow", "Print graph", None))
-        self.toolButton_23.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_23.setToolTip(_translate("MainWindow", "Print graph", None))
+        #self.toolButton_23.setText(_translate("MainWindow", "...", None))
         #self.toolButton_2.setToolTip(_translate("MainWindow", "Save Graph", None))
         #self.toolButton_2.setText(_translate("MainWindow", "...", None))
         self.toolButton_24.setToolTip(_translate("MainWindow", "Save Graph", None))
         self.toolButton_24.setText(_translate("MainWindow", "...", None))
         #self.toolButton_22.setToolTip(_translate("MainWindow", "Go to our FaceBook page", None))
         #self.toolButton_22.setText(_translate("MainWindow", "...", None))
-        self.toolButton_21.setToolTip(_translate("MainWindow", "Play", None))
-        self.toolButton_21.setText(_translate("MainWindow", "...", None))
-        self.toolButton_16.setToolTip(_translate("MainWindow", "Stop", None))
-        self.toolButton_16.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_21.setToolTip(_translate("MainWindow", "Play", None))
+        #self.toolButton_21.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_16.setToolTip(_translate("MainWindow", "Stop", None))
+        #self.toolButton_16.setText(_translate("MainWindow", "...", None))
         self.toolButton_15.setToolTip(_translate("MainWindow", "FullScreen", None))
         self.toolButton_15.setText(_translate("MainWindow", "...", None))
         #self.toolButton_14.setToolTip(_translate("MainWindow", "Enable Anti-Aliasing", None))
         #self.toolButton_14.setText(_translate("MainWindow", "...", None))
         #self.toolButton_13.setToolTip(_translate("MainWindow", "Zoom All", None))
         #self.toolButton_13.setText(_translate("MainWindow", "...", None))
-        self.toolButton_12.setToolTip(_translate("MainWindow", "Zoom in", None))
-        self.toolButton_12.setText(_translate("MainWindow", "...", None))
-        self.toolButton_11.setToolTip(_translate("MainWindow", "Zoom out", None))
-        self.toolButton_11.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_12.setToolTip(_translate("MainWindow", "Zoom in", None))
+        #self.toolButton_12.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_11.setToolTip(_translate("MainWindow", "Zoom out", None))
+        #self.toolButton_11.setText(_translate("MainWindow", "...", None))
         #self.pushButton_2.setText(_translate("MainWindow", "PushButton", None))
 
 
@@ -1419,6 +1376,59 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
 
 
 
+class SplashScreen(QtGui.QWidget):
+    def __init__(self, pixmap):
+        QtGui.QWidget.__init__(self)
+        self._pixmap = pixmap
+        self._message = QtCore.QString()
+        self._color = QtGui.QColor.black
+        self._alignment = QtCore.Qt.AlignLeft
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint |
+                            QtCore.Qt.WindowStaysOnTopHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.setFixedSize(self._pixmap.size())
+        self.setMask(self._pixmap.mask())
+
+    def clearMessage(self):
+        self._message.clear()
+        self.repaint()
+
+    def showMessage(self, message, alignment=QtCore.Qt.AlignLeft,
+                                   color=QtGui.QColor.black):
+        self._message = QtCore.QString(message)
+        self._alignment = alignment
+        self._color = color
+        self.repaint()
+
+    def paintEvent(self, event):
+        textbox = QtCore.QRect(self.rect())
+        textbox.setRect(textbox.x() + 5, textbox.y() + 5,
+                        textbox.width() - 10, textbox.height() - 10)
+        painter = QtGui.QPainter(self)
+        painter.drawPixmap(self.rect(), self._pixmap)
+        painter.setPen(QtGui.QColor(self._color))
+        painter.drawText(textbox, self._alignment, self._message)
+
+    def mousePressEvent(self, event):
+        self.hide()
+
+def show_splash(path):
+    image = QtGui.QPixmap(path)
+    splash = SplashScreen(image)
+    font = QtGui.QFont(splash.font())
+    font.setPointSize(font.pointSize() + 5)
+    splash.setFont(font)
+    splash.show()
+    QtGui.QApplication.processEvents()
+    for count in range(1, 100):
+        splash.showMessage(splash.tr('Processing %1...').arg(count),
+                           QtCore.Qt.AlignBottom+20, QtCore.Qt.black)
+        QtGui.QApplication.processEvents()
+        QtCore.QThread.msleep(15)
+    splash.hide()
+    splash.close()
+
 def changedFocusSlot(old, now):
     if type(now) is QLineEdit:
         keyboard.setTarget(now)
@@ -1428,6 +1438,7 @@ def changedFocusSlot(old, now):
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication.instance()
+    show_splash('splashscreen.jpg')
     ex = Ui_MainWindow_2()
     keyboard=ex.myKeyboard
     keyboard_2=ex.myKeyboard_2
