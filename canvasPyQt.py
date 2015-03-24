@@ -216,12 +216,14 @@ from sympy.plotting.experimental_lambdify import vectorized_lambdify,experimenta
 
 class Example(QtGui.QWidget):
     
-    def __init__(self,strr):
+    def __init__(self,strr,linewidth=1,lineType=1):
         super(Example, self).__init__()
         self.str_expr=strr
         self.x = symbols('x')
         self.expr = sympify(sympyParsing.symStr(self.str_expr))
         self.initUI()
+        self.linewidth=linewidth
+        self.lineType=lineType
 
         
     def initUI(self):      
@@ -273,8 +275,10 @@ class Example(QtGui.QWidget):
         qp.drawLine(xStart*Nop,xInitStart*Nop,xEnd*Nop,xInitStart*Nop)
         qp.drawLine(xInitStart*Nop,yStart*Nop,xInitStart*Nop,yEnd*Nop)
         # qp.drawLine(0,0,1000,100)
-        qp.setPen(QtGui.QColor(25, 34, 3))
-        for i in xrange(1,len(xArr)):
+        pen = QtGui.QPen(QtGui.QColor(25, 34, 3), self.linewidth, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+
+        for i in xrange(1,len(xArr),self.lineType):
           if y[i]>(yEnd*Nop) or y[i]<(yStart*Nop) or np.isnan(y[i]) or np.isnan(y[i-1]):
             print y[i]
             continue
