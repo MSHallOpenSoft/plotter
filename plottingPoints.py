@@ -8,7 +8,8 @@ def points2dPlot(xArr,yArr,scale=2,deg=2,typeOfPlot='regression'):
 		X,Y = regression.spline(xArr,yArr,scale)
 	print X
 	print Y
-	plt.plot(X, Y, '-o')
+	plt.plot(X, Y)
+	plt.plot(xArr, yArr, '-o')
 	plt.show()
 if __name__ == "__main__":
 	X = map(int, raw_input().split())

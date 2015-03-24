@@ -52,6 +52,7 @@ from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
 #import matplotlib.pyplot as plotter
+from PyQt4.QtCore import pyqtSlot,SIGNAL,SLOT
 i=1
 import sys, random  
 from Thesidetab import mainFrame
@@ -819,12 +820,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame.hide()
         self.frame_2.show()
         self.pushButton.show()
+        self.parent.parent.actionTable.setChecked(False)
     
     def show_2(self):
         self.frame.show()
         self.frame_2.hide()
         self.pushButton.hide()
-
+        self.parent.parent.actionTable.setChecked(True)
     def add_page(self):
         #self.pages.append(self.create_page(self.create_new_page_button(),self.create_new_page_button_2()))
         contents = QtGui.QWidget(self.tabWidget)
@@ -913,11 +915,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
 class TabContainer(QtGui.QWidget):
   def __init__(self,parent):
     super(TabContainer, self).__init__(parent)
+    self.parent=parent
     self.initUI()
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self, self.close)
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+T"), self, self.add_page)
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+W"), self, self.closeTab_1)
-    self.parent=parent
     
 
   def initUI(self):
@@ -946,7 +948,7 @@ class TabContainer(QtGui.QWidget):
     self.pages = []
     self.add_page()
     self.show()
-    
+
   def closeTab(self, index):
       
       #self.tabWidget.widget(index).close()
@@ -1008,6 +1010,7 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         MainWindow.setCentralWidget(self.centralwidget)
+        self.t=TabContainer(self)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
@@ -1051,14 +1054,14 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.actionFullScrren.setObjectName(_fromUtf8("actionFullScrren"))
         self.actionExit_Full_Screen_esc = QtGui.QAction(MainWindow)
         self.actionExit_Full_Screen_esc.setObjectName(_fromUtf8("actionExit_Full_Screen_esc"))
-        self.actionFile_Menu = QtGui.QAction(MainWindow,checkable=True)
-        self.actionFile_Menu.setChecked(True)
+        self.actionFile_Menu = self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_4.toggleViewAction()
+        #self.actionFile_Menu.setChecked(True)
         self.actionFile_Menu.setObjectName(_fromUtf8("actionFile_Menu"))
-        self.actionGraph_Menu = QtGui.QAction(MainWindow,checkable=True)
-        self.actionGraph_Menu.setChecked(True)
+        self.actionGraph_Menu =self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.toggleViewAction()
+        #self.actionGraph_Menu.setChecked(True)
         self.actionGraph_Menu.setObjectName(_fromUtf8("actionGraph_Menu"))
-        self.actionEquation_Widget = QtGui.QAction(MainWindow,checkable=True)
-        self.actionEquation_Widget.setChecked(True)
+        self.actionEquation_Widget = self.t.pages[self.t.tabWidget.currentIndex()].dockWidget.toggleViewAction()
+        #self.actionEquation_Widget.setChecked(True)
         self.actionEquation_Widget.setObjectName(_fromUtf8("actionEquation_Widget"))
         self.menuFile.addAction(self.actionNew_Project)
         self.menuFile.addAction(self.actionOpen_Project)
@@ -1088,20 +1091,31 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.actionExit_Full_Screen_esc.triggered.connect(self.exitFullScreen)
         self.actionSave.triggered.connect(self.save)
         self.actionSave_As.triggered.connect(self.save_as)
-        self.actionEquation_Widget.triggered.connect(self.equationWidget)
-        self.actionFile_Menu.triggered.connect(self.fileMenu)
+        #self.actionEquation_Widget.triggered.connect(self.equationWidget)
+        #self.actionFile_Menu.triggered.connect(self.fileMenu)
         self.actionTable.triggered.connect(self.showTable)
-        self.actionTable.triggered.connect(self.graphMenu)
+        #self.actionTable.triggered.connect(self.graphMenu)
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
         self.myKeyboard = Ui_DockWidget(self,None)
-        self.t=TabContainer(self)
         self.vbox.addWidget(self.t)
         self.vbox.setMargin(0)
         self.vbox.setSpacing(0)
         #self.vbox.setContentsMargins(0,0,0,0)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+    def tabChangedSlot(self,index):
+        self.menuView_2.removeAction(self.actionFile_Menu)
+        self.menuView_2.removeAction(self.actionGraph_Menu)
+        self.menuView_2.removeAction(self.actionEquation_Widget)
+        self.actionFile_Menu=self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_4.toggleViewAction()
+        self.actionEquation_Widget=self.t.pages[self.t.tabWidget.currentIndex()].dockWidget.toggleViewAction()
+        self.actionGraph_Menu=self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.toggleViewAction()
+        self.actionEquation_Widget.setText("Equation Widget")
+        self.actionGraph_Menu.setText("Graph Menu")
+        self.actionFile_Menu.setText("File Menu")
+        self.menuView_2.addAction(self.actionFile_Menu)
+        self.menuView_2.addAction(self.actionGraph_Menu)
+        self.menuView_2.addAction(self.actionEquation_Widget)
     def show_1(self):   
         if self.myKeyboard.isVisible()==False:
             self.myKeyboard.setSize(self.rect)
@@ -1129,8 +1143,12 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
     def showTable(self):
         if self.t.pages[self.t.tabWidget.currentIndex()].frame.isVisible() == False:
             self.t.pages[self.t.tabWidget.currentIndex()].frame.show()
+            self.t.pages[self.t.tabWidget.currentIndex()].frame_2.hide()
+            self.t.pages[self.t.tabWidget.currentIndex()].pushButton.hide()
         else:
             self.t.pages[self.t.tabWidget.currentIndex()].frame.hide()
+            self.t.pages[self.t.tabWidget.currentIndex()].frame_2.show()
+            self.t.pages[self.t.tabWidget.currentIndex()].pushButton.show()
     def graphMenu(self):
         if self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.isVisible() == False:
             self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.show()
@@ -1331,6 +1349,7 @@ if __name__ == '__main__':
     ex = Ui_MainWindow_2()
     keyboard=ex.myKeyboard
     QtCore.QObject.connect(app, SIGNAL("focusChanged(QWidget *, QWidget *)"), changedFocusSlot)
+    QtCore.QObject.connect(ex.t.tabWidget, QtCore.SIGNAL(_fromUtf8("currentChanged(int)")), ex.tabChangedSlot)
     #ex.myKeyboard.
     ex.showMaximized()
     ex.setSize()
