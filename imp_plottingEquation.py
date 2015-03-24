@@ -57,11 +57,11 @@ class customLineEdit(QtGui.QLineEdit):
 
 
 class MplPlot2dCanvas(FigureCanvas):
-  dic_plot={} #storing contour
-  dic_parameter={} #storing parameters
-  dic_calculated={} #storing calculated values
-  dic_index={} #storing calculated values
   def __init__(self,parent=None):
+      self.dic_plot={} #storing contour
+      self.dic_parameter={} #storing parameters
+      self.dic_calculated={} #storing calculated values
+      self.dic_index={} #storing calculated values
       self.count=0
       self.plotobj={}
       self.surfs = [] # [{"xx":,"yy:","val:"}]
