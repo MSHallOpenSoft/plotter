@@ -181,8 +181,8 @@ class Plot(object):
                 setattr(self, key, val)
     def plotNow(self):
         print("roooooooooooo")
-        if hasattr(self, '_backend'):
-            self._backend.close()
+        #if hasattr(self, '_backend'):
+        #    self._backend.close()
         self._backend = self.backend(self)
         self._backend.process_series()
 
@@ -1033,6 +1033,7 @@ class MatplotlibBackend(BaseBackend):
         self.plt = self.matplotlib.pyplot
         self.cm = self.matplotlib.cm
         self.LineCollection = self.matplotlib.collections.LineCollection
+        self.plottedCollection=0;
         #if(self.parent.ax!=None):
         #  print("hooooo wooooooooo")
         if any(are_3D) and not all(are_3D):
@@ -1072,8 +1073,11 @@ class MatplotlibBackend(BaseBackend):
             # Create the collections
             if s.is_2Dline:
                 collection = self.LineCollection(s.get_segments())
+                print("ronoooooooooooooooooooooooooo")
+                self.plottedCollection=collection
                 self.ax.add_collection(collection)
             elif s.is_contour:
+                print("conoooooooooooooooooooooooooo")
                 self.ax.contour(*s.get_meshes())
             elif s.is_3Dline:
                 # TODO too complicated, I blame matplotlib
@@ -1093,11 +1097,13 @@ class MatplotlibBackend(BaseBackend):
                                                   linewidth=0.1)
             elif s.is_implicit:
                 #Smart bounds have to be set to False for implicit plots.
+                print("yonoooooooooooooooooooooooooo")
                 self.ax.spines['left'].set_smart_bounds(False)
                 self.ax.spines['bottom'].set_smart_bounds(False)
                 points = s.get_raster()
                 if len(points) == 2:
                     #interval math plotting
+                    print("honoooooooooooooooooooooooooo")
                     x, y = _matplotlib_list(points[0])
                     self.ax.fill(x, y, facecolor=s.line_color, edgecolor='None')
                 else:
@@ -1108,9 +1114,11 @@ class MatplotlibBackend(BaseBackend):
                     colormap = ListedColormap(["white", s.line_color])
                     xarray, yarray, zarray, plot_type = points
                     if plot_type == 'contour':
+                        print("conoooooooooooooooooooooooooo")
                         self.ax.contour(xarray, yarray, zarray,
                                 contours=(0, 0), fill=False, cmap=colormap)
                     else:
+                        print("ronoooooooooooooooooooooooooo")
                         self.ax.contourf(xarray, yarray, zarray, cmap=colormap)
             else:
                 raise ValueError('The matplotlib backend supports only '

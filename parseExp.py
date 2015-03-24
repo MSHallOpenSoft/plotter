@@ -101,5 +101,5 @@ class NumericStringParser(object):
 
 if __name__ == "__main__":
     nsp=NumericStringParser()
-    result=nsp.eval('2^4')
+    result=nsp.eval('2^5')
     print(result)
