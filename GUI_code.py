@@ -322,6 +322,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         sc_2=MplPlot2dCanvas(self)
+        self.sc_2=sc_2
         widget_2=QtGui.QWidget(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
