@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 from customThreading import MyThread
+import tableCon
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -177,13 +178,42 @@ class AccordionMain(QtGui.QWidget):
         if(self.frame.isHidden()):
             
             self.frame.show()
-        else:
+            print "here"
+            print type(self.parent.parent)
+            print type(self.frame.tableValue)
+            hlayout = self.parent.parent.horizontalLayout_3
+            print hlayout.count()
+            j = 1;
+            for i in range(hlayout.count()):
+              if(type(hlayout.itemAt(i)) == tableCon.TableContents):
+                frem = hlayout.itemAt(i)
+                j = i
+
+            hlayout.takeAt(i)
+
+
+
             
-            self.frame.hide()
+            hlayout.insertWidget(i,self.frame.table)
+            
+            self.parent.parent.adjustSize()
+            
+        else:
+          j = 1;
+          hlayout = self.parent.parent.horizontalLayout_3
+          for i in range(hlayout.count()):
+            if(type(hlayout.itemAt(i)) == tableCon.TableContents):
+              frem = hlayout.itemAt(i)
+              j = i
+          self.parent.parent.horizontalLayout_3.takeAt(j)
+          self.frame.hide()
 
     def closeHandler(self):
         if(self):
             self.deleteLater()
+
+    def getMainFrame(self):
+      return parent
 
     
 

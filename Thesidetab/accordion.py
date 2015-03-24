@@ -114,6 +114,8 @@ class Accordion(QtGui.QWidget):
             self.adjustSize()
             self.parent.adjustSize()
 
+
+
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
