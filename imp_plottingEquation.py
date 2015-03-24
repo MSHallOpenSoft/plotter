@@ -96,6 +96,15 @@ class MplPlot2dCanvas(FigureCanvas):
       #timer.start(100)
 
   def plot_2d_implicit(self,curTab=0,curPlot=1,**kwargs):
+      """
+        Using the same logic as ``plot_implicit_3d`` for plotting multiple graphs efficiently.
+        We are using two dictionaries, ``dic_index`` and ``dic_parameter`` to store the position
+        of a particular plot in the ``_series`` attribute of the plot returned by ``plot_implicit``.
+        The dictionaries are indexed by ``keystr`` which is of the form ``plt1``. If the key already exists,
+        we check if there is any change in the parameters using ``dic_parameter``.
+        If there is a change we remove the plot from the ``_series`` and put the new plot and update the ``dic_index``.
+        ``dic_index`` stores an index of a plot in the ``_series`` list.
+      """
       len_arguments=len(kwargs)
       print(kwargs)
       keystr='plt'+str(curPlot)
@@ -131,30 +140,15 @@ class MplPlot2dCanvas(FigureCanvas):
         self.plotobj.extend(sympy_p1)
 
       self.dic_plot[keystr]=sympy_p1
-      #for k in self.dic_plot.keys():
-        #if k!=keystr:
-      #    self.plotobj.extend(dic[k])
-      #if(self.plotted==0):
-        #self.plotted=sympy_p1
-      ##if(self.plotted!=0):
-
-      #if(self.plotted!=0):
-        #self.count=1
-        #self.plotted.extend(sympy_p1)
-        #self.plotted.plotNow()
-      #else:
-      #  sympy_p1.plotNow()
       self.dic_index[keystr]=len(self.plotobj._series)-1
       self.dic_parameter[keystr]=kwargs
-      print(self.plotobj._series)
+      #print(self.plotobj._series)
       self.plotobj.plotNow()
       self.update_figure()
       
   def update_figure(self):
-      #print(time.localtime())
-      #self.ax.dist+=1
-      #self.ax.azim=(self.ax.azim+5)%360
       self.draw()
+
   def zoom_factory(self,base_scale = 2.):
     def zoom_fun(event):
         # get the current x and y limits
