@@ -571,8 +571,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_2.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_2.setObjectName(_fromUtf8("toolButton_2"))
         self.horizontalLayout_2.addWidget(self.toolButton_2)'''
-        self.toolButton_2.clicked.connect(self.saveImage)
-        self.horizontalLayout_2.addWidget(self.toolButton_2)
+        #self.toolButton_2.clicked.connect(self.saveImage)
+        #self.horizontalLayout_2.addWidget(self.toolButton_2)
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_24.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_24.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -716,11 +716,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
         self.toolButton_15.clicked.connect(self.hideAll)
         self.toolButton_25.clicked.connect(self.showTable)
+        self.toolButton_17.clicked.connect(self.parent.add_page)
         #self.toolButton.clicked.connect(self.still)
         self.action_1=self.dockWidget_3.toggleViewAction()
         ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
     def showTable(self):
         if self.frame.isVisible()==True:
             self.hide_2()
@@ -1174,7 +1174,7 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
             self.myKeyboard.hide()
         if self.myKeyboard_2.isVisible()==False:
             #print self.rect_1.width()
-            self.myKeyboard_2.move(1.73532*self.rect.width()-350,1.73532*self.rect.height()-350)
+            self.myKeyboard_2.move(1.73532*self.rect.width()-350,0)
             #self.myKeyboard_2.setTarget(self.target)
             self.myKeyboard_2.show()
         else:
@@ -1394,7 +1394,7 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
 
 
 def changedFocusSlot(old, now):
-    if type(now) is not QPushButton and QTableWidget:
+    if type(now) is QLineEdit:
         keyboard.setTarget(now)
         keyboard_2.setTarget(now)
 
