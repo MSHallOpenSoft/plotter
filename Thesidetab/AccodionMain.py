@@ -189,6 +189,8 @@ class AccordionMain(QtGui.QWidget):
       #print( self.parent.parent.mayavi_widget.visualization)
           print(eqn)
           self.plot2d_parametric_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=tuple(expr),color=color,line_width=thickness,u_start=x_start,u_end=x_end,v_start=x_start,v_end=x_end)
+        elif str(type(expr[0]))=='list':
+          print("getting table")
         
 
     def retranslateUi(self):
