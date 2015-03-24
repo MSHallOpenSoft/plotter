@@ -201,14 +201,14 @@ class AccordionMain(QtGui.QWidget):
             
             self.frame.show()
             #self.
-            self.saveThetableContents()
-            table = self.parent.parent.frame
-            table.setPlotName(self.label)
-            table.setData(self.frame.tableContents)
+            
             self.adjustSize()
             
         else:
-          
+          self.saveThetableContents()
+          table = self.parent.parent.frame
+          table.setPlotName(self.label)
+          table.setData(self.frame.tableContents)
           self.frame.hide()
 
     def closeHandler(self):
@@ -221,9 +221,11 @@ class AccordionMain(QtGui.QWidget):
     def saveThetableContents(self):
         layf = self.parent.eqList
         table = self.parent.parent.frame
+        print "in pushed mode"
         for i in range(len(layf)):
             if(layf[i].label == table.getPlotName()):
-              layf[i].frame.tableContents = table.data
+              layf[i].frame.tableContents = table.getData()
+              print layf[i].frame.tableContents
               break
 
 

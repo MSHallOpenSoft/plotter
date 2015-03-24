@@ -83,9 +83,9 @@ class DockContents(QtGui.QWidget):
         self.noOfEquations = self.noOfEquations + 1
         frame = AccodionMain.AccordionMain(self,"Plot_"+str(self.noOfEquations),example.MainFrameR(self))
         self.parent.frame.setPlotName("Plot_"+str(self.noOfEquations))
-        print self.parent.frame.getPlotName()
+        #print self.parent.frame.getPlotName()
         self.parent.frame.setData([])
-        print "here" , self.parent.frame.data
+        #print "here" , self.parent.frame.data
         frame.frame.show()
         self.eqList.append(frame)
         self.vertical2.addWidget(frame)

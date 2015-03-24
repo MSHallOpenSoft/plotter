@@ -48,6 +48,22 @@ class TableContents(QtGui.QFrame):
     def setPlotName(self,name):
         self.targetPlot = name
 
+    def getData(self):
+        pdata = []
+        for i in range (0,self.tableWidget.rowCount()):
+            row = []
+
+            for j in range (0,self.tableWidget.columnCount()):
+                
+                item = self.tableWidget.item(i,j)
+                print item
+                row.append(item)
+
+            pdata.append(row)
+        self.data = pdata
+        print pdata
+        return pdata
+
     def setupUI(self):
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -263,12 +279,17 @@ class TableContents(QtGui.QFrame):
     def addRowDataPoint(self):
         rowC = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowC)
+        self.data.append(rowC)
+        print self.data
 
     def removeRowDataPoint(self):
         if(self.tableWidget.currentRow()==-1):
             self.errorRemoveDataPoint()
         else:
+            self.data.remove(self.tableWidget.currentRow())
             self.tableWidget.removeRow(self.tableWidget.currentRow())
+
+
             self.tableWidget.setCurrentCell(-1,-1)
 
     def errorRemoveDataPoint(self):
