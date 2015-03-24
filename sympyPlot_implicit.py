@@ -74,6 +74,7 @@ class ImplicitSeries(BaseSeries):
                     str((self.start_y, self.end_y)))
 
     def get_raster(self):
+        print("raaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasrrrrrrrrrr")
         func = experimental_lambdify((self.var_x, self.var_y), self.expr,
                                     use_interval=True)
         xinterval = interval(self.start_x, self.end_x)
@@ -366,7 +367,7 @@ def plot_implicit(expr, x_var=None, y_var=None, **kwargs):
                                     nb_of_points, line_color)
     show = kwargs.pop('show', True)
 
-    print (series_argument.get_points())
+    #print (series_argument.get_points())
     #set the x and y limits
     kwargs['xlim'] = tuple(float(x) for x in var_start_end_x[1:])
     kwargs['ylim'] = tuple(float(y) for y in var_start_end_y[1:])
@@ -374,6 +375,7 @@ def plot_implicit(expr, x_var=None, y_var=None, **kwargs):
     kwargs.setdefault('xlabel', var_start_end_x[0].name)
     kwargs.setdefault('ylabel', var_start_end_y[0].name)
     p = Plot(series_argument, **kwargs)
+    #p2 = Plot(series_argument, **kwargs)
     if show:
         p.show()
     return p

@@ -35,7 +35,7 @@ class Ui_DockWidget_2(QtGui.QDockWidget):
         DockWidget.setObjectName(_fromUtf8("DockWidget"))
         DockWidget.resize(293, 411)
         DockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        DockWidget.setStyleSheet("\n"
+        '''DockWidget.setStyleSheet("\n"
             " QPushButton{ \n"
 "position: relative;\n"
 " border:none;\n"
@@ -60,7 +60,7 @@ class Ui_DockWidget_2(QtGui.QDockWidget):
 " background-color:#737373;\n"
 " border:none;\n"
 " padding:0px; \n"
-" }\n")
+" }\n")'''
         self.dockWidgetContents = QtGui.QWidget()
         self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
         self.verticalLayout = QtGui.QVBoxLayout(self.dockWidgetContents)

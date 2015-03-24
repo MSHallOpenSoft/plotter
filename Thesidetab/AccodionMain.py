@@ -44,6 +44,10 @@ class AccordionMain(QtGui.QWidget):
       self.plotThread.plot3d(**kwargs)
       print("foooooooooo")
       return
+    def plot2d_spawn_thread(self,**kwargs):
+      self.plotThread.plot2d(**kwargs)
+      print("doooooooooo")
+      return
 
     def setupUi(self):
         ##Form.setWindowModality(QtCore.Qt.WindowModal)
@@ -150,14 +154,19 @@ class AccordionMain(QtGui.QWidget):
       x_end=self.frame.rangeTab.frame.XRight.value()
       y_start=self.frame.rangeTab.frame.YLeft.value()
       y_end=self.frame.rangeTab.frame.YRight.value()
-      z_start=self.frame.rangeTab.frame.ZRight.value()
-      z_end=self.frame.rangeTab.frame.ZLeft.value()
+      z_start=self.frame.rangeTab.frame.ZLeft.value()
+      z_end=self.frame.rangeTab.frame.ZRight.value()
+      x_width=x_end-x_start
+      y_width=y_end-y_start
+      z_width=z_end-z_start
       if(currentDim=="3D"):
         self.plot3d_spawn_thread(curTab=curTab
-          ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end,no_x_points=10
-          ,y_start=y_start,y_end=y_end,no_y_points=10,z_start=z_start,z_end=z_end,no_z_points=10)
+          ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end
+          ,no_x_points=int(x_width)*10,y_start=y_start,y_end=y_end,no_y_points=int(y_width*10),z_start=z_start,z_end=z_end
+          ,no_z_points=int(y_width)*10)
       else:
         print("plot 2d")
+        self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
       #print( self.parent.parent.mayavi_widget.visualization)
         
 

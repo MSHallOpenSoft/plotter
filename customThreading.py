@@ -9,13 +9,22 @@ class MyThread(QThread):
         self.parent = parent
         self.threadlinks=[]
         self.data=0
+        self.plotType='3d'
     def plot3d(self,**kwargs):
         self.data=kwargs
+        self.plotType='3d'
+        self.start()
+    def plot2d(self,**kwargs):
+        self.data=kwargs
+        self.plotType='2d'
         self.start()
     def run(self):
         #time.sleep(5)
         print("inpuuuuuuuuuuuuuuuuuuuuuuut in thread")
-        self.parent.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(**self.data)
+        if(self.plotType=='3d'):
+          self.parent.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(**self.data)
+        else:
+          self.parent.parent.parent.sc_2.plot_2d_implicit(**self.data)
         print("thread finished")
         self.emit(SIGNAL('finished'))
 
