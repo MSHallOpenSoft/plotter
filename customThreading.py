@@ -12,7 +12,8 @@ class MyThread(QThread):
         self.plotType='3d'
     def plot3d_parametric(self,**kwargs):
         self.data=kwargs
-        self.plotType='3d parametrc'
+        self.plotType='3d parametric'
+        self.start()
     def plot3d(self,**kwargs):
         self.data=kwargs
         self.plotType='3d'
@@ -32,7 +33,7 @@ class MyThread(QThread):
           self.parent.parent.parent.mayavi_widget.visualization.mayavi_implicit_3d(**self.data)
         elif self.plotType=='3d parametric':
           print(self.data)
-          #self.parent.parent.parent.mayavi_widget.visualization.mayavi_parametric_3d(**self.data)
+          self.parent.parent.parent.mayavi_widget.visualization.mayavi_parametric_3d(**self.data)
         elif self.plotType=='2d':
           self.parent.parent.parent.sc_2.plot_2d_implicit(**self.data)
         elif self.plotType=='2d parametric':
