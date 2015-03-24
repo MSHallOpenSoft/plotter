@@ -1321,7 +1321,7 @@ def changedFocusSlot(old, now):
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication.instance()
-    app.focusChanged.connect(focusAdjuster)
+    #app.focusChanged.connect(focusAdjuster)
     ex = Ui_MainWindow_2()
     keyboard=ex.myKeyboard
     QtCore.QObject.connect(app, SIGNAL("focusChanged(QWidget *, QWidget *)"), changedFocusSlot)

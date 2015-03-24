@@ -161,7 +161,7 @@ class AccordionMain(QtGui.QWidget):
           ,y_start=y_start,y_end=y_end,no_y_points=10,z_start=z_start,z_end=z_end,no_z_points=10)
       else:
         print("plot 2d")
-        self.plot2d_spawn_thread(eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
+        self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
       #print( self.parent.parent.mayavi_widget.visualization)
         
 

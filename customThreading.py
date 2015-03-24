@@ -12,12 +12,12 @@ class MyThread(QThread):
         self.plotType='3d'
     def plot3d(self,**kwargs):
         self.data=kwargs
-        self.start()
         self.plotType='3d'
+        self.start()
     def plot2d(self,**kwargs):
         self.data=kwargs
-        self.start()
         self.plotType='2d'
+        self.start()
     def run(self):
         #time.sleep(5)
         print("inpuuuuuuuuuuuuuuuuuuuuuuut in thread")

@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import sympyParsing
 import sys
 import sympy
+import copy
 import time
 import os
 import random
@@ -56,9 +57,16 @@ class customLineEdit(QtGui.QLineEdit):
 
 
 class MplPlot2dCanvas(FigureCanvas):
+  dic_plot={} #storing contour
+  dic_parameter={} #storing parameters
+  dic_calculated={} #storing calculated values
+  dic_index={} #storing calculated values
   def __init__(self,parent=None):
+      self.count=0
+      self.plotobj={}
       self.surfs = [] # [{"xx":,"yy:","val:"}]
       self.fig= plt.figure()
+      self.plotted=0
       #self.fig = Figure()
       self.fig.suptitle("this is  the  figure  title",  fontsize=12)
       FigureCanvas.__init__(self, self.fig)
@@ -87,8 +95,10 @@ class MplPlot2dCanvas(FigureCanvas):
       #timer.timeout.connect(self.update_figure)
       #timer.start(100)
 
-  def plot_2d_implicit(self,**kwargs):
+  def plot_2d_implicit(self,curTab=0,curPlot=1,**kwargs):
+      len_arguments=len(kwargs)
       print(kwargs)
+      keystr='plt'+str(curPlot)
       color=kwargs.get('color',(0.5,0.8,0.5))
       x_start=kwargs.get('x_start',(-5))
       eqn=kwargs.get('eqn',"x+y=0")
@@ -101,9 +111,43 @@ class MplPlot2dCanvas(FigureCanvas):
       expr = sympy.radsimp(expr)
       num_dum=sympy.fraction(expr)
       expr=num_dum[0]
-      sympy_p1 = sympyPlot_implicit.plot_implicit(expr,show=False,ax=self.ax,x_var=(x,x_start,x_end),y_var=(y,y_start,y_end),line_color=color,linewidth=line_width)
+      shared_items=[]
+      if(keystr in self.dic_parameter):
+        shared_items = set(kwargs.items()) & set(self.dic_parameter[keystr].items())
+        print(shared_items)
+        len_shared = len(shared_items)
+        if len_shared == len_arguments:
+            print("no change")
+            return
       self.ax.cla()
-      sympy_p1.plotNow()
+      sympy_p1 = sympyPlot_implicit.plot_implicit(expr,show=False,ax=self.ax,x_var=(x,x_start,x_end),y_var=(y,y_start,y_end),line_color=color,linewidth=line_width)
+      if(len(self.dic_plot)==0):
+        self.plotobj=sympy_p1
+      else:
+        print("goooiiiooooooooooooooo")
+        if keystr in self.dic_index:
+          print("hooooiioooooooooooo")
+          self.plotobj._series.pop(self.dic_index[keystr])
+        self.plotobj.extend(sympy_p1)
+
+      self.dic_plot[keystr]=sympy_p1
+      #for k in self.dic_plot.keys():
+        #if k!=keystr:
+      #    self.plotobj.extend(dic[k])
+      #if(self.plotted==0):
+        #self.plotted=sympy_p1
+      ##if(self.plotted!=0):
+
+      #if(self.plotted!=0):
+        #self.count=1
+        #self.plotted.extend(sympy_p1)
+        #self.plotted.plotNow()
+      #else:
+      #  sympy_p1.plotNow()
+      self.dic_index[keystr]=len(self.plotobj._series)-1
+      self.dic_parameter[keystr]=kwargs
+      print(self.plotobj._series)
+      self.plotobj.plotNow()
       self.update_figure()
       
   def update_figure(self):
@@ -118,7 +162,7 @@ class MplPlot2dCanvas(FigureCanvas):
         cur_ylim = self.ax.get_ylim()
         cur_xrange = (cur_xlim[1] - cur_xlim[0])*.5
         cur_yrange = (cur_ylim[1] - cur_ylim[0])*.5
-        print(cur_xlim,cur_ylim)
+        #print(cur_xlim,cur_ylim)
         xdata = event.xdata # get event x location
         ydata = event.ydata # get event y location
         x_left = xdata - cur_xlim[0]
@@ -134,7 +178,7 @@ class MplPlot2dCanvas(FigureCanvas):
         else:
             # deal with something that should never happen
             scale_factor = 1
-            print event.button
+            #print event.button
         # set new limits
         self.ax.set_xlim([xdata - x_left*scale_factor, xdata + x_right*scale_factor])
         self.ax.set_ylim([ydata - y_top*scale_factor, ydata + y_bottom*scale_factor])

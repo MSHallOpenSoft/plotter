@@ -374,6 +374,7 @@ def plot_implicit(expr, x_var=None, y_var=None, **kwargs):
     kwargs.setdefault('xlabel', var_start_end_x[0].name)
     kwargs.setdefault('ylabel', var_start_end_y[0].name)
     p = Plot(series_argument, **kwargs)
+    #p2 = Plot(series_argument, **kwargs)
     if show:
         p.show()
     return p
