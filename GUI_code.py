@@ -49,7 +49,7 @@ from PyQt4.QtGui import *
 from functions import Ui_DockWidget_2
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot2dCanvas
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -321,7 +321,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
-        sc_2=MplPlot3dCanvas_2(self)
+        sc_2=MplPlot2dCanvas(self)
         widget_2=QtGui.QWidget(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
@@ -572,12 +572,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_2.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_2.setObjectName(_fromUtf8("toolButton_2"))
         self.horizontalLayout_2.addWidget(self.toolButton_2)'''
-        self.toolButton_2.clicked.connect(self.saveImage)
-        self.horizontalLayout_2.addWidget(self.toolButton_2)
+        #self.horizontalLayout_2.addWidget(self.toolButton_2)
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_24.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_24.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_24.setStyleSheet(_fromUtf8(""))
+        self.toolButton_24.clicked.connect(self.saveImage)
         icon11 = QtGui.QIcon()
         icon11.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Camera-02-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_24.setIcon(icon11)
