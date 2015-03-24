@@ -45,12 +45,8 @@ import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
-<<<<<<< HEAD
 from functions import Ui_DockWidget_2
-=======
 
-
->>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
@@ -141,7 +137,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " QMenuBar::item { spacing: 3px; padding: 1px 4px; background: transparent; border-radius: 2px; } \n"
 "QMenuBar::item:selected { background:#737373; } \n"
 "QMenuBar::item:pressed { background: #414953; }\n"
-<<<<<<< HEAD
 " QTableWidget{ background:rgb(25, 25, 25); border:none; color:white; gridline-color:#aaaaaa;} \n"
 "QTextEdit{\n"
 " background:rgb(25, 25, 25);\n"
@@ -149,12 +144,10 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " } \n"
 "QScrollBar:horizontal { border: none; background: rgb(100, 100, 100); height: 15px; margin: 0px 20px 0px 20px; } \n"
 "QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(47, 47, 47, 255), stop:0.465909 rgba(67, 67, 67, 255), stop:0.681818 rgba(103, 103, 103, 255), stop:0.875 rgba(150, 150, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; }\n"
-=======
 " QTableWidget{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); border:1px solid rgb(171, 173, 179); } \n"
 "QfTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
 "QScrollBar:horizontal { border: none; background: #DBDBDB; height: 15px; margin: 0px 20px 0px 20px; } \n"
 "QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); min-width: 20px; }\n"
->>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
 " QScrollBar::add-line:horizontal { border: none; background:#DBDBDB; width: 20px; subcontrol-position: right; subcontrol-origin: margin; }\n"
 " QScrollBar::sub-line:horizontal { border:none; background:#DBDBDB; width: 20px; subcontrol-position: left; subcontrol-origin: margin; } \n"
 "QScrollBar::add-line:horizontal:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); width: 20px; subcontrol-position: right; subcontrol-origin: margin; } \n"
@@ -577,12 +570,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_2.setIcon(icon4)
         self.toolButton_2.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_2.setObjectName(_fromUtf8("toolButton_2"))
-<<<<<<< HEAD
         self.horizontalLayout_2.addWidget(self.toolButton_2)'''
-=======
         self.toolButton_2.clicked.connect(self.saveImage)
         self.horizontalLayout_2.addWidget(self.toolButton_2)
->>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_24.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_24.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -731,19 +721,17 @@ class Ui_MainWindow(QtGui.QMainWindow):
         ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-<<<<<<< HEAD
     def showTable(self):
         if self.frame.isVisible()==True:
             self.hide_2()
         else:
             self.show_2()
-=======
+
     def saveImage(self,event):
       #self.sc_2.plotobj.save('foo.pdf')
       #self.mayavi_widget.visualization.scene.mlab.savefig('doo.pdf')
       print("saving graph")
 
->>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
     def hideAll(self):
         self.dockWidget.hide()
         self.dockWidget_4.hide()
