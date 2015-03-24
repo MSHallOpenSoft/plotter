@@ -49,20 +49,22 @@ class TableContents(QtGui.QFrame):
         self.targetPlot = name
 
     def getData(self):
-        pdata = []
-        for i in range (0,self.tableWidget.rowCount()):
-            row = []
+        #pdata = []
+        #for i in range (0,self.tableWidget.rowCount()):
+            #row = []
 
-            for j in range (0,self.tableWidget.columnCount()):
+            #for j in range (0,self.tableWidget.columnCount()):
                 
-                item = self.tableWidget.item(i,j)
-                print item
-                row.append(item)
+                #item = float(self.tableWidget.item(i,j).text())
+                #print item
+                #row.append(item)
 
-            pdata.append(row)
-        self.data = pdata
-        print pdata
-        return pdata
+        #    pdata.append(row)
+        #self.data = pdata
+        #print pdata
+        print("geeeeeeeeeet data")
+        print(self.data)
+        return self.data
 
     def setupUI(self):
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
@@ -350,6 +352,7 @@ class TableContents(QtGui.QFrame):
                     self.data.append(row)
 
                 print self.data        
+                print("woooooooooooooooooooooooooooo")
 
                 self.tableWidget.setRowCount(rowno_)
                 

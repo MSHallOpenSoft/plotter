@@ -178,6 +178,52 @@ class Visualization(HasTraits):
 
           # mlab.view(47, 57, 8.2, (0.1, 0.15, 0.14))
           #self.scene.mlab.show()
+    def mayavi_table_3d(self,curTab=0,curPlot=1,**kwargs):
+      donot_calculate=False
+      color=kwargs.get('color',(0.5,0.8,0.5))
+      table=kwargs.get('table',((0,0,0)))
+      opacity=kwargs.get('opacity',1)
+      line_width=kwargs.get('line_width',0.2)
+      self.remove_from_2d("plt"+str(curPlot))
+      keystr="tab"+str(curTab)+"plt"+str(curPlot)
+      len_arguments=len(kwargs)
+      len_shared=0
+      if(keystr in self.dic_parameter):
+          if self.dic_parameter[keystr]['eqn'] == kwargs['eqn']:
+            print(kwargs)
+            print(self.dic_parameter)
+            shared_items = set(kwargs.items()) & set(self.dic_parameter[keystr].items())
+            print(shared_items)
+            len_shared = len(shared_items)
+            if len_shared == len_arguments:
+                print("no change")
+                return
+            donot_calculate = len_shared == len_arguments-1 and self.dic_parameter[keystr]['color'] != kwargs['color']
+
+      self.dic_parameter[keystr]=kwargs
+      print("shaaaaaaaaaare",len_shared)
+      if(donot_calculate):
+          doo=self.dic_calculated[keystr]
+          print("not calculating")
+      else:
+        xarr=[float(p[0]) for p in table]
+        yarr=[float(p[1]) for p in table]
+        zarr=[float(p[2]) for p in table]
+        if(keystr in self.dic_contour):
+            self.dic_contour[keystr].remove()
+
+        if(keystr in self.dic_outline):
+            self.dic_outline[keystr].remove()
+        print(xarr,yarr,zarr)
+        self.dic_contour[keystr]=self.scene.mlab.plot3d(xarr,yarr,zarr,color=color,tube_radius=0.5,opacity=opacity)
+        axes=self.scene.mlab.axes(color=(0.5,0.5,0.5),nb_labels=10,xlabel='x',ylabel='y',zlabel='z')
+        axes.label_text_property.font_family = 'courier'
+        axes.label_text_property.font_size = 4
+        self.dic_outline[keystr]=self.scene.mlab.outline(self.dic_contour[keystr], color=(.7, .7, .7))
+        self.update_plot()
+
+          
+
 
       
     def mayavi_implicit_3d(self,curTab=0,curPlot=1,**kwargs):
@@ -199,7 +245,6 @@ class Visualization(HasTraits):
       donot_calculate=False
       len_arguments=len(kwargs)
       len_shared=0
-
       x_start=kwargs.get('x_start',(-5))
       eqn=kwargs.get('eqn',"x+y+z=0")
       line_width=kwargs.get('line_width',0.2)
@@ -209,7 +254,6 @@ class Visualization(HasTraits):
       y_end=kwargs.get('y_end',5)
       z_start=kwargs.get('z_start',-5)
       z_end=kwargs.get('z_end',5)
-
       no_x_points=kwargs.get('no_x_points',50)
       no_y_points=kwargs.get('no_y_points',50)
       no_z_points=kwargs.get('no_z_points',50)
