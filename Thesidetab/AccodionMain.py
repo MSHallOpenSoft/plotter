@@ -40,6 +40,16 @@ class AccordionMain(QtGui.QWidget):
 
     def finishedPlotting(self):
       print("finished plotting")
+    def plot_table2d_spawn_thread(self,**kwargs):
+      self.plotThread.plot2d_table(**kwargs)
+      print("foooooooooo")
+      return
+    def plot_table3d_spawn_thread(self,**kwargs):
+      print("taaaaaaaaaaaaaaaaaaaaaabllllleeeeeeeeeeeeeeeeeeeeeeeeeee")
+      self.plotThread.plot3d_table(**kwargs)
+      print("foooooooooo")
+      return
+
 
     def plot3d_parametric_spawn_thread(self,**kwargs):
       self.plotThread.plot3d_parametric(**kwargs)
@@ -181,17 +191,27 @@ class AccordionMain(QtGui.QWidget):
           self.plot3d_parametric_spawn_thread(curTab=curTab
           ,curPlot=curPlot,eqn=tuple(expr),color=color,line_width=thickness,opacity=opacity,u_start=x_start,u_end=x_end
           ,v_start=x_start,v_end=x_end)
+        else:
+          #layf = self.parent.eqList
+          table = self.parent.parent.frame
+          print(table.getData())
+          print("liiiiiiiiiiiiiiiiiii")
+          self.plot_table3d_spawn_thread(curTab=curTab,curPlot=curPlot,table=tuple(table.getData()),color=color,opacity=opacity,line_width=thickness)
+
       else:
         if len(expr)==1:
           eqn=expr[0]
           print("plot 2d")
-          self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
+          self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,opacity=opacity,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
         elif len(expr)==3:
       #print( self.parent.parent.mayavi_widget.visualization)
           print(eqn)
-          self.plot2d_parametric_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=tuple(expr),color=color,line_width=thickness,u_start=x_start,u_end=x_end,v_start=x_start,v_end=x_end)
-        elif str(type(expr[0]))=='list':
-          print("getting table")
+          self.plot2d_parametric_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=tuple(expr),color=color,opacity=opacity,line_width=thickness,u_start=x_start,u_end=x_end,v_start=x_start,v_end=x_end)
+        else:
+          if(len(expr[0])==2):
+              self.plot_table2d_spawn_thread(curTab=curTab,curPlot=curPlot,table=tuple(expr),color=color,opacity=opacity,line_width=thickness)
+          
+
         
 
     def retranslateUi(self):
@@ -205,12 +225,11 @@ class AccordionMain(QtGui.QWidget):
             #self.
             
             self.adjustSize()
-            
+            self.saveThetableContents()
+            table = self.parent.parent.frame
+            table.setPlotName(self.label)
+            table.setData(self.frame.tableContents)
         else:
-          self.saveThetableContents()
-          table = self.parent.parent.frame
-          table.setPlotName(self.label)
-          table.setData(self.frame.tableContents)
           self.frame.hide()
 
     def closeHandler(self):
