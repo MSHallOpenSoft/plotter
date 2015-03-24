@@ -31,19 +31,21 @@ import sliderTop
 import som
 import som2
 import tableCon
+import AccodionMain
 
 
 class MainFrameR(QtGui.QWidget):
     def __init__(self,parent):
         super(MainFrameR,self).__init__(parent)
         self.parent = parent
-
+        self.table = self.parent.parent.frame
+        self.tableContents = []
+        self.hideTable = self.parent.parent.frame_2
         self.setupUi()
 
     def setupUi(self):
         #Form.setObjectName(_fromUtf8("Form"))
         self.resize(400, 10)
-        self.table = tableCon.TableContents(self)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -84,13 +86,20 @@ class MainFrameR(QtGui.QWidget):
 
 
 
-        #self.sliderTab.hide()
+        self.sliderTab.hide()
+
+        self.widget_43 = QtGui.QLineEdit(self)
+        self.equationTable = accordion.Accordion(self,"Expression",self.widget_43)
 
         
+        self.equationTable.frame.setText("[Table]")
+        self.equationTable.frame.setReadOnly(True)
+        self.equationTable.hide()
       
         self.vertical.addRow(self.equationTab)
         self.vertical.addRow(self.equationTabParameter)
         self.vertical.addRow(self.equationTabExplicit)
+        self.vertical.addRow(self.equationTable)
         self.vertical.addRow(self.rangeTab)
         self.vertical.addRow(self.settingTab)
         self.vertical.addRow(self.sliderTab)
@@ -100,6 +109,9 @@ class MainFrameR(QtGui.QWidget):
 
         self.equationTabExplicit.frame.show()
         self.equationTabExplicit.iconButton.setIcon(self.equationTabExplicit.icon2)
+
+
+        
 
         self.vertical.setSpacing(0)
         self.vertical.setContentsMargins(0,0,0,0)
@@ -121,17 +133,56 @@ class MainFrameR(QtGui.QWidget):
             self.equationTabParameter.hide()
             self.equationTabExplicit.show()
             self.equationTabExplicit.frame.show()
+            self.equationTable.hide()
+            self.table.hide()
+            self.hideTable.hide()
         elif(combob.currentIndex() == 1):
             self.equationTab.show()
             self.equationTab.frame.show()
             self.equationTabParameter.hide()
             self.equationTabExplicit.hide()
+            self.equationTable.hide()
+            self.table.hide()
+            self.hideTable.hide()
         elif(combob.currentIndex() == 2):
             self.equationTab.hide()
             self.equationTabParameter.show()
             self.equationTabParameter.frame.show()
             self.equationTabExplicit.hide()
+            self.equationTable.hide()
+            self.table.hide()
+            self.hideTable.hide()
+        elif(combob.currentIndex() == 3):
+            self.equationTab.hide()
+            self.equationTabParameter.hide()
+            self.equationTabExplicit.hide()
+            self.equationTable.show()
+            self.equationTable.frame.show()
+            #self.table.show()
+            #self.hideTable.hide()
+            #add listener to dispaly in table
+            
+
+            #self.saveThetableContents()
+            #self.table.setData(self.tableContents)
+            ##temp = self.parent.eqList[-1]
+            #self.table.setPlotName(temp.label)
+
+
+            #print "here"
+
+
         self.adjustSize()
+
+
+    def saveThetableContents(self):
+        layf = self.parent.eqList
+
+        for i in range(len(layf)):
+            print type(layf[i])
+            if(layf[i].label == self.table.getPlotName()):
+                layf[i].tableContents = self.table.data
+
 
     def dimensionSelector(self,combob):
         if(combob.currentIndex() == 0):   # 0 is 3D
@@ -139,7 +190,7 @@ class MainFrameR(QtGui.QWidget):
             self.equationTabParameter.frame.lineEdit_3.show()
             self.equationTabExplicit.frame.setfor3D()
             self.rangeTab.frame.setupfor3D()
-        elif(combob.currentIndex() == 1):
+        elif(combob.currentIndex() == 1): 
             self.equationTabExplicit.frame.setfor2D()
             self.equationTabParameter.frame.label_3.hide()
             self.equationTabParameter.frame.lineEdit_3.hide()
@@ -155,6 +206,8 @@ class MainFrameR(QtGui.QWidget):
             listr.append(self.equationTabExplicit.frame.getExpre())
         elif(not self.equationTabParameter.isHidden()):
             listr = self.equationTabParameter.frame.getExpression()
+        elif(not self.equationTable.isHidden()):
+            listr = self.tableContents
 
         return listr
 

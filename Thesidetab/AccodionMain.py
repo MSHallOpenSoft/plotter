@@ -32,6 +32,7 @@ class AccordionMain(QtGui.QWidget):
         self.frame = frame
         self.label = label
         self.parent = parent
+        
         self.setupUi()
         self.plotThread = MyThread(self)
         self.connect(self.plotThread,QtCore.SIGNAL('finished'),self.finishedPlotting)
@@ -40,10 +41,21 @@ class AccordionMain(QtGui.QWidget):
     def finishedPlotting(self):
       print("finished plotting")
 
+    def plot3d_parametric_spawn_thread(self,**kwargs):
+      self.plotThread.plot3d_parametric(**kwargs)
+      print("foooooooooo")
+      return
+
     def plot3d_spawn_thread(self,**kwargs):
       self.plotThread.plot3d(**kwargs)
       print("foooooooooo")
       return
+
+    def plot2d_parametric_spawn_thread(self,**kwargs):
+      self.plotThread.plot2d_parametric(**kwargs)
+      print("doooooooooo")
+      return
+
     def plot2d_spawn_thread(self,**kwargs):
       self.plotThread.plot2d(**kwargs)
       print("doooooooooo")
@@ -147,8 +159,7 @@ class AccordionMain(QtGui.QWidget):
       expr=self.frame.getExpression()
       print(expr)
       eqn=""
-      if len(expr)==1:
-        eqn=expr[0]
+      
       
       x_start=self.frame.rangeTab.frame.XLeft.value()
       x_end=self.frame.rangeTab.frame.XRight.value()
@@ -160,14 +171,25 @@ class AccordionMain(QtGui.QWidget):
       y_width=y_end-y_start
       z_width=z_end-z_start
       if(currentDim=="3D"):
-        self.plot3d_spawn_thread(curTab=curTab
-          ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end
-          ,no_x_points=int(x_width)*10,y_start=y_start,y_end=y_end,no_y_points=int(y_width*10),z_start=z_start,z_end=z_end
-          ,no_z_points=int(y_width)*10)
+        if len(expr)==1:
+          eqn=expr[0]
+          self.plot3d_spawn_thread(curTab=curTab
+            ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end
+            ,no_x_points=int(x_width)*10,y_start=y_start,y_end=y_end,no_y_points=int(y_width*10),z_start=z_start,z_end=z_end
+            ,no_z_points=int(y_width)*10)
+        elif len(expr)==3:
+          self.plot3d_parametric_spawn_thread(curTab=curTab
+          ,curPlot=curPlot,eqn=tuple(expr),color=color,line_width=thickness,opacity=opacity,u_start=x_start,u_end=x_end
+          ,v_start=x_start,v_end=x_end)
       else:
-        print("plot 2d")
-        self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
+        if len(expr)==1:
+          eqn=expr[0]
+          print("plot 2d")
+          self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
+        elif len(expr)==3:
       #print( self.parent.parent.mayavi_widget.visualization)
+          print(eqn)
+          self.plot2d_parametric_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=tuple(expr),color=color,line_width=thickness,u_start=x_start,u_end=x_end,v_start=x_start,v_end=x_end)
         
 
     def retranslateUi(self):
@@ -178,34 +200,15 @@ class AccordionMain(QtGui.QWidget):
         if(self.frame.isHidden()):
             
             self.frame.show()
-            print "here"
-            print type(self.parent.parent)
-            print type(self.frame.tableValue)
-            hlayout = self.parent.parent.horizontalLayout_3
-            print hlayout.count()
-            j = 1;
-            for i in range(hlayout.count()):
-              if(type(hlayout.itemAt(i)) == tableCon.TableContents):
-                frem = hlayout.itemAt(i)
-                j = i
-
-            hlayout.takeAt(i)
-
-
-
+            #self.
             
-            hlayout.insertWidget(i,self.frame.table)
-            
-            self.parent.parent.adjustSize()
+            self.adjustSize()
             
         else:
-          j = 1;
-          hlayout = self.parent.parent.horizontalLayout_3
-          for i in range(hlayout.count()):
-            if(type(hlayout.itemAt(i)) == tableCon.TableContents):
-              frem = hlayout.itemAt(i)
-              j = i
-          self.parent.parent.horizontalLayout_3.takeAt(j)
+          self.saveThetableContents()
+          table = self.parent.parent.frame
+          table.setPlotName(self.label)
+          table.setData(self.frame.tableContents)
           self.frame.hide()
 
     def closeHandler(self):
@@ -214,6 +217,17 @@ class AccordionMain(QtGui.QWidget):
 
     def getMainFrame(self):
       return parent
+
+    def saveThetableContents(self):
+        layf = self.parent.eqList
+        table = self.parent.parent.frame
+        print "in pushed mode"
+        for i in range(len(layf)):
+            if(layf[i].label == table.getPlotName()):
+              layf[i].frame.tableContents = table.getData()
+              print layf[i].frame.tableContents
+              break
+
 
     
 

@@ -463,7 +463,7 @@ class LineOver1DRangeSeries(Line2DBaseSeries):
         if self.only_integers or not self.adaptive:
             return super(LineOver1DRangeSeries, self).get_segments()
         else:
-            f = lambdify([self.var], self.expr)
+            f = lambdify([self.var], self.expr,"numpy")
             list_segments = []
 
             def sample(p, q, depth):
@@ -522,7 +522,7 @@ class LineOver1DRangeSeries(Line2DBaseSeries):
                     num=int(self.end) - int(self.start) + 1)
         else:
             list_x = np.linspace(self.start, self.end, num=self.nb_of_points)
-        f = vectorized_lambdify([self.var], self.expr)
+        f = lambdify([self.var], self.expr,"numpy")
         list_y = f(list_x)
         return (list_x, list_y)
 
@@ -557,8 +557,8 @@ class Parametric2DLineSeries(Line2DBaseSeries):
 
     def get_points(self):
         param = self.get_parameter_points()
-        fx = vectorized_lambdify([self.var], self.expr_x)
-        fy = vectorized_lambdify([self.var], self.expr_y)
+        fx = lambdify([self.var], self.expr_x,"numpy")
+        fy = lambdify([self.var], self.expr_y,"numpy")
         list_x = fx(param)
         list_y = fy(param)
         return (list_x, list_y)
@@ -580,8 +580,8 @@ class Parametric2DLineSeries(Line2DBaseSeries):
         if not self.adaptive:
             return super(Parametric2DLineSeries, self).get_segments()
 
-        f_x = lambdify([self.var], self.expr_x)
-        f_y = lambdify([self.var], self.expr_y)
+        f_x = lambdify([self.var], self.expr_x,"numpy")
+        f_y = lambdify([self.var], self.expr_y,"numpy")
         list_segments = []
 
         def sample(param_p, param_q, p, q, depth):
@@ -687,9 +687,9 @@ class Parametric3DLineSeries(Line3DBaseSeries):
 
     def get_points(self):
         param = self.get_parameter_points()
-        fx = vectorized_lambdify([self.var], self.expr_x)
-        fy = vectorized_lambdify([self.var], self.expr_y)
-        fz = vectorized_lambdify([self.var], self.expr_z)
+        fx = lambdify([self.var], self.expr_x,"numpy")
+        fy = lambdify([self.var], self.expr_y,"numpy")
+        fz = lambdify([self.var], self.expr_z,"numpy")
         list_x = fx(param)
         list_y = fy(param)
         list_z = fz(param)
@@ -760,7 +760,7 @@ class SurfaceOver2DRangeSeries(SurfaceBaseSeries):
                                                  num=self.nb_of_points_x),
                                      np.linspace(self.start_y, self.end_y,
                                                  num=self.nb_of_points_y))
-        f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
+        f = lambdify((self.var_x, self.var_y), self.expr,"numpy")
         print ( f(mesh_x, mesh_y) )
         
         return (mesh_x, mesh_y, f(mesh_x, mesh_y))
@@ -799,7 +799,7 @@ class SurfaceOver3DRangeSeries(SurfaceBaseSeries):
                                                  num=self.nb_of_points_x),
                                      np.linspace(self.start_y, self.end_y,
                                                  num=self.nb_of_points_y))
-        f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
+        f = lambdify((self.var_x, self.var_y), self.expr,"numpy")
         z_eqns = f(mesh_x, mesh_y)
         # mesh_z=[]
         mesh_z = [[0 for x in xrange(len(z_eqns))] for x in xrange(len(z_eqns))]
@@ -870,7 +870,7 @@ class SurfaceOver3D1RangeSeries(SurfaceBaseSeries):
         zArr=np.linspace(self.start_x, self.end_x,num=50)
         print (self.expr)
         print ((self.var_z))
-        f = lambdify((self.var_z), self.expr )
+        f = lambdify((self.var_z), self.expr,"numpy" )
         zExpr = f(zArr)
         # print (zExpr)
         xArrF=[]
@@ -964,9 +964,9 @@ class ParametricSurfaceSeries(SurfaceBaseSeries):
 
     def get_meshes(self):
         mesh_u, mesh_v = self.get_parameter_meshes()
-        fx = vectorized_lambdify((self.var_u, self.var_v), self.expr_x)
-        fy = vectorized_lambdify((self.var_u, self.var_v), self.expr_y)
-        fz = vectorized_lambdify((self.var_u, self.var_v), self.expr_z)
+        fx = lambdify((self.var_u, self.var_v), self.expr_x,"numpy")
+        fy = lambdify((self.var_u, self.var_v), self.expr_y,"numpy")
+        fz = lambdify((self.var_u, self.var_v), self.expr_z,"numpy")
         return (fx(mesh_u, mesh_v), fy(mesh_u, mesh_v), fz(mesh_u, mesh_v))
 
 
@@ -1008,7 +1008,7 @@ class ContourSeries(BaseSeries):
                                                  num=self.nb_of_points_x),
                                      np.linspace(self.start_y, self.end_y,
                                                  num=self.nb_of_points_y))
-        f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
+        f = lambdify((self.var_x, self.var_y), self.expr,"numpy")
         return (mesh_x, mesh_y, f(mesh_x, mesh_y))
 
 
@@ -1107,6 +1107,7 @@ class MatplotlibBackend(BaseBackend):
                     #interval math plotting
                     print("honoooooooooooooooooooooooooo")
                     x, y = _matplotlib_list(points[0])
+                    #print(x,y)
                     self.ax.fill(x, y, facecolor=s.line_color, edgecolor='None')
                 else:
                     # use contourf or contour depending on whether it is
@@ -1115,6 +1116,7 @@ class MatplotlibBackend(BaseBackend):
                     ListedColormap = self.matplotlib.colors.ListedColormap
                     colormap = ListedColormap(["white", s.line_color])
                     xarray, yarray, zarray, plot_type = points
+                    #print(xarray,yarray,zarray,plot_type)
                     if plot_type == 'contour':
                         print("conoooooooooooooooooooooooooo")
                         self.ax.contour(xarray, yarray, zarray,
