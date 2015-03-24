@@ -42,14 +42,14 @@ Please point out any further feautures that can be included in our plotter, or e
                                              2) Enter button does not create the graph
                                              3) Prabhar find your bugs and get it right ASAP'''
 
-#import mayaviPlot
+import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 from functions import Ui_DockWidget_2
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot2dCanvas
+from imp_plottingEquation import MplPlot2dCanvas
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -324,7 +324,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tab.setVisible(False)'''
         #self.tab_2 = QtGui.QWidget()
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        '''contents_2=QtGui.QWidget(self.tabWidget)
+        contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         sc_2=MplPlot2dCanvas(self)
         self.sc_2=sc_2
@@ -336,7 +336,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         self.mayavi_widget = mayaviPlot.MayaviQWidget(self)
         layout.addWidget(self.mayavi_widget)
-        self.tabWidget.addTab(contents, "3D Graph")'''
+        self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
         # self.wrewidget = QtGui.QWidget()
         # self.wrewidget.setLayout(self.verticalLayout_6)
@@ -1427,7 +1427,7 @@ def changedFocusSlot(old, now):
 
 import sys
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
+    app = QtGui.QApplication.instance()
     ex = Ui_MainWindow_2()
     keyboard=ex.myKeyboard
     keyboard_2=ex.myKeyboard_2
