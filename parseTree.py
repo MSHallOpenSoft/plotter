@@ -31,6 +31,15 @@ def get_var_par (eq):
 	This is the main function that parses the equation to 
 	finds out the parameters and variables present in it.
 
+	>>> x^2 / a^2 + y^2 / b^2 = 1    
+	{'variables': ['x', 'y'], 'parameters': ['a', 'b']}
+	
+	>>> a*x + b*y = c
+	{'variables': ['x', 'y'], 'parameters': ['a', 'c', 'b']}
+ 
+	>>> cos(t) + sin(t) = m*x + c        
+	{'variables': ['x'], 'parameters': ['c', 'm', 't']}
+
 	'''
 	eq = eq.replace ("=","+")
 	node= compiler.parse( eq )
@@ -53,11 +62,51 @@ def get_var_par (eq):
 
 	return (out)
 
-while (True):
 
-	eq = raw_input("Enter the equation? \n")
+def validate_equation (eq):
+	'''	
+	Checks if the equation is a valid one.
+	first it checks if the string is an implicit equation of a function.
+	returns false if the equation is not parse able
+	
+	If the syntax is right, and if implicit equation doesn't contain 
+	a variable then also its not valid, otherwise return True
+	
+	>>> a*x = c
+	{'variables': ['x'], 'parameters': ['a', 'c']}
+	true
 
-	# take command line input
-	# eq = sys.argv[1]
+	>>> a*b = c
+	Implicit equation must have a variable.
+	false
+	
+	'''
+	try :
+		if eq.find("=")!=-1:
+			isequation = True
+		else:
+			isequation = False
+		eq = eq.replace ("=","+")
+		node= compiler.parse( eq )
 
-	print get_var_par(eq)
+		par = get_var_par(eq)
+		if len (par['variables']) ==0 and isequation:
+			print "Implicit equation must have a variable."
+			return False
+		else :
+			return True
+	except :
+		return False
+
+
+if __name__ == "__main__":
+	while (True):
+		eq = raw_input("Enter the equation? \n")
+
+		# take command line input
+		# eq = sys.argv[1]
+		if validate_equation(eq):
+			par = get_var_par(eq)
+			print par
+		else:
+			print "Equation not valid."

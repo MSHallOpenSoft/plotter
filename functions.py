@@ -33,7 +33,7 @@ class Ui_DockWidget_2(QtGui.QDockWidget):
 
     def setupUi(self, DockWidget):
         DockWidget.setObjectName(_fromUtf8("DockWidget"))
-        DockWidget.resize(293, 411)
+        DockWidget.resize(293, 350)
         DockWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         '''DockWidget.setStyleSheet("\n"
             " QPushButton{ \n"
