@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 from customThreading import MyThread
+import tableCon
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -42,6 +43,10 @@ class AccordionMain(QtGui.QWidget):
     def plot3d_spawn_thread(self,**kwargs):
       self.plotThread.plot3d(**kwargs)
       print("foooooooooo")
+      return
+    def plot2d_spawn_thread(self,**kwargs):
+      self.plotThread.plot2d(**kwargs)
+      print("doooooooooo")
       return
 
     def setupUi(self):
@@ -149,14 +154,19 @@ class AccordionMain(QtGui.QWidget):
       x_end=self.frame.rangeTab.frame.XRight.value()
       y_start=self.frame.rangeTab.frame.YLeft.value()
       y_end=self.frame.rangeTab.frame.YRight.value()
-      z_start=self.frame.rangeTab.frame.ZRight.value()
-      z_end=self.frame.rangeTab.frame.ZLeft.value()
+      z_start=self.frame.rangeTab.frame.ZLeft.value()
+      z_end=self.frame.rangeTab.frame.ZRight.value()
+      x_width=x_end-x_start
+      y_width=y_end-y_start
+      z_width=z_end-z_start
       if(currentDim=="3D"):
         self.plot3d_spawn_thread(curTab=curTab
-          ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end,no_x_points=10
-          ,y_start=y_start,y_end=y_end,no_y_points=10,z_start=z_start,z_end=z_end,no_z_points=10)
+          ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end
+          ,no_x_points=int(x_width)*10,y_start=y_start,y_end=y_end,no_y_points=int(y_width*10),z_start=z_start,z_end=z_end
+          ,no_z_points=int(y_width)*10)
       else:
         print("plot 2d")
+        self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
       #print( self.parent.parent.mayavi_widget.visualization)
         
 
@@ -168,13 +178,42 @@ class AccordionMain(QtGui.QWidget):
         if(self.frame.isHidden()):
             
             self.frame.show()
-        else:
+            print "here"
+            print type(self.parent.parent)
+            print type(self.frame.tableValue)
+            hlayout = self.parent.parent.horizontalLayout_3
+            print hlayout.count()
+            j = 1;
+            for i in range(hlayout.count()):
+              if(type(hlayout.itemAt(i)) == tableCon.TableContents):
+                frem = hlayout.itemAt(i)
+                j = i
+
+            hlayout.takeAt(i)
+
+
+
             
-            self.frame.hide()
+            hlayout.insertWidget(i,self.frame.table)
+            
+            self.parent.parent.adjustSize()
+            
+        else:
+          j = 1;
+          hlayout = self.parent.parent.horizontalLayout_3
+          for i in range(hlayout.count()):
+            if(type(hlayout.itemAt(i)) == tableCon.TableContents):
+              frem = hlayout.itemAt(i)
+              j = i
+          self.parent.parent.horizontalLayout_3.takeAt(j)
+          self.frame.hide()
 
     def closeHandler(self):
         if(self):
             self.deleteLater()
+
+    def getMainFrame(self):
+      return parent
 
     
 

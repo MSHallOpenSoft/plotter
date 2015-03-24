@@ -1,10 +1,10 @@
-Calculator input integration
-Threading
-   Done
 Project Saving
 Image Saving
 Print support
 2D plot polishing
+  Almost done.
+  Not plotting when no change.
+  Should take care of not calculating when stuff like colour is changed
 3D axes set
 Colour gradient for plots
 Time/animation
@@ -13,4 +13,6 @@ Table integration with plots given on left
 
 Removing Logic
   figure removing possible. 
+
+>= check it out
 

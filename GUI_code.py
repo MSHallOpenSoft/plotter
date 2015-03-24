@@ -46,12 +46,14 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
+
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot2dCanvas
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
 #import matplotlib.pyplot as plotter
+from PyQt4.QtCore import pyqtSlot,SIGNAL,SLOT
 i=1
 import sys, random  
 from Thesidetab import mainFrame
@@ -129,7 +131,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "QMenuBar::item:selected { background:#737373; } \n"
 "QMenuBar::item:pressed { background: #414953; }\n"
 " QTableWidget{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); border:1px solid rgb(171, 173, 179); } \n"
-"QTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
+"QfTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
 "QScrollBar:horizontal { border: none; background: #DBDBDB; height: 15px; margin: 0px 20px 0px 20px; } \n"
 "QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); min-width: 20px; }\n"
 " QScrollBar::add-line:horizontal { border: none; background:#DBDBDB; width: 20px; subcontrol-position: right; subcontrol-origin: margin; }\n"
@@ -161,6 +163,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame_2.setObjectName(_fromUtf8("frame_2"))
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
+        self.horizontalLayout_4.setMargin(0)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setContentsMargins(0,0,0,0)
         self.verticalLayout_5 = QtGui.QVBoxLayout()
         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
         self.pushButton = QtGui.QPushButton(self.frame_2)
@@ -283,6 +288,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.pushButton_21.setStyleSheet(_fromUtf8(""))
         self.pushButton_21.setObjectName(_fromUtf8("pushButton_21"))
         self.verticalLayout_3.addWidget(self.pushButton_21)
+
+        #remove above from code
         self.horizontalLayout_3.addWidget(self.frame)
         self.verticalLayout_6 = QtGui.QVBoxLayout()
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
@@ -297,7 +304,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
-        sc_2=MplPlot3dCanvas_2(self)
+        sc_2=MplPlot2dCanvas(self)
+        self.sc_2=sc_2
         widget_2=QtGui.QWidget(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
@@ -308,7 +316,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         layout.addWidget(self.mayavi_widget)
         self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
-        self.horizontalLayout_3.addLayout(self.verticalLayout_6)
+        self.wrewidget = QtGui.QWidget()
+        self.wrewidget.setLayout(self.verticalLayout_6)
+        self.horizontalLayout_3.addWidget(self.wrewidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1396, 21))
@@ -545,6 +555,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_2.setIcon(icon4)
         self.toolButton_2.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_2.setObjectName(_fromUtf8("toolButton_2"))
+        self.toolButton_2.clicked.connect(self.saveImage)
         self.horizontalLayout_2.addWidget(self.toolButton_2)
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_24.setMaximumSize(QtCore.QSize(16777215, 25))
@@ -692,6 +703,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
         ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def saveImage(self,event):
+      #self.sc_2.plotobj.save('foo.pdf')
+      #self.mayavi_widget.visualization.scene.mlab.savefig('doo.pdf')
+      print("saving graph")
+
     def hideAll(self):
         self.dockWidget.hide()
         self.dockWidget_4.hide()
@@ -808,16 +824,25 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.delimit = dialg.getDelim()
       #self.showFileChooser()
 
+
+    def setCurrentTable(self,table5):
+        self.tableWidget = table5
+        self.verticalLayout_3.insert(table5,1)
+        self.verticalLayout_3.takeAt(2)
+
+
+
     def hide_2(self):
         self.frame.hide()
         self.frame_2.show()
         self.pushButton.show()
+        self.parent.parent.actionTable.setChecked(False)
     
     def show_2(self):
         self.frame.show()
         self.frame_2.hide()
         self.pushButton.hide()
-
+        self.parent.parent.actionTable.setChecked(True)
     def add_page(self):
         #self.pages.append(self.create_page(self.create_new_page_button(),self.create_new_page_button_2()))
         contents = QtGui.QWidget(self.tabWidget)
@@ -906,11 +931,11 @@ class Ui_MainWindow(QtGui.QMainWindow):
 class TabContainer(QtGui.QWidget):
   def __init__(self,parent):
     super(TabContainer, self).__init__(parent)
+    self.parent=parent
     self.initUI()
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self, self.close)
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+T"), self, self.add_page)
     QtGui.QShortcut(QtGui.QKeySequence("Ctrl+W"), self, self.closeTab_1)
-    self.parent=parent
     
 
   def initUI(self):
@@ -939,7 +964,7 @@ class TabContainer(QtGui.QWidget):
     self.pages = []
     self.add_page()
     self.show()
-    
+
   def closeTab(self, index):
       
       #self.tabWidget.widget(index).close()
@@ -1001,6 +1026,7 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         MainWindow.setCentralWidget(self.centralwidget)
+        self.t=TabContainer(self)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
@@ -1044,14 +1070,14 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.actionFullScrren.setObjectName(_fromUtf8("actionFullScrren"))
         self.actionExit_Full_Screen_esc = QtGui.QAction(MainWindow)
         self.actionExit_Full_Screen_esc.setObjectName(_fromUtf8("actionExit_Full_Screen_esc"))
-        self.actionFile_Menu = QtGui.QAction(MainWindow,checkable=True)
-        self.actionFile_Menu.setChecked(True)
+        self.actionFile_Menu = self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_4.toggleViewAction()
+        #self.actionFile_Menu.setChecked(True)
         self.actionFile_Menu.setObjectName(_fromUtf8("actionFile_Menu"))
-        self.actionGraph_Menu = QtGui.QAction(MainWindow,checkable=True)
-        self.actionGraph_Menu.setChecked(True)
+        self.actionGraph_Menu =self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.toggleViewAction()
+        #self.actionGraph_Menu.setChecked(True)
         self.actionGraph_Menu.setObjectName(_fromUtf8("actionGraph_Menu"))
-        self.actionEquation_Widget = QtGui.QAction(MainWindow,checkable=True)
-        self.actionEquation_Widget.setChecked(True)
+        self.actionEquation_Widget = self.t.pages[self.t.tabWidget.currentIndex()].dockWidget.toggleViewAction()
+        #self.actionEquation_Widget.setChecked(True)
         self.actionEquation_Widget.setObjectName(_fromUtf8("actionEquation_Widget"))
         self.menuFile.addAction(self.actionNew_Project)
         self.menuFile.addAction(self.actionOpen_Project)
@@ -1081,20 +1107,31 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.actionExit_Full_Screen_esc.triggered.connect(self.exitFullScreen)
         self.actionSave.triggered.connect(self.save)
         self.actionSave_As.triggered.connect(self.save_as)
-        self.actionEquation_Widget.triggered.connect(self.equationWidget)
-        self.actionFile_Menu.triggered.connect(self.fileMenu)
+        #self.actionEquation_Widget.triggered.connect(self.equationWidget)
+        #self.actionFile_Menu.triggered.connect(self.fileMenu)
         self.actionTable.triggered.connect(self.showTable)
-        self.actionTable.triggered.connect(self.graphMenu)
+        #self.actionTable.triggered.connect(self.graphMenu)
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
         self.myKeyboard = Ui_DockWidget(self,None)
-        self.t=TabContainer(self)
         self.vbox.addWidget(self.t)
         self.vbox.setMargin(0)
         self.vbox.setSpacing(0)
         #self.vbox.setContentsMargins(0,0,0,0)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+    def tabChangedSlot(self,index):
+        self.menuView_2.removeAction(self.actionFile_Menu)
+        self.menuView_2.removeAction(self.actionGraph_Menu)
+        self.menuView_2.removeAction(self.actionEquation_Widget)
+        self.actionFile_Menu=self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_4.toggleViewAction()
+        self.actionEquation_Widget=self.t.pages[self.t.tabWidget.currentIndex()].dockWidget.toggleViewAction()
+        self.actionGraph_Menu=self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.toggleViewAction()
+        self.actionEquation_Widget.setText("Equation Widget")
+        self.actionGraph_Menu.setText("Graph Menu")
+        self.actionFile_Menu.setText("File Menu")
+        self.menuView_2.addAction(self.actionFile_Menu)
+        self.menuView_2.addAction(self.actionGraph_Menu)
+        self.menuView_2.addAction(self.actionEquation_Widget)
     def show_1(self):   
         if self.myKeyboard.isVisible()==False:
             self.myKeyboard.setSize(self.rect)
@@ -1122,8 +1159,12 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
     def showTable(self):
         if self.t.pages[self.t.tabWidget.currentIndex()].frame.isVisible() == False:
             self.t.pages[self.t.tabWidget.currentIndex()].frame.show()
+            self.t.pages[self.t.tabWidget.currentIndex()].frame_2.hide()
+            self.t.pages[self.t.tabWidget.currentIndex()].pushButton.hide()
         else:
             self.t.pages[self.t.tabWidget.currentIndex()].frame.hide()
+            self.t.pages[self.t.tabWidget.currentIndex()].frame_2.show()
+            self.t.pages[self.t.tabWidget.currentIndex()].pushButton.show()
     def graphMenu(self):
         if self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.isVisible() == False:
             self.t.pages[self.t.tabWidget.currentIndex()].dockWidget_3.show()
@@ -1312,19 +1353,25 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
         self.label.setText(_translate("Dialog", self.mssg, None))
 
 
+
 def changedFocusSlot(old, now):
     if type(now) is not QPushButton and QTableWidget:
         keyboard.setTarget(now)
 
 
+
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication.instance()
+
+    #app.focusChanged.connect(focusAdjuster)
     ex = Ui_MainWindow_2()
     keyboard=ex.myKeyboard
     QtCore.QObject.connect(app, SIGNAL("focusChanged(QWidget *, QWidget *)"), changedFocusSlot)
+    QtCore.QObject.connect(ex.t.tabWidget, QtCore.SIGNAL(_fromUtf8("currentChanged(int)")), ex.tabChangedSlot)
     #ex.myKeyboard.
     ex.showMaximized()
     ex.setSize()
+
     #app.focusChanged.connect(keyboardFocusChanger)
     sys.exit(app.exec_())

@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import sympyParsing
 import sys
 import sympy
+import copy
 import time
 import os
 import random
@@ -23,8 +24,18 @@ from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as Naviga
 
 progname = os.path.basename(sys.argv[0])
 progversion = "0.1"
+x = sympy.symbols('x')
+y = sympy.symbols('y')
 
 class customLineEdit(QtGui.QLineEdit):
+    """
+    A simple, custom input taking class to test when this module is run.
+    The input is taken from an object of this to give it to mayavi and test.
+    This is not used in the actual GUI. Used to just test this module separately
+    by running this file. The graph is plotted when the enter key is pressed in
+    this input box. It calls the ``mayavi_implicit_3d`` method from the ``Visualization``
+    class to draw the plot.
+    """
     def __init__(self,parent=None):
         self.parent=parent
         QtGui.QLineEdit.__init__(self)
@@ -35,29 +46,27 @@ class customLineEdit(QtGui.QLineEdit):
         print("wooooo")
         print(self.text())
         #self.parent.
-        txt=sympyParsing.exprLatex(str(self.text()))
+        #txt=sympyParsing.exprLatex(str(self.text()))
         #self.parent.sc.fig.suptitle('$'+txt+'$', x=0.0, y=0.5,  horizontalalignment='left', verticalalignment='center')
         #self.parent.sc.update_figure()
         #x_arr,y_arr=sympyParsing.exprParseSolve(str(self.text()),1,5)
         #print(y_arr)
         #y_arr=[i[0] for i in y_arr]
-        changed=sympyParsing.symStr(str(self.text()))
-        print(changed)
-        foo=sympy.sympify(changed)
-        sympy_p1 = sympyPlot_implicit.plot_implicit(foo,show=False,ax=self.parent.sc.ax)
-        print(self.parent.sc.ax.get_children())
-        sympy_p1.plotNow()
-        print(self.parent.sc.ax.get_children())
-        #print(sympy_p1._backend)
-        #self.parent.sc.ax.add_collection(sympy_p1._backend.ax.get_children()[2])
-        #self.parent.sc.ax.plot(x_arr,y_arr,'r')
-        self.parent.sc.update_figure()
+        sympy_p1 = self.parent.sc.plot_2d_implicit(str(self.text()))
+        #print(self.parent.sc.ax.get_children())
 
 
-class MplPlot3dCanvas_2(FigureCanvas):
+class MplPlot2dCanvas(FigureCanvas):
   def __init__(self,parent=None):
+      self.dic_plot={} #storing contour
+      self.dic_parameter={} #storing parameters
+      self.dic_calculated={} #storing calculated values
+      self.dic_index={} #storing calculated values
+      self.count=0
+      self.plotobj={}
       self.surfs = [] # [{"xx":,"yy:","val:"}]
       self.fig= plt.figure()
+      self.plotted=0
       #self.fig = Figure()
       self.fig.suptitle("this is  the  figure  title",  fontsize=12)
       FigureCanvas.__init__(self, self.fig)
@@ -85,11 +94,63 @@ class MplPlot3dCanvas_2(FigureCanvas):
       #timer = QtCore.QTimer(self)
       #timer.timeout.connect(self.update_figure)
       #timer.start(100)
+
+  def plot_2d_implicit(self,curTab=0,curPlot=1,**kwargs):
+      """
+        Using the same logic as ``plot_implicit_3d`` for plotting multiple graphs efficiently.
+        We are using two dictionaries, ``dic_index`` and ``dic_parameter`` to store the position
+        of a particular plot in the ``_series`` attribute of the plot returned by ``plot_implicit``.
+        The dictionaries are indexed by ``keystr`` which is of the form ``plt1``. If the key already exists,
+        we check if there is any change in the parameters using ``dic_parameter``.
+        If there is a change we remove the plot from the ``_series`` and put the new plot and update the ``dic_index``.
+        ``dic_index`` stores an index of a plot in the ``_series`` list.
+      """
+      len_arguments=len(kwargs)
+      print(kwargs)
+      keystr='plt'+str(curPlot)
+      color=kwargs.get('color',(0.5,0.8,0.5))
+      x_start=kwargs.get('x_start',(-5))
+      eqn=kwargs.get('eqn',"x+y=0")
+      line_width=kwargs.get('line_width',0.2)
+      x_end=kwargs.get('x_end', 5)
+      y_start=kwargs.get('y_start',-5)
+      y_end=kwargs.get('y_end',5)
+      expr = sympy.sympify(sympyParsing.symStr(eqn))
+      expr = sympy.simplify(expr)
+      expr = sympy.radsimp(expr)
+      num_dum=sympy.fraction(expr)
+      expr=num_dum[0]
+      shared_items=[]
+      if(keystr in self.dic_parameter):
+        shared_items = set(kwargs.items()) & set(self.dic_parameter[keystr].items())
+        print(shared_items)
+        len_shared = len(shared_items)
+        if len_shared == len_arguments:
+            print("no change")
+            return
+      self.ax.cla()
+      print("adsflasdfasdf")
+      print(expr)
+      sympy_p1 = sympyPlot_implicit.plot_implicit(expr,show=False,ax=self.ax,fig=self.fig,x_var=(x,x_start,x_end),y_var=(y,y_start,y_end),line_color=color,linewidth=line_width)
+      if(len(self.dic_plot)==0):
+        self.plotobj=sympy_p1
+      else:
+        print("goooiiiooooooooooooooo")
+        if keystr in self.dic_index:
+          print("hooooiioooooooooooo")
+          self.plotobj._series.pop(self.dic_index[keystr])
+        self.plotobj.extend(sympy_p1)
+
+      self.dic_plot[keystr]=sympy_p1
+      self.dic_index[keystr]=len(self.plotobj._series)-1
+      self.dic_parameter[keystr]=kwargs
+      #print(self.plotobj._series)
+      self.plotobj.plotNow()
+      self.update_figure()
+      
   def update_figure(self):
-      #print(time.localtime())
-      #self.ax.dist+=1
-      #self.ax.azim=(self.ax.azim+5)%360
       self.draw()
+
   def zoom_factory(self,base_scale = 2.):
     def zoom_fun(event):
         # get the current x and y limits
@@ -97,7 +158,7 @@ class MplPlot3dCanvas_2(FigureCanvas):
         cur_ylim = self.ax.get_ylim()
         cur_xrange = (cur_xlim[1] - cur_xlim[0])*.5
         cur_yrange = (cur_ylim[1] - cur_ylim[0])*.5
-        print(cur_xlim,cur_ylim)
+        #print(cur_xlim,cur_ylim)
         xdata = event.xdata # get event x location
         ydata = event.ydata # get event y location
         x_left = xdata - cur_xlim[0]
@@ -113,7 +174,7 @@ class MplPlot3dCanvas_2(FigureCanvas):
         else:
             # deal with something that should never happen
             scale_factor = 1
-            print event.button
+            #print event.button
         # set new limits
         self.ax.set_xlim([xdata - x_left*scale_factor, xdata + x_right*scale_factor])
         self.ax.set_ylim([ydata - y_top*scale_factor, ydata + y_bottom*scale_factor])
@@ -138,29 +199,9 @@ class MplPlot3dCanvas_2(FigureCanvas):
       return s
 
   def update_view(self):
-
       print("boo")
       self.draw()
-#      for plt in self.plots:
-              ## del plt
-          #self.ax.collections.remove(plt)
-          #self.plots = []
-          #for surf in self.surfs:
-              #plt = self.ax.plot_surface(surf["xx"], surf["yy"], surf["val"], rstride=5, cstride=5, cmap=cm.jet, linewidth=1, antialiased=True)
-      #        self.plots.append(plt)
-          #self.draw()
 
-
-#class MplPlot3dView(QWidget):
-    #def __init__(self, parent = None):
-       #super(MplPlot3dView, self).__init__(parent)
-       #self.canvas = MplPlot3dCanvas()
-       #self.toolbar = NavigationToolbar(self.canvas, self.canvas)
-       #self.vbox = QVBoxLayout()
-       #self.vbox.addWidget(self.canvas)
-       #self.vbox.addWidget(self.toolbar)
-       #self.setLayout(self.vbox)
-#       self.to_update = False
 
 class ApplicationWindow(QtGui.QMainWindow):
     def __init__(self):
@@ -183,7 +224,7 @@ class ApplicationWindow(QtGui.QMainWindow):
 
         l = QtGui.QVBoxLayout(self.main_widget)
         textbox=customLineEdit(self)
-        sc = MplPlot3dCanvas_2(self.main_widget)
+        sc = MplPlot2dCanvas(self.main_widget)
         l.addWidget(sc)
         l.addWidget(textbox)
         self.sc=sc
