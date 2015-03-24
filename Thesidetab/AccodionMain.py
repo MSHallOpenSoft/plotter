@@ -39,10 +39,21 @@ class AccordionMain(QtGui.QWidget):
     def finishedPlotting(self):
       print("finished plotting")
 
+    def plot3d_parametric_spawn_thread(self,**kwargs):
+      self.plotThread.plot3d_parametric(**kwargs)
+      print("foooooooooo")
+      return
+
     def plot3d_spawn_thread(self,**kwargs):
       self.plotThread.plot3d(**kwargs)
       print("foooooooooo")
       return
+
+    def plot2d_parametric_spawn_thread(self,**kwargs):
+      self.plotThread.plot2d_parametric(**kwargs)
+      print("doooooooooo")
+      return
+
     def plot2d_spawn_thread(self,**kwargs):
       self.plotThread.plot2d(**kwargs)
       print("doooooooooo")
@@ -146,8 +157,7 @@ class AccordionMain(QtGui.QWidget):
       expr=self.frame.getExpression()
       print(expr)
       eqn=""
-      if len(expr)==1:
-        eqn=expr[0]
+      
       
       x_start=self.frame.rangeTab.frame.XLeft.value()
       x_end=self.frame.rangeTab.frame.XRight.value()
@@ -159,14 +169,25 @@ class AccordionMain(QtGui.QWidget):
       y_width=y_end-y_start
       z_width=z_end-z_start
       if(currentDim=="3D"):
-        self.plot3d_spawn_thread(curTab=curTab
-          ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end
-          ,no_x_points=int(x_width)*10,y_start=y_start,y_end=y_end,no_y_points=int(y_width*10),z_start=z_start,z_end=z_end
-          ,no_z_points=int(y_width)*10)
+        if len(expr)==1:
+          eqn=expr[0]
+          self.plot3d_spawn_thread(curTab=curTab
+            ,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,opacity=opacity,x_start=x_start,x_end=x_end
+            ,no_x_points=int(x_width)*10,y_start=y_start,y_end=y_end,no_y_points=int(y_width*10),z_start=z_start,z_end=z_end
+            ,no_z_points=int(y_width)*10)
+        elif len(expr)==3:
+          self.plot3d_parametric_spawn_thread(curTab=curTab
+          ,curPlot=curPlot,eqn=tuple(expr),color=color,line_width=thickness,opacity=opacity,u_start=x_start,u_end=x_end
+          ,v_start=x_start,v_end=x_end)
       else:
-        print("plot 2d")
-        self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
+        if len(expr)==1:
+          eqn=expr[0]
+          print("plot 2d")
+          self.plot2d_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=eqn,color=color,line_width=thickness,x_start=x_start,x_end=x_end,y_start=y_start,y_end=y_end)
+        elif len(expr)==3:
       #print( self.parent.parent.mayavi_widget.visualization)
+          print(eqn)
+          self.plot2d_parametric_spawn_thread(curTab=curTab,curPlot=curPlot,eqn=tuple(expr),color=color,line_width=thickness,u_start=x_start,u_end=x_end,v_start=x_start,v_end=x_end)
         
 
     def retranslateUi(self):

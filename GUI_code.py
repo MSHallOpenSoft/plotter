@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'GUI.ui'
@@ -306,7 +307,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         contents = QtGui.QWidget(self.tabWidget)
         layout = QtGui.QVBoxLayout(contents)
         widget_1 = QtGui.QWidget(self)
-        self.mayavi_widget = mayaviPlot.MayaviQWidget()
+        self.mayavi_widget = mayaviPlot.MayaviQWidget(self)
         layout.addWidget(self.mayavi_widget)
         self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
@@ -698,6 +699,16 @@ class Ui_MainWindow(QtGui.QMainWindow):
     def saveImage(self,event):
       #self.sc_2.plotobj.save('foo.pdf')
       #self.mayavi_widget.visualization.scene.mlab.savefig('doo.pdf')
+      ind=self.tabWidget.currentIndex()
+      if ind==0:
+        filename = QFileDialog.getSaveFileName(self,"Save Ouptut File", "", 'PNG (*.png), JPG(*.jpg), PDF(*.pdf), EPS(*.eps)')
+        print(filename)
+        self.sc_2.plotobj.save(filename)
+      elif ind==1:
+        filename = QFileDialog.getSaveFileName(self,"Save Ouptut File", "", 'PNG (*.png), JPG(*.jpg), PDF(*.pdf), EPS(*.eps)')
+        print(filename)
+        self.mayavi_widget.visualization.scene.mlab.savefig(filename)
+      #print(self.tabWidget.currentIndex())
       print("saving graph")
 
     def hideAll(self):

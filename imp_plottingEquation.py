@@ -7,6 +7,7 @@ import time
 import os
 import random
 import sympyPlot_implicit
+import sympyPlot
 from matplotlib import animation
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends import qt4_compat
@@ -26,6 +27,8 @@ progname = os.path.basename(sys.argv[0])
 progversion = "0.1"
 x = sympy.symbols('x')
 y = sympy.symbols('y')
+u = sympy.symbols('u')
+v = sympy.symbols('v')
 
 class customLineEdit(QtGui.QLineEdit):
     """
@@ -58,6 +61,7 @@ class customLineEdit(QtGui.QLineEdit):
 
 class MplPlot2dCanvas(FigureCanvas):
   def __init__(self,parent=None):
+      self.parent=parent
       self.dic_plot={} #storing contour
       self.dic_parameter={} #storing parameters
       self.dic_calculated={} #storing calculated values
@@ -94,6 +98,70 @@ class MplPlot2dCanvas(FigureCanvas):
       #timer = QtCore.QTimer(self)
       #timer.timeout.connect(self.update_figure)
       #timer.start(100)
+  def remove_from_3d(self,keystr):
+      if keystr in self.parent.mayavi_widget.visualization.dic_contour:
+        self.parent.mayavi_widget.visualization.dic_contour[keystr].remove()
+        self.parent.mayavi_widget.visualization.dic_outline[keystr].remove()
+        #self.parent.mayavi_widget.visualization.update_plot()
+        self.parent.mayavi_widget.visualization.dic_parameter.pop(keystr,None)
+        self.parent.mayavi_widget.visualization.dic_contour.pop(keystr,None)
+        self.parent.mayavi_widget.visualization.dic_calculated.pop(keystr,None)
+        self.parent.mayavi_widget.visualization.dic_outline.pop(keystr,None)
+        print(self.parent.mayavi_widget)
+
+  def plot_2d_parametric(self,curTab=0,curPlot=1,**kwargs):
+      len_arguments=len(kwargs)
+      print(kwargs)
+      keystr='plt'+str(curPlot)
+      self.remove_from_3d('tab'+str(curTab)+keystr)
+      u_start=kwargs.get('u_start',(-5))
+      eqn=kwargs.get('eqn',('x=u','y=u'))
+      color=kwargs.get('color',(0.5,0.8,0.5))
+      print(eqn)
+      keystr='plt'+str(curPlot)
+      eqn1=eqn[0]
+      eqn2=eqn[1]
+      line_width=kwargs.get('line_width',0.2)
+      u_end=kwargs.get('u_end', 5)
+      v_start=kwargs.get('v_start',-5)
+      v_end=kwargs.get('v_end',5)
+      expr1 = sympy.sympify((eqn1[4:]))
+      expr1 = sympy.simplify(expr1)
+      expr1 = sympy.radsimp(expr1)
+      num_dum=sympy.fraction(expr1)
+      expr1=num_dum[0]
+
+      expr2 = sympy.sympify((eqn2[4:]))
+      expr2 = sympy.simplify(expr2)
+      expr2 = sympy.radsimp(expr2)
+      num_dum=sympy.fraction(expr2)
+      expr2=num_dum[0]
+      print(expr1,expr2)
+      color=kwargs.get('color',(0.5,0.8,0.5))
+      if(keystr in self.dic_parameter):
+        shared_items = set(kwargs.items()) & set(self.dic_parameter[keystr].items())
+        print(shared_items)
+        len_shared = len(shared_items)
+        if len_shared == len_arguments:
+            print("no change")
+            return
+      self.ax.cla()
+      sympy_p1 = sympyPlot.plot_parametric(expr1,expr2,(u,u_start,u_end),(v,v_start,v_end),ax=self.ax,fig=self.fig,show=False,line_color=color)
+      if(len(self.dic_plot)==0):
+        self.plotobj=sympy_p1
+      else:
+        print("goooiiiooooooooooooooo")
+        if keystr in self.dic_index:
+          print("hooooiioooooooooooo")
+          self.plotobj._series.pop(self.dic_index[keystr])
+        self.plotobj.extend(sympy_p1)
+
+      self.dic_plot[keystr]=sympy_p1
+      self.dic_index[keystr]=len(self.plotobj._series)-1
+      self.dic_parameter[keystr]=kwargs
+      #print(self.plotobj._series)
+      self.plotobj.plotNow()
+      self.update_figure()
 
   def plot_2d_implicit(self,curTab=0,curPlot=1,**kwargs):
       """
@@ -108,6 +176,7 @@ class MplPlot2dCanvas(FigureCanvas):
       len_arguments=len(kwargs)
       print(kwargs)
       keystr='plt'+str(curPlot)
+      self.remove_from_3d('tab'+str(curTab)+keystr)
       color=kwargs.get('color',(0.5,0.8,0.5))
       x_start=kwargs.get('x_start',(-5))
       eqn=kwargs.get('eqn',"x+y=0")

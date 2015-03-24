@@ -68,6 +68,21 @@ class Visualization(HasTraits):
     dic_outline={} #storing outline
     # the layout of the dialog screated
 
+    def remove_from_2d(self,keystr):
+      print('removing')
+      if keystr in self.parent.sc_2.dic_index:
+        print('removing2')
+        print(self.parent.sc_2.plotobj._series)
+        self.parent.sc_2.plotobj._series.pop(self.parent.sc_2.dic_index[keystr])
+        print(self.parent.sc_2.plotobj._series)
+        self.parent.sc_2.ax.cla()
+        self.parent.sc_2.dic_plot.pop(keystr,None)
+        self.parent.sc_2.dic_index.pop(keystr,None)
+        self.parent.sc_2.dic_parameter.pop(keystr,None)
+        self.parent.sc_2.dic_calculated.pop(keystr,None)
+        self.parent.sc_2.plotobj.plotNow()
+        self.parent.sc_2.update_figure()
+
       
     def mayavi_implicit_3d(self,curTab=0,curPlot=1,**kwargs):
       """
@@ -84,6 +99,7 @@ class Visualization(HasTraits):
       If the dimension of the output given by ``numpy's ogrid`` method is not of the form (t,t,t) we manually change the numpy
       array using ``numpy's repeat`` method. This is used to plot 2d equations like ``x+y=0``,``x+z=0``,``z=0`` etc in 3d form.
       """
+
       donot_calculate=False
       len_arguments=len(kwargs)
       len_shared=0
@@ -104,6 +120,7 @@ class Visualization(HasTraits):
       color=kwargs.get('color',(0.5,0.8,0.5))
       #print(self.dic_parameter)
       print(kwargs)
+      self.remove_from_2d("plt"+str(curPlot))
       keystr="tab"+str(curTab)+"plt"+str(curPlot)
       shared_items=[]
       print("hooooo")
@@ -139,7 +156,7 @@ class Visualization(HasTraits):
           print(expr)
           f = lambdify((x,y,z), expr,"numpy")
           foo=f(X,Y,Z)
-          print(foo)
+          #print(foo)
           print(points_size)
           print(foo.shape)
           axis=[]
@@ -206,11 +223,13 @@ class MayaviQWidget(QtGui.QWidget):
         The QWidget containing the visualization, this is pure PyQt4 code.
     """ 
     def __init__(self, parent=None):
+        self.parent=parent
         QtGui.QWidget.__init__(self, parent)
         layout = QtGui.QVBoxLayout(self)
         layout.setContentsMargins(0,0,0,0)
         layout.setSpacing(0)
         self.visualization = Visualization()
+        self.visualization.parent=parent
 
         # If you want to debug, beware that you need to remove the Qt
         # input hook.
