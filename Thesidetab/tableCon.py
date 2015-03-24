@@ -33,10 +33,36 @@ except AttributeError:
 
 class TableContents(QtGui.QFrame):
 
-    def __init__(self,parent = None):
+    def __init__(self,parent,frame,pushB):
         super(TableContents,self).__init__(parent)
         self.parent = parent
+        self.data = []
+        self.frame_2 = frame
+        self.pushBu = pushB
+        self.targetPlot = ""
         self.setupUI()
+
+    def getPlotName(self):
+        return self.targetPlot
+
+    def setPlotName(self,name):
+        self.targetPlot = name
+
+    def getData(self):
+        pdata = []
+        for i in range (0,self.tableWidget.rowCount()):
+            row = []
+
+            for j in range (0,self.tableWidget.columnCount()):
+                
+                item = self.tableWidget.item(i,j)
+                print item
+                row.append(item)
+
+            pdata.append(row)
+        self.data = pdata
+        print pdata
+        return pdata
 
     def setupUI(self):
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
@@ -148,7 +174,15 @@ class TableContents(QtGui.QFrame):
         self.toolButton_9.clicked.connect(self.removeRowDataPoint)
         self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
 
+        self.pushButton_3.clicked.connect(self.hide_2)
+
         self.retranslateUI()
+
+    def hide_2(self):
+        self.hide()
+        self.frame_2.show()
+        self.pushBu.show()
+        #self.parent.parent.parent.actionTable.setChecked(False)
 
     def retranslateUI(self):
         self.pushButton_3.setText(_translate("MainWindow", "Hide", None))
@@ -167,6 +201,55 @@ class TableContents(QtGui.QFrame):
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "z", None))
         self.pushButton_21.setText(_translate("MainWindow", "Redraw", None))
+
+    
+    def setData(self,newData):
+        self.data = newData
+        
+        #try:
+        reader = newData
+
+        self.tableWidget.clearContents()
+        print self.data , "here"
+        self.tableWidget.setRowCount(len(newData))
+
+        if(len(newData)==0):
+            return
+        count_comma= len(newData[0])
+        ## create items in all added 
+        rowno_=0
+        
+        if(count_comma == 2):        # i.e. values correspond to a 2D graph
+            col_count = 2
+            self.tableWidget.setColumnHidden(2,True)
+            print "123"
+        elif (count_comma == 3):
+            col_count = 3
+            self.tableWidget.setColumnHidden(2,False)
+            print "456"
+
+        #try:   
+            for row in reader:
+                for col in range (0,count_comma):
+                    float(row[col])
+                    item = QtGui.QTableWidgetItem(row[col])
+                    self.tableWidget.setItem(rowno_,col,item)
+                rowno_=rowno_+1
+
+            print self.data        
+
+            self.tableWidget.setRowCount(rowno_)
+                
+        #     except Exception, e:
+        #         self.tableWidget.setRowCount(0)
+        #         self.showU=self.showInvalidValueError()
+                   
+        # except Exception, e: 
+        #         print""
+
+        #finally:
+            #f.close()      
+
 
     def saveDataValuesToFile(self):
         #EDIT : here add the filename to be stored as
@@ -196,12 +279,17 @@ class TableContents(QtGui.QFrame):
     def addRowDataPoint(self):
         rowC = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowC)
+        self.data.append(rowC)
+        print self.data
 
     def removeRowDataPoint(self):
         if(self.tableWidget.currentRow()==-1):
             self.errorRemoveDataPoint()
         else:
+            self.data.remove(self.tableWidget.currentRow())
             self.tableWidget.removeRow(self.tableWidget.currentRow())
+
+
             self.tableWidget.setCurrentCell(-1,-1)
 
     def errorRemoveDataPoint(self):
@@ -258,14 +346,18 @@ class TableContents(QtGui.QFrame):
                         float(row[col])
                         item = QtGui.QTableWidgetItem(row[col])
                         self.tableWidget.setItem(rowno_,col,item)
-                    rowno_=rowno_+1        
+                    rowno_=rowno_+1
+                    self.data.append(row)
+
+                print self.data        
 
                 self.tableWidget.setRowCount(rowno_)
                 
             except Exception, e:
+                self.tableWidget.setRowCount(0)
                 self.showU=self.showInvalidValueError()
-                self.tableWidget.setRowCount(0)   
-            except Exception, e: 
+                   
+        except Exception, e: 
                 print""
 
         finally:
@@ -407,6 +499,9 @@ class Ui_Dialog(object):
 
     def getDelim(self):
         return self.ch
+
+
+
 
 class StartDialog(QtGui.QDialog, Ui_Dialog): 
     def __init__(self,parent=None): 
