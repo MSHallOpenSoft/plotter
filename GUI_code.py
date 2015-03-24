@@ -42,14 +42,14 @@ Please point out any further feautures that can be included in our plotter, or e
                                              2) Enter button does not create the graph
                                              3) Prabhar find your bugs and get it right ASAP'''
 
-import mayaviPlot
+#import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 from functions import Ui_DockWidget_2
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot2dCanvas
+#from imp_plottingEquation import MplPlot2dCanvas
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -324,7 +324,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.tab.setVisible(False)'''
         #self.tab_2 = QtGui.QWidget()
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        contents_2=QtGui.QWidget(self.tabWidget)
+        '''contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
         sc_2=MplPlot2dCanvas(self)
         self.sc_2=sc_2
@@ -336,7 +336,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         widget_1 = QtGui.QWidget(self)
         self.mayavi_widget = mayaviPlot.MayaviQWidget(self)
         layout.addWidget(self.mayavi_widget)
-        self.tabWidget.addTab(contents, "3D Graph")
+        self.tabWidget.addTab(contents, "3D Graph")'''
         self.verticalLayout_6.addWidget(self.tabWidget)
         # self.wrewidget = QtGui.QWidget()
         # self.wrewidget.setLayout(self.verticalLayout_6)
@@ -1082,14 +1082,14 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
-        self.menuView = QtGui.QMenu(self.menubar)
-        self.menuView.setObjectName(_fromUtf8("menuView"))
+        #self.menuView = QtGui.QMenu(self.menubar)
+        #self.menuView.setObjectName(_fromUtf8("menuView"))
         self.menuView_2 = QtGui.QMenu(self.menubar)
         self.menuView_2.setObjectName(_fromUtf8("menuView_2"))
-        self.menuSettigs = QtGui.QMenu(self.menubar)
-        self.menuSettigs.setObjectName(_fromUtf8("menuSettigs"))
-        self.menuWindow = QtGui.QMenu(self.menubar)
-        self.menuWindow.setObjectName(_fromUtf8("menuWindow"))
+        #self.menuSettigs = QtGui.QMenu(self.menubar)
+        #self.menuSettigs.setObjectName(_fromUtf8("menuSettigs"))
+        #self.menuWindow = QtGui.QMenu(self.menubar)
+        #self.menuWindow.setObjectName(_fromUtf8("menuWindow"))
         self.menuHelp = QtGui.QMenu(self.menubar)
         self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
         MainWindow.setMenuBar(self.menubar)
@@ -1098,18 +1098,18 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         MainWindow.setStatusBar(self.statusbar)
         self.actionNew_Project = QtGui.QAction(MainWindow)
         self.actionNew_Project.setObjectName(_fromUtf8("actionNew_Project"))
-        self.actionSave = QtGui.QAction(MainWindow)
+        '''self.actionSave = QtGui.QAction(MainWindow)
         self.actionSave.setObjectName(_fromUtf8("actionSave"))
         self.actionSave_As = QtGui.QAction(MainWindow)
-        self.actionSave_As.setObjectName(_fromUtf8("actionSave_As"))
+        self.actionSave_As.setObjectName(_fromUtf8("actionSave_As"))'''
         self.actionExit = QtGui.QAction(MainWindow)
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
-        self.actionOpen_Project = QtGui.QAction(MainWindow)
-        self.actionOpen_Project.setObjectName(_fromUtf8("actionOpen_Project"))
-        self.actionSave_All = QtGui.QAction(MainWindow)
-        self.actionSave_All.setObjectName(_fromUtf8("actionSave_All"))
-        self.actionPrint = QtGui.QAction(MainWindow)
-        self.actionPrint.setObjectName(_fromUtf8("actionPrint"))
+        #self.actionOpen_Project = QtGui.QAction(MainWindow)
+        #self.actionOpen_Project.setObjectName(_fromUtf8("actionOpen_Project"))
+        '''self.actionSave_All = QtGui.QAction(MainWindow)
+        self.actionSave_All.setObjectName(_fromUtf8("actionSave_All"))'''
+        #self.actionPrint = QtGui.QAction(MainWindow)
+        #self.actionPrint.setObjectName(_fromUtf8("actionPrint"))
         self.actionClose = QtGui.QAction(MainWindow)
         self.actionClose.setObjectName(_fromUtf8("actionClose"))
         self.actionTable = QtGui.QAction(MainWindow,checkable=True)
@@ -1130,11 +1130,11 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         #self.actionEquation_Widget.setChecked(True)
         self.actionEquation_Widget.setObjectName(_fromUtf8("actionEquation_Widget"))
         self.menuFile.addAction(self.actionNew_Project)
-        self.menuFile.addAction(self.actionOpen_Project)
-        self.menuFile.addAction(self.actionSave)
-        self.menuFile.addAction(self.actionSave_As)
-        self.menuFile.addAction(self.actionSave_All)
-        self.menuFile.addAction(self.actionPrint)
+        #self.menuFile.addAction(self.actionOpen_Project)
+        #self.menuFile.addAction(self.actionSave)
+        #self.menuFile.addAction(self.actionSave_As)
+        #self.menuFile.addAction(self.actionSave_All)
+        #self.menuFile.addAction(self.actionPrint)
         self.menuFile.addAction(self.actionClose)
         self.menuFile.addSeparator()    
         self.menuFile.addAction(self.actionExit)
@@ -1145,18 +1145,18 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menuView_2.addAction(self.actionGraph_Menu)
         self.menuView_2.addAction(self.actionEquation_Widget)
         self.menubar.addAction(self.menuFile.menuAction())
-        self.menubar.addAction(self.menuView.menuAction())
+        #self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menuView_2.menuAction())
-        self.menubar.addAction(self.menuSettigs.menuAction())
-        self.menubar.addAction(self.menuWindow.menuAction())
+        #self.menubar.addAction(self.menuSettigs.menuAction())
+        #self.menubar.addAction(self.menuWindow.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
         
         ##Allotion slots actions created above
         
         self.actionFullScrren.triggered.connect(self.FullScrren)
         self.actionExit_Full_Screen_esc.triggered.connect(self.exitFullScreen)
-        self.actionSave.triggered.connect(self.save)
-        self.actionSave_As.triggered.connect(self.save_as)
+        #self.actionSave.triggered.connect(self.save)
+        #self.actionSave_As.triggered.connect(self.save_as)
         self.actionClose.triggered.connect(self.close_1)
         self.actionExit.triggered.connect(self.close_2)
         #self.actionEquation_Widget.triggered.connect(self.equationWidget)
@@ -1245,18 +1245,18 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
-        self.menuView.setTitle(_translate("MainWindow", "Edit", None))
+        #self.menuView.setTitle(_translate("MainWindow", "Edit", None))
         self.menuView_2.setTitle(_translate("MainWindow", "View", None))
-        self.menuSettigs.setTitle(_translate("MainWindow", "Settings", None))
-        self.menuWindow.setTitle(_translate("MainWindow", "Window", None))
+        #self.menuSettigs.setTitle(_translate("MainWindow", "Settings", None))
+        #self.menuWindow.setTitle(_translate("MainWindow", "Window", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
         self.actionNew_Project.setText(_translate("MainWindow", "New Project", None))
-        self.actionSave.setText(_translate("MainWindow", "Save", None))
-        self.actionSave_As.setText(_translate("MainWindow", "Save As", None))
+        #self.actionSave.setText(_translate("MainWindow", "Save", None))
+        #self.actionSave_As.setText(_translate("MainWindow", "Save As", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
-        self.actionOpen_Project.setText(_translate("MainWindow", "Open Project", None))
-        self.actionSave_All.setText(_translate("MainWindow", "Save All", None))
-        self.actionPrint.setText(_translate("MainWindow", "Print", None))
+        #self.actionOpen_Project.setText(_translate("MainWindow", "Open Project", None))
+        #self.actionSave_All.setText(_translate("MainWindow", "Save All", None))
+        #self.actionPrint.setText(_translate("MainWindow", "Print", None))
         self.actionClose.setText(_translate("MainWindow", "Close", None))
         self.actionTable.setText(_translate("MainWindow", "Table", None))
         self.actionFullScrren.setText(_translate("MainWindow", "FullScrren", None))
@@ -1427,7 +1427,7 @@ def changedFocusSlot(old, now):
 
 import sys
 if __name__ == '__main__':
-    app = QtGui.QApplication.instance()
+    app = QtGui.QApplication(sys.argv)
     ex = Ui_MainWindow_2()
     keyboard=ex.myKeyboard
     keyboard_2=ex.myKeyboard_2
