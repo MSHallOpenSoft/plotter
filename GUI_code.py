@@ -46,9 +46,10 @@ import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
+from functions import Ui_DockWidget_2
 
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
-from imp_plottingEquation import MplPlot2dCanvas
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -97,53 +98,68 @@ class Ui_MainWindow(QtGui.QMainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1396, 727)
 
-        MainWindow.setStyleSheet(_fromUtf8("QFrame{\n"
+        MainWindow.setStyleSheet(_fromUtf8("\n"
+"QFrame{\n"
 "border:none;\n"
+"}\n"
+"QHeaderView::section {\n"
+"    background-color:rgb(100, 100, 100);\n"
+"    color: rgb(200, 200, 200);\n"
 "}\n"
 "QStatusBar{ \n"
 "background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.33, stop:0 rgba(255, 255, 255, 255), stop:0.125 rgba(155, 174, 198, 255), stop:0.318182 rgba(104, 117, 133, 255), stop:0.534091 rgba(65, 73, 83, 255), stop:0.875 rgba(42, 47, 54, 255)); }\n"
 " QMainWindow{\n"
-" background-image: url(Icons/rsz_back1.jpg); border:none; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); text-align: center; }\n"
+" border:none; background-color:rgb(52, 52, 52); text-align: center; }\n"
 " QGroupBox{ \n"
 "background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); }\n"
 " QTabWidget{\n"
-
-
 " background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); } \n"
-"QDockWidget{ background-color:#737373; border:none; padding:0px; }   QSlider::groove:horizontal { background:red; height: 15px; position: absolute; left: 4px; right: 4px; } \n"
+"QDockWidget{ background-color:#737373; border:none; padding:0px; } QSlider::groove:horizontal { background:red; height: 15px; position: absolute; left: 4px; right: 4px; } \n"
 "QSlider::handle:horizontal {\n"
 " height:20px; width: 10px; background: qlineargradient(spread:pad, x1:0, y1:0.477, x2:0, y2:0, stop:0.125 rgba(42, 47, 54, 255), stop:0.465909 rgba(65, 73, 83, 255), stop:0.681818 rgba(104, 117, 133, 255), stop:0.875 rgba(155, 174, 198, 255), stop:1 rgba(255, 255, 255, 255)); margin: -4px; } \n"
 "QSlider::handle:hover:horizontal { height:20px; width: 10px; background:qlineargradient(spread:pad, x1:0, y1:0.477, x2:0, y2:0, stop:0.125 rgba(91, 95, 100, 255), stop:0.465909 rgba(122, 132, 146, 255), stop:0.681818 rgba(141, 153, 167, 255), stop:0.875 rgba(181, 195, 212, 255), stop:1 rgba(255, 255, 255, 255)); margin: -4px; }\n"
-" QSlider::add-page:horizontal { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); }\n"
-" QSlider::sub-page:horizontal { background: qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)) ; }\n"
-" QToolButton{ position: relative; border: none; outline:none; color: black; padding: 0px; border-radius: 2px; font-size: 22px; }\n"
-" QToolButton:hover:!pressed{ position: relative; border: none; outline:none; background-color:qlineargradient(spread:pad, x1:0, y1:0.71, x2:0, y2:0, stop:0 rgba(198, 198, 198, 255), stop:0.471591 rgba(207, 207, 207, 255), stop:1 rgba(255, 255, 255, 255)); color: white; padding: 4px; border-radius: 2px; font-size: 22px; }\n"
-" QPushButton{ position: relative; border:none; outline:none; background-color:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); color: white; padding: 6px 20px; border-radius: 2px; font-size: 20px; } QPushButton:hover:!pressed{ position: relative; border: none; outline:none; background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); color: white; padding: 6px 20px; border-radius: 2px; font-size:20px; } \n"
-"QComboBox { border: none; padding: 1px 18px 1px 3px; min-width: 6em; } QComboBox, QComboBox:drop-down { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); } QComboBox:on, QComboBox:drop-down:on { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); }\n"
+" QSlider::add-page:horizontal { background:rgb(170, 170, 170); }\n"
+" QSlider::sub-page:horizontal { background: rgb(100, 100, 100) ; }\n"
+" QToolButton{ position: relative; border: none; outline:none; color: black; padding: 4px; border-radius: 2px; font-size: 22px; }\n"
+" QToolButton:hover:!pressed{ position: relative; border: none; outline:none;  color: white;  border-radius: 2px; font-size: 22px;padding: 0px; }\n"
+" QPushButton{ position: relative; border:none; outline:none; background-color:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); color: rgb(170, 170, 170); padding: 6px 20px; border-radius: 2px; font-size: 20px; } \n"
+"QPushButton:hover:!pressed{ position: relative; border: none; outline:none; background-color:rgb(60, 69, 79); color: white; padding: 6px 20px; border-radius: 2px; font-size:20px; } \n"
+"QComboBox { border: none; padding: 1px 18px 1px 3px; } QComboBox, QComboBox:drop-down { background:qlineargradient(spread:pad, x1:0, y1:0.097, x2:0, y2:0, stop:0 rgba(100, 100, 100, 255), stop:0.892045 rgba(149, 149, 149, 255));color: rgb(200, 200, 200); } \n"
+"\n"
+"\n"
+"QComboBox:on, QComboBox:drop-down:on { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.869318, stop:0.107955 rgba(149, 149, 149, 255), stop:1 rgba(100, 100, 100, 255));color: rgb(200, 200, 200); }\n"
 " QComboBox:on { padding-top: 3px; padding-left: 4px; } \n"
 "QComboBox::drop-down { subcontrol-origin: padding; subcontrol-position: top right; width: 15px; border-left-width: 1px; border-left-color: darkgray; border-left-style: solid; }\n"
-" QComboBox::down-arrow { image:url(Icons/arrow-new.png); } QComboBox::down-arrow:on { top: 1px; left: 1px; }\n"
-" QMenu { background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0.483136, y2:0.466, stop:0 rgba(219, 219, 219, 255), stop:1 rgba(255, 255, 255, 255)); border: none; } \n"
+" QComboBox::down-arrow { image:url(:/arrow/Icons/arrow-new.png); } QComboBox::down-arrow:on { top: 1px; left: 1px; }\n"
+" QMenu { background-color: rgb(52, 52, 52); border: none; } \n"
 "QMenu::item { background-color: transparent; }\n"
-" QMenu::item:selected { background-color:rgb(24, 164, 82); } \n"
+" QMenu::item:selected { background-color:rgb(100, 100, 100); } \n"
 "QMenuBar { background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)) }\n"
 " QMenuBar::item { spacing: 3px; padding: 1px 4px; background: transparent; border-radius: 2px; } \n"
 "QMenuBar::item:selected { background:#737373; } \n"
 "QMenuBar::item:pressed { background: #414953; }\n"
+" QTableWidget{ background:rgb(25, 25, 25); border:none; color:white; gridline-color:#aaaaaa;} \n"
+"QTextEdit{\n"
+" background:rgb(25, 25, 25);\n"
+"color:rgb(255, 255, 255);\n"
+" } \n"
+"QScrollBar:horizontal { border: none; background: rgb(100, 100, 100); height: 15px; margin: 0px 20px 0px 20px; } \n"
+"QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(47, 47, 47, 255), stop:0.465909 rgba(67, 67, 67, 255), stop:0.681818 rgba(103, 103, 103, 255), stop:0.875 rgba(150, 150, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; }\n"
 " QTableWidget{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); border:1px solid rgb(171, 173, 179); } \n"
-"QTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
+"QfTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
 "QScrollBar:horizontal { border: none; background: #DBDBDB; height: 15px; margin: 0px 20px 0px 20px; } \n"
 "QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); min-width: 20px; }\n"
 " QScrollBar::add-line:horizontal { border: none; background:#DBDBDB; width: 20px; subcontrol-position: right; subcontrol-origin: margin; }\n"
 " QScrollBar::sub-line:horizontal { border:none; background:#DBDBDB; width: 20px; subcontrol-position: left; subcontrol-origin: margin; } \n"
-"QScrollBar::add-line:horizontal:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); width: 20px; subcontrol-position: right; subcontrol-origin: margin; } \n"
-"QScrollBar::sub-line:horizontal:hover:!pressed { border:none; background: qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); width: 20px; subcontrol-position: left; subcontrol-origin: margin; } \n"
-"QScrollBar::left-arrow:horizontal{ image: url(Icons/left-arrow.png); } QScrollBar::right-arrow:horizontal{ image: url(Icons/right-arrow.png); } \n"
-"QScrollBar:vertical { border: none; background: #DBDBDB; width: 15px; margin: 20px 0px 20px 0px; } \n"
-"QScrollBar::handle:vertical { background:qlineargradient(spread:pad, x1:0.659545, y1:0, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); min-height: 20px; } QScrollBar::handle:vertical:hover { background:qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); min-height: 15px; } QScrollBar::add-line:vertical { border: none; background:#DBDBDB; height: 20px; subcontrol-position: bottom; subcontrol-origin: margin; } QScrollBar::sub-line:vertical { border:none; background:#DBDBDB; height: 20px; subcontrol-position: top; subcontrol-origin: margin; } \n"
-"QScrollBar::add-line:vertical:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0.659545, y1:0, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); height: 20px; subcontrol-position:bottom; subcontrol-origin: margin; }\n"
-" QScrollBar::sub-line:vertical:hover:!pressed { border:none; background: qlineargradient(spread:pad, x1:0.659545, y1:0, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); height: 20px; subcontrol-position:top; subcontrol-origin: margin; } \n"
-"QScrollBar::up-arrow:vertical{ image: url(Icons/up-arrow.png); } QScrollBar::down-arrow:vertical{ image: url(Icons/down-arrow.png); }"))
+"QScrollBar::add-line:horizontal:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); width: 20px; subcontrol-position: right; subcontrol-origin: margin; } \n"
+"QScrollBar::sub-line:horizontal:hover:!pressed { border:none; background: qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); width: 20px; subcontrol-position: left; subcontrol-origin: margin; } \n"
+"QScrollBar::left-arrow:horizontal{ image: url(:/arrow/Icons/left-arrow.png); } QScrollBar::right-arrow:horizontal{ image: url(:/arrow/Icons/right-arrow.png); } \n"
+"QScrollBar:vertical { border: none; background:  rgb(100, 100, 100); width: 15px; margin: 20px 0px 20px 0px; } \n"
+"QScrollBar::handle:vertical { background:qlineargradient(spread:pad, x1:0.136, y1:0, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-height: 20px; } QScrollBar::handle:vertical:hover { background:qlineargradient(spread:pad, x1:0.136, y1:0, x2:0, y2:0, stop:0.125 rgba(47, 47, 47, 255), stop:0.465909 rgba(67, 67, 67, 255), stop:0.681818 rgba(103, 103, 103, 255), stop:0.875 rgba(150, 150, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-height: 15px; } \n"
+"QScrollBar::add-line:vertical { border: none; background:#DBDBDB; height: 20px; subcontrol-position: bottom; subcontrol-origin: margin; } QScrollBar::sub-line:vertical { border:none; background:#DBDBDB; height: 20px; subcontrol-position: top; subcontrol-origin: margin; } \n"
+"QScrollBar::add-line:vertical:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0.136, y1:0, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); height: 20px; subcontrol-position:bottom; subcontrol-origin: margin; }\n"
+" QScrollBar::sub-line:vertical:hover:!pressed { border:none; background: qlineargradient(spread:pad, x1:0.136, y1:0, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); height: 20px; subcontrol-position:top; subcontrol-origin: margin; } \n"
+"QScrollBar::up-arrow:vertical{ image: url(:/arrow/Icons/up-arrow.png); } QScrollBar::down-arrow:vertical{ image: url(:/arrow/Icons/down-arrow.png); }"))
 
         
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -163,6 +179,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame_2.setObjectName(_fromUtf8("frame_2"))
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
+        self.horizontalLayout_4.setMargin(0)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setContentsMargins(0,0,0,0)
         self.verticalLayout_5 = QtGui.QVBoxLayout()
         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
         self.pushButton = QtGui.QPushButton(self.frame_2)
@@ -204,13 +223,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
         sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
         self.pushButton_3.setSizePolicy(sizePolicy)
         self.pushButton_3.setMinimumSize(QtCore.QSize(50, 0))
+        self.pushButton_3.setMaximumSize(QtCore.QSize(84, 30))
         self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_3.setStyleSheet(_fromUtf8(""))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.horizontalLayout_5.addWidget(self.pushButton_3)
         self.toolButton_7 = QtGui.QToolButton(self.frame)
         self.toolButton_7.setMinimumSize(QtCore.QSize(10, 0))
-        self.toolButton_7.setMaximumSize(QtCore.QSize(35, 16777215))
+        self.toolButton_7.setMaximumSize(QtCore.QSize(25, 16777215))
         self.toolButton_7.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_7.setStyleSheet(_fromUtf8(""))
         icon1 = QtGui.QIcon()
@@ -221,7 +241,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_5.addWidget(self.toolButton_7)
         self.toolButton_9 = QtGui.QToolButton(self.frame)
         self.toolButton_9.setMinimumSize(QtCore.QSize(10, 0))
-        self.toolButton_9.setMaximumSize(QtCore.QSize(35, 16777215))
+        self.toolButton_9.setMaximumSize(QtCore.QSize(25, 16777215))
         self.toolButton_9.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_9.setStyleSheet(_fromUtf8(""))
         icon2 = QtGui.QIcon()
@@ -232,7 +252,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_5.addWidget(self.toolButton_9)
         self.toolButton_8 = QtGui.QToolButton(self.frame)
         self.toolButton_8.setMinimumSize(QtCore.QSize(10, 0))
-        self.toolButton_8.setMaximumSize(QtCore.QSize(35, 16777215))
+        self.toolButton_8.setMaximumSize(QtCore.QSize(25, 16777215))
         self.toolButton_8.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_8.setStyleSheet(_fromUtf8(""))
         icon3 = QtGui.QIcon()
@@ -243,7 +263,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.horizontalLayout_5.addWidget(self.toolButton_8)
         self.toolButton_5 = QtGui.QToolButton(self.frame)
         self.toolButton_5.setMinimumSize(QtCore.QSize(10, 0))
-        self.toolButton_5.setMaximumSize(QtCore.QSize(35, 16777215))
+        self.toolButton_5.setMaximumSize(QtCore.QSize(25, 16777215))
         self.toolButton_5.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_5.setStyleSheet(_fromUtf8(""))
         icon4 = QtGui.QIcon()
@@ -252,8 +272,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_5.setIconSize(QtCore.QSize(40, 30))
         self.toolButton_5.setObjectName(_fromUtf8("toolButton_5"))
         self.horizontalLayout_5.addWidget(self.toolButton_5)
-        spacerItem = QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem)
+        #spacerItem = QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        #self.horizontalLayout_5.addItem(spacerItem)
         self.verticalLayout_3.addLayout(self.horizontalLayout_5)
         self.tableWidget = QtGui.QTableWidget(self.frame)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Expanding)
@@ -285,10 +305,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.pushButton_21.setStyleSheet(_fromUtf8(""))
         self.pushButton_21.setObjectName(_fromUtf8("pushButton_21"))
         self.verticalLayout_3.addWidget(self.pushButton_21)
+
+        #remove above from code
         self.horizontalLayout_3.addWidget(self.frame)
         self.verticalLayout_6 = QtGui.QVBoxLayout()
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
-        self.tabWidget = QtGui.QTabWidget(self.centralwidget)
+        self.tabWidget = QtGui.QTabWidget(self.centralwidget) 
         self.tabWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         '''self.tab = QtGui.QWidget()
@@ -299,8 +321,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #self.tab_2.setObjectName(_fromUtf8("tab_2"))
         contents_2=QtGui.QWidget(self.tabWidget)
         layout_2= QtGui.QVBoxLayout(contents_2)
-        sc_2=MplPlot2dCanvas(self)
-        self.sc_2=sc_2
+        sc_2=MplPlot3dCanvas_2(self)
         widget_2=QtGui.QWidget(self)
         layout_2.addWidget(sc_2)
         self.tabWidget.addTab(contents_2, "2D Graph")
@@ -311,7 +332,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         layout.addWidget(self.mayavi_widget)
         self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
-        self.horizontalLayout_3.addLayout(self.verticalLayout_6)
+        self.wrewidget = QtGui.QWidget()
+        self.wrewidget.setLayout(self.verticalLayout_6)
+        self.horizontalLayout_3.addWidget(self.wrewidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1396, 21))
@@ -406,46 +429,46 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_18.setIconSize(QtCore.QSize(30, 30))
         self.toolButton_18.setObjectName(_fromUtf8("toolButton_18"))
         self.horizontalLayout.addWidget(self.toolButton_18)
-        self.line_4 = QtGui.QFrame(self.dockWidgetContents_3)
+        '''self.line_4 = QtGui.QFrame(self.dockWidgetContents_3)
         self.line_4.setMaximumSize(QtCore.QSize(16777215, 20))
         self.line_4.setFrameShape(QtGui.QFrame.VLine)
         self.line_4.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_4.setObjectName(_fromUtf8("line_4"))
-        self.horizontalLayout.addWidget(self.line_4)
-        self.toolButton_4 = QtGui.QToolButton(self.dockWidgetContents_3)
+        self.horizontalLayout.addWidget(self.line_4)'''
+        '''self.toolButton_4 = QtGui.QToolButton(self.dockWidgetContents_3)
         self.toolButton_4.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_4.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_4.setStyleSheet(_fromUtf8(""))
         self.toolButton_4.setIcon(icon1)
         self.toolButton_4.setIconSize(QtCore.QSize(30, 30))
         self.toolButton_4.setObjectName(_fromUtf8("toolButton_4"))
-        self.horizontalLayout.addWidget(self.toolButton_4)
-        self.toolButton_3 = QtGui.QToolButton(self.dockWidgetContents_3)
+        self.horizontalLayout.addWidget(self.toolButton_4)'''
+        '''self.toolButton_3 = QtGui.QToolButton(self.dockWidgetContents_3)
         self.toolButton_3.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_3.setStyleSheet(_fromUtf8(""))
         self.toolButton_3.setIcon(icon2)
         self.toolButton_3.setIconSize(QtCore.QSize(30, 30))
         self.toolButton_3.setObjectName(_fromUtf8("toolButton_3"))
-        self.horizontalLayout.addWidget(self.toolButton_3)
-        self.line_5 = QtGui.QFrame(self.dockWidgetContents_3)
+        self.horizontalLayout.addWidget(self.toolButton_3)'''
+        '''self.line_5 = QtGui.QFrame(self.dockWidgetContents_3)
         self.line_5.setMaximumSize(QtCore.QSize(16777215, 20))
         self.line_5.setFrameShape(QtGui.QFrame.VLine)
         self.line_5.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_5.setObjectName(_fromUtf8("line_5"))
-        self.horizontalLayout.addWidget(self.line_5)
-        self.checkBox = QtGui.QCheckBox(self.dockWidgetContents_3)
+        self.horizontalLayout.addWidget(self.line_5)'''
+        '''self.checkBox = QtGui.QCheckBox(self.dockWidgetContents_3)
         self.checkBox.setMaximumSize(QtCore.QSize(20, 25))
         self.checkBox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.checkBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.checkBox.setText(_fromUtf8(""))
         self.checkBox.setObjectName(_fromUtf8("checkBox"))
-        self.horizontalLayout.addWidget(self.checkBox)
+        self.horizontalLayout.addWidget(self.checkBox)'''
 
 
         
 
-        self.Example = QtGui.QToolButton(self.dockWidgetContents_3)
+        '''self.Example = QtGui.QToolButton(self.dockWidgetContents_3)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -459,14 +482,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "}"))
         self.Example.setIconSize(QtCore.QSize(24, 24))
         self.Example.setObjectName(_fromUtf8("Example"))
-        self.horizontalLayout.addWidget(self.Example)
-        self.line_6 = QtGui.QFrame(self.dockWidgetContents_3)
+        self.horizontalLayout.addWidget(self.Example)'''
+        '''self.line_6 = QtGui.QFrame(self.dockWidgetContents_3)
         self.line_6.setMaximumSize(QtCore.QSize(16777215, 20))
         self.line_6.setFrameShape(QtGui.QFrame.VLine)
         self.line_6.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_6.setObjectName(_fromUtf8("line_6"))
-        self.horizontalLayout.addWidget(self.line_6)
-        self.toolButton = QtGui.QToolButton(self.dockWidgetContents_3)
+        self.horizontalLayout.addWidget(self.line_6)'''
+        '''self.toolButton = QtGui.QToolButton(self.dockWidgetContents_3)
         self.toolButton.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton.setStyleSheet(_fromUtf8(""))
@@ -475,7 +498,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton.setIcon(icon7)
         self.toolButton.setIconSize(QtCore.QSize(30, 30))
         self.toolButton.setObjectName(_fromUtf8("toolButton"))
-        self.horizontalLayout.addWidget(self.toolButton)
+        self.horizontalLayout.addWidget(self.toolButton)'''
         self.toolButton_25 = QtGui.QToolButton(self.dockWidgetContents_3)
         self.toolButton_25.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_25.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -486,12 +509,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_25.setIconSize(QtCore.QSize(30, 30))
         self.toolButton_25.setObjectName(_fromUtf8("toolButton_25"))
         self.horizontalLayout.addWidget(self.toolButton_25)
-        self.line_8 = QtGui.QFrame(self.dockWidgetContents_3)
+        '''self.line_8 = QtGui.QFrame(self.dockWidgetContents_3)
         self.line_8.setMaximumSize(QtCore.QSize(16777215, 20))
         self.line_8.setFrameShape(QtGui.QFrame.VLine)
         self.line_8.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_8.setObjectName(_fromUtf8("line_8"))
-        self.horizontalLayout.addWidget(self.line_8)
+        self.horizontalLayout.addWidget(self.line_8)'''
         self.dockWidget_3.setWidget(self.dockWidgetContents_3)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(4), self.dockWidget_3)
         self.dockWidget_4 = QtGui.QDockWidget(MainWindow)
@@ -542,12 +565,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_23.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_23.setObjectName(_fromUtf8("toolButton_23"))
         self.horizontalLayout_2.addWidget(self.toolButton_23)
-        self.toolButton_2 = QtGui.QToolButton(self.dockWidgetContents_4)
+        '''self.toolButton_2 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_2.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_2.setIcon(icon4)
         self.toolButton_2.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_2.setObjectName(_fromUtf8("toolButton_2"))
+        self.horizontalLayout_2.addWidget(self.toolButton_2)'''
         self.toolButton_2.clicked.connect(self.saveImage)
         self.horizontalLayout_2.addWidget(self.toolButton_2)
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
@@ -560,7 +584,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_24.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_24.setObjectName(_fromUtf8("toolButton_24"))
         self.horizontalLayout_2.addWidget(self.toolButton_24)
-        self.toolButton_22 = QtGui.QToolButton(self.dockWidgetContents_4)
+        '''self.toolButton_22 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_22.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_22.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_22.setStyleSheet(_fromUtf8(""))
@@ -569,7 +593,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_22.setIcon(icon12)
         self.toolButton_22.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_22.setObjectName(_fromUtf8("toolButton_22"))
-        self.horizontalLayout_2.addWidget(self.toolButton_22)
+        self.horizontalLayout_2.addWidget(self.toolButton_22)'''
         self.line_3 = QtGui.QFrame(self.dockWidgetContents_4)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -617,21 +641,21 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_15.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_15.setStyleSheet(_fromUtf8(""))
         icon15 = QtGui.QIcon()
-        icon15.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Column-Selection-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon15.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Full-Screen-Expand-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_15.setIcon(icon15)
         self.toolButton_15.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_15.setObjectName(_fromUtf8("toolButton_15"))
         self.horizontalLayout_2.addWidget(self.toolButton_15)
-        self.toolButton_14 = QtGui.QToolButton(self.dockWidgetContents_4)
+        '''self.toolButton_14 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_14.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_14.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_14.setStyleSheet(_fromUtf8(""))
         icon16 = QtGui.QIcon()
-        icon16.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Slash-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon16.addPixmap(QtGui.QPixmap(_fromUtf8("Icons/Full-Screen-Collapse-48.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.toolButton_14.setIcon(icon16)
         self.toolButton_14.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_14.setObjectName(_fromUtf8("toolButton_14"))
-        self.horizontalLayout_2.addWidget(self.toolButton_14)
+        self.horizontalLayout_2.addWidget(self.toolButton_14)'''
         self.line = QtGui.QFrame(self.dockWidgetContents_4)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -643,7 +667,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.horizontalLayout_2.addWidget(self.line)
-        self.toolButton_13 = QtGui.QToolButton(self.dockWidgetContents_4)
+        '''self.toolButton_13 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_13.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_13.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_13.setStyleSheet(_fromUtf8(""))
@@ -652,7 +676,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_13.setIcon(icon17)
         self.toolButton_13.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_13.setObjectName(_fromUtf8("toolButton_13"))
-        self.horizontalLayout_2.addWidget(self.toolButton_13)
+        self.horizontalLayout_2.addWidget(self.toolButton_13)'''
         self.toolButton_12 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_12.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_12.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -692,9 +716,17 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_9.clicked.connect(self.removeRowDataPoint)
         self.toolButton_5.clicked.connect(self.saveDataValuesToFile)
         self.toolButton_15.clicked.connect(self.hideAll)
+        self.toolButton_25.clicked.connect(self.showTable)
+        #self.toolButton.clicked.connect(self.still)
         self.action_1=self.dockWidget_3.toggleViewAction()
         ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def showTable(self):
+        if self.frame.isVisible()==True:
+            self.hide_2()
+        else:
+            self.show_2()
 
     def saveImage(self,event):
       #self.sc_2.plotobj.save('foo.pdf')
@@ -827,6 +859,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.delimit = dialg.getDelim()
       #self.showFileChooser()
 
+
+    def setCurrentTable(self,table5):
+        self.tableWidget = table5
+        self.verticalLayout_3.insert(table5,1)
+        self.verticalLayout_3.takeAt(2)
+
+
+
     def hide_2(self):
         self.frame.hide()
         self.frame_2.show()
@@ -884,38 +924,38 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_20.setText(_translate("MainWindow", "...", None))
         self.toolButton_18.setToolTip(_translate("MainWindow", "Load New", None))
         self.toolButton_18.setText(_translate("MainWindow", "...", None))
-        self.toolButton_4.setToolTip(_translate("MainWindow", "Add new Equation", None))
-        self.toolButton_4.setText(_translate("MainWindow", "...", None))
-        self.toolButton_3.setToolTip(_translate("MainWindow", "Remove this Equation", None))
-        self.toolButton_3.setText(_translate("MainWindow", "...", None))
-        self.checkBox.setToolTip(_translate("MainWindow", "Show on Graph", None))
-        self.Example.setToolTip(_translate("MainWindow", "Illustrate with an Example", None))
-        self.Example.setWhatsThis(_translate("MainWindow", "Example", None))
-        self.Example.setText(_translate("MainWindow", "Example", None))
-        self.toolButton.setToolTip(_translate("MainWindow", "Always on Top", None))
-        self.toolButton.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_4.setToolTip(_translate("MainWindow", "Add new Equation", None))
+        #self.toolButton_4.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_3.setToolTip(_translate("MainWindow", "Remove this Equation", None))
+        #self.toolButton_3.setText(_translate("MainWindow", "...", None))
+        #self.checkBox.setToolTip(_translate("MainWindow", "Show on Graph", None))
+        #self.Example.setToolTip(_translate("MainWindow", "Illustrate with an Example", None))
+        #self.Example.setWhatsThis(_translate("MainWindow", "Example", None))
+        #self.Example.setText(_translate("MainWindow", "Example", None))
+        #self.toolButton.setToolTip(_translate("MainWindow", "Always on Top", None))
+        #self.toolButton.setText(_translate("MainWindow", "...", None))
         self.toolButton_25.setToolTip(_translate("MainWindow", "Show/Hide Table", None))
         self.toolButton_25.setText(_translate("MainWindow", "...", None))
         self.toolButton_19.setToolTip(_translate("MainWindow", "Keyboard", None))
         self.toolButton_19.setText(_translate("MainWindow", "...", None))
         self.toolButton_23.setToolTip(_translate("MainWindow", "Print graph", None))
         self.toolButton_23.setText(_translate("MainWindow", "...", None))
-        self.toolButton_2.setToolTip(_translate("MainWindow", "Save Graph", None))
-        self.toolButton_2.setText(_translate("MainWindow", "...", None))
-        self.toolButton_24.setToolTip(_translate("MainWindow", "Take a screenshot", None))
+        #self.toolButton_2.setToolTip(_translate("MainWindow", "Save Graph", None))
+        #self.toolButton_2.setText(_translate("MainWindow", "...", None))
+        self.toolButton_24.setToolTip(_translate("MainWindow", "Save Graph", None))
         self.toolButton_24.setText(_translate("MainWindow", "...", None))
-        self.toolButton_22.setToolTip(_translate("MainWindow", "Go to our FaceBook page", None))
-        self.toolButton_22.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_22.setToolTip(_translate("MainWindow", "Go to our FaceBook page", None))
+        #self.toolButton_22.setText(_translate("MainWindow", "...", None))
         self.toolButton_21.setToolTip(_translate("MainWindow", "Play", None))
         self.toolButton_21.setText(_translate("MainWindow", "...", None))
         self.toolButton_16.setToolTip(_translate("MainWindow", "Stop", None))
         self.toolButton_16.setText(_translate("MainWindow", "...", None))
-        self.toolButton_15.setToolTip(_translate("MainWindow", "Disable Anti-Aliasing", None))
+        self.toolButton_15.setToolTip(_translate("MainWindow", "FullScreen", None))
         self.toolButton_15.setText(_translate("MainWindow", "...", None))
-        self.toolButton_14.setToolTip(_translate("MainWindow", "Enable Anti-Aliasing", None))
-        self.toolButton_14.setText(_translate("MainWindow", "...", None))
-        self.toolButton_13.setToolTip(_translate("MainWindow", "Zoom All", None))
-        self.toolButton_13.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_14.setToolTip(_translate("MainWindow", "Enable Anti-Aliasing", None))
+        #self.toolButton_14.setText(_translate("MainWindow", "...", None))
+        #self.toolButton_13.setToolTip(_translate("MainWindow", "Zoom All", None))
+        #self.toolButton_13.setText(_translate("MainWindow", "...", None))
         self.toolButton_12.setToolTip(_translate("MainWindow", "Zoom in", None))
         self.toolButton_12.setText(_translate("MainWindow", "...", None))
         self.toolButton_11.setToolTip(_translate("MainWindow", "Zoom out", None))
@@ -1102,12 +1142,15 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.actionExit_Full_Screen_esc.triggered.connect(self.exitFullScreen)
         self.actionSave.triggered.connect(self.save)
         self.actionSave_As.triggered.connect(self.save_as)
+        self.actionClose.triggered.connect(self.close_1)
+        self.actionExit.triggered.connect(self.close_2)
         #self.actionEquation_Widget.triggered.connect(self.equationWidget)
         #self.actionFile_Menu.triggered.connect(self.fileMenu)
         self.actionTable.triggered.connect(self.showTable)
         #self.actionTable.triggered.connect(self.graphMenu)
         self.vbox=QtGui.QVBoxLayout(self.centralwidget)
         self.myKeyboard = Ui_DockWidget(self,None)
+        self.myKeyboard_2 = Ui_DockWidget_2(self,None)
         self.vbox.addWidget(self.t)
         self.vbox.setMargin(0)
         self.vbox.setSpacing(0)
@@ -1127,14 +1170,26 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
         self.menuView_2.addAction(self.actionFile_Menu)
         self.menuView_2.addAction(self.actionGraph_Menu)
         self.menuView_2.addAction(self.actionEquation_Widget)
+    def close_1(self):
+        self.t.closeTab_1()
+    def close_2(self):
+        self.t.close()
+        self.close()
     def show_1(self):   
         if self.myKeyboard.isVisible()==False:
-            self.myKeyboard.setSize(self.rect)
-            self.myKeyboard.move(1.73532*self.rect.width()-911,1.73532*self.rect.height()-296)
+            #self.myKeyboard.setSize(self.rect)
+            self.myKeyboard.move(1.73532*self.rect.width()-911-293,1.73532*self.rect.height()-296)
             self.myKeyboard.show()
             #self.myKeyboard.setTarget(self.dockWidgetContents.eqList[0].frame.widget_4)
         else:
             self.myKeyboard.hide()
+        if self.myKeyboard_2.isVisible()==False:
+            #print self.rect_1.width()
+            self.myKeyboard_2.move(1.73532*self.rect.width()-350,1.73532*self.rect.height()-350)
+            #self.myKeyboard_2.setTarget(self.target)
+            self.myKeyboard_2.show()
+        else:
+            self.myKeyboard_2.hide()
     def setSize(self):
         self.rect=self.geometry()
     def FullScrren(self):
@@ -1169,7 +1224,7 @@ class Ui_MainWindow_2(QtGui.QMainWindow):
     #self.dockWidget_3.show()
     #self.frame.show()
     def save(self):
-        print "save"
+        print self.t.pages[self.t.tabWidget.currentIndex()].tabWidget.currentIndex()
     def save_as(self):
         print "save_as"
     def retranslateUi(self, MainWindow):
@@ -1348,21 +1403,24 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
         self.label.setText(_translate("Dialog", self.mssg, None))
 
 
+
 def changedFocusSlot(old, now):
     if type(now) is not QPushButton and QTableWidget:
         keyboard.setTarget(now)
+        keyboard_2.setTarget(now)
 
 
 import sys
 if __name__ == '__main__':
     app = QtGui.QApplication.instance()
-    #app.focusChanged.connect(focusAdjuster)
     ex = Ui_MainWindow_2()
     keyboard=ex.myKeyboard
+    keyboard_2=ex.myKeyboard_2
     QtCore.QObject.connect(app, SIGNAL("focusChanged(QWidget *, QWidget *)"), changedFocusSlot)
     QtCore.QObject.connect(ex.t.tabWidget, QtCore.SIGNAL(_fromUtf8("currentChanged(int)")), ex.tabChangedSlot)
     #ex.myKeyboard.
     ex.showMaximized()
     ex.setSize()
+
     #app.focusChanged.connect(keyboardFocusChanger)
     sys.exit(app.exec_())

@@ -4,10 +4,12 @@ from sympy import symbols,sympify,latex,lambdify
 import sympyParsing
 from mayavi import mlab
 t = symbols('t')
+u = symbols('u')
+v = symbols('v')
 
 # X = 100 * scipy.rand(100, 3)
 
-def mayaviParam3d(str_expr_x,str_expr_y,str_expr_z):
+def mayaviParam3d(str_expr_x,str_expr_y,str_expr_z,noOfParams=2,u_start=-10,u_end=10,u_points=200,v_start=-10,v_end=10,v_points=200):
 	expr_x=sympyParsing.symStr(str_expr_x)
 	expr_y=sympyParsing.symStr(str_expr_y)
 	expr_z=sympyParsing.symStr(str_expr_z)
@@ -25,13 +27,25 @@ def mayaviParam3d(str_expr_x,str_expr_y,str_expr_z):
 	# z_end = 10
 	# no_z_points=complex(0,100)
 	# X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
-	T=np.ogrid[-10:10:200j]
-	f = lambdify((t), expr_x,"numpy")
-	xArr=f(T)
-	f1 = lambdify((t), expr_y,"numpy")
-	yArr=f1(T)
-	f2 = lambdify((t), expr_z,"numpy")
-	zArr=f2(T)
+	uC=complex(0,u_points)
+	vC=complex(0,v_points)
+	T=np.ogrid[u_start:u_end:uC]
+	U=np.ogrid[v_start:v_end:vC]
+	if noOfParams==1:
+			
+		f = lambdify((t), expr_x,"numpy")
+		xArr=f(T)
+		f1 = lambdify((t), expr_y,"numpy")
+		yArr=f1(T)
+		f2 = lambdify((t), expr_z,"numpy")
+		zArr=f2(T)
+	elif noOfParams == 2:
+		f = lambdify((u,v), expr_x,"numpy")
+		xArr=f(T,U)
+		f1 = lambdify((u,v), expr_y,"numpy")
+		yArr=f1(T,U)
+		f2 = lambdify((u,v), expr_z,"numpy")
+		zArr=f2(T,U)
 	print xArr,yArr,zArr
 	# Visualize the points
 	pts = mlab.points3d(xArr, yArr, zArr, zArr, scale_mode='none', scale_factor=0.2)
@@ -48,7 +62,7 @@ if __name__=="__main__":
 	expr1=raw_input()
 	expr2=raw_input()
 	expr3=raw_input()
-	mayaviParam3d(expr1,expr2,expr3)
+	mayaviParam3d(expr1,expr2,expr3,2)
 
 
 # import numpy as np

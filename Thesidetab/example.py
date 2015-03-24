@@ -30,18 +30,20 @@ import accordion
 import sliderTop
 import som
 import som2
+import tableCon
 
 
 class MainFrameR(QtGui.QWidget):
     def __init__(self,parent):
         super(MainFrameR,self).__init__(parent)
         self.parent = parent
+
         self.setupUi()
 
     def setupUi(self):
         #Form.setObjectName(_fromUtf8("Form"))
         self.resize(400, 10)
-
+        self.table = tableCon.TableContents(self)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -49,6 +51,8 @@ class MainFrameR(QtGui.QWidget):
         self.setSizePolicy(sizePolicy)
 
         self.vertical = QtGui.QFormLayout()
+
+        self.tableValue = QtGui.QTableWidget()
 
         self.vertical.setSizeConstraint(QtGui.QLayout.SetMinimumSize)
         
@@ -80,7 +84,7 @@ class MainFrameR(QtGui.QWidget):
 
 
 
-        self.sliderTab.hide()
+        #self.sliderTab.hide()
 
         
       
@@ -154,8 +158,6 @@ class MainFrameR(QtGui.QWidget):
 
         return listr
 
-    def getMainFrame(self):
-      return parent
 
 
 

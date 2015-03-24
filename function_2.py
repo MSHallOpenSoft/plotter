@@ -467,10 +467,10 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.frame_3.setObjectName(_fromUtf8("frame_3"))
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.frame_3)
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
-        self.pushButton_8 = QtGui.QPushButton(self.frame_3)
+        '''self.pushButton_8 = QtGui.QPushButton(self.frame_3)
         self.pushButton_8.setMinimumSize(QtCore.QSize(0, 50))
         self.pushButton_8.setObjectName(_fromUtf8("pushButton_8"))
-        self.verticalLayout_3.addWidget(self.pushButton_8)
+        self.verticalLayout_3.addWidget(self.pushButton_8)'''
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.pushButton_34 = QtGui.QPushButton(self.frame_3)
@@ -500,7 +500,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
         font.setPointSize(16)
         font.setBold(False)
         self.pushButton_4.setFont(font)
-        self.pushButton_8.clicked.connect(lambda:self.show_1(self.myKeyboard_2))
+        #self.pushButton_8.clicked.connect(lambda:self.show_1(self.myKeyboard_2))
         DockWidget.setWidget(self.dockWidgetContents)
         self.pushButton_13.clicked.connect(self.function_11)
         self.pushButton_6.clicked.connect(lambda:self.function_14("x"))
@@ -551,6 +551,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
 
     def function(self):
         self.target.insert("x")
+        #self.target
     def function_1(self):
         self.target.insert("y")
     def function_2(self):
@@ -593,9 +594,9 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.target.backspace()
     def setTarget(self,target_area):
         self.target=target_area
-        self.myKeyboard_2.setTarget(self.target)
-    def setSize(self,rect1):
-        self.rect_1=rect1
+        #self.myKeyboard_2.setTarget(self.target)
+    #def setSize(self,rect1):
+        #self.rect_1=rect1
     def retranslateUi(self, DockWidget):
         #DockWidget.setWindowTitle(_translate("DockWidget", "Keyboard", None))
         self.pushButton_13.setText(_translate("DockWidget", u'\u2265', None))#Greater than equal to
@@ -629,7 +630,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
         self.pushButton_29.setText(_translate("DockWidget", "4", None))
         self.pushButton_30.setText(_translate("DockWidget", "0", None))
         self.pushButton_32.setText(_translate("DockWidget", ".", None))
-        self.pushButton_8.setText(_translate("DockWidget", "functions", None))
+        #self.pushButton_8.setText(_translate("DockWidget", "functions", None))
         self.pushButton_34.setText(_translate("DockWidget", u'\u2190', None))#LeftArrow
         self.pushButton_33.setText(_translate("DockWidget", u'\u2192', None))#Right Arrow
         self.pushButton_35.setText(_translate("DockWidget", u'\u232B', None))#BackSpace
@@ -640,3 +641,11 @@ if __name__ == "__main__":
     w=Ui_DockWidget(None,None)
     w.show()
     sys.exit(a.exec_())
+
+
+
+'''
+x square x**
+pi
+square root sqrt'''
+

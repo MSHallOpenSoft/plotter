@@ -86,6 +86,7 @@ class DockContents(QtGui.QWidget):
         self.eqList.append(frame)
         self.vertical2.addWidget(frame)
 
+
 	
 
 import sys
