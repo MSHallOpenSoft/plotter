@@ -74,6 +74,7 @@ class ImplicitSeries(BaseSeries):
                     str((self.start_y, self.end_y)))
 
     def get_raster(self):
+        print("raaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasrrrrrrrrrr")
         func = experimental_lambdify((self.var_x, self.var_y), self.expr,
                                     use_interval=True)
         xinterval = interval(self.start_x, self.end_x)

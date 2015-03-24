@@ -45,7 +45,12 @@ import mayaviPlot
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
+<<<<<<< HEAD
 from functions import Ui_DockWidget_2
+=======
+
+
+>>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
 #from plottingEquation_3d_explicit import MplPlot3dCanvas
 from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
@@ -136,6 +141,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " QMenuBar::item { spacing: 3px; padding: 1px 4px; background: transparent; border-radius: 2px; } \n"
 "QMenuBar::item:selected { background:#737373; } \n"
 "QMenuBar::item:pressed { background: #414953; }\n"
+<<<<<<< HEAD
 " QTableWidget{ background:rgb(25, 25, 25); border:none; color:white; gridline-color:#aaaaaa;} \n"
 "QTextEdit{\n"
 " background:rgb(25, 25, 25);\n"
@@ -143,6 +149,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " } \n"
 "QScrollBar:horizontal { border: none; background: rgb(100, 100, 100); height: 15px; margin: 0px 20px 0px 20px; } \n"
 "QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(47, 47, 47, 255), stop:0.465909 rgba(67, 67, 67, 255), stop:0.681818 rgba(103, 103, 103, 255), stop:0.875 rgba(150, 150, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; }\n"
+=======
+" QTableWidget{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); border:1px solid rgb(171, 173, 179); } \n"
+"QfTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
+"QScrollBar:horizontal { border: none; background: #DBDBDB; height: 15px; margin: 0px 20px 0px 20px; } \n"
+"QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); min-width: 20px; }\n"
+>>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
 " QScrollBar::add-line:horizontal { border: none; background:#DBDBDB; width: 20px; subcontrol-position: right; subcontrol-origin: margin; }\n"
 " QScrollBar::sub-line:horizontal { border:none; background:#DBDBDB; width: 20px; subcontrol-position: left; subcontrol-origin: margin; } \n"
 "QScrollBar::add-line:horizontal:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); width: 20px; subcontrol-position: right; subcontrol-origin: margin; } \n"
@@ -173,6 +185,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame_2.setObjectName(_fromUtf8("frame_2"))
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
+        self.horizontalLayout_4.setMargin(0)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setContentsMargins(0,0,0,0)
         self.verticalLayout_5 = QtGui.QVBoxLayout()
         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
         self.pushButton = QtGui.QPushButton(self.frame_2)
@@ -296,6 +311,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.pushButton_21.setStyleSheet(_fromUtf8(""))
         self.pushButton_21.setObjectName(_fromUtf8("pushButton_21"))
         self.verticalLayout_3.addWidget(self.pushButton_21)
+
+        #remove above from code
         self.horizontalLayout_3.addWidget(self.frame)
         self.verticalLayout_6 = QtGui.QVBoxLayout()
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
@@ -321,7 +338,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         layout.addWidget(self.mayavi_widget)
         self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
-        self.horizontalLayout_3.addLayout(self.verticalLayout_6)
+        self.wrewidget = QtGui.QWidget()
+        self.wrewidget.setLayout(self.verticalLayout_6)
+        self.horizontalLayout_3.addWidget(self.wrewidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1396, 21))
@@ -558,7 +577,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_2.setIcon(icon4)
         self.toolButton_2.setIconSize(QtCore.QSize(35, 35))
         self.toolButton_2.setObjectName(_fromUtf8("toolButton_2"))
+<<<<<<< HEAD
         self.horizontalLayout_2.addWidget(self.toolButton_2)'''
+=======
+        self.toolButton_2.clicked.connect(self.saveImage)
+        self.horizontalLayout_2.addWidget(self.toolButton_2)
+>>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
         self.toolButton_24 = QtGui.QToolButton(self.dockWidgetContents_4)
         self.toolButton_24.setMaximumSize(QtCore.QSize(16777215, 25))
         self.toolButton_24.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -707,11 +731,19 @@ class Ui_MainWindow(QtGui.QMainWindow):
         ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+<<<<<<< HEAD
     def showTable(self):
         if self.frame.isVisible()==True:
             self.hide_2()
         else:
             self.show_2()
+=======
+    def saveImage(self,event):
+      #self.sc_2.plotobj.save('foo.pdf')
+      #self.mayavi_widget.visualization.scene.mlab.savefig('doo.pdf')
+      print("saving graph")
+
+>>>>>>> 977016a7a9f9cb56d86c0dfd0fec4a07fc795f69
     def hideAll(self):
         self.dockWidget.hide()
         self.dockWidget_4.hide()
@@ -827,6 +859,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
       if dialg.exec_():
         self.delimit = dialg.getDelim()
       #self.showFileChooser()
+
+
+    def setCurrentTable(self,table5):
+        self.tableWidget = table5
+        self.verticalLayout_3.insert(table5,1)
+        self.verticalLayout_3.takeAt(2)
+
+
 
     def hide_2(self):
         self.frame.hide()
@@ -1364,10 +1404,12 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
         self.label.setText(_translate("Dialog", self.mssg, None))
 
 
+
 def changedFocusSlot(old, now):
     if type(now) is not QPushButton and QTableWidget:
         keyboard.setTarget(now)
         keyboard_2.setTarget(now)
+
 
 import sys
 if __name__ == '__main__':
@@ -1380,5 +1422,6 @@ if __name__ == '__main__':
     #ex.myKeyboard.
     ex.showMaximized()
     ex.setSize()
+
     #app.focusChanged.connect(keyboardFocusChanger)
     sys.exit(app.exec_())

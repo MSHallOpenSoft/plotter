@@ -57,11 +57,11 @@ class customLineEdit(QtGui.QLineEdit):
 
 
 class MplPlot2dCanvas(FigureCanvas):
-  dic_plot={} #storing contour
-  dic_parameter={} #storing parameters
-  dic_calculated={} #storing calculated values
-  dic_index={} #storing calculated values
   def __init__(self,parent=None):
+      self.dic_plot={} #storing contour
+      self.dic_parameter={} #storing parameters
+      self.dic_calculated={} #storing calculated values
+      self.dic_index={} #storing calculated values
       self.count=0
       self.plotobj={}
       self.surfs = [] # [{"xx":,"yy:","val:"}]
@@ -129,7 +129,9 @@ class MplPlot2dCanvas(FigureCanvas):
             print("no change")
             return
       self.ax.cla()
-      sympy_p1 = sympyPlot_implicit.plot_implicit(expr,show=False,ax=self.ax,x_var=(x,x_start,x_end),y_var=(y,y_start,y_end),line_color=color,linewidth=line_width)
+      print("adsflasdfasdf")
+      print(expr)
+      sympy_p1 = sympyPlot_implicit.plot_implicit(expr,show=False,ax=self.ax,fig=self.fig,x_var=(x,x_start,x_end),y_var=(y,y_start,y_end),line_color=color,linewidth=line_width)
       if(len(self.dic_plot)==0):
         self.plotobj=sympy_p1
       else:

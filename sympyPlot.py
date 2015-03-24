@@ -163,6 +163,7 @@ class Plot(object):
         self.margin = 0
 
         self.ax=kwargs.get('ax',None)
+        self.fig=kwargs.get('fig',None)
 
         # Contains the data objects to be plotted. The backend should be smart
         # enough to iterate over this list.
@@ -194,8 +195,8 @@ class Plot(object):
         self._backend.show()
 
     def save(self, path):
-        if hasattr(self, '_backend'):
-            self._backend.close()
+#        if hasattr(self, '_backend'):
+#            self._backend.close()
         self._backend = self.backend(self)
         self._backend.save(path)
 
@@ -1043,6 +1044,7 @@ class MatplotlibBackend(BaseBackend):
               self.fig = self.plt.figure()
               self.ax = self.fig.add_subplot(111)
             else:
+              self.fig=self.parent.fig
               self.ax=self.parent.ax
               print("hooooooooooooooooooooo")
               print(self.ax)

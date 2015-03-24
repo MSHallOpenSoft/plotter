@@ -3,7 +3,7 @@ import tkMessageBox
 import numpy as np
 import sympyParsing
 from sympy import symbols,sympify,lambdify
-from sympy.plotting.experimental_lambdify import (vectorized_lambdify)
+from sympy.plotting.experimental_lambdify import vectorized_lambdify,experimental_lambdify
 
 
 def OwnPlot(str_expr,xStart=-10,xEnd=10,yStart=-10,yEnd=10,Nop=50):
@@ -20,11 +20,11 @@ def OwnPlot(str_expr,xStart=-10,xEnd=10,yStart=-10,yEnd=10,Nop=50):
 	# def F(x):
 	# 	return x**3 
 	xArr=np.ogrid[xStart:xEnd:100j]
-	xArr=np.array(xArr, dtype=float)
+	xArr1=np.array(xArr, dtype=float)
 	# print x
 	print xArr
 	print 'uff',expr
-	f = lambdify([x], expr)
+	f = lambdify([x], expr, "numpy")
 	# f = vectorized_lambdify((x), expr)
 	print 'asdf'
 
@@ -32,20 +32,22 @@ def OwnPlot(str_expr,xStart=-10,xEnd=10,yStart=-10,yEnd=10,Nop=50):
 	# for i in xrange(len(xArr)):
 	# 	y[i]=-1*expr.subs(x, xArr[i])
 	# print 'lol',f
-	y= f(xArr)
+	y= f(xArr1)
 	print y
+	print xArr
 	for i in xrange(len(y)):
 		y[i]=-1*y[i]
-	print xArr
-
+	
+	print xStart
+	# print xStart
 	arc = C.create_line(xStart*Nop,0,xEnd*Nop,0,fill='green')
 	arc = C.create_line(0,yStart*Nop,0,yEnd*Nop,fill='green')
 	
 	for i in xrange(1,len(xArr)):
-		if y[i]>(yEnd*Nop) or y[i]<(yStart*Nop):
+		if y[i]>(yEnd*Nop) or y[i]<(yStart*Nop) or np.isnan(y[i]) or np.isnan(y[i-1]):
 			print y[i]
 			continue
-		print xArr[i],y[i]
+		# print xArr[i],y[i]
 		arc = C.create_line(xArr[i-1]*Nop,y[i-1]*Nop,xArr[i]*Nop,y[i]*Nop,fill='red')
 	
 	# arc = C.create_line(-100,200,100,-200,fill='blue')
