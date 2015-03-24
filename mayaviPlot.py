@@ -36,6 +36,8 @@ x = symbols('x')
 y = symbols('y')
 z = symbols('z')
 
+u = symbols('u')
+v = symbols('v')
 
 
 class customLineEdit(QtGui.QLineEdit):
@@ -68,54 +70,114 @@ class Visualization(HasTraits):
     dic_outline={} #storing outline
     # the layout of the dialog screated
 
+    def remove_from_2d(self,keystr):
+      print('removing')
+      if keystr in self.parent.sc_2.dic_index:
+        print('removing2')
+        print(self.parent.sc_2.plotobj._series)
+        self.parent.sc_2.plotobj._series.pop(self.parent.sc_2.dic_index[keystr])
+        print(self.parent.sc_2.plotobj._series)
+        self.parent.sc_2.ax.cla()
+        self.parent.sc_2.dic_plot.pop(keystr,None)
+        self.parent.sc_2.dic_index.pop(keystr,None)
+        self.parent.sc_2.dic_parameter.pop(keystr,None)
+        self.parent.sc_2.dic_calculated.pop(keystr,None)
+        self.parent.sc_2.plotobj.plotNow()
+        self.parent.sc_2.update_figure()
 
-    def mayaviParam3d(str_expr_x,str_expr_y,str_expr_z,noOfParams=2,u_start=-10,u_end=10,u_points=200,v_start=-10,v_end=10,v_points=200):
-      expr_x=sympyParsing.symStr(str_expr_x)
-      expr_y=sympyParsing.symStr(str_expr_y)
-      expr_z=sympyParsing.symStr(str_expr_z)
+    def mayavi_parametric_3d(self,curTab=0,curPlot=1,**kwargs):
+      donot_calculate=False
+      len_arguments=len(kwargs)
+      len_shared=0
+      line_width=kwargs.get('line_width',0.2)
+      opacity=kwargs.get('opacity',1)
+      u_start=kwargs.get('u_start',-5)
+      eqnx,eqny,eqnz=kwargs.get('eqn',("u","u","u"))
+      eqnx=eqnx[4:]
+      eqny=eqny[4:]
+      eqnz=eqnz[4:]
+      print(eqnx)
+      print(eqny)
+      print(eqnz)
+      u_end=kwargs.get('u_end', 5)
+      v_start=kwargs.get('v_start',-5)
+      v_end=kwargs.get('v_end',5)
 
-      print expr_x,expr_y,expr_z
+      u_points=kwargs.get('u_points',200)
+      v_points=kwargs.get('v_points',200)
+      color=kwargs.get('color',(0.5,0.8,0.5))
+      #print(self.dic_parameter)
+      print(kwargs)
+      self.remove_from_2d("plt"+str(curPlot))
+      keystr="tab"+str(curTab)+"plt"+str(curPlot)
+      if(keystr in self.dic_parameter):
+          if self.dic_parameter[keystr]['eqn'] == kwargs['eqn']:
+            print(kwargs)
+            print(self.dic_parameter)
+            shared_items = set(kwargs.items()) & set(self.dic_parameter[keystr].items())
+            print(shared_items)
+            len_shared = len(shared_items)
+            if len_shared == len_arguments:
+                print("no change")
+                return
+            donot_calculate = len_shared == len_arguments-1 and self.dic_parameter[keystr]['color'] != kwargs['color']
 
+      self.dic_parameter[keystr]=kwargs
+      print("shaaaaaaaaaare",len_shared)
+      if(donot_calculate):
+          doo=self.dic_calculated[keystr]
+          print("not calculating")
+      else:
+          expr_x = sympify((eqnx))
+          expr_x = simplify(expr_x)
+          expr_x = radsimp(expr_x)
+          num_dum=fraction(expr_x)
+          expr_x=num_dum[0]
+          expr_y = sympify((eqny))
+          expr_y = simplify(expr_y)
+          expr_y = radsimp(expr_y)
+          num_dum=fraction(expr_y)
+          expr_z=num_dum[0]
+          expr_z = sympify((eqnz))
+          expr_z = simplify(expr_z)
+          expr_z = radsimp(expr_z)
+          num_dum=fraction(expr_z)
+          expr_z=num_dum[0]
+          if(keystr in self.dic_contour):
+              self.dic_contour[keystr].remove()
 
-      # x_start = -10
-      # x_end = 10
-      # no_x_points=complex(0,100)
-      # y_start = -10
-      # y_end = 10
-      # no_y_points=complex(0,100)
-      # z_start = -10
-      # z_end = 10
-      # no_z_points=complex(0,100)
-      # X,Y,Z=np.ogrid[x_start:x_end:no_x_points , y_start:y_end:no_y_points , z_start:z_end:no_z_points]
-      uC=complex(0,u_points)
-      vC=complex(0,v_points)
-      T=np.ogrid[u_start:u_end:uC]
-      U=np.ogrid[v_start:v_end:vC]
-      if noOfParams==1:
-          
-        f = lambdify((t), expr_x,"numpy")
-        xArr=f(T)
-        f1 = lambdify((t), expr_y,"numpy")
-        yArr=f1(T)
-        f2 = lambdify((t), expr_z,"numpy")
-        zArr=f2(T)
-      elif noOfParams == 2:
-        f = lambdify((u,v), expr_x,"numpy")
-        xArr=f(T,U)
-        f1 = lambdify((u,v), expr_y,"numpy")
-        yArr=f1(T,U)
-        f2 = lambdify((u,v), expr_z,"numpy")
-        zArr=f2(T,U)
-      print xArr,yArr,zArr
-      # Visualize the points
-      pts = self.scene.mlab.points3d(xArr, yArr, zArr, zArr, scale_mode='none', scale_factor=0.2)
+          if(keystr in self.dic_outline):
+              self.dic_outline[keystr].remove()
 
-      # Create and visualize the mesh
-      mesh = self.scene.mlab.pipeline.delaunay2d(pts)
-      surf = self.scene.mlab.pipeline.surface(mesh)
+          print expr_x,expr_y,expr_z
+          uC=complex(0,u_points)
+          vC=complex(0,v_points)
+          T=np.ogrid[u_start:u_end:uC]
+          U=np.ogrid[v_start:v_end:vC]
+          f = lambdify((u,v), expr_x,"numpy")
+          xArr=f(T,U)
+          f1 = lambdify((u,v), expr_y,"numpy")
+          yArr=f1(T,U)
+          f2 = lambdify((u,v), expr_z,"numpy")
+          zArr=f2(T,U)
+          print xArr,yArr,zArr
+          # Visualize the points
+          self.dic_calculated[keystr]=(xArr,yArr,zArr)
+          pts = self.scene.mlab.points3d(xArr, yArr, zArr, zArr, scale_mode='none', scale_factor=0.2)
+          # Create and visualize the mesh
+          mesh = self.scene.mlab.pipeline.delaunay2d(pts)
+          self.dic_contour[keystr] = self.scene.mlab.pipeline.surface(mesh)
+          self.dic_parameter[keystr] = kwargs
+          axes=self.scene.mlab.axes(color=(0.5,0.5,0.5),nb_labels=10,xlabel='x',ylabel='y',zlabel='z')
+          axes.label_text_property.font_family = 'courier'
+          axes.label_text_property.font_size = 4
+          self.dic_outline[keystr]=self.scene.mlab.outline(self.dic_contour[keystr], color=(.7, .7, .7))
 
-      # mlab.view(47, 57, 8.2, (0.1, 0.15, 0.14))
-      self.scene.mlab.show()
+          print("finiiiiiiiiiiiiiiiiiish")
+          self.update_plot()
+
+          # mlab.view(47, 57, 8.2, (0.1, 0.15, 0.14))
+          #self.scene.mlab.show()
 
       
     def mayavi_implicit_3d(self,curTab=0,curPlot=1,**kwargs):
@@ -133,6 +195,7 @@ class Visualization(HasTraits):
       If the dimension of the output given by ``numpy's ogrid`` method is not of the form (t,t,t) we manually change the numpy
       array using ``numpy's repeat`` method. This is used to plot 2d equations like ``x+y=0``,``x+z=0``,``z=0`` etc in 3d form.
       """
+
       donot_calculate=False
       len_arguments=len(kwargs)
       len_shared=0
@@ -153,6 +216,7 @@ class Visualization(HasTraits):
       color=kwargs.get('color',(0.5,0.8,0.5))
       #print(self.dic_parameter)
       print(kwargs)
+      self.remove_from_2d("plt"+str(curPlot))
       keystr="tab"+str(curTab)+"plt"+str(curPlot)
       shared_items=[]
       print("hooooo")
@@ -188,6 +252,7 @@ class Visualization(HasTraits):
           print(expr)
           f = lambdify((x,y,z), expr,"numpy")
           foo=f(X,Y,Z)
+          #print(foo)
           print(points_size)
           print(foo.shape)
           axis=[]
@@ -254,11 +319,13 @@ class MayaviQWidget(QtGui.QWidget):
         The QWidget containing the visualization, this is pure PyQt4 code.
     """ 
     def __init__(self, parent=None):
+        self.parent=parent
         QtGui.QWidget.__init__(self, parent)
         layout = QtGui.QVBoxLayout(self)
         layout.setContentsMargins(0,0,0,0)
         layout.setSpacing(0)
         self.visualization = Visualization()
+        self.visualization.parent=parent
 
         # If you want to debug, beware that you need to remove the Qt
         # input hook.

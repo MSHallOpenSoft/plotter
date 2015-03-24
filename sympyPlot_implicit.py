@@ -28,7 +28,8 @@ from __future__ import print_function, division
 
 from sympyPlot import BaseSeries, Plot
 # from experimental_lambdify import experimental_lambdify, vectorized_lambdify
-from sympy.plotting.experimental_lambdify import vectorized_lambdify, lambdify,experimental_lambdify
+from sympy.plotting.experimental_lambdify import vectorized_lambdify, experimental_lambdify
+from sympy.utilities.lambdify import lambdify 
 from sympy.plotting.intervalmath import interval
 from sympy.core.relational import (Equality, GreaterThan, LessThan,
                 Relational, StrictLessThan, StrictGreaterThan)
@@ -193,7 +194,7 @@ class ImplicitSeries(BaseSeries):
         yarray = np.linspace(self.start_y, self.end_y, self.nb_of_points)
         x_grid, y_grid = np.meshgrid(xarray, yarray)
 
-        func = vectorized_lambdify((self.var_x, self.var_y), expr)
+        func = lambdify((self.var_x, self.var_y), expr,"numpy")
         z_grid = func(x_grid, y_grid)
         z_grid[np.ma.where(z_grid < 0)] = -1
         z_grid[np.ma.where(z_grid > 0)] = 1
