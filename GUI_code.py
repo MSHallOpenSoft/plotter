@@ -45,7 +45,7 @@ from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
 from plottingEquation_3d_explicit import MplPlot3dCanvas
-#from imp_plottingEquation import MplPlot3dCanvas_2
+from imp_plottingEquation import MplPlot3dCanvas_2
 from PyQt4.QtCore import Qt, SIGNAL
 from function_2 import Ui_DockWidget
 import numpy as np
@@ -127,7 +127,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "QMenuBar::item:selected { background:#737373; } \n"
 "QMenuBar::item:pressed { background: #414953; }\n"
 " QTableWidget{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); border:1px solid rgb(171, 173, 179); } \n"
-"QTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
+"QfTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
 "QScrollBar:horizontal { border: none; background: #DBDBDB; height: 15px; margin: 0px 20px 0px 20px; } \n"
 "QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); min-width: 20px; }\n"
 " QScrollBar::add-line:horizontal { border: none; background:#DBDBDB; width: 20px; subcontrol-position: right; subcontrol-origin: margin; }\n"
@@ -159,6 +159,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.frame_2.setObjectName(_fromUtf8("frame_2"))
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
+        self.horizontalLayout_4.setMargin(0)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setContentsMargins(0,0,0,0)
         self.verticalLayout_5 = QtGui.QVBoxLayout()
         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
         self.pushButton = QtGui.QPushButton(self.frame_2)
@@ -281,6 +284,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.pushButton_21.setStyleSheet(_fromUtf8(""))
         self.pushButton_21.setObjectName(_fromUtf8("pushButton_21"))
         self.verticalLayout_3.addWidget(self.pushButton_21)
+
+        #remove above from code
         self.horizontalLayout_3.addWidget(self.frame)
         self.verticalLayout_6 = QtGui.QVBoxLayout()
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
@@ -306,7 +311,9 @@ class Ui_MainWindow(QtGui.QMainWindow):
         layout.addWidget(self.mayavi_widget)
         self.tabWidget.addTab(contents, "3D Graph")
         self.verticalLayout_6.addWidget(self.tabWidget)
-        self.horizontalLayout_3.addLayout(self.verticalLayout_6)
+        self.wrewidget = QtGui.QWidget()
+        self.wrewidget.setLayout(self.verticalLayout_6)
+        self.horizontalLayout_3.addWidget(self.wrewidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1396, 21))
@@ -804,6 +811,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.delimit = dialg.getDelim()
       #self.showFileChooser()
 
+
+    def setCurrentTable(self,table5):
+        self.tableWidget = table5
+        self.verticalLayout_3.insert(table5,1)
+        self.verticalLayout_3.takeAt(2)
+
+
+
     def hide_2(self):
         self.frame.hide()
         self.frame_2.show()
@@ -1274,12 +1289,7 @@ class Ui_Dialog_2(object):    ## class for error Dialog Box
         self.label.setText(_translate("Dialog", self.mssg, None))
 
 
-def focusAdjuster(old,new):
-    return new
 
-
-def keyBoardChanger(old,new,ex):
-    ex.myKeyboard.setTarget(new)
 
 
 
@@ -1288,13 +1298,13 @@ def keyBoardChanger(old,new,ex):
 
 import sys
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    app.focusChanged.connect(focusAdjuster)
+    app = QtGui.QApplication.instance()
+    
     ex = Ui_MainWindow_2()
-    ex.myKeyboard.setTarget(app.focusChanged.connect(focusAdjuster))
+   
     #ex.myKeyboard.
     ex.showMaximized()
-    app.focusChanger.connect(lambda:keyboardFocusChanger(ex))
+   
     #app.focusChanged.connect(keyboardFocusChanger)
 
 
