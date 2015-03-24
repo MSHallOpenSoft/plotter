@@ -551,14 +551,13 @@ class Ui_DockWidget(QtGui.QDockWidget):
 
     def function(self):
         self.target.insert("x")
-        #self.target
     def function_1(self):
         self.target.insert("y")
     def function_2(self):
-        self.target.insert(u'\u00B2')
+        self.target.insert("x**2")
     # very very hard !!!
     def function_3(self):
-        self.target.insert(u'\u1D47')
+        self.target.insert("**")
     def function_4(self):
         self.target.insert("(")
     def function_5(self):
@@ -573,19 +572,21 @@ class Ui_DockWidget(QtGui.QDockWidget):
     def function_9(self):
         self.target.insert(",")
     def function_10(self):
-        self.target.insert(u'\u2264')#<=
+        self.target.insert("<=")#<=
     def function_11(self):
-        self.target.insert(u'\u2265')#>=
+        self.target.insert(">=")#>=
     def function_12(self):
-        self.target.insert(u'\u221A')#sqrt
+        self.target.insert("sqrt()")#sqrt
+        self.target.setCursorPosition(self.target.cursorPosition()-1)
     def function_13(self):
-        self.target.insert(u'\u03C0')#pi
+        self.target.insert("pi")#pi
     def function_14(self,str_num):
-        self.target.insert(str_num)    
+        self.target.insert(str_num)
+        text="str_num"   
     def function_15(self):
-        self.target.insert(u'\u00F7')#divide
+        self.target.insert("/")#divide
     def function_16(self):
-        self.target.insert(u'\u00D7')#multiply
+        self.target.insert("*")#multiply
     def function_17(self):
         self.target.setCursorPosition(self.target.cursorPosition()-1)
     def function_18(self):
@@ -637,7 +638,7 @@ class Ui_DockWidget(QtGui.QDockWidget):
 
 if __name__ == "__main__":
     import sys
-    a = QtGui.QApplication.instance()
+    a = QtGui.QApplication(sys.argv)
     w=Ui_DockWidget(None,None)
     w.show()
     sys.exit(a.exec_())
