@@ -32,6 +32,7 @@ class AccordionMain(QtGui.QWidget):
         self.frame = frame
         self.label = label
         self.parent = parent
+        
         self.setupUi()
         self.plotThread = MyThread(self)
         self.connect(self.plotThread,QtCore.SIGNAL('finished'),self.finishedPlotting)
@@ -178,34 +179,15 @@ class AccordionMain(QtGui.QWidget):
         if(self.frame.isHidden()):
             
             self.frame.show()
-            print "here"
-            print type(self.parent.parent)
-            print type(self.frame.tableValue)
-            hlayout = self.parent.parent.horizontalLayout_3
-            print hlayout.count()
-            j = 1;
-            for i in range(hlayout.count()):
-              if(type(hlayout.itemAt(i)) == tableCon.TableContents):
-                frem = hlayout.itemAt(i)
-                j = i
-
-            hlayout.takeAt(i)
-
-
-
-            
-            hlayout.insertWidget(i,self.frame.table)
-            
-            self.parent.parent.adjustSize()
+            #self.
+            self.saveThetableContents()
+            table = self.parent.parent.frame
+            table.setPlotName(self.label)
+            table.setData(self.frame.tableContents)
+            self.adjustSize()
             
         else:
-          j = 1;
-          hlayout = self.parent.parent.horizontalLayout_3
-          for i in range(hlayout.count()):
-            if(type(hlayout.itemAt(i)) == tableCon.TableContents):
-              frem = hlayout.itemAt(i)
-              j = i
-          self.parent.parent.horizontalLayout_3.takeAt(j)
+          
           self.frame.hide()
 
     def closeHandler(self):
@@ -214,6 +196,15 @@ class AccordionMain(QtGui.QWidget):
 
     def getMainFrame(self):
       return parent
+
+    def saveThetableContents(self):
+        layf = self.parent.eqList
+        table = self.parent.parent.frame
+        for i in range(len(layf)):
+            if(layf[i].label == table.getPlotName()):
+              layf[i].frame.tableContents = table.data
+              break
+
 
     
 
