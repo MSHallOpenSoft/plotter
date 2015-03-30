@@ -1,3 +1,4 @@
+#!/user/bin/env python
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'settings.ui'
@@ -15,7 +16,6 @@ try:
 except AttributeError:
     def _fromUtf8(s):
         return s
-
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
     def _translate(context, text, disambig):

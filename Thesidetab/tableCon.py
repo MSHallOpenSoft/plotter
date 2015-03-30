@@ -9,9 +9,6 @@
 
 from PyQt4 import QtCore, QtGui
 ''''
-@Varun : Need to check the close delimeter choose action properly execute and check
-
-
 
 '''
 

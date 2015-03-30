@@ -38,9 +38,6 @@ Please point out any further feautures that can be included in our plotter, or e
 
 ## Please keep adding more as you come to think of any !!!
 '''
-'''Bugs by prabahat ------------------------ 1) + button comes in place of cross when you change the expression type
-                                             2) Enter button does not create the graph
-                                             3) Prabhar find your bugs and get it right ASAP'''
 
 import mayaviPlot
 from PyQt4 import QtCore
@@ -100,8 +97,10 @@ class Ui_MainWindow(QtGui.QMainWindow):
         MainWindow.resize(1396, 727)
 
         MainWindow.setStyleSheet(_fromUtf8("\n"
+
 "QFrame{\n"
-"border:none;\n"
+"border:1px solid rgb(0, 0, 0);\n"
+"border-radius:5px;\n"
 "}\n"
 "QHeaderView::section {\n"
 "    background-color:rgb(100, 100, 100);\n"
@@ -125,7 +124,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " QToolButton:hover:!pressed{ position: relative; border: none; outline:none;  color: white;  border-radius: 2px; font-size: 22px;padding: 0px; }\n"
 " QPushButton{ position: relative; border:none; outline:none; background-color:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); color: rgb(170, 170, 170); padding: 6px 20px; border-radius: 2px; font-size: 20px; } \n"
 "QPushButton:hover:!pressed{ position: relative; border: none; outline:none; background-color:rgb(60, 69, 79); color: white; padding: 6px 20px; border-radius: 2px; font-size:20px; } \n"
-"QComboBox { border: none; padding: 1px 18px 1px 3px; } QComboBox, QComboBox:drop-down { background:qlineargradient(spread:pad, x1:0, y1:0.097, x2:0, y2:0, stop:0 rgba(100, 100, 100, 255), stop:0.892045 rgba(149, 149, 149, 255));color: rgb(200, 200, 200); } \n"
+"QComboBox { border: none; padding: 1px 18px 1px 3px;  } QComboBox, QComboBox:drop-down { background:qlineargradient(spread:pad, x1:0, y1:0.097, x2:0, y2:0, stop:0 rgba(100, 100, 100, 255), stop:0.892045 rgba(149, 149, 149, 255));color: rgb(200, 200, 200); } \n"
 "\n"
 "\n"
 "QComboBox:on, QComboBox:drop-down:on { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.869318, stop:0.107955 rgba(149, 149, 149, 255), stop:1 rgba(100, 100, 100, 255));color: rgb(200, 200, 200); }\n"
@@ -139,17 +138,13 @@ class Ui_MainWindow(QtGui.QMainWindow):
 " QMenuBar::item { spacing: 3px; padding: 1px 4px; background: transparent; border-radius: 2px; } \n"
 "QMenuBar::item:selected { background:#737373; } \n"
 "QMenuBar::item:pressed { background: #414953; }\n"
-" QTableWidget{ background:rgb(25, 25, 25); border:none; color:white; gridline-color:#aaaaaa;} \n"
+" QTableWidget{ background:rgb(25, 25, 25); border:none; color:white; border: 1px solid white; } \n"
 "QTextEdit{\n"
 " background:rgb(25, 25, 25);\n"
 "color:rgb(255, 255, 255);\n"
 " } \n"
 "QScrollBar:horizontal { border: none; background: rgb(100, 100, 100); height: 15px; margin: 0px 20px 0px 20px; } \n"
 "QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(47, 47, 47, 255), stop:0.465909 rgba(67, 67, 67, 255), stop:0.681818 rgba(103, 103, 103, 255), stop:0.875 rgba(150, 150, 150, 255), stop:1 rgba(186, 186, 186, 255)); min-width: 20px; }\n"
-" QTableWidget{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); border:1px solid rgb(171, 173, 179); } \n"
-"QfTextEdit{ background:qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 #DBDBDB, stop:1 rgba(255, 255, 255, 255)); } \n"
-"QScrollBar:horizontal { border: none; background: #DBDBDB; height: 15px; margin: 0px 20px 0px 20px; } \n"
-"QScrollBar::handle:horizontal { background:qlineargradient(spread:pad, x1:0, y1:0.664, x2:0, y2:0, stop:0.25 rgba(17, 118, 59, 255), stop:0.551136 rgba(20, 138, 69, 255), stop:0.914773 rgba(114, 189, 145, 255), stop:1 rgba(132, 221, 169, 255)); min-width: 20px; } QScrollBar::handle:horizontal:hover { background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0.278, stop:0 rgba(200, 239, 217, 255), stop:0.0852273 rgba(126, 201, 157, 255), stop:0.448864 rgba(59, 180, 109, 255), stop:0.75 rgba(43, 151, 88, 255)); min-width: 20px; }\n"
 " QScrollBar::add-line:horizontal { border: none; background:#DBDBDB; width: 20px; subcontrol-position: right; subcontrol-origin: margin; }\n"
 " QScrollBar::sub-line:horizontal { border:none; background:#DBDBDB; width: 20px; subcontrol-position: left; subcontrol-origin: margin; } \n"
 "QScrollBar::add-line:horizontal:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0, y1:0.164, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); width: 20px; subcontrol-position: right; subcontrol-origin: margin; } \n"
@@ -160,7 +155,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
 "QScrollBar::add-line:vertical { border: none; background:#DBDBDB; height: 20px; subcontrol-position: bottom; subcontrol-origin: margin; } QScrollBar::sub-line:vertical { border:none; background:#DBDBDB; height: 20px; subcontrol-position: top; subcontrol-origin: margin; } \n"
 "QScrollBar::add-line:vertical:hover:!pressed { border: none; background: qlineargradient(spread:pad, x1:0.136, y1:0, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); height: 20px; subcontrol-position:bottom; subcontrol-origin: margin; }\n"
 " QScrollBar::sub-line:vertical:hover:!pressed { border:none; background: qlineargradient(spread:pad, x1:0.136, y1:0, x2:0, y2:0, stop:0.125 rgba(36, 41, 47, 255), stop:0.465909 rgba(52, 59, 67, 255), stop:0.681818 rgba(80, 91, 103, 255), stop:0.875 rgba(117, 132, 150, 255), stop:1 rgba(186, 186, 186, 255)); height: 20px; subcontrol-position:top; subcontrol-origin: margin; } \n"
-"QScrollBar::up-arrow:vertical{ image: url(:/arrow/Icons/up-arrow.png); } QScrollBar::down-arrow:vertical{ image: url(:/arrow/Icons/down-arrow.png); }"))
+"QScrollBar::up-arrow:vertical{ image: url(:/arrow/Icons/up-arrow.png); } QScrollBar::down-arrow:vertical{ image: url(:/arrow/Icons/down-arrow.png); \n"
+"}\n"))
 
         
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -733,7 +729,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.toolButton_17.clicked.connect(self.parent.add_page)
         #self.toolButton.clicked.connect(self.still)
         self.action_1=self.dockWidget_3.toggleViewAction()
-        ##has to be done by ravi link: http://doc.qt.io/qt-4.8/qdockwidget.html#toggleViewAction
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def showTable(self):
         if self.frame.isVisible()==True:
