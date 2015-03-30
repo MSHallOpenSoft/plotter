@@ -71,12 +71,12 @@ class ExplicitEquation(QtGui.QWidget):
         self.comboBox.setItemText(6, _translate("Form", "x <", None))
         self.comboBox.setItemText(7, _translate("Form", "y < ", None))
         self.comboBox.setItemText(8, _translate("Form", "z <", None))
-        self.comboBox.setItemText(9, _translate("Form", "x "+u"\u2264", None))
-        self.comboBox.setItemText(10, _translate("Form", "y "+u"\u2264", None))
-        self.comboBox.setItemText(11, _translate("Form", "z "+u"\u2264", None))
-        self.comboBox.setItemText(12, _translate("Form", "x "+u"\u2265", None))
-        self.comboBox.setItemText(13, _translate("Form", "y "+u"\u2265", None))
-        self.comboBox.setItemText(14, _translate("Form", "z "+u"\u2265", None))
+        self.comboBox.setItemText(9, _translate("Form", "x <=", None))
+        self.comboBox.setItemText(10, _translate("Form", "y <=", None))
+        self.comboBox.setItemText(11, _translate("Form", "z <=", None))
+        self.comboBox.setItemText(12, _translate("Form", "x >=", None))
+        self.comboBox.setItemText(13, _translate("Form", "y >=", None))
+        self.comboBox.setItemText(14, _translate("Form", "z >=", None))
         self.comboBox.setCurrentIndex(2)
 
     def getExpre(self):
